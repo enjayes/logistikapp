@@ -1,0 +1,26 @@
+#calendar {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.fc-time, .fc-title{
+    color:#fff!important ;
+    font-weight: normal!important ;
+}
+
+
+.fc-axis.fc-time{
+    color:#000!important ;
+}
+
+.fc-header.fc-widget-header .fc-title{
+    color:#000!important ;
+}
+
+
+.fc-view-container{
+    background-color: #fff;
+}

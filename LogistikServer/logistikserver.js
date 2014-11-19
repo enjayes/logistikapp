@@ -1,75 +1,77 @@
 /**
  * Main Server
- *
  */
 
 
-
 // General Settings
-var port = 4305;
+
+var port = 3142;
+
+var mysqlprefs = {
+    host: 'localhost',
+    port: 3306,
+    user: 'logistikuser',
+    password: 'logistikpasswort',
+    database: 'logistikdb'
+}
 
 
 //Express Server
 var express = require("express"),
     app = express();
 
-//Https Handler
-var httpsHandler = require('./httpsHandler');
-
-//Parse Html Text
-var cheerio = require('cheerio');
+//MySql
+var mysql =  require('mysql');
 
 
-//Answer Get Request
-app.get("/", function (req, res) {
-
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-
-
-
-
-
-
-    var isDidYouMeanRequest=(typeof req.query.dum != "undefined" );
-    if (isDidYouMeanRequest) {
-       var term = req.query.dum;
-
-
-        httpsHandler.downloadFile("www.google.com", "/search?q="+encodeURIComponent(term), function (content) {
-
-            $ = cheerio.load(content);
-
-            var correctTerm = $('a.spell').text();
-
-            if(!(correctTerm&& correctTerm.trim()!=""))
-                correctTerm = $("#_FQd a").text();
-
-
-            console.log(correctTerm)
-
-            res.send(correctTerm);
-
-
-        })
-
-
-    }
-    else
-       res.send('');
-
-
+//Connect to MySql database
+mysqlConnection = mysql.createConnection(mysqlprefs);
+mysqlConnection.connect(function (err) {
+    if (err) throw err;
+    console.log('Connected to MySql database');
 });
 
 
-console.log("Service server listening at http://localhost:" + port);
-app.listen(port);
+//Https Handler
+var http = require('http').Server(app);
+
+
+//Start Admin Site, serve Resources under /admin/ statically
+app.use('/', express.static(__dirname + '/LogistikAdmin'));
+
+
+//Start socket.io for communication with website/apps
+var io = require('socket.io')(http);
+
+
+//Listen
+http.listen(port, function(){
+    console.log("Server listening on port "+port);
+});
+
+
+//Website connected
+io.on('connection', function(socket){
+
+    console.log('Connected');
+    socket.emit('message', 'Server Push Message');
+
+    socket.on('disconnect', function(){
+        console.log('Disconnected');
+    });
+});
+
+
+
+//App  connected
+io.on('connection', function(socket){
+
+    console.log('App connected');
+
+    socket.emit('message', 'Server Push Message');
+
+    socket.on('disconnect', function(){
+        console.log('App Disconnected');
+    });
+});
+

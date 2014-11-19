@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+    <title>Edeka</title>
+    <link href='libs/fullcalendar-2.2.1/fullcalendar.css' rel='stylesheet' type="text/css"/>
+    <link href='libs/fullcalendar-2.2.1/fullcalendar.print.css' rel='stylesheet' media='print' type="text/css"/>
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link href="css/calendar.css" rel="stylesheet" type="text/css">
+
+    <link href="libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="display:none">
+
+
+<div data-role="page">
+
+    <div id="bannerbackground"></div>
+
+    <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
+    <img id="banner" height="60px" src="img/bannerlogo.png">
+
+    <div data-demo-html="true">
+        <div data-role="tabs" id="tabs">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="openTab(0)">Übersicht</a></li>
+                    <li><a href="#termine" data-ajax="false" onclick="openTab(1)">Termine</a></li>
+                    <li><a href="#lieferanten" data-ajax="false" onclick="openTab(2)">Lieferanten</a></li>
+                </ul>
+            </div>
+            <div id="uebersicht" class="ui-body-d ui-content">
+                <div class="tabinhalt">
+                </div>
+            </div>
+            <div id="termine" class="ui-body-d ui-content">
+                <div class="tabinhalt">
+
+                     
+                    <div id='calendar'></div>
+                </div>
+            </div>
+            <div id="lieferanten">
+                <div class="tabinhalt">
+                    <div id="suchelieferanten" data-demo-html="true">
+                        <div id="suchelieferantenwidget">
+                            <form class="ui-filterable">
+                                <input id="filterBasic-input" data-type="search">
+                            </form>
+                            <ul id="suchelieferantenliste" data-role="listview" data-inset="true" data-filter="true" data-input="#filterBasic-input">
+                                <li><a>
+                                        <h2>Stephen Weber</h2>
+                                        <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+                                        <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+                                            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+                                        </a></li>
+                                <li><a>
+                                        <h2>jQuery Team</h2>
+                                        <p><strong>Boston Conference Planning</strong></p>
+                                        <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+                                            <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                                        </a></li>
+                                <li><a>
+                                        <h2>Avery Walker</h2>
+                                        <p><strong>Re: Dinner Tonight</strong></p>
+                                        <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
+                                            <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                                        </a></li>
+                                <li><a>
+                                        <h2>Stephen Weber</h2>
+                                        <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+                                        <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+                                            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+                                        </a></li>
+                                <li><a>
+                                        <h2>jQuery Team</h2>
+                                        <p><strong>Boston Conference Planning</strong></p>
+                                        <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+                                            <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                                        </a></li>
+                                <li><a>
+                                        <h2>Avery Walker</h2>
+                                        <p><strong>Re: Dinner Tonight</strong></p>
+                                        <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
+                                            <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                                        </a></li>
+                                <li><a>
+                                        <h2>Stephen Weber</h2>
+                                        <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+                                        <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+                                            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+                                        </a></li>
+                                <li><a>
+                                        <h2>jQuery Team</h2>
+                                        <p><strong>Boston Conference Planning</strong></p>
+                                        <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+                                            <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                                        </a></li>
+                                <li><a>
+                                        <h2>Avery Walker</h2>
+                                        <p><strong>Re: Dinner Tonight</strong></p>
+                                        <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
+                                            <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                                        </a></li>
+                            </ul>
+
+                            <input id="allelieferantenanzeigen" type="button" onclick="zeigeLieferanten()" data-inline="true" data-mini="true" value="Alle Anzeigen">
+                        </div>
+
+
+                        <h1>Lieferant</h1>
+
+                    </div>
+                    <!--/demo-html -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!--Own Libraries ------------------------------------------------->
+
+<!-- jQuery --->
+
+
+<script src="libs/jquery-1.11.1.min.js"></script>
+
+<script src='libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js'></script>
+
+<script src="libs/socket.io.js"></script>
+
+
+<!--Kalender --->
+<script src='libs/fullcalendar-2.2.1/lib/moment.min.js'></script>
+<script src='libs/fullcalendar-2.2.1/fullcalendar.min.js'></script>
+<script src='libs/fullcalendar-2.2.1/lang/de.js'></script>
+
+<script src='js/index.js'></script>
+
+
+</body>
+</html>
