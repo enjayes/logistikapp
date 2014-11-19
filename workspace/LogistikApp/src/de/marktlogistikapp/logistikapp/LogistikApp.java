@@ -31,4 +31,5 @@ public class LogistikApp extends CordovaActivity
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
     }
+    
 }

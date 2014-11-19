@@ -24,9 +24,9 @@
         <div data-role="tabs" id="tabs">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="openTab(0)">Übersicht</a></li>
-                    <li><a href="#termine" data-ajax="false" onclick="openTab(1)">Termine</a></li>
-                    <li><a href="#lieferanten" data-ajax="false" onclick="openTab(2)">Lieferanten</a></li>
+                    <li><a href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="tabsConstroller.openTab(0)">Übersicht</a></li>
+                    <li><a href="#termine" data-ajax="false" onclick="tabsConstroller.openTab(1)">Termine</a></li>
+                    <li><a href="#lieferanten" data-ajax="false" onclick="tabsConstroller.openTab(2)">Lieferanten</a></li>
                 </ul>
             </div>
             <div id="uebersicht" class="ui-body-d ui-content">
@@ -104,7 +104,7 @@
                                         </a></li>
                             </ul>
 
-                            <input id="allelieferantenanzeigen" type="button" onclick="zeigeLieferanten()" data-inline="true" data-mini="true" value="Alle Anzeigen">
+                            <input id="allelieferantenanzeigen" type="button" onclick="lieferantenTab.zeigeLieferanten()" data-inline="true" data-mini="true" value="Alle Anzeigen">
                         </div>
 
 
@@ -138,6 +138,15 @@
 <script src='libs/fullcalendar-2.2.1/lib/moment.min.js'></script>
 <script src='libs/fullcalendar-2.2.1/fullcalendar.min.js'></script>
 <script src='libs/fullcalendar-2.2.1/lang/de.js'></script>
+
+
+<script src='js/termineTab.js'></script>
+<script src='js/lieferantenTab.js'></script>
+<script src='js/uebersichtTab.js'></script>
+
+<script src='js/tabsController.js'></script>
+<script src='js/uiController.js'></script>
+
 
 <script src='js/index.js'></script>
 
