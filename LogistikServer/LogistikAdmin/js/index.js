@@ -19,21 +19,13 @@ socket.on('message', function (msg) {
 });
 
 
-//Init Controlers
+//Init Controller
 tabsConstroller.init();
 
 
-
-//init calendar
-
+//Init UI
 $(document).ready(function () {
-
-
-    $("body").show();
-
-
-    uiController.init();
-
+    uiController.ready();
 });
 
 

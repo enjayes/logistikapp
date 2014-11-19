@@ -12,9 +12,8 @@
 
 uiController = {
 
-    init: function () {
-
-        console.log("Ready!")
+    ready: function () {
+        $("body").show();
 
         //Init Calender rendering
         $('#calendar .fc-toolbar').hide();
