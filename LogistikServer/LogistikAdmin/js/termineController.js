@@ -82,6 +82,10 @@ termineController = {
 
 
             var event = new CalenderEvent(date);
+
+
+            termineController.events =  termineTab.calender.fullCalendar( 'clientEvents'  )
+
             termineController.zeigeEvent(event);
             // alert('Clicked on: ' + date.format());
             //  alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
@@ -102,22 +106,32 @@ termineController = {
             //$(this).css('border-color', 'red');
 
         },
-        events: []
+        events: [],
+        timeFormat: 'H(:mm)'
 
     } ,
     init:function(){
-
         this.calendar.events = termineController.events
+
     }  ,
     aktuellesEvent: null,
 
     zeigeEvent:function(calenderEvent){
+
+
+        var date =  calenderEvent.start.format('DD.MM.YYYY');
+
+        $("#eventDate").val(date).trigger("change");
+
+        console.log(date)
+
 
         $("#popupTermin").popup("open", {
             transition: "pop"
         });
 
         termineController.aktuellesEvent = calenderEvent;
+
 
 
 

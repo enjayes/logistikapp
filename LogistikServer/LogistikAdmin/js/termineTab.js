@@ -16,13 +16,21 @@ termineTab = {
 
     init: function () {
 
+
+
     },
 
     ready: function () {
+        $('.clockpicker').clockpicker();
+
         setTimeout(function () {
+
+
+
 
             termineTab.calender =  $('#calendar');
             termineTab.calender.fullCalendar(termineController.calendar);
+            delete termineController.calendar.events;
 
         }, 0);
 

@@ -24,3 +24,9 @@
 .fc-view-container{
     background-color: #fff;
 }
+
+
+.fc-event {
+    border: 1px solid #38c;
+    background-color: #38c;
+}

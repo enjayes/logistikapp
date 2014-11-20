@@ -1,38 +1,13 @@
+@media (max-device-width: 1400px) {
+    #tabs, .ui-popup {
 
-/**
-  Banner
-**/
-
-
-#bannerbackground{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:129px;
-    background-color: #fff;
-}
-
-#banner{
-    margin-top:10px;
-    margin-bottom:10px;
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:1;
-}
-#bannerext{
-    margin-top:10px;
-    margin-bottom:10px;
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:0;
-}
-
-
-#tabs{
-    margin-top:90px
+        transform-origin: 50% 0%;
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        transform: scale(0.8);
+    }
 }
 
 /**
@@ -40,9 +15,166 @@ Custom style jquery
 **/
 
 .ui-page-theme-a .ui-btn:hover, html .ui-bar-a .ui-btn:hover, html .ui-body-a .ui-btn:hover, html body .ui-group-theme-a .ui-btn:hover, html head+body .ui-btn.ui-btn-a:hover, .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited {
-    text-shadow: none!important;
+    text-shadow: none !important;
 }
 
+.ui-navbar ul {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/**
+Datebox
+**/
+
+#popupTermin .eventDateparent {
+    display: inline-block;
+    width: 78%;
+    float: left;
+}
+
+#popupTermin .input-group.clockpicker {
+    display: inline-block !important;
+    width: 20% !important;
+    float: right !important;
+}
+
+.clockpicker-popover {
+    z-index: 2010 !important;
+}
+
+input-group {
+    width: 110px;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+input-group-addon {
+    cursor: pointer;
+}
+
+.input-group-addon:last-child {
+    border-left: 1px;
+    float: right !important;
+    position: absolute;
+    top: 8px;
+    right: 0px;
+    display: inline-block !important;
+    height: 37px;
+    width: 37px;
+    webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+}
+
+.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:first-child>.btn-group:not(:first-child)>.btn {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.input-group-addon {
+    padding: 6px 14px 6px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-group-addon, .input-group-btn {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:before, :after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.glyphicon {
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url(../libs/timepicker/glyphicons-halflings-regular.eot);
+    src: url(../libs/timepicker/glyphicons-halflings-regularie.eot) format('embedded-opentype'), url(../libs/timepicker/glyphicons-halflings-regular.woff) format('woff'), url(../libs/timepicker/glyphicons-halflings-regular.ttf) format('truetype')
+}
+
+
+.glyphicon-time:before {
+    content: "\e023";
+}
+
+/**
+  Banner
+**/
+
+#bannerbackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 129px;
+    background-color: #fff;
+}
+
+#banner {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#bannerext {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#tabs {
+    margin-top: 90px
+}
 
 /**
 background-color: #FFFFFF;
@@ -55,70 +187,83 @@ background-color: #f9f9f9;
 }
 
 .ui-page-theme-a .ui-btn:focus, html .ui-bar-a .ui-btn:focus, html .ui-body-a .ui-btn:focus, html body .ui-group-theme-a .ui-btn:focus, html head+body .ui-btn.ui-btn-a:focus, .ui-page-theme-a .ui-focus, html .ui-bar-a .ui-focus, html .ui-body-a .ui-focus, html body .ui-group-theme-a .ui-focus, html head+body .ui-btn-a.ui-focus, html head+body .ui-body-a.ui-focus {
-    -webkit-box-shadow: none!important;
-    -moz-box-shadow: none!important;
-    box-shadow: none!important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }
 
-
-  /**
+/**
 Navbar
 **/
 
-
-.ui-tabs-nav{
-    max-width: 900px!important;
+.ui-tabs-nav {
+    max-width: 900px !important;
 }
 
 .ui-navbar li .ui-btn {
-    border-right-width: 1px!important;
+    border-right-width: 1px !important;
 }
-
 
 /**
  Lieferanten
 **/
 
-#suchelieferanten{
+#suchelieferanten {
     margin-left: 30px;
     margin-right: 30px;
 }
 
-
-#suchelieferantenwidget{
+#suchelieferantenwidget {
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
 }
 
-#suchelieferantenliste{
-    position:absolute;
+#suchelieferantenliste {
+    position: absolute;
     border: 2px solid rgba(102, 102, 102, 0.59);
     top: 160px;
-    margin-bottom:30px;
+    margin-bottom: 30px;
     box-shadow: 5px 10px 20px #888888;
     top: 95px;
     z-index: 1;
 }
 
-
-
-.allelieferantenanzeigenparent{
-    position: absolute!important;
-    right: 0!important;
+.allelieferantenanzeigenparent {
+    position: absolute !important;
+    right: 0 !important;
 }
-
 
 /**
  Termin Popup
 **/
 
-#popupTermin{
-    width: 900px
+#popupTermin {
+    width: 850px
 }
 
 #popupTermin div.hasDatepicker {
     margin-left: auto;
     margin-right: auto;
+    margin-top: 70px;
 }
+
+#popupTermin div.hasDatepicker .ui-datepicker-inline {
+    -webkit-box-shadow: 0px 0px 6px /*{global-box-shadow-size}*/ rgba(0, 0, 0, .15) /*{global-box-shadow-color}*/ !important;
+    -moz-box-shadow: 0px 0px 6px /*{global-box-shadow-size}*/ rgba(0, 0, 0, .15) /*{global-box-shadow-color}*/ !important;
+    box-shadow: 0px 0px 6px /*{global-box-shadow-size}*/ rgba(0, 0, 0, .15) /*{global-box-shadow-color}*/ !important;
+}
+
+#popupTermin .bottombuttons {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 236px;
+}
+
+#popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton {
+    margin-right: 0 !important;
+
+}
+
+
