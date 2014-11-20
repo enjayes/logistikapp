@@ -44,6 +44,9 @@ uiController = {
             //Rearange Widgets
             $("#popupTermin .eventDateparent").after($("#popupTermin .input-group.clockpicker"))
 
+            $("#popupTermin .eventDateparent").append($("#popupTermin .input-group-addon").clone())
+
+
             //Execute resize actions
             uiController.updateSize();
 
