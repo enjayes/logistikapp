@@ -14002,7 +14002,7 @@ $.widget( "mobile.filterable", {
 
 				this._filterItems( val );
 				this._timer = 0;
-			}, 250 );
+			}, 50 ); //CHANGED 250
 		}
 	},
 

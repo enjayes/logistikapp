@@ -9,11 +9,14 @@
 
     <link href="libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css">
 
+    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.css" />
+    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.theme.css" />
+
 </head>
 <body style="display:none">
 
 
-<div data-role="page">
+<div id="page" data-role="page">
 
     <div id="bannerbackground"></div>
 
@@ -24,9 +27,9 @@
         <div data-role="tabs" id="tabs">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="tabsConstroller.openTab(0)">Übersicht</a></li>
-                    <li><a href="#termine" data-ajax="false" onclick="tabsConstroller.openTab(1)">Termine</a></li>
-                    <li><a href="#lieferanten" data-ajax="false" onclick="tabsConstroller.openTab(2)">Lieferanten</a></li>
+                    <li><a href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="tabsController.openTab(0)">Übersicht</a></li>
+                    <li><a href="#termine" data-ajax="false" onclick="tabsController.openTab(1)">Termine</a></li>
+                    <li><a href="#lieferanten" data-ajax="false" onclick="tabsController.openTab(2)">Lieferanten</a></li>
                 </ul>
             </div>
             <div id="uebersicht" class="ui-body-d ui-content">
@@ -48,68 +51,19 @@
                                 <input id="filterBasic-input" data-type="search">
                             </form>
                             <ul id="suchelieferantenliste" data-role="listview" data-inset="true" data-filter="true" data-input="#filterBasic-input">
-                                <li><a>
-                                    <h2>Stephen Weber</h2>
-                                    <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
-                                    <p><a href="#popupTermin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
-                                    <p class="ui-li-aside"><strong>6:24</strong>PM</p>
-                                </a></li>
-                                <li><a>
-                                    <h2>jQuery Team</h2>
-                                    <p><strong>Boston Conference Planning</strong></p>
-                                    <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
-                                    <p class="ui-li-aside"><strong>9:18</strong>AM</p>
-                                </a></li>
-                                <li><a>
-                                    <h2>Avery Walker</h2>
-                                    <p><strong>Re: Dinner Tonight</strong></p>
-                                    <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
-                                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
-                                </a></li>
-                                <li><a>
-                                    <h2>Stephen Weber</h2>
-                                    <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
-                                    <p><a href="#popupTermin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
-                                    <p class="ui-li-aside"><strong>6:24</strong>PM</p>
-                                </a></li>
-                                <li><a>
-                                    <h2>jQuery Team</h2>
-                                    <p><strong>Boston Conference Planning</strong></p>
-                                    <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
-                                    <p class="ui-li-aside"><strong>9:18</strong>AM</p>
-                                </a></li>
-                                <li><a>
-                                    <h2>Avery Walker</h2>
-                                    <p><strong>Re: Dinner Tonight</strong></p>
-                                    <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
-                                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
-                                </a></li>
-                                <li><a>
-                                    <h2>Stephen Weber</h2>
-                                    <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
-                                    <p><a href="#popupTermin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
-                                    <p class="ui-li-aside"><strong>6:24</strong>PM</p>
-                                </a></li>
-                                <li><a>
-                                    <h2>jQuery Team</h2>
-                                    <p><strong>Boston Conference Planning</strong></p>
-                                    <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
-                                    <p class="ui-li-aside"><strong>9:18</strong>AM</p>
-                                </a></li>
-                                <li><a>
-                                    <h2>Avery Walker</h2>
-                                    <p><strong>Re: Dinner Tonight</strong></p>
-                                    <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
-                                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
-                                </a></li>
+
                             </ul>
 
-                            <input id="allelieferantenanzeigen" type="button" onclick="lieferantenTab.zeigeLieferanten()" data-inline="true" data-mini="true" value="Alle Anzeigen">
+                            <input id="lieferanthinzufuegen" type="button" data-theme="b" onclick="lieferantenController.lieferantenHinzufuegen()" data-inline="true" data-mini="true" value="Hinzufügen">
+                            <input id="allelieferantenanzeigen" type="button" data-theme="b" onclick="lieferantenController.zeigeLieferanten()" data-inline="true" data-mini="true" value="Alle Anzeigen">
+
                         </div>
 
 
-                        <h1>Lieferant</h1>
-
+                        <h1 id="lieferantName"></h1>
+                        <div id="lieferantterminanlegen" style="display:none">
+                        <a href="#popupTermin" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>
+                        </div>
                     </div>
                     <!--/demo-html -->
                 </div>
@@ -120,16 +74,24 @@
 
 
     <div data-role="popup" id="popupTermin" data-theme="a" class="ui-corner-all">
-        <form>
+
             <div style="padding:10px 20px;">
                 <h3>Termin</h3>
-                <label for="un" class="ui-hidden-accessible">Username:</label>
+
+                <label for="eventDate" class="">Datum:</label>
+                <input id="eventDate"  type="text" data-role="date"  data-inline="true">
+
+
+
+                <label for="un" class="">Username:</label>
                 <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a">
-                <label for="pw" class="ui-hidden-accessible">Password:</label>
+                <label for="pw" class="">Password:</label>
                 <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a">
-                <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Sign in</button>
+                <button onclick="termineController.speichereAktuellesEvent();"  class="ui-btn ui-corner-all ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok</button>
+                <button onclick="termineController.abbrechenBearbeitungAktuellesEvent();"  class="ui-btn ui-corner-all ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Abbrechen</button>
+
             </div>
-        </form>
+
     </div>
 
 
@@ -148,17 +110,29 @@
 <script src="libs/socket.io.js"></script>
 
 
+<script src="libs/datepicker.js"></script>
+<script src="libs/jquery.mobile.datepicker.js"></script>
+
+
 <!--Kalender --->
 <script src='libs/fullcalendar-2.2.1/lib/moment.min.js'></script>
 <script src='libs/fullcalendar-2.2.1/fullcalendar.min.js'></script>
 <script src='libs/fullcalendar-2.2.1/lang/de.js'></script>
 
+<script src='js/lieferant.js'></script>
+<script src='js/calenderEvent.js'></script>
 
+<script src='js/uebersichtTab.js'></script>
 <script src='js/termineTab.js'></script>
 <script src='js/lieferantenTab.js'></script>
-<script src='js/uebersichtTab.js'></script>
+
 
 <script src='js/tabsController.js'></script>
+<script src='js/termineController.js'></script>
+<script src='js/lieferantenController.js'></script>
+
+
+
 <script src='js/uiController.js'></script>
 
 

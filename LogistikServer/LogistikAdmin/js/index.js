@@ -20,14 +20,21 @@ socket.on('message', function (msg) {
 
 
 //Init Controller
-tabsConstroller.init();
-
+tabsController.init();
+lieferantenController.init();
+termineController.init();
 
 //Init UI
 $(document).ready(function () {
     uiController.ready();
 });
 
+$(document).on("mobileinit", function () {
+    $.extend($.mobile, {
+        linkBindingEnabled: false,
+        ajaxEnabled: false
+    });
+});
 
 
 

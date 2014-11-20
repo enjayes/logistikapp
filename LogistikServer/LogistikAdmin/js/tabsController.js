@@ -9,7 +9,8 @@
  */
 
 
-tabsConstroller = {
+tabsController = {
+    aktuellerTab:0,
     tabs: [],
 
     //Init Controller
@@ -40,8 +41,8 @@ tabsConstroller = {
         $(".tabinhalt").css("opacity", "0")
 
         setTimeout(function () {
-
-            tabsConstroller.tabs[index].open();
+            tabsController.aktuellerTab = index;
+            tabsController.tabs[index].open();
 
             uiController.updateSize();
             //Inhalt anzeigen nach Rendern

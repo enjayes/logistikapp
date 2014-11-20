@@ -19,7 +19,7 @@ lieferantenTab = {
             $("#suchelieferantenliste").filterable("option", "filterCallback", function (index, searchValue) {
 
                 //Alle einzeigen
-                if (lieferantenTab.zeigeAlleLieferanten)
+                if (lieferantenController.zeigeAlleLieferanten)
                     return false;
 
                 //Kein Term eingebenen
@@ -38,9 +38,14 @@ lieferantenTab = {
 
         //Bei Eingabe alle anzeigen deaktivieren
         $("#suchelieferantenwidget #filterBasic-input").on("input change", function () {
-            if (lieferantenTab.zeigeAlleLieferanten)
-                lieferantenTab.zeigeLieferanten();
-        }).attr("placeholder","Suche nach Lieferanten...");
+            if (lieferantenController.zeigeAlleLieferanten)
+                lieferantenController.zeigeLieferanten();
+        }).click(function(event){
+                 event.stopPropagation()
+            }).attr("placeholder","Suche nach Lieferanten...");
+
+
+
 
         //Filterable initialisieren
         $("#suchelieferantenliste").filterable({
@@ -59,19 +64,6 @@ lieferantenTab = {
 
 
 
-    },
-
-    zeigeAlleLieferanten:false,
-    zeigeLieferanten: function () {
-        lieferantenTab.zeigeAlleLieferanten = !lieferantenTab.zeigeAlleLieferanten;
-        if (lieferantenTab.zeigeAlleLieferanten) {
-            $("#allelieferantenanzeigen").val('Verstecken').button('refresh');
-        } else {
-            $("#allelieferantenanzeigen").val('Alle anzeigen').button('refresh');
-        }
-        $("#suchelieferantenliste").filterable("refresh");
     }
-
-
 
 }

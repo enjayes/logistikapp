@@ -39,10 +39,11 @@
 Custom style jquery
 **/
 
-.ui-mobile .ui-page {
-
-
+.ui-page-theme-a .ui-btn:hover, html .ui-bar-a .ui-btn:hover, html .ui-body-a .ui-btn:hover, html body .ui-group-theme-a .ui-btn:hover, html head+body .ui-btn.ui-btn-a:hover, .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited {
+    text-shadow: none!important;
 }
+
+
 /**
 background-color: #FFFFFF;
 
@@ -88,6 +89,7 @@ Navbar
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
 }
 
 #suchelieferantenliste{
@@ -95,4 +97,23 @@ Navbar
     border: 2px solid rgba(102, 102, 102, 0.59);
     top: 160px;
     margin-bottom:30px;
+    box-shadow: 5px 10px 20px #888888;
+    top: 95px;
+    z-index: 1;
+}
+
+
+
+.allelieferantenanzeigenparent{
+    position: absolute!important;
+    right: 0!important;
+}
+
+
+/**
+ Termin Popup
+**/
+
+#popupTermin{
+    width: 900px
 }

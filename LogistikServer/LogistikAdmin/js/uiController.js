@@ -18,12 +18,21 @@ uiController = {
         //Init Calender rendering
         $('#calendar .fc-toolbar').hide();
 
+        //Stop Clicks
+        $(".ui-tabs-panel .ui-input-btn").click(function(event){
+            event.stopPropagation();
+        })
+
+        //Buttons parents
+        $("#lieferanthinzufuegen").parent().addClass("lieferanthinzufuegenparent");
+        $("#allelieferantenanzeigen").parent().addClass("allelieferantenanzeigenparent");
+
 
         //Window Resize Handling
         $(window).resize(uiController.updateSize);
 
         //Init Tabs
-        tabsConstroller.ready();
+        tabsController.ready();
 
         //Execute resize actions
         uiController.updateSize();
