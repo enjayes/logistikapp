@@ -9,8 +9,8 @@
 
     <link href="libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.css" />
-    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.theme.css" />
+    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.css"/>
+    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.theme.css"/>
 
 </head>
 <body style="display:none">
@@ -61,8 +61,10 @@
 
 
                         <h1 id="lieferantName"></h1>
+
                         <div id="lieferantterminanlegen" style="display:none">
-                        <a href="#popupTermin" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>
+                            <a href="#popupTermin" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Termin
+                                anlegen</a>
                         </div>
                     </div>
                     <!--/demo-html -->
@@ -75,22 +77,23 @@
 
     <div data-role="popup" id="popupTermin" data-theme="a" class="ui-corner-all">
 
-            <div style="padding:10px 20px;">
-                <h3>Termin</h3>
+        <div style="padding:10px 20px;">
+            <h3>Termin</h3>
 
-                <label for="eventDate" class="">Datum:</label>
-                <input id="eventDate"  type="text" data-role="date"  data-inline="true">
+            <label for="eventDate" class="">Datum:</label>
+            <input id="eventDate" type="text" data-role="date" data-inline="true">
 
 
+            <label for="un" class="">Username:</label>
+            <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a">
+            <label for="pw" class="">Password:</label>
+            <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a">
 
-                <label for="un" class="">Username:</label>
-                <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a">
-                <label for="pw" class="">Password:</label>
-                <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a">
-                <button onclick="termineController.speichereAktuellesEvent();"  class="ui-btn ui-corner-all ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok</button>
-                <button onclick="termineController.abbrechenBearbeitungAktuellesEvent();"  class="ui-btn ui-corner-all ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Abbrechen</button>
-
+            <div style="margin-left:auto;margin-right:auto;max-width: 250px;    ">
+                <button onclick="termineController.speichereAktuellesEvent();" class="ui-btn ui-corner-all ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok</button>
+                <button onclick="termineController.abbrechenBearbeitungAktuellesEvent();" class="ui-btn ui-corner-all ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Abbrechen</button>
             </div>
+        </div>
 
     </div>
 
@@ -130,7 +133,6 @@
 <script src='js/tabsController.js'></script>
 <script src='js/termineController.js'></script>
 <script src='js/lieferantenController.js'></script>
-
 
 
 <script src='js/uiController.js'></script>

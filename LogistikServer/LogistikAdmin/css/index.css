@@ -117,3 +117,8 @@ Navbar
 #popupTermin{
     width: 900px
 }
+
+#popupTermin div.hasDatepicker {
+    margin-left: auto;
+    margin-right: auto;
+}
