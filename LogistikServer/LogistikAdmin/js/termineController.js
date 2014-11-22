@@ -275,9 +275,9 @@ termineController = {
         Router.popupClosed = true;
 
         termineController.aktuellerTerminGespeichert = true;
-
+        termineController.aktuellesEvent=null;
+        termineController.aktuellerTerminLieferant = null;
         $("#popupTermin").popup("close");
-        $("#suchelieferantenwidget #filterBasic-input").val(termineTab.alterFilterInput);
 
     },
 
@@ -364,10 +364,10 @@ termineController = {
             else
                 serverController.termin.update(termineController.aktuellesEvent);
 
-
+            termineController.aktuellesEvent=null;
+            termineController.aktuellerTerminLieferant = null;
             $("#popupTermin").popup("close");
         }
-        $("#suchelieferantenwidget #filterBasic-input").val(termineTab.alterFilterInput);
 
     },
     zeigeSpeicherButton: function () {

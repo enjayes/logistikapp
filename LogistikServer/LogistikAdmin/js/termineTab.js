@@ -52,6 +52,7 @@ termineTab = {
 
             $("#speichereaktuelleseventbutton, #abbrechenbearbeitungaktuelleseventbutton").removeClass("fade");
 
+            $("#suchelieferantenwidget #filterBasic-input").val(termineTab.alterFilterInput);
 
             if (tabsController.tab() == termineTab)
                 $("#suchelieferanten").prepend($("#suchelieferantenwidget"));
