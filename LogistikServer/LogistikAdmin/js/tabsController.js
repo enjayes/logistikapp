@@ -10,7 +10,7 @@
 
 
 tabsController = {
-    aktuellerTab: 0,
+    aktuellerTab: null,
     tabs: [],
     tabsAnchorName: ["uebersichtTab","termineTab","lieferantenTab"],
     //Init Controller
@@ -76,11 +76,6 @@ tabsController = {
     openTab: function (index) {
 
         if (index != this.aktuellerTab) {
-
-
-
-
-
             $(".tabinhalt").css("opacity", "0")
 
             setTimeout(function () {
@@ -88,9 +83,13 @@ tabsController = {
                 tabsController.tabs[index].open();
 
                 uiController.updateSize();
+
                 //Inhalt anzeigen nach Rendern
                 $(".tabinhalt").css("opacity", "1")
-                Router.pushState();
+                //State Updaten
+
+                  Router.pushState();
+
             }, 0)
 
 
@@ -98,6 +97,10 @@ tabsController = {
 
     },
     openTabWithoutClick:function(index){
+
+        index= parseInt(index+"");
+        if(index<0||index>2)
+         return;
 
         tabsController.openTabAttempt =  index;
 

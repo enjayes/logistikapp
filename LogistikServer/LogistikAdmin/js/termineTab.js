@@ -38,8 +38,12 @@ termineTab = {
             if (tabsController.tab() == termineTab) {
                 $("#lieferantenTerminReadyOnly").parent(".ui-input-text").hide();
                 $("#lieferantTermin").append($("#suchelieferantenwidget"));
-            } else
+                $("#lieferantAnzeigen button").show();
+            } else{
                 $("#lieferantenTerminReadyOnly").parent(".ui-input-text").show();
+                $("#lieferantAnzeigen button").hide();
+
+            }
 
 
         });

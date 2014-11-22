@@ -22,7 +22,7 @@ uiController = {
             }
 
             if (event) {
-                if (!lieferantenController.aktuellerLieferantGespeichert) {
+                if (!lieferantenController.aktuellerLieferantGespeichert||!termineController.aktuellerTerminGespeichert) {
 
                     var message = 'Sie haben ihre Änderungen noch nicht gespeichert!';
                     event.returnValue = message;

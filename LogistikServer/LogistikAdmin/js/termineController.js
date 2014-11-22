@@ -17,24 +17,83 @@ termineController = {
         this.calendarData.events = termineController.events;
 
         //Get Lieferanten From Server
+
         var getTermineFromServer = function (termine) {
             if (termine) {
+
+
+                 termine.forEach(function(termin){
+                     if(termin.start)
+                         termin.start = termineTab.calenderFactory.moment( termin.start);
+                     if(termin.end)
+                         termin.end = termineTab.calenderFactory.moment( termin.end);
+                 })
+
+
+                termineController.events  = termine;
+                termineController.calendarData.events = termine;
                 if (termineTab.calender) {
+
+                    if (tabsController.tab() == termineTab) {
+
+                        if (termineController.aktuellesEvent) {
+                            var termin = termineController.getTerminByID(termineController.aktuellesEvent.id);
+
+                            console.log(termin+"   "+termineController.aktuellerTerminGespeichert)
+                            console.dir(termin)
+                            if (!termin)
+                                $("#popupTermin").popup("close");
+                            else if (termineController.aktuellerTerminGespeichert) {
+                                termineController.zeigeEvent(termin,termineController.aktuellesEventIstNeu);
+                            }
+
+                        }
+                    }
+
+
                     termineTab.calender.fullCalendar('removeEvents');
                     termineTab.calender.fullCalendar('addEventSource', termine);
-                } else {
-                    termineController.calendarData.events = termine;
+
+
                 }
 
             }
         }
+
         serverController.termin.getAll(getTermineFromServer);
         $("#popupTermin input,#popupTermin textarea").on("input", function () {
-           if(termineController.aktuellerTerminGespeichert){
-               termineController.aktuellerTerminGespeichert = false;
-               termineController.zeigeSpeicherButton()
-           }
+            if (termineController.aktuellerTerminGespeichert) {
+                termineController.aktuellerTerminGespeichert = false;
+                termineController.zeigeSpeicherButton()
+            }
         })
+
+
+        var checkValidLieferant = function () {
+            var lieferantenName = $("#suchelieferantenwidget #filterBasic-input").val();
+
+            var lieferant = lieferantenController.getLieferantByName(lieferantenName);
+            if (lieferant && lieferant.id) {
+                termineController.aktuellerTerminLieferant = lieferant;
+                $("#lieferantAnzeigen button").removeClass("ui-disabled");
+            }
+            else {
+                termineController.aktuellerTerminLieferant = null;
+                $("#lieferantAnzeigen button").addClass("ui-disabled");
+            }
+            if (termineController.aktuellerTerminGespeichert) {
+                termineController.aktuellerTerminGespeichert = false;
+                termineController.zeigeSpeicherButton()
+            }
+
+        }
+
+        $("#suchelieferantenliste, #suchelieferantenwidget a").click(function () {
+            setTimeout(checkValidLieferant(), 0)
+        })
+
+        $("#suchelieferantenwidget #filterBasic-input").on("input", checkValidLieferant)
+
 
         //Check if time is right
         $('#popupTermin .clockpicker input').change(function () {
@@ -102,6 +161,8 @@ termineController = {
     waehleLieferant: function (index) {
         if (lieferantenController.zeigeAlleLieferanten)
             lieferantenController.zeigeLieferanten();
+
+        termineController.aktuellerTerminLieferant = lieferantenController.lieferanten[index];
         $("#suchelieferantenwidget #filterBasic-input").val(lieferantenController.getLieferantFullName(lieferantenController.lieferanten[index]));
         $("#suchelieferantenliste").hide();
 
@@ -120,7 +181,7 @@ termineController = {
     },
     aktuellesEvent: null,
     aktuellesEventIstNeu: false,
-    aktuellerTerminGespeichert:true,
+    aktuellerTerminGespeichert: true,
     zeigeEvent: function (calenderEvent, neuesEvent) {
 
 
@@ -128,8 +189,6 @@ termineController = {
 
         termineController.aktuellesEvent = $.extend({}, calenderEvent);
         termineController.aktuellesEventIstNeu = neuesEvent;
-
-
 
         var date = termineController.aktuellesEvent.start.format('DD.MM.YYYY');
         var time = termineController.aktuellesEvent.start.format('HH:mm');
@@ -157,46 +216,51 @@ termineController = {
         if (calenderEvent.lieferant && calenderEvent.lieferant.trim() != "") {
             var lieferant = lieferantenController.getLieferantByID(calenderEvent.lieferant);
 
-            if (!lieferant || !lieferant.id) {
-                lieferantenInput.val("");
-            } else
+            if (lieferant && lieferant.id) {
+                termineController.aktuellerTerminLieferant = lieferant;
+                $("#lieferantAnzeigen button").removeClass("ui-disabled")
                 lieferantenInput.val(lieferantenController.getLieferantFullName(lieferant));
+            }
+            else {
+                $("#lieferantAnzeigen button").addClass("ui-disabled")
+                lieferantenInput.val("");
+            }
+
 
         } else
             lieferantenInput.val("");
 
 
-        if (calenderEvent.allDay){
+        if (calenderEvent.allDay) {
             $("#lieferantAlldayTermin").prop("checked", true).checkboxradio("refresh");
             $("#popupTermin .clockpicker").addClass("ui-disabled");
 
         }
-        else{
+        else {
             $("#lieferantAlldayTermin").removeProp("checked", true).checkboxradio("refresh");
             $("#popupTermin .clockpicker").removeClass("ui-disabled");
 
         }
-        $("#popupTermin .ui-checkbox.lieferantAlldayTerminparent").click(function(){
-           setTimeout(function(){
-              if($("#lieferantAlldayTermin").prop("checked"))
-                  $("#popupTermin .clockpicker").addClass("ui-disabled");
-              else
-                  $("#popupTermin .clockpicker").removeClass("ui-disabled");
-               if(termineController.aktuellerTerminGespeichert){
-                   termineController.aktuellerTerminGespeichert = false;
-                   termineController.zeigeSpeicherButton()
-               }
+        $("#popupTermin .ui-checkbox.lieferantAlldayTerminparent").click(function () {
+            setTimeout(function () {
+                if ($("#lieferantAlldayTermin").prop("checked"))
+                    $("#popupTermin .clockpicker").addClass("ui-disabled");
+                else
+                    $("#popupTermin .clockpicker").removeClass("ui-disabled");
+                if (termineController.aktuellerTerminGespeichert) {
+                    termineController.aktuellerTerminGespeichert = false;
+                    termineController.zeigeSpeicherButton()
+                }
 
-           },0)
+            }, 0)
 
         })
-
 
 
         $("#popupTermin .redborder").removeClass("redborder");
 
 
-        termineController.aktuellerTerminGespeichert= !neuesEvent;
+        termineController.aktuellerTerminGespeichert = !neuesEvent;
 
         termineController.zeigeSpeicherButton();
 
@@ -208,7 +272,9 @@ termineController = {
     },
 
     abbrechenBearbeitungAktuellesEvent: function () {
+        Router.popupClosed = true;
 
+        termineController.aktuellerTerminGespeichert = true;
 
         $("#popupTermin").popup("close");
         $("#suchelieferantenwidget #filterBasic-input").val(termineTab.alterFilterInput);
@@ -217,6 +283,7 @@ termineController = {
 
 
     speichereAktuellesEvent: function () {
+        Router.popupClosed = true;
 
         var validated = true;
         $("#popupTermin .redborder").removeClass("redborder");
@@ -230,21 +297,13 @@ termineController = {
         }
 
         //Lieferanten Name validieren
-        if (tabsController.tab() == termineTab)
-            var lieferantenInput = $("#suchelieferantenwidget #filterBasic-input")
-        else
-            lieferantenInput = $("#lieferantenTerminReadyOnly");
-        var lieferantenName = lieferantenInput.val();
-        //Wenn lieferanten Name angegeben muss dieser existieren
-        if (lieferantenName.trim() != "") {
-            var lieferant = lieferantenController.getLieferantByName(lieferantenName);
-            if (!lieferant || !lieferant.id) {
-                validated = false;
-                $("#suchelieferantenwidget #filterBasic-input").parent(".ui-input-search").addClass("redborder");
-            }
+
+
+        if ((!(tabsController.tab() == termineTab && $("#suchelieferantenwidget #filterBasic-input").val().trim() == "")) && (!termineController.aktuellerTerminLieferant || !termineController.aktuellerTerminLieferant.id)) {
+            validated = false;
+            $("#suchelieferantenwidget #filterBasic-input").parent(".ui-input-search").addClass("redborder");
         }
-        else
-            lieferant = null;
+
 
         var start = termineTab.calenderFactory.moment($("#eventDate").datepicker('getDate'));
 
@@ -255,25 +314,20 @@ termineController = {
 
         //Alle Daten in Ordnung
         if (validated) {
-
-
-
-
+            termineController.aktuellerTerminGespeichert = true;
 
             //Eintragen
             termineController.aktuellesEvent.title = $("#termintitel").val();
             termineController.aktuellesEvent.notizen = $("#terminnotizen").val();
 
-
             termineController.aktuellesEvent.allDay = $("#lieferantAlldayTermin").prop("checked");
 
-            if(termineController.aktuellesEvent.allDay ) {
+            if (termineController.aktuellesEvent.allDay) {
                 start.stripTime();
                 termineController.aktuellesEvent.end = null;
-            }else{
+            } else {
                 var starttime = $('#popupTermin .clockpicker input').val();
                 start.time(starttime + ":00");
-
 
                 if (termineController.aktuellesEvent.end) {
                     var oldStart = termineTab.calenderFactory.moment(termineController.aktuellesEvent.start);
@@ -291,14 +345,12 @@ termineController = {
             }
             termineController.aktuellesEvent.start = start;
 
-
-
-            if (!lieferant || !lieferant.id) {
+            if (!termineController.aktuellerTerminLieferant || !termineController.aktuellerTerminLieferant.id) {
                 if (termineController.aktuellesEvent.lieferant)
                     delete termineController.aktuellesEvent.lieferant
             }
             else
-                termineController.aktuellesEvent.lieferant = lieferant.id;
+                termineController.aktuellesEvent.lieferant = termineController.aktuellerTerminLieferant.id;
 
 
             termineTab.calender.fullCalendar('removeEvents', termineController.aktuellesEvent.id);
@@ -317,33 +369,51 @@ termineController = {
         }
         $("#suchelieferantenwidget #filterBasic-input").val(termineTab.alterFilterInput);
 
-    } ,
-    zeigeSpeicherButton:function(){
+    },
+    zeigeSpeicherButton: function () {
 
 
-       if(termineController.aktuellerTerminGespeichert){
-             $("#popupTermin .bottombuttons").addClass("saved");
-             $("#speichereaktuelleseventbutton").hide();
+        if (termineController.aktuellerTerminGespeichert) {
+            $("#popupTermin .bottombuttons").addClass("saved");
+            $("#speichereaktuelleseventbutton").hide();
             $("#abbrechenbearbeitungaktuelleseventbutton").val("Ok").text("Ok").removeClass("ui-icon-delete").addClass("ui-icon-check");
 
-       }else{
+        } else {
 
-           $("#popupTermin .bottombuttons").removeClass("saved");
-           $("#speichereaktuelleseventbutton").css("opacity",0);
-           $("#speichereaktuelleseventbutton").show();
-           $("#abbrechenbearbeitungaktuelleseventbutton").hide();
+            $("#popupTermin .bottombuttons").removeClass("saved");
+            $("#speichereaktuelleseventbutton").css("opacity", 0);
+            $("#speichereaktuelleseventbutton").show();
+            $("#abbrechenbearbeitungaktuelleseventbutton").hide();
 
-           $("#abbrechenbearbeitungaktuelleseventbutton").val("Abbrechen").text("Abbrechen").removeClass("ui-icon-check").addClass("ui-icon-delete");
-           setTimeout(function(){
-               $("#speichereaktuelleseventbutton").addClass("fade");
-               $("#abbrechenbearbeitungaktuelleseventbutton").addClass("fade");
-               $("#abbrechenbearbeitungaktuelleseventbutton").show();
-           },0)
+            $("#abbrechenbearbeitungaktuelleseventbutton").val("Abbrechen").text("Abbrechen").removeClass("ui-icon-check").addClass("ui-icon-delete");
+            setTimeout(function () {
+                $("#speichereaktuelleseventbutton").addClass("fade");
+                $("#abbrechenbearbeitungaktuelleseventbutton").addClass("fade");
+                $("#abbrechenbearbeitungaktuelleseventbutton").show();
+            }, 0)
 
-       }
+        }
 
 
+    },
+    oeffneLieferantenTab: function () {
 
+        if (termineController.aktuellerTerminLieferant) {
+            var url = location.protocol + "//" + location.host + "#state=tab_2+l_" + termineController.aktuellerTerminLieferant.id + "+jq_";
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+
+    },
+    getTerminByID: function (terminID) {
+
+        for (var i = 0; i < termineController.events.length; i++) {
+            if (termineController.events[i].id == terminID) {
+                return termineController.events[i];
+            }
+
+        }
+        return null;
 
     }
 

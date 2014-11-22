@@ -31,6 +31,7 @@ serverController = {
 
     socket: null,
     id: misc.getUniqueID(),
+
     messageType: {
         connection: "c",
         normal: "n",
@@ -59,7 +60,15 @@ serverController = {
                     serverController.callbackHandler[msg.callback](msg.cbdata);
                     delete serverController.callbackHandler[msg.callback];
                 }
+                //Lieferanten wurde in anderem Fenster geändert
+            } else if (msg.t ==  serverController.lieferant.messageType.updateOthers) {
+                if (msg.l)
+                    serverController.lieferant.getAllCallback(msg.l);
+            } else if (msg.t == serverController.termin.messageType.updateOthers) {
+                if (msg.e)
+                    serverController.termin.getAllCallback(msg.e);
             }
+
 
         });
 
@@ -71,10 +80,19 @@ serverController = {
             create: "lc",
             update: "lu",
             delete: "ld",
-            get: "lg"
+            get: "lg",
+            updateOthers:"luo"
+
         },
+        getAllCallback: null,
         getAll: function (callback) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(callback)}));
+            serverController.lieferant.getAllCallback = callback;
+            var newCallback = function () {
+                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            }
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (lieferant) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: lieferant}));
@@ -94,8 +112,11 @@ serverController = {
             create: "tc",
             update: "tu",
             delete: "td",
-            get: "tg"
+            get: "tg",
+            updateOthers:"tuo"
+
         },
+        getAllCallback: null,
         buildDTO: function (termin) {
             var newTermin = {
                 id: termin.id,
@@ -111,12 +132,18 @@ serverController = {
             else
                 newTermin.end = "";
 
-
-
             return newTermin;
         },
         getAll: function (callback) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(callback)}));
+
+            var newCallback = function () {
+                serverController.termin.getAllCallback = callback;
+                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            }
+
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (termin) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: this.buildDTO(termin)}));
@@ -128,7 +155,14 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, l: this.buildDTO(termin)}));
         }
 
-    }
+    },
+    getAllOnStartupCounter: 0,
+    getAllOnStartupMax: 2,
+    onLoadedGetAllOnStartup: function () {
+        if (serverController.getAllOnStartupCounter == serverController.getAllOnStartupMax) {
+            crossroads.parse(location.hash);
+        }
 
+    }
 }
 

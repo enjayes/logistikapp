@@ -19,7 +19,7 @@
 <body style="display:none">
 
 
-<div id="page" data-role="page">
+<div id="page" data-role="page" style="opacity:0">
 
     <div id="bannerbackground"></div>
 
@@ -127,11 +127,15 @@
             </label>
 
             <label id="lieferantTerminLabel" for="lieferantTermin" class="">Lieferant:</label>
-
-            <span id="lieferantTermin">
+            <div id="lieferantAuswahl">
+            <div id="lieferantTermin" >
                <input type="text" name="user" id="lieferantenTerminReadyOnly" value="" placeholder="" data-theme="a" readonly>
-            </span>
-
+            </div>
+            <div id="lieferantAnzeigen">
+                <button id=""  title="Öffne Profil" onclick="termineController.oeffneLieferantenTab()" class="ui-btn-icon-notext ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-a ui-icon-user">Ok
+                </button>
+            </div>
+            </div>
             <label for="terminnotizen" class="">Notizen:</label>
             <textarea id="terminnotizen" rows="7"></textarea>
 
