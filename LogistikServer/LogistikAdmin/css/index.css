@@ -23,6 +23,10 @@ Custom style jquery
     margin-right: auto !important;
 }
 
+
+.ui-mobile label, .ui-controlgroup-label {
+    margin-top: 16px!important;
+}
 /**
 Datebox
 **/
@@ -32,8 +36,16 @@ Datebox
     width: 78%;
     float: left;
     position: relative;
+    margin: 0;
 
 }
+
+#popupTermin .clockpicker .ui-input-text {
+    margin: 0;
+}
+
+
+
 
 #popupTermin .eventDateparent .input-group-addon {
     top: -1px !important;
@@ -50,6 +62,21 @@ Datebox
     width: 20% !important;
     float: right !important;
 }
+
+#popupTermin .ui-checkbox.lieferantAlldayTerminparent{
+    display: inline-block;
+    vertical-align: middle;
+    margin: -10px;
+}
+
+#popupTermin .ui-checkbox.lieferantAlldayTerminparent .ui-btn {
+    border: none!important;
+    font-weight: normal!important;
+    background-color: #fff!important;
+}
+
+
+
 
 .clockpicker-popover {
     z-index: 2010 !important;
@@ -74,10 +101,10 @@ input-group-addon {
     border-left: 1px;
     float: right !important;
     position: absolute;
-    top: 8px;
-    right: 0px;
+    top: 0px;
+    right: -1px;
     display: inline-block !important;
-    height: 37px;
+    height: 38px;
     width: 37px;
     webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
     -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
@@ -162,7 +189,7 @@ input-group-addon {
     top: 0;
     left: 0;
     width: 100%;
-    height: 129px;
+    height: 124px;
     background-color: #fff;
 }
 
@@ -185,7 +212,7 @@ input-group-addon {
 }
 
 #tabs {
-    margin-top: 90px
+    margin-top: 85px
 }
 
 /**
@@ -225,12 +252,99 @@ Navbar
     margin-right: 30px;
 }
 
+
+#lieferantenInformationen{
+    padding: 0px 15px 15px 15px;
+    background-color: #E5E5E5;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
+    position: relative;
+}
+
+
+#lieferantenInformationen .ui-btn.ui-btn-b {
+    -webkit-transition: opacity 0.8s; /* For Safari 3.1 to 6.0 */
+    transition: opacity 0.8s;
+}
+
+
+#lieferantErzeugeEvent{
+    position: absolute;
+    right: 130px;
+}
+
+#lieferantLoeschen{
+    position: absolute;
+    right:15px;
+}
+
+#lieferantenInformationen  .ui-input-text{
+display: inline-block;
+vertical-align: middle;
+    width: 450px;
+}
+
+
+
+
+
+#lieferantBearbeitenTitle{
+    padding-top: 15px;
+}
+
+
+#suchelieferanten .ui-input-text{
+    margin: 0!important;
+}
+
+
 #suchelieferantenwidget {
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
 }
+
+#popupTermin #suchelieferantenwidget {
+    display: inline-block!important;
+    width:100%!important;
+    margin-bottom: 0px;
+}
+
+#popupTermin #suchelieferantenliste {
+    top: 35px!important;
+
+}
+
+
+#popupTermin .lieferanthinzufuegenparent {
+    display: none!important;
+}
+
+#popupTermin .allelieferantenanzeigenparent {
+    display: none!important;
+}
+
+#popupTermin #suchelieferantenwidget .ui-input-search {
+    margin: 0!important;
+}
+
+#popupTermin #terminnotizen {
+    min-height:100px;
+}
+
+#popupTermin #lieferantTermin .ui-input-text{
+    border: none!important;
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow:  none!important;
+}
+
+
 
 #suchelieferantenliste {
     position: absolute;
@@ -240,7 +354,33 @@ Navbar
     box-shadow: 5px 10px 20px #888888;
     top: 95px;
     z-index: 1;
+
+    -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeincomplete ease-in 1;
+    animation: fadeincomplete ease-in 1;
+
+    -webkit-animation-fill-mode: forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode: forwards; /*FF 5+*/
+    -o-animation-fill-mode: forwards; /*Not implemented yet*/
+    -ms-animation-fill-mode: forwards; /*IE 10+*/
+    animation-fill-mode: forwards; /*when the spec is finished*/
+
+    -webkit-animation-duration: 200ms;
+    -moz-animation-duration: 200ms;
+    animation-duration: 200ms;
 }
+
+
+#suchelieferantenliste .selected a {
+    background-color: #E2E2E2!important;
+}
+
+
+#popupTermin #suchelieferantenliste .selected a {
+    background-color: #f6f6f6!important;
+}
+
+
 
 .allelieferantenanzeigenparent {
     position: absolute !important;
@@ -259,6 +399,7 @@ Navbar
     margin-left: auto;
     margin-right: auto;
     margin-top: 70px;
+
 }
 
 #popupTermin div.hasDatepicker .ui-datepicker-inline {
@@ -271,30 +412,17 @@ Navbar
     margin-left: auto;
     margin-right: auto;
     max-width: 243px;
-}
-
-#popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton {
-    margin-right: 0 !important;
+    overflow: visible;
+    white-space: nowrap;
 
 }
 
-#popupTermin #termintitel {
-    margin-top: 7px;
-
+#popupTermin .bottombuttons.saved {
+    max-width: 80px;
 }
 
-#ui-datepicker-div {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
-    background-color: rgb(255, 255, 255);
-    background-clip: padding-box;
-}
-
-.popover {
-    border-radius: 0 !important;
-    margin-top: -9px !important;
-    oopacity: 0; /* make things invisible upon start */
+#popupTermin .bottombuttons #speichereaktuelleseventbutton.fade, #popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton.fade{
+    opacity: 0; /* make things invisible upon start */
     -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
     -moz-animation: fadeincomplete ease-in 1;
     animation: fadeincomplete ease-in 1;
@@ -305,10 +433,84 @@ Navbar
     -ms-animation-fill-mode: forwards; /*IE 10+*/
     animation-fill-mode: forwards; /*when the spec is finished*/
 
-    -webkit-animation-duration: 200ms;
-    -moz-animation-duration: 200ms;
-    animation-duration: 200ms;
+    -webkit-animation-duration: 400ms;
+    -moz-animation-duration: 400ms;
+    animation-duration: 400ms;
 }
+
+
+
+
+
+#popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton {
+    margin-right: 0 !important;
+
+}
+
+#popupTermin #terminheader {
+    margin-top: 7px;
+
+}
+
+#popupTermin .redborder, #lieferantenInformationen .redborder{
+    -webkit-box-shadow: inset 0 1px 3px rgba(255,0,0,.2)!important;
+    -moz-box-shadow: inset 0 1px 3px rgba(255,0,0,.2)!important;
+    box-shadow: inset 0 1px 3px rgba(255, 0, 0, 0.2)!important;
+    border-color:#f00!important;
+}
+
+#ui-datepicker-div {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+    background-color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    margin-top: 1px;
+}
+
+
+#calendar {
+
+    opacity: 0; /* make things invisible upon start */
+    -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeincomplete ease-in 1;
+    animation: fadeincomplete ease-in 1;
+
+    -webkit-animation-fill-mode: forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode: forwards; /*FF 5+*/
+    -o-animation-fill-mode: forwards; /*Not implemented yet*/
+    -ms-animation-fill-mode: forwards; /*IE 10+*/
+    animation-fill-mode: forwards; /*when the spec is finished*/
+
+    -webkit-animation-duration: 150ms;
+    -moz-animation-duration: 150ms;
+    animation-duration: 150ms;
+}
+
+
+.popover {
+    border-radius: 0 !important;
+    margin-top: -1px !important;
+    opacity: 0; /* make things invisible upon start */
+    -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeincomplete ease-in 1;
+    animation: fadeincomplete ease-in 1;
+
+    -webkit-animation-fill-mode: forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode: forwards; /*FF 5+*/
+    -o-animation-fill-mode: forwards; /*Not implemented yet*/
+    -ms-animation-fill-mode: forwards; /*IE 10+*/
+    animation-fill-mode: forwards; /*when the spec is finished*/
+
+    -webkit-animation-duration: 300ms;
+    -moz-animation-duration: 300ms;
+    animation-duration: 300ms;
+
+}
+
+
+
+
 
 .popover .arrow {
     display: none !important;
@@ -342,8 +544,11 @@ Navbar
     }
 }
 
+
+
+
 .clockpicker-span-hours, .clockpicker-span-minutes {
-    font-size: 0.8em !important;
+    font-size: 0.77em !important;
 }
 
 .clockpicker-popover .popover-title {
@@ -351,3 +556,111 @@ Navbar
 }
 
 
+
+/**
+Colors
+**/
+.greenbutton, .lieferanthinzufuegenparent{
+    background-color: rgb(0, 113, 23)!important;
+}
+
+.redbutton{
+    background-color: rgb(113,0, 23)!important;
+}
+
+
+#lieferantenInformationen.neu{
+    -webkit-animation-name: greenPulse;
+    -webkit-animation-duration: 1.3s;
+    -webkit-animation-iteration-count: 1;
+    animation-name: greenPulse;
+    animation-duration: 1.3s;
+    animation-iteration-count: 1;
+}
+
+
+@-webkit-keyframes greenPulse {
+    from { background-color: rgba(116, 154, 2, 0.27); -webkit-box-shadow: 0 0 1px #333;opacity:0 }
+    50% { background-color: rgba(145, 189, 9, 0.7); -webkit-box-shadow: 0 0 1px #91bd09; opacity:1 }
+    to { background-color: #E5E5E5; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.1); }
+}
+
+
+@keyframes greenPulse {
+    from { background-color: rgba(116, 154, 2, 0.27);box-shadow: 0 0 1px #333;opacity:0 }
+    50% { background-color: rgba(145, 189, 9, 0.7); box-shadow: 0 0 1px #91bd09; opacity:1}
+    to { background-color: #E5E5E5; box-shadow: inset 0 1px 1px rgba(0,0,0,.1); }
+}
+
+
+
+
+
+#lieferantenInformationen.neumitalt{
+    -webkit-animation-name: greenPulseAlt;
+    -webkit-animation-duration: 1.3s;
+    -webkit-animation-iteration-count: 1;
+    animation-name: greenPulseAlt;
+    animation-duration: 1.3s;
+    animation-iteration-count: 1;
+}
+
+
+@-webkit-keyframes greenPulseAlt {
+    from { background-color: #E5E5E5; -webkit-box-shadow: 0 0 1px #333;}
+    50% { background-color: rgba(145, 189, 9, 0.7); -webkit-box-shadow: 0 0 1px #91bd09;  }
+    to { background-color: #E5E5E5; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.1); }
+}
+
+@keyframes greenPulseAlt {
+    from { background-color: #E5E5E5;box-shadow: 0 0 1px #333;}
+    50% { background-color: rgba(145, 189, 9, 0.7); box-shadow: 0 0 1px #91bd09; }
+    to { background-color: #E5E5E5; box-shadow: inset 0 1px 1px rgba(0,0,0,.1); }
+}
+
+
+#lieferantenInformationen.geladen{
+    -webkit-animation-name: whitePulse;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+
+    animation-name: whitePulse;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@-webkit-keyframes whitePulse {
+    from { background-color: #E5E5E5; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.1);  }
+    50% { background-color: #D5D5D5;  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.1); }
+    to { background-color: #E5E5E5; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.1);  }
+}
+
+@keyframes whitePulse {
+    from { background-color: #E5E5E5; box-shadow: inset 0 1px 1px rgba(0,0,0,.1); }
+    50% { background-color: #D5D5D5; box-shadow: inset 0 1px 1px rgba(0,0,0,.1);  }
+    to { background-color: #E5E5E5; box-shadow: inset 0 1px 1px rgba(0,0,0,.1); }
+}
+
+
+
+#lieferantenInformationen.geloescht{
+    -webkit-animation-name: greyPulse;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+    animation-name: greyPulse;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+
+@-webkit-keyframes greyPulse {
+    from {background-color: #E5E5E5;  }
+    30% { background-color: #f9f9f9;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05); opacity:0.9 }
+    to { background-color: #f9f9f9;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05); opacity:0}
+}
+
+@keyframes greyPulse {
+    from {background-color: #f9f9f9;  }
+    30% { background-color:#f9f9f9;box-shadow: inset 0 1px 1px rgba(0,0,0,.05); opacity:0.9 }
+    to { background-color:#f9f9f9;box-shadow: inset 0 1px 1px rgba(0,0,0,.05); opacity:0 }
+}

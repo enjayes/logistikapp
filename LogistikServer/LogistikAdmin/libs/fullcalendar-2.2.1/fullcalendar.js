@@ -331,8 +331,6 @@ fc.lang = function(langCode, options) {
 function Calendar(element, instanceOptions) {
 	var t = this;
 
-
-
 	// Build options object
 	// -----------------------------------------------------------------------------------
 	// Precedence (lowest to highest): defaults, rtlDefaults, langOptions, instanceOptions
@@ -688,6 +686,7 @@ function Calendar(element, instanceOptions) {
 
 		// if viewName is changing, destroy the old view
 		if (currentView && viewName && currentView.name !== viewName) {
+
 			header.deactivateButton(currentView.name);
 			freezeContentHeight(); // prevent a scroll jump when view element is removed
 			if (currentView.start) { // rendered before?

@@ -10,8 +10,12 @@
 
 
 
-Lieferant = function(name){
-      this.name = name;
-
-
+lieferant = function(vorname,name){
+    this.id = misc.getUniqueID();
+    this.vorname = vorname;
+    this.name = name;
+    this.telefon="";
+    this.email="";
+    this.adresse="";
+    this.notizen="";
 }

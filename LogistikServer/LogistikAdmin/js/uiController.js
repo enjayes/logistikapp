@@ -13,7 +13,27 @@
 uiController = {
 
     ready: function () {
-        setTimeout(function () {
+
+
+        window.onbeforeunload = function (event) {
+
+            if (typeof event == 'undefined') {
+                event = window.event;
+            }
+
+            if (event) {
+                if (!lieferantenController.aktuellerLieferantGespeichert) {
+
+                    var message = 'Sie haben ihre Änderungen noch nicht gespeichert!';
+                    event.returnValue = message;
+                }
+            }
+
+            return message;
+        }
+
+
+
             $("body").show();
 
             //Init Calender rendering
@@ -22,7 +42,6 @@ uiController = {
 
             //Stop Clicks
             $(".ui-tabs-panel .ui-input-btn").click(function (event) {
-                console.log("!!!!")
                 event.stopPropagation();
             })
 
@@ -31,6 +50,8 @@ uiController = {
             $("#allelieferantenanzeigen").parent(".ui-input-btn").addClass("allelieferantenanzeigenparent");
 
             $("#eventDate").parent(".ui-input-text").addClass("eventDateparent");
+
+            $("#lieferantAlldayTermin").parent(".ui-checkbox").addClass("lieferantAlldayTerminparent");
 
 
 
@@ -47,12 +68,13 @@ uiController = {
             $("#popupTermin .eventDateparent").append($("#popupTermin .input-group-addon").clone())
 
 
+
+
             //Execute resize actions
             uiController.updateSize();
 
 
 
-        }, 0)
     },
     updateSize: function () {
         $("#suchelieferantenliste").css("width", $("#suchelieferantenwidget").width());

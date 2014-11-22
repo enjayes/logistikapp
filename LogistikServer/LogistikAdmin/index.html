@@ -30,9 +30,9 @@
         <div data-role="tabs" id="tabs">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="tabsController.openTab(0)">Übersicht</a></li>
-                    <li><a href="#termine" data-ajax="false" onclick="tabsController.openTab(1)">Termine</a></li>
-                    <li><a href="#lieferanten" data-ajax="false" onclick="tabsController.openTab(2)">Lieferanten</a></li>
+                    <li><a id="uebersichtTab" href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="tabsController.clickedTab(0)">Übersicht</a></li>
+                    <li><a id="termineTab" href="#termine" data-ajax="false" onclick="tabsController.clickedTab(1)">Termine</a></li>
+                    <li><a id="lieferantenTab" href="#lieferanten" data-ajax="false" onclick="tabsController.clickedTab(2)">Lieferanten</a></li>
                 </ul>
             </div>
             <div id="uebersicht" class="ui-body-d ui-content">
@@ -57,17 +57,42 @@
 
                             </ul>
 
-                            <input id="lieferanthinzufuegen" type="button" data-theme="b" onclick="lieferantenController.lieferantenHinzufuegen()" data-inline="true" data-mini="true" value="Hinzufügen">
-                            <input id="allelieferantenanzeigen" type="button" data-theme="b" onclick="lieferantenController.zeigeLieferanten()" data-inline="true" data-mini="true" value="Alle Anzeigen">
+                            <input id="lieferanthinzufuegen" type="button" data-theme="b" onclick="lieferantenController.lieferantenHinzufuegen()" data-inline="true" data-icon="plus" data-mini="true" value="Hinzufügen">
+                            <input id="allelieferantenanzeigen" type="button" data-theme="b" onclick="lieferantenController.zeigeLieferanten()" data-inline="true" data-icon="bars" data-mini="true" value="Alle Anzeigen">
 
                         </div>
 
+                        <div id="lieferantenInformationen" style="display:none">
 
-                        <h1 id="lieferantName"></h1>
+                            <h2 id="lieferantBearbeitenTitle">Lieferant</h2>
+                            <label for="lieferantVorname" class="">Vorname:</label>
 
-                        <div id="lieferantterminanlegen" style="display:none">
-                            <a href="#popupTermin" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Termin
-                                anlegen</a>
+                            <input type="text" name="user" id="lieferantVorname" value="" placeholder="" data-theme="a">
+
+
+                            <label for="lieferantName" class="">Name:</label>
+
+                            <input type="text" name="user" id="lieferantName" value="" placeholder="" data-theme="a">
+
+
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+
+
+                            <a href="" id="speichereLieferant" onclick="lieferantenController.speichereAktuellenLieferant()" style="opacity:0"
+                               class="greenbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a"
+                               data-transition="pop">Speichern</a>
+                            <a href="" id="rueckgaengigLieferant" onclick="lieferantenController.abbrechenBearbeitungAktuellerLieferant()" style="opacity:0"
+                               class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
+                               data-transition="pop">Abbrechen</a>
+                            <a href="" id="lieferantLoeschen" onclick="lieferantenController.loescheAktuellerLieferant()"
+                               class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
+                               data-transition="pop">Löschen</a>
+                            <a href="" id="lieferantErzeugeEvent" onclick="termineController.erzeugeEvent(termineTab.calenderFactory.moment().stripTime(),lieferantenController.aktuellerLieferant)"
+                               class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>
                         </div>
                     </div>
                     <!--/demo-html -->
@@ -81,11 +106,14 @@
     <div data-role="popup" id="popupTermin" data-dismissible="false" data-theme="a" class="ui-corner-all">
 
         <div style="padding:10px 20px;">
-            <h2 id="termintitel">Termin</h2>
+            <h2 id="terminheader"></h2>
+
+            <label for="termintitel" class="">Titel:</label>
+            <input type="text" name="user" id="termintitel" value="" placeholder="" data-theme="a">
 
             <label for="eventDate" class="">Datum:</label>
 
-            <input id="eventDate" type="text" data-role="date" >
+            <input id="eventDate" type="text" data-role="date">
 
             <div class="input-group clockpicker">
                 <input type="text" class="form-control" value="12:00">
@@ -94,18 +122,63 @@
                 </span>
             </div>
 
-            <label for="un" class="">Username:</label>
-            <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a">
-            <label for="pw" class="">Password:</label>
-            <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a">
+            <label>
+                <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
+            </label>
 
-            <div class="bottombuttons">
-                <button id="speichereaktuelleseventbutton" onclick="termineController.speichereAktuellesEvent();" class="ui-btn ui-corner-all ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok</button>
-                <button id="abbrechenbearbeitungaktuelleseventbutton" onclick="termineController.abbrechenBearbeitungAktuellesEvent();" class="ui-btn ui-corner-all ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Abbrechen
+            <label id="lieferantTerminLabel" for="lieferantTermin" class="">Lieferant:</label>
+
+            <span id="lieferantTermin">
+               <input type="text" name="user" id="lieferantenTerminReadyOnly" value="" placeholder="" data-theme="a" readonly>
+            </span>
+
+            <label for="terminnotizen" class="">Notizen:</label>
+            <textarea id="terminnotizen" rows="7"></textarea>
+
+            <div class="bottombuttons saved">
+                <button id="speichereaktuelleseventbutton" onclick="termineController.speichereAktuellesEvent();" class="greenbutton ui-btn ui-corner-all ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check"
+                        style="display:none">Speichern
+                </button>
+                <button id="abbrechenbearbeitungaktuelleseventbutton" onclick="termineController.abbrechenBearbeitungAktuellesEvent();"
+                        class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok
                 </button>
             </div>
         </div>
 
+    </div>
+
+    <div data-role="popup" id="savePopup" data-theme="a" data-dismissible="false" style="max-width:400px;">
+        <div data-role="header" data-theme="a">
+            <h1>Speichern</h1>
+        </div>
+        <div role="main" class="ui-content">
+
+            <p style="margin: 20px 20px 25px 20px;">Wollen Sie die Änderungen speichern?</p>
+
+            <div style="margin-left: auto;margin-right:auto;max-width:290px; overflow: visible;white-space: nowrap;">
+                <a href="#" onclick="lieferantenController.savePopupYes()" class="greenbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-rel="back">Ja</a>
+                <a href="#" onclick="lieferantenController.savePopupNo()" class="redbutton  ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a" data-rel="back"
+                   data-transition="flow">Nein</a>
+                <a href="#" onclick="lieferantenController.savePopupCancel()" class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow  ui-btn-inline ui-icon-back ui-btn-icon-left ui-btn-a" data-rel="back" data-transition="flow">Abbrechen</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div data-role="popup" id="deletePopup" data-theme="a" data-dismissible="false" style="max-width:430px;">
+        <div data-role="header" data-theme="a">
+            <h1>Löschen</h1>
+        </div>
+        <div role="main" class="ui-content">
+
+            <p style="margin: 20px 20px 25px 20px;">Wollen Sie diesen Lieferanten wirklich löschen?</p>
+
+            <div style="margin-left: auto;margin-right:auto;max-width:160px">
+                <a href="#" onclick="lieferantenController.deletePopupYes()" class="redbutton  ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a" data-rel="back"
+                   data-transition="flow">Ja</a>
+                <a href="#" onclick="lieferantenController.deletePopupNo()" class=" ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-rel="back">Nein</a>
+            </div>
+        </div>
     </div>
 
 
@@ -116,9 +189,24 @@
 
 <!-- jQuery --->
 
+<script src="js/router.js"></script>
+
 
 <script src="libs/jquery-1.11.1.min.js"></script>
 
+<!--script>
+    //Disable jquery binding features
+    $(document).on("mobileinit", function () {
+        $.extend($.mobile, {
+            linkBindingEnabled: false,
+            ajaxEnabled: false
+        });
+    });
+</script-->
+
+<!-- Routing -->
+
+<script src="libs/jquery.mobile.router.js"></script>
 <script src='libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js'></script>
 
 <script src="libs/socket.io.js"></script>
@@ -129,10 +217,19 @@
 <script src="libs/timepicker/jquery-clockpicker.js"></script>
 
 
+<script src="libs/signals.min.js"></script>
+<script src="libs/crossroads.js"></script>
+
+
 <!--Kalender --->
 <script src='libs/fullcalendar-2.2.1/lib/moment.min.js'></script>
 <script src='libs/fullcalendar-2.2.1/fullcalendar.min.js'></script>
 <script src='libs/fullcalendar-2.2.1/lang/de.js'></script>
+<!-------------->
+
+
+<script src='js/misc.js'></script>
+
 
 <script src='js/lieferant.js'></script>
 <script src='js/calenderEvent.js'></script>
@@ -141,6 +238,7 @@
 <script src='js/termineTab.js'></script>
 <script src='js/lieferantenTab.js'></script>
 
+<script src='js/serverController.js'></script>
 
 <script src='js/tabsController.js'></script>
 <script src='js/termineController.js'></script>

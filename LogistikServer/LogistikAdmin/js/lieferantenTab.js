@@ -36,6 +36,8 @@ lieferantenTab = {
 
     ready: function () {
 
+
+
         //Bei Eingabe alle anzeigen deaktivieren
         $("#suchelieferantenwidget #filterBasic-input").on("input change", function () {
             if (lieferantenController.zeigeAlleLieferanten)
@@ -50,9 +52,13 @@ lieferantenTab = {
         //Filterable initialisieren
         $("#suchelieferantenliste").filterable({
             filter: function (event, ui) {
-                if ($("#suchelieferantenliste li.ui-screen-hidden").length == $("#suchelieferantenliste li").length)
+
+                if (lieferantenController.lieferanten.length==0||!lieferantenController.zeigeAlleLieferanten&&$("#suchelieferantenliste li.ui-screen-hidden").length == $("#suchelieferantenliste li").length)
+                {
                     $("#suchelieferantenliste").hide();
-                else
+
+                }
+                else if( lieferantenController.zeigeAlleLieferanten||  $("#suchelieferantenwidget #filterBasic-input").is(":focus"))
                     $("#suchelieferantenliste").show();
 
             }
@@ -64,6 +70,10 @@ lieferantenTab = {
 
 
 
+    },
+    waehleLieferant: function (index) {
+
+        lieferantenController.waehleLieferant(index);
     }
 
 }

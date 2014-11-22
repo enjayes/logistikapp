@@ -2,76 +2,53 @@
  * Main Server
  */
 
-
-// General Settings
-
-var port = 3142;
-
-var mysqlprefs = {
-    host: 'localhost',
-    port: 3306,
-    user: 'logistikuser',
-    password: 'logistikpasswort',
-    database: 'logistikdb'
+// General Preferences
+var preferences = {
+    port: 3142,
+    serverdirectory: __dirname,
+    mysql: {
+        host: 'localhost',
+        port: 3306,
+        user: 'logistikuser',
+        password: 'logistikpasswort',
+        database: 'logistikdb'
+    }
 }
+
+
 
 
 //Express Server
 var express = require("express"),
     app = express();
 
-//MySql
-var mysql =  require('mysql');
+//Http Handler
+var http = require('http').Server(app);
 
+//Socket.IO
+var io = require('socket.io')(http);
+
+//MySql
+var mysql = require('mysql');
 
 //Connect to MySql database
-mysqlConnection = mysql.createConnection(mysqlprefs);
+mysqlConnection = mysql.createConnection(preferences.mysql);
 mysqlConnection.connect(function (err) {
     if (err) throw err;
     console.log('Connected to MySql database');
 });
 
+//Custom Controllers
+var connectionController = require('connectionController');
+var adminController = require('admincontroller/adminController.js');
 
-//Https Handler
-var http = require('http').Server(app);
-
-
-//Start Admin Site, serve Resources under /admin/ statically
-app.use('/', express.static(__dirname + '/LogistikAdmin'));
-
-
-//Start socket.io for communication with website/apps
-var io = require('socket.io')(http);
-
-
-//Listen
-http.listen(port, function(){
-    console.log("Server listening on port "+port);
-});
-
-
-//Website connected
-io.on('connection', function(socket){
-
-    console.log('Connected');
-    socket.emit('message', 'Server Push Message');
-
-    socket.on('disconnect', function(){
-        console.log('Disconnected');
-    });
-});
+//Init Controllers
+connectionController.init(preferences,io,http,adminController);
+adminController.init(preferences,io,app,express,mysqlConnection);
 
 
 
-//App  connected
-io.on('connection', function(socket){
 
-    console.log('App connected');
 
-    socket.emit('message', 'Server Push Message');
 
-    socket.on('disconnect', function(){
-        console.log('App Disconnected');
-    });
-});
 

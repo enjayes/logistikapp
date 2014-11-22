@@ -9,32 +9,22 @@
  */
 
 
-//Load Socket io and connect
-var socket = io();
-
-
-//On Message
-socket.on('message', function (msg) {
-    console.log('message: ' + msg);
-});
-
-
-//Init Controller
+//Init Controllers
 tabsController.init();
-lieferantenController.init();
-termineController.init();
+var initAfterServerConnection = function(){
+    lieferantenController.init();
+    termineController.init();
+    $(document).ready(function () {
+        //Enable Routing
+        setTimeout(function () {
+        uiController.ready();
+            Router.init();
 
-//Init UI
-$(document).ready(function () {
-    uiController.ready();
-});
-
-$(document).on("mobileinit", function () {
-    $.extend($.mobile, {
-        linkBindingEnabled: false,
-        ajaxEnabled: false
+        },0)
     });
-});
+}
+serverController.init(initAfterServerConnection);
+
 
 
 
