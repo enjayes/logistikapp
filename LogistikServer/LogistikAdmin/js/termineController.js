@@ -22,15 +22,15 @@ termineController = {
             if (termine) {
 
 
-                 termine.forEach(function(termin){
-                     if(termin.start)
-                         termin.start = termineTab.calenderFactory.moment( termin.start);
-                     if(termin.end)
-                         termin.end = termineTab.calenderFactory.moment( termin.end);
-                 })
+                termine.forEach(function (termin) {
+                    if (termin.start)
+                        termin.start = termineTab.calenderFactory.moment(termin.start);
+                    if (termin.end)
+                        termin.end = termineTab.calenderFactory.moment(termin.end);
+                })
 
 
-                termineController.events  = termine;
+                termineController.events = termine;
                 termineController.calendarData.events = termine;
                 if (termineTab.calender) {
 
@@ -39,12 +39,12 @@ termineController = {
                         if (termineController.aktuellesEvent) {
                             var termin = termineController.getTerminByID(termineController.aktuellesEvent.id);
 
-                            console.log(termin+"   "+termineController.aktuellerTerminGespeichert)
+                            console.log(termin + "   " + termineController.aktuellerTerminGespeichert)
                             console.dir(termin)
                             if (!termin)
                                 $("#popupTermin").popup("close");
                             else if (termineController.aktuellerTerminGespeichert) {
-                                termineController.zeigeEvent(termin,termineController.aktuellesEventIstNeu);
+                                termineController.zeigeEvent(termin, termineController.aktuellesEventIstNeu);
                             }
 
                         }
@@ -70,20 +70,24 @@ termineController = {
 
 
         var checkValidLieferant = function () {
-            var lieferantenName = $("#suchelieferantenwidget #filterBasic-input").val();
+            if (tabsController.tab() == termineTab) {
 
-            var lieferant = lieferantenController.getLieferantByName(lieferantenName);
-            if (lieferant && lieferant.id) {
-                termineController.aktuellerTerminLieferant = lieferant;
-                $("#lieferantAnzeigen button").removeClass("ui-disabled");
-            }
-            else {
-                termineController.aktuellerTerminLieferant = null;
-                $("#lieferantAnzeigen button").addClass("ui-disabled");
-            }
-            if (termineController.aktuellerTerminGespeichert) {
-                termineController.aktuellerTerminGespeichert = false;
-                termineController.zeigeSpeicherButton()
+                var lieferantenName = $("#suchelieferantenwidget #filterBasic-input").val();
+
+                var lieferant = lieferantenController.getLieferantByName(lieferantenName);
+                if (lieferant && lieferant.id) {
+                    termineController.aktuellerTerminLieferant = lieferant;
+                    $("#lieferantAnzeigen button").removeClass("ui-disabled");
+                }
+                else {
+                    termineController.aktuellerTerminLieferant = null;
+                    $("#lieferantAnzeigen button").addClass("ui-disabled");
+                }
+                if (termineController.aktuellerTerminGespeichert) {
+                    termineController.aktuellerTerminGespeichert = false;
+                    termineController.zeigeSpeicherButton()
+                }
+
             }
 
         }
@@ -275,7 +279,7 @@ termineController = {
         Router.popupClosed = true;
 
         termineController.aktuellerTerminGespeichert = true;
-        termineController.aktuellesEvent=null;
+        termineController.aktuellesEvent = null;
         termineController.aktuellerTerminLieferant = null;
         $("#popupTermin").popup("close");
 
@@ -364,7 +368,7 @@ termineController = {
             else
                 serverController.termin.update(termineController.aktuellesEvent);
 
-            termineController.aktuellesEvent=null;
+            termineController.aktuellesEvent = null;
             termineController.aktuellerTerminLieferant = null;
             $("#popupTermin").popup("close");
         }

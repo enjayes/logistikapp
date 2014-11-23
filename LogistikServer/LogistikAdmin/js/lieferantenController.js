@@ -47,12 +47,15 @@ lieferantenController = {
 
                         if (tabsController.tab() == lieferantenTab) {
                             $("#popupTermin").popup("close");
-                        }
+                        }else  if (tabsController.tab() == termineTab)
+                            termineController.aktuellerTerminLieferant =  null;
 
                     }
                     else {
                         termineController.aktuellerTerminLieferant = $.extend(true, {}, lieferant);
-                        lieferantenInput.val(lieferantenController.getLieferantFullName(lieferant)).trigger("input");
+                        lieferantenInput.val(lieferantenController.getLieferantFullName(lieferant));
+                        if (tabsController.tab() == termineTab)
+                        termineController.aktuellerTerminLieferant =   lieferant;
 
                         $("#lieferantAnzeigen button").removeClass("ui-disabled")
 
