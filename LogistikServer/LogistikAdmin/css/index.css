@@ -431,17 +431,26 @@ vertical-align: middle;
 #popupTermin .bottombuttons {
     margin-left: auto;
     margin-right: auto;
-    max-width: 243px;
+    max-width: 360px;
     overflow: visible;
     white-space: nowrap;
 
 }
 
-#popupTermin .bottombuttons.saved {
-    max-width: 80px;
+#popupTermin .bottombuttons.newevent {
+    max-width: 245px;
 }
 
-#popupTermin .bottombuttons #speichereaktuelleseventbutton.fade, #popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton.fade{
+#popupTermin .bottombuttons.newevent #loescheaktuelleseventbutton {
+   display:none!important;
+}
+
+
+#popupTermin .bottombuttons.saved {
+    max-width: 185px;
+}
+
+#popupTermin .bottombuttons #speichereaktuelleseventbutton.fade, #popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton.fade, #popupTermin .bottombuttons #loescheaktuelleseventbutton.fade{
     opacity: 0; /* make things invisible upon start */
     -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
     -moz-animation: fadeincomplete ease-in 1;
@@ -459,13 +468,6 @@ vertical-align: middle;
 }
 
 
-
-
-
-#popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton {
-    margin-right: 0 !important;
-
-}
 
 #popupTermin #terminheader {
     margin-top: 7px;

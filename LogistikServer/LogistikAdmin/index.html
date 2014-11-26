@@ -88,7 +88,7 @@
                             <a href="" id="rueckgaengigLieferant" onclick="lieferantenController.abbrechenBearbeitungAktuellerLieferant()" style="opacity:0"
                                class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
                                data-transition="pop">Abbrechen</a>
-                            <a href="" id="lieferantLoeschen" onclick="lieferantenController.loescheAktuellerLieferant()"
+                            <a href="" id="lieferantLoeschen" onclick="lieferantenController.loescheAktuellenLieferant()"
                                class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
                                data-transition="pop">Löschen</a>
                             <a href="" id="lieferantErzeugeEvent" onclick="termineController.erzeugeEvent(termineTab.calenderFactory.moment().stripTime(),lieferantenController.aktuellerLieferant)"
@@ -146,6 +146,9 @@
                 <button id="abbrechenbearbeitungaktuelleseventbutton" onclick="termineController.abbrechenBearbeitungAktuellesEvent();"
                         class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok
                 </button>
+                <button id="loescheaktuelleseventbutton" onclick="termineController.loescheAktuellenTermin();"
+                        class="redbutton ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-delete">Löschen
+                </button>
             </div>
         </div>
 
@@ -169,7 +172,7 @@
     </div>
 
 
-    <div data-role="popup" id="deletePopup" data-theme="a" data-dismissible="false" style="max-width:430px;">
+    <div data-role="popup" id="deleteLieferantPopup" data-theme="a" data-dismissible="false" style="max-width:430px;">
         <div data-role="header" data-theme="a">
             <h1>Löschen</h1>
         </div>
@@ -178,12 +181,29 @@
             <p style="margin: 20px 20px 25px 20px;">Wollen Sie diesen Lieferanten wirklich löschen?</p>
 
             <div style="margin-left: auto;margin-right:auto;max-width:160px">
-                <a href="#" onclick="lieferantenController.deletePopupYes()" class="redbutton  ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a" data-rel="back"
+                <a href="#" onclick="lieferantenController.deletePopupYes()" class="redbutton  ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-rel="back"
                    data-transition="flow">Ja</a>
-                <a href="#" onclick="lieferantenController.deletePopupNo()" class=" ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-rel="back">Nein</a>
+                <a href="#" onclick="lieferantenController.deletePopupNo()" class=" ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a" data-rel="back">Nein</a>
             </div>
         </div>
     </div>
+
+    <div data-role="popup" id="deleteTerminPopup" data-theme="a" data-dismissible="false" style="max-width:430px;">
+        <div data-role="header" data-theme="a">
+            <h1>Löschen</h1>
+        </div>
+        <div role="main" class="ui-content">
+
+            <p style="margin: 20px 20px 25px 20px;">Wollen Sie diesen Termin wirklich löschen?</p>
+
+            <div style="margin-left: auto;margin-right:auto;max-width:160px">
+                <a href="#" onclick="termineController.deletePopupYes()" class="redbutton  ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-rel="back"
+                   data-transition="flow">Ja</a>
+                <a href="#" onclick="termineController.deletePopupNo()" class=" ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a" data-rel="back">Nein</a>
+            </div>
+        </div>
+    </div>
+
 
 
 </div>

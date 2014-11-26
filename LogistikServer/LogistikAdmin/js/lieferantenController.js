@@ -55,7 +55,8 @@ lieferantenController = {
                         termineController.aktuellerTerminLieferant = $.extend(true, {}, lieferant);
                         lieferantenInput.val(lieferantenController.getLieferantFullName(lieferant));
                         if (tabsController.tab() == termineTab)
-                        termineController.aktuellerTerminLieferant =   lieferant;
+                         termineController.aktuellerTerminLieferant =   lieferant;
+
 
                         $("#lieferantAnzeigen button").removeClass("ui-disabled")
 
@@ -247,9 +248,9 @@ lieferantenController = {
     },
 
 
-    loescheAktuellerLieferant: function () {
+    loescheAktuellenLieferant: function () {
 
-        $("#deletePopup").popup("open", {
+        $("#deleteLieferantPopup").popup("open", {
             transition: "pop"
         });
 

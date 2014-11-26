@@ -33,6 +33,7 @@ termineTab = {
 
         });
         $("#popupTermin").on("popupbeforeposition", function (event, ui) {
+            tabsController.terminePopupOpen = true;
 
 
             if (tabsController.tab() == termineTab) {
@@ -49,8 +50,8 @@ termineTab = {
         });
 
         $("#popupTermin").on("popupafterclose", function (event, ui) {
-
-            $("#speichereaktuelleseventbutton, #abbrechenbearbeitungaktuelleseventbutton").removeClass("fade");
+            tabsController.terminePopupOpen = false;
+            $("#speichereaktuelleseventbutton, #abbrechenbearbeitungaktuelleseventbutton, #loescheaktuelleseventbutton").removeClass("fade");
 
             $("#suchelieferantenwidget #filterBasic-input").val(termineTab.alterFilterInput);
 
