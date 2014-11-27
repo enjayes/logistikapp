@@ -8,9 +8,9 @@
  * @copyright munichDev UG
  */
 
-
 //Init Controllers
 tabsController.init();
+
 var initAfterServerConnection = function(){
     lieferantenController.init();
     termineController.init();

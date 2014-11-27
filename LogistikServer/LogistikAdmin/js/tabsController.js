@@ -12,15 +12,15 @@
 tabsController = {
     aktuellerTab: null,
     tabs: [],
-    tabsAnchorName: ["uebersichtTab","termineTab","lieferantenTab"],
     //Init Controller
     init: function () {
         this.tabs[0] = uebersichtTab;
         this.tabs[1] = termineTab;
-        this.tabs[2] = lieferantenTab;
+        this.tabs[2] = nachrichtenTab;
+        this.tabs[3] = lieferantenTab;
 
         //Init Tabs
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < tabsController.tabs.length-1 ; i++) {
             this.tabs[i].init();
         }
 
@@ -63,7 +63,7 @@ tabsController = {
     //Init after UI Loaded
     ready: function () {
         //Init Tabs
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < tabsController.tabs.length; i++) {
             this.tabs[i].ready();
         }
     },
@@ -99,15 +99,19 @@ tabsController = {
     openTabWithoutClick:function(index){
 
         index= parseInt(index+"");
-        if(index<0||index>2)
+        if(index<0||index>tabsController.tabs.length-1)
          return;
+
+
 
         tabsController.openTabAttempt =  index;
 
         $("#tabs").tabs( "option", "active", tabsController.openTabAttempt );
 
         $("#tabs .ui-btn-active").removeClass("ui-btn-active")
-        $("#tabs #"+this.tabsAnchorName[tabsController.openTabAttempt]).addClass("ui-btn-active")
+
+
+        $("#tabs #"+tabsController.tabs[index].anchorName).addClass("ui-btn-active")
 
 
 

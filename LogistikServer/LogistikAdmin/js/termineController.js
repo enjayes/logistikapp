@@ -239,8 +239,11 @@ termineController = {
             }
 
 
-        } else
+        } else {
+            $("#lieferantAnzeigen button").addClass("ui-disabled")
             lieferantenInput.val("");
+
+        }
 
 
         if (calenderEvent.allDay) {

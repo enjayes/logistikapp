@@ -121,7 +121,7 @@ Router = {
 
         //Set Tabs as marked
         setTimeout(function () {
-            $("#tabs #" + tabsController.tabsAnchorName[tabsController.openTabAttempt]).addClass("ui-btn-active")
+            $("#tabs #" + tabsController.tab().anchorName).addClass("ui-btn-active")
             $("#page").css("opacity","1")
         }, 0);
 

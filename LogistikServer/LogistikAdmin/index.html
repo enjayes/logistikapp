@@ -32,7 +32,10 @@
                 <ul>
                     <li><a id="uebersichtTab" href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="tabsController.clickedTab(0)">Übersicht</a></li>
                     <li><a id="termineTab" href="#termine" data-ajax="false" onclick="tabsController.clickedTab(1)">Termine</a></li>
-                    <li><a id="lieferantenTab" href="#lieferanten" data-ajax="false" onclick="tabsController.clickedTab(2)">Lieferanten</a></li>
+                    <li><a id="nachrichtenTab" href="#nachrichten" data-ajax="false" onclick="tabsController.clickedTab(2)">Nachrichten</a></li>
+                    <li><a id="lieferantenTab" href="#lieferanten" data-ajax="false" onclick="tabsController.clickedTab(3)">Lieferanten</a></li>
+
+
                 </ul>
             </div>
             <div id="uebersicht" class="ui-body-d ui-content">
@@ -46,9 +49,20 @@
                     <div id='calendar'></div>
                 </div>
             </div>
+            <div id="nachrichten" class="ui-body-d ui-content">
+                <div class="tabinhalt">
+
+                  <div id="searchMessageLieferanten"></div> 
+
+                </div>
+            </div>
             <div id="lieferanten">
                 <div class="tabinhalt">
                     <div id="suchelieferanten" data-demo-html="true">
+
+
+
+
                         <div id="suchelieferantenwidget">
                             <form class="ui-filterable">
                                 <input id="filterBasic-input" data-type="search">
@@ -99,6 +113,7 @@
                 </div>
 
             </div>
+
         </div>
     </div>
 
@@ -254,6 +269,8 @@
 
 <script src='js/misc.js'></script>
 
+<script src='js/searchWidget.js'></script>
+
 
 <script src='js/lieferant.js'></script>
 <script src='js/calenderEvent.js'></script>
@@ -261,6 +278,7 @@
 <script src='js/uebersichtTab.js'></script>
 <script src='js/termineTab.js'></script>
 <script src='js/lieferantenTab.js'></script>
+<script src='js/nachrichtenTab.js'></script>
 
 <script src='js/serverController.js'></script>
 

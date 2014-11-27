@@ -10,6 +10,7 @@
 
 
 lieferantenTab = {
+    anchorName:"lieferantenTab",
 
     init: function () {
 

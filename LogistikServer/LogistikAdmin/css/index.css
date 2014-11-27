@@ -243,6 +243,44 @@ Navbar
     border-right-width: 1px !important;
 }
 
+.ui-tabs-panel{
+    overflow: visible!important;
+}
+
+/**
+ Nachrichten
+**/
+
+
+#searchMessageLieferanten{
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+
+.searchWidget-resultlist {
+    width:100%;
+    position: absolute;
+    border: 2px solid rgba(102, 102, 102, 0.59);
+    margin-bottom: 30px;
+    box-shadow: 5px 10px 20px #888888;
+    z-index: 1;
+    -webkit-animation: fadeincomplete ease-in 1;
+    -moz-animation: fadeincomplete ease-in 1;
+    animation: fadeincomplete ease-in 1;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 200ms;
+    -moz-animation-duration: 200ms;
+    animation-duration: 200ms;
+}
+
+
 /**
  Lieferanten
 **/

@@ -9,7 +9,7 @@
  */
 
 uebersichtTab = {
-
+    anchorName:"uebersichtTab",
     init: function () {
 
 
