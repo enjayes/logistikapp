@@ -30,3 +30,12 @@
     border: 1px solid #38c;
     background-color: #38c;
 }
+
+.fc-day-grid-event > .fc-content {
+    height: 25px;
+    padding-top: 6px;
+}
+
+.fc-day-grid-event > .fc-content span{
+    font-weight: normal;
+}

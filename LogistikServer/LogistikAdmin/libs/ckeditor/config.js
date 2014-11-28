@@ -30,7 +30,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.basicEntities = false;
 	config.entities_greek = false;
 	config.entities_latin = false;
-	config.height = '300px';
+	config.height = '400px';
 	config.language = 'de';	// Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.
 	

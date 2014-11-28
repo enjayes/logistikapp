@@ -12,12 +12,13 @@
 var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect, clickedItemCallback, renderItemFunction) {
 
     searchPlaceHolder = !searchPlaceHolder ? "" : searchPlaceHolder;
-    topMargin = !topMargin ? 22 : topMargin;
+    topMargin = !topMargin ? 35 : topMargin;
 
     var that = this;
     this.domObject = domObject;
     this.filterableDomObject = domObject + " .searchWidget-resultlist";
     this.searchPlaceHolder = searchPlaceHolder;
+    this.origList = [];
 
     this.list = [];
     this.showAll = true;
@@ -175,9 +176,12 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
 
 
     this.setList = function(list){
+        that.origList =  $.extend(true, [], list);
+        that.list = $.extend(true, [], list);
+        if(that.multiSelect)
+          that.list.unshift({name:"Alle",addAll:true});
 
-         that.list = list;
-         that.renderList();
+            that.renderList();
     }
 
 
@@ -219,36 +223,71 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
 
             var callbackFactory = function (actItem) {
                 return function () {
-                    if(that.itemSelected(actItem)){
-                        if(that.multiSelect){
-                            that.deselectedItem(actItem)
+                    if(actItem.addAll){
+                        if(that.selectedItems.length==that.origList.length){
+
+                           var oldSelectedItems =    $.extend(true, [], that.selectedItems);
+                           that.selectedItems =[];
+                            for(var i=0;i<oldSelectedItems.length;i++){
+                                that.clickedItemCallback(oldSelectedItems[i]);
+                            }
+
+                        }else{
+                            that.selectedItems =  $.extend(true, [], that.origList)
+                            for( i=0;i<that.selectedItems.length;i++){
+                                that.clickedItemCallback();
+                                that.clickedItemCallback(that.selectedItems[i]);
+                            }
                         }
-                    }else {
-                        if(!that.multiSelect){
-                            that.selectedItems = [];
+
+
+                        that.renderList();
+                    }else{
+                        if(that.itemSelected(actItem)){
+                            if(that.multiSelect){
+                                that.deselectedItem(actItem)
+                            }
+                        }else {
+                            if(!that.multiSelect){
+                                that.selectedItems = [];
+                            }
+                            that.selectedItems.push(actItem);
                         }
-                        that.selectedItems.push(actItem);
+                        that.renderList();
+                        that.clickedItemCallback(actItem);
                     }
-                    that.renderList();
-                    that.clickedItemCallback(actItem);
+
+
+
                 }
             }
 
             if(that.itemSelected(item))
-               var selected = "selected"
+               var selected = "selected";
             else
-                selected = ""
+                selected = "";
+
+            if(item.addAll)
+                var addAll = "addAll";
+            else
+                addAll = "";
+
 
             if (renderItemFunction)
                 var html = renderItemFunction(item);
             else
-                html = "<li class='"+selected+"'><a>" + item.name + "</a></li>"
+                html = "<li class='"+selected+" "+addAll+"'><a>" + item.name + "</a></li>"
 
             searchListDom.append($(html).click(callbackFactory(item)));
 
 
         }
         searchListDom.listview("refresh");
+
+
+        searchListDom.find("a").removeClass("ui-btn-icon-right ui-icon-carat-r");
+
+
 
     }
 

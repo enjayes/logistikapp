@@ -24,3 +24,12 @@
 
 }
 
+.searchWidget-resultlist li.addAll a{
+    background-color: #d8d8d8 !important;
+
+}
+
+.searchWidget-resultlist li a{
+    padding: 1em 1em;
+
+}

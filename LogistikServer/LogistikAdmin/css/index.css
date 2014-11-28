@@ -251,8 +251,12 @@ Navbar
  Nachrichten
 **/
 
+#searchMessageLieferanten{
+    position: relative;
+}
+
 #selectedMessageLieferanten{
-    height:54px;
+    min-height:48px;
     background-color: #eee;
     border-color: #ddd;
     color: #333;
@@ -263,24 +267,17 @@ Navbar
 }
 
 
-.centerBlock{
-    max-width: 900px!important;
-    margin-left: auto!important;
-    margin-right: auto!important;
-    position: relative!important;
-}
 
 #selectedMessageLieferanten .selectedLieferantButton{
     display:inline-block;
-    margin: 5px 0 5px 5px!important;
-    padding: 11px 8px 7px 8px;
-
-
-
+    margin: 5px 0 0 5px!important;
+    padding: 8px 8px 4px 8px;
+    font-weight: normal!important;
+    font-size: 16px;
 }
 
 #selectedMessageLieferanten .selectedLieferantDefault{
-    padding: 18px 18px 18px 10px !important;
+    padding: 15px 18px 15px 10px !important;
     color: #656565;
 }
 
@@ -302,18 +299,13 @@ Navbar
  Lieferanten
 **/
 
-#suchelieferanten {
-    margin-left: 30px;
-    margin-right: 30px;
-}
+
 
 
 #lieferantenInformationen{
     padding: 0px 15px 15px 15px;
     background-color: #E5E5E5;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
     -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
@@ -340,7 +332,7 @@ Navbar
 #lieferantenInformationen  .ui-input-text{
 display: inline-block;
 vertical-align: middle;
-    width: 450px;
+    width: 300px;
 }
 
 
@@ -546,23 +538,8 @@ vertical-align: middle;
 }
 
 
-#calendar {
 
-    opacity: 0; /* make things invisible upon start */
-    -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-    -moz-animation: fadeincomplete ease-in 1;
-    animation: fadeincomplete ease-in 1;
 
-    -webkit-animation-fill-mode: forwards; /*Chrome 16+, Safari 4+*/
-    -moz-animation-fill-mode: forwards; /*FF 5+*/
-    -o-animation-fill-mode: forwards; /*Not implemented yet*/
-    -ms-animation-fill-mode: forwards; /*IE 10+*/
-    animation-fill-mode: forwards; /*when the spec is finished*/
-
-    -webkit-animation-duration: 150ms;
-    -moz-animation-duration: 150ms;
-    animation-duration: 150ms;
-}
 
 
 .popover {
@@ -579,9 +556,9 @@ vertical-align: middle;
     -ms-animation-fill-mode: forwards; /*IE 10+*/
     animation-fill-mode: forwards; /*when the spec is finished*/
 
-    -webkit-animation-duration: 300ms;
-    -moz-animation-duration: 300ms;
-    animation-duration: 300ms;
+    -webkit-animation-duration: 150ms;
+    -moz-animation-duration:  150ms;
+    animation-duration: 150ms;
 
 }
 
@@ -632,6 +609,32 @@ vertical-align: middle;
     line-height: 28px;
 }
 
+
+
+
+/**
+Allgemein
+**/
+
+
+.tabinhalt{
+    max-width: 900px!important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    position: relative!important;
+    opacity: 0;
+    -webkit-animation: fadeincomplete ease-in 1;
+    -moz-animation: fadeincomplete ease-in 1;
+    animation: fadeincomplete ease-in 1;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 150ms;
+    -moz-animation-duration: 150ms;
+    animation-duration: 150ms;
+}
 
 
 /**
