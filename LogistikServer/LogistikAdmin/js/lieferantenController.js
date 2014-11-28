@@ -11,62 +11,11 @@
 
 
 lieferantenController = {
-    tabPosition: 2,
     titleUnbenannt: "Unbenannt",
     lieferanten: [],
 
     init: function () {
 
-        //Get Lieferanten From Server
-        var getLieferatenFromServer = function (lieferanten) {
-            if (lieferanten) {
-                lieferantenController.lieferanten = lieferanten;
-
-                if (lieferantenController.aktuellerLieferant) {
-                    var lieferant = lieferantenController.getLieferantByID(lieferantenController.aktuellerLieferant.id);
-                    if (!lieferant)
-                        lieferantenController.keinenLieferantenZeigen();
-                    else if (lieferantenController.aktuellerLieferantGespeichert) {
-                        lieferantenController.aktuellerLieferant = $.extend(true, {}, lieferant);
-
-                        lieferantenController.zeigeAktuellenLieferanten(true);
-
-                    }
-                }
-                if (termineController.aktuellerTerminLieferant) {
-                    if (tabsController.tab() == termineTab)
-                        var lieferantenInput = $("#suchelieferantenwidget #filterBasic-input")
-                    else
-                        lieferantenInput = $("#lieferantenTerminReadyOnly");
-
-                    var lieferant = lieferantenController.getLieferantByID(termineController.aktuellerTerminLieferant.id);
-                    if (!lieferant) {
-
-                        lieferantenInput.val("").trigger("input");
-                        $("#lieferantAnzeigen button").addClass("ui-disabled")
-
-                        if (tabsController.tab() == lieferantenTab) {
-                            $("#popupTermin").popup("close");
-                        }else  if (tabsController.tab() == termineTab)
-                            termineController.aktuellerTerminLieferant =  null;
-
-                    }
-                    else {
-                        termineController.aktuellerTerminLieferant = $.extend(true, {}, lieferant);
-                        lieferantenInput.val(lieferantenController.getLieferantFullName(lieferant));
-                        if (tabsController.tab() == termineTab)
-                         termineController.aktuellerTerminLieferant =   lieferant;
-
-
-                        $("#lieferantAnzeigen button").removeClass("ui-disabled")
-
-                    }
-                }
-
-                lieferantenController.renderLieferanten();
-            }
-        }
-        serverController.lieferant.getAll(getLieferatenFromServer);
 
         this.renderLieferanten();
 
@@ -129,6 +78,64 @@ lieferantenController = {
         })
 
 
+    },
+    ready: function () {
+        //Get Lieferanten From Server
+        var getLieferatenFromServer = function (lieferanten) {
+            if (lieferanten) {
+                lieferantenController.lieferanten = lieferanten;
+
+                if (lieferantenController.aktuellerLieferant) {
+                    var lieferant = lieferantenController.getLieferantByID(lieferantenController.aktuellerLieferant.id);
+                    if (!lieferant)
+                        lieferantenController.keinenLieferantenZeigen();
+                    else if (lieferantenController.aktuellerLieferantGespeichert) {
+                        lieferantenController.aktuellerLieferant = $.extend(true, {}, lieferant);
+
+                        lieferantenController.zeigeAktuellenLieferanten(true);
+
+                    }
+                }
+                if (termineController.aktuellerTerminLieferant) {
+                    if (tabsController.tab() == termineTab)
+                        var lieferantenInput = $("#suchelieferantenwidget #filterBasic-input")
+                    else
+                        lieferantenInput = $("#lieferantenTerminReadyOnly");
+
+                    var lieferant = lieferantenController.getLieferantByID(termineController.aktuellerTerminLieferant.id);
+                    if (!lieferant) {
+
+                        lieferantenInput.val("").trigger("input");
+                        $("#lieferantAnzeigen button").addClass("ui-disabled")
+
+                        if (tabsController.tab() == lieferantenTab) {
+                            $("#popupTermin").popup("close");
+                        } else if (tabsController.tab() == termineTab)
+                            termineController.aktuellerTerminLieferant = null;
+
+                    }
+                    else {
+                        termineController.aktuellerTerminLieferant = $.extend(true, {}, lieferant);
+                        lieferantenInput.val(lieferantenController.getLieferantFullName(lieferant));
+                        if (tabsController.tab() == termineTab)
+                            termineController.aktuellerTerminLieferant = lieferant;
+
+
+                        $("#lieferantAnzeigen button").removeClass("ui-disabled")
+
+                    }
+                }
+
+                lieferantenController.renderLieferanten();
+
+
+               //Update Nachrichtetab
+                nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
+
+
+            }
+        }
+        serverController.lieferant.getAll(getLieferatenFromServer);
     },
     renderLieferanten: function () {
 

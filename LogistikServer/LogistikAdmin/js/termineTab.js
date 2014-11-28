@@ -12,6 +12,7 @@
 
 termineTab = {
     anchorName:"termineTab",
+    controller: termineController,
     calender: null,
     calenderFactory: null,
     allowOpening: false,

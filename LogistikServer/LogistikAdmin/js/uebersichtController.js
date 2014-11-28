@@ -9,8 +9,11 @@
  */
 
 uebersichtController = {
-    tabPosition:0
+    init:function(){
 
+    },
+    ready:function(){
 
+    }
 
 }

@@ -22,7 +22,7 @@ uiController = {
             }
 
             if (event) {
-                if (!lieferantenController.aktuellerLieferantGespeichert||!termineController.aktuellerTerminGespeichert) {
+                if (!lieferantenController.aktuellerLieferantGespeichert || !termineController.aktuellerTerminGespeichert) {
 
                     var message = 'Sie haben ihre Änderungen noch nicht gespeichert!';
                     event.returnValue = message;
@@ -33,46 +33,40 @@ uiController = {
         }
 
 
+        $("body").show();
 
-            $("body").show();
-
-            //Init Calender rendering
-            $('#calendar .fc-toolbar').hide();
-
-
-            //Stop Clicks
-            $(".ui-tabs-panel .ui-input-btn").click(function (event) {
-                event.stopPropagation();
-            })
-
-            //Buttons parents
-            $("#lieferanthinzufuegen").parent(".ui-input-btn").addClass("lieferanthinzufuegenparent");
-            $("#allelieferantenanzeigen").parent(".ui-input-btn").addClass("allelieferantenanzeigenparent");
-
-            $("#eventDate").parent(".ui-input-text").addClass("eventDateparent");
-
-            $("#lieferantAlldayTermin").parent(".ui-checkbox").addClass("lieferantAlldayTerminparent");
+        //Init Calender rendering
+        $('#calendar .fc-toolbar').hide();
 
 
+        //Stop Clicks
+        $(".ui-tabs-panel .ui-input-btn").click(function (event) {
+            event.stopPropagation();
+        })
+
+        //Buttons parents
+        $("#lieferanthinzufuegen").parent(".ui-input-btn").addClass("lieferanthinzufuegenparent");
+        $("#allelieferantenanzeigen").parent(".ui-input-btn").addClass("allelieferantenanzeigenparent");
+
+        $("#eventDate").parent(".ui-input-text").addClass("eventDateparent");
+
+        $("#lieferantAlldayTermin").parent(".ui-checkbox").addClass("lieferantAlldayTerminparent");
 
 
-            //Window Resize Handling
-            $(window).resize(uiController.updateSize);
+        //Window Resize Handling
+        $(window).resize(uiController.updateSize);
 
-            //Init Tabs
-            tabsController.ready();
+        //Init Tabs
+        tabsController.ready();
 
-            //Rearange Widgets
-            $("#popupTermin .eventDateparent").after($("#popupTermin .input-group.clockpicker"))
+        //Rearange Widgets
+        $("#popupTermin .eventDateparent").after($("#popupTermin .input-group.clockpicker"))
 
-            $("#popupTermin .eventDateparent").append($("#popupTermin .input-group-addon").clone())
-
-
+        $("#popupTermin .eventDateparent").append($("#popupTermin .input-group-addon").clone())
 
 
-            //Execute resize actions
-            uiController.updateSize();
-
+        //Execute resize actions
+        uiController.updateSize();
 
 
     },

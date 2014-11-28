@@ -10,6 +10,7 @@
 
 uebersichtTab = {
     anchorName:"uebersichtTab",
+    controller: uebersichtController,
     init: function () {
 
 

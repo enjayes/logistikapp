@@ -4,8 +4,10 @@
     <title>Edeka</title>
     <link href='libs/fullcalendar-2.2.1/fullcalendar.css' rel='stylesheet' type="text/css"/>
     <link href='libs/fullcalendar-2.2.1/fullcalendar.print.css' rel='stylesheet' media='print' type="text/css"/>
+
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <link href="css/calendar.css" rel="stylesheet" type="text/css">
+    <link href="css/searchWidget.css" rel="stylesheet" type="text/css">
 
     <link href="libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css">
 
@@ -51,13 +53,17 @@
             </div>
             <div id="nachrichten" class="ui-body-d ui-content">
                 <div class="tabinhalt">
+                    <div id="selectedMessageLieferanten" class="centerBlock"><div class='selectedLieferantDefault'>An:</div></div>
+                    <div id="searchMessageLieferanten"  class="centerBlock"></div>
 
-                  <div id="searchMessageLieferanten"></div> 
-
+                    <div id="messageLieferantenEditor" class=" centerBlock">
+                    <textarea id="messageLieferantenCKEditor" ></textarea>
+                    </div>
                 </div>
             </div>
             <div id="lieferanten">
-                <div class="tabinhalt">
+                <div class="tabinhalt ">
+
                     <div id="suchelieferanten" data-demo-html="true">
 
 
@@ -76,7 +82,7 @@
 
                         </div>
 
-                        <div id="lieferantenInformationen" style="display:none">
+                        <div id="lieferantenInformationen" class="centerBlock" style="display:none">
 
                             <h2 id="lieferantBearbeitenTitle">Lieferant</h2>
                             <label for="lieferantVorname" class="">Vorname:</label>
@@ -260,6 +266,12 @@
 <script src="libs/crossroads.js"></script>
 
 
+<!--CKEditor-->
+
+<script src="libs/ckeditor/ckeditor.js"></script>
+<!----->
+
+
 <!--Kalender --->
 <script src='libs/fullcalendar-2.2.1/lib/moment.min.js'></script>
 <script src='libs/fullcalendar-2.2.1/fullcalendar.min.js'></script>
@@ -275,16 +287,19 @@
 <script src='js/lieferant.js'></script>
 <script src='js/calenderEvent.js'></script>
 
+
+<script src='js/serverController.js'></script>
+<script src='js/tabsController.js'></script>
+
+<script src='js/uebersichtController.js'></script>
+<script src='js/termineController.js'></script>
+<script src='js/nachrichtenController.js'></script>
+<script src='js/lieferantenController.js'></script>
+
 <script src='js/uebersichtTab.js'></script>
 <script src='js/termineTab.js'></script>
 <script src='js/lieferantenTab.js'></script>
 <script src='js/nachrichtenTab.js'></script>
-
-<script src='js/serverController.js'></script>
-
-<script src='js/tabsController.js'></script>
-<script src='js/termineController.js'></script>
-<script src='js/lieferantenController.js'></script>
 
 
 <script src='js/uiController.js'></script>

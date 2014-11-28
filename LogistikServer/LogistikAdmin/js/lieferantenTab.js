@@ -11,7 +11,7 @@
 
 lieferantenTab = {
     anchorName:"lieferantenTab",
-
+    controller: lieferantenController,
     init: function () {
 
         // Init Filterable

@@ -64,8 +64,15 @@ tabsController = {
     ready: function () {
         //Init Tabs
         for (var i = 0; i < tabsController.tabs.length; i++) {
-            this.tabs[i].ready();
+            tabsController.tabs[i].ready();
         }
+        setTimeout(function(){
+            for (var i = 0; i < tabsController.tabs.length; i++) {
+                tabsController.tabs[i].controller.ready();
+            }
+        },0)
+
+
     },
     clickedTab:function(index){
      this.openTabAttempt =  index;

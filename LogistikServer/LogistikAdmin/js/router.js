@@ -16,73 +16,68 @@ Router = {
     init: function () {
 
 
-        if(Router.getQueryVariable(location.hash, "jq")=="&ui-state=dialog"){
+        if (Router.getQueryVariable(location.hash, "jq") == "&ui-state=dialog") {
             Router.popupClosedStartUp = true;
         }
 
         crossroads.shouldTypecast = true;
 
 
-         var handleRoute = function (state) {
+        var handleRoute = function (state) {
 
-             if(state==undefined)
-                 state="";
+            if (state == undefined)
+                state = "";
 
-             var tab = Router.getQueryVariable(state, "tab")||0;
-             var lieferantId = Router.getQueryVariable(state, "l")||null;
-             var jqueryvars = Router.getQueryVariable(state, "jq")||"";
+            var tab = Router.getQueryVariable(state, "tab") || 0;
+            var lieferantId = Router.getQueryVariable(state, "l") || null;
+            var jqueryvars = Router.getQueryVariable(state, "jq") || "";
 
-             if (Router.popupClosedStartUp||jqueryvars != "&ui-state=dialog") {
-                 Router.popupClosedStartUp=false;
-                 var changeTab = true;
+            if (Router.popupClosedStartUp || jqueryvars != "&ui-state=dialog") {
+                Router.popupClosedStartUp = false;
+                var changeTab = true;
 
-                 var lieferant = lieferantenController.getLieferantByID(lieferantId);
-                 var waehleLieferant = function () {
-                     if (lieferant) {
-                         lieferantenController.aktuellerLieferant = lieferant;
-                         lieferantenController.zeigeAktuellenLieferanten(true);
-                     }
-                     else
-                         lieferantenController.keinenLieferantenZeigen();
-
-
-                 };
-                 if (tabsController.tabs[tab] == lieferantenTab) {
-                     setTimeout(function () {
-                         var changeActTab = function (destTab) {
-                             lieferantenController.checkSaved(function () {
-                                 waehleLieferant();
-                                 tabsController.openTabWithoutClick(destTab);
-                             });
-                         };
-                         changeActTab(tab);
-                     }, 0);
-                     changeTab = false;
-
-                 }
-                 else
-                     waehleLieferant();
+                var lieferant = lieferantenController.getLieferantByID(lieferantId);
+                var waehleLieferant = function () {
+                    if (lieferant) {
+                        lieferantenController.aktuellerLieferant = lieferant;
+                        lieferantenController.zeigeAktuellenLieferanten(true);
+                    }
+                    else
+                        lieferantenController.keinenLieferantenZeigen();
 
 
-                 if(tab==0&&tabsController.aktuellerTab==null)   {
-                     tabsController.openTab(0);
-                     $("#page").css("opacity","1")
+                };
+                if (tabsController.tabs[tab] == lieferantenTab) {
+                    setTimeout(function () {
+                        var changeActTab = function (destTab) {
+                            lieferantenController.checkSaved(function () {
+                                waehleLieferant();
+                                tabsController.openTabWithoutClick(destTab);
+                            });
+                        };
+                        changeActTab(tab);
+                    }, 0);
+                    changeTab = false;
 
-                 }
+                }
+                else
+                    waehleLieferant();
 
-             else if (changeTab) {
-                     tabsController.openTabWithoutClick(tab)
-                 }
+                if (tab == 0 && tabsController.aktuellerTab == null) {
+                    tabsController.openTab(0);
+                    $("#page").css("opacity", "1")
+                }else if (changeTab) {
+                    tabsController.openTabWithoutClick(tab)
+                }
 
 
+            }
 
-             }
-
-         };
+        };
 
 
-        crossroads.addRoute('/', handleRoute )
-        crossroads.addRoute('#state={state}', handleRoute )
+        crossroads.addRoute('/', handleRoute)
+        crossroads.addRoute('#state={state}', handleRoute)
 
 
         $(window).on("hashchange", function (test) {
@@ -95,7 +90,7 @@ Router = {
 
 
     },
-     getQueryVariable :function (query, variable) {
+    getQueryVariable: function (query, variable) {
         var vars = query.split('+');
         for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split('_');
@@ -103,12 +98,11 @@ Router = {
                 return decodeURIComponent(pair[1]);
             }
         }
-    }
-    ,
+    },
     pushState: function () {
 
-        if(location.hash==""&& tabsController.aktuellerTab==0&&!lieferantenController.aktuellerLieferant)
-          return;
+        if (location.hash == "" && tabsController.aktuellerTab == 0 && !lieferantenController.aktuellerLieferant)
+            return;
 
         var hashCode = "state=tab_" + tabsController.aktuellerTab;
 
@@ -122,7 +116,7 @@ Router = {
         //Set Tabs as marked
         setTimeout(function () {
             $("#tabs #" + tabsController.tab().anchorName).addClass("ui-btn-active")
-            $("#page").css("opacity","1")
+            $("#page").css("opacity", "1")
         }, 0);
 
 
