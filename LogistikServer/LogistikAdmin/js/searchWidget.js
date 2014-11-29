@@ -9,10 +9,15 @@
  */
 
 
-var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect, clickedItemCallback, renderItemFunction) {
+var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelect, clickedItemCallback, renderItemFunction,afterFilteredCallback) {
+
+    if($(domObject).length==0){
+        console.log("ERROR, filterable not found...")
+        return;
+    }
 
     searchPlaceHolder = !searchPlaceHolder ? "" : searchPlaceHolder;
-    topMargin = !topMargin ? 35 : topMargin;
+    topMargin = !topMargin&&topMargin!=0 ? 55 : 36+topMargin;
 
     var that = this;
     this.domObject = domObject;
@@ -50,23 +55,24 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
 
     });
 
-
     //Build Filterable
     $(domObject).append(
         '<form>' +
-            '<input class="searchWidget-filterable" placeholder="' + searchPlaceHolder + '" data-type="search">' +
+            '<input class="searchWidget-filterable" placeholder="' + that.searchPlaceHolder + '" data-type="search">' +
             ' </form>' +
             '<ul class="searchWidget-resultlist" style="top:' + topMargin + 'px;" data-role="listview" data-inset="true" data-filter="true" data-input="' + that.domObject + ' .searchWidget-filterable"></ul>'
 
     );
 
-    //Bind Events and Logic
 
+    //Bind Events and Logic
     setTimeout(function () {
 
         //Zeige alle Lieferanten bei anklicken des Filters
         $(that.domObject + " input").on("focus",function () {
             $(that.filterableDomObject).show();
+            if(afterFilteredCallback)
+                afterFilteredCallback(true,$(that.filterableDomObject).offset().top , $(that.filterableDomObject).height());
 
             if (!that.showAll)
                 that.toggleShowAllItems();
@@ -76,7 +82,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
                 if (e.which == 13) {
 
                     var obj = $(that.filterableDomObject + " li").filter(":visible");
-                    if (obj.length > 1)
+                    if (obj.length > 0)
                         $(obj[0]).click();
                     $(that.domObject + " input").blur();
                 }
@@ -105,6 +111,9 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
                 else
                     $(that.filterableDomObject).filterable("refresh");
                 $(that.filterableDomObject).hide();
+                if(afterFilteredCallback)
+                    afterFilteredCallback(false,$(that.filterableDomObject).offset().top , $(that.filterableDomObject).height());
+
             }
         }
         $("#page").click(function () {
@@ -135,11 +144,18 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
 
                 if (that.list.length == 0 || (!that.showAll && $(that.filterableDomObject + " li.ui-screen-hidden").length == $(that.filterableDomObject + " li").length)) {
                     $(that.filterableDomObject).hide();
+                    if(afterFilteredCallback)
+                        afterFilteredCallback(false,$(that.filterableDomObject).offset().top ,  $(that.filterableDomObject).height());
 
                 } else if (that.showAll || $(that.domObject + " input").is(":focus")) {
                     $(that.filterableDomObject).show();
 
+                    if(afterFilteredCallback)
+                        afterFilteredCallback(true,$(that.filterableDomObject).offset().top , $(that.filterableDomObject).height());
                 }
+
+
+
 
             }
         });
@@ -147,11 +163,10 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
         //Render List
         that.renderList();
 
-
         //Trigger Filter at start
         $(that.domObject + " input").trigger("change");
 
-    }, 0)
+    }, 0);
 
 
     this.toggleShowAllItems = function () {
@@ -163,36 +178,45 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
                 that.DontDismissByBlur = false;
             }, 400);
 
-            //$("#allelieferantenanzeigen").val('Verstecken').button('refresh');
-
-
-        } else {
-
-            //$("#allelieferantenanzeigen").val('Alle anzeigen').button('refresh');
-
         }
         $(that.filterableDomObject).filterable("refresh");
     };
 
 
-    this.setList = function(list){
-        that.origList =  $.extend(true, [], list);
+    this.setList = function (list) {
+        that.origList = $.extend(true, [], list);
         that.list = $.extend(true, [], list);
-        if(that.multiSelect)
-          that.list.unshift({name:"Alle",addAll:true});
+        if (that.multiSelect)
+            that.list.unshift({name: "Alle", addAll: true});
 
-            that.renderList();
+        that.renderList();
     }
 
 
-    this.getSelectedItems = function(){
+    this.getInput = function () {
+        return $(that.domObject+" input");
+    }
+
+    this.getDomList = function () {
+        return $(that.filterableDomObject);
+    }
+
+
+    this.setInputText = function (text) {
+       $(that.domObject+" input").val(text);
+    }
+
+
+    this.getSelectedItems = function () {
         return that.selectedItems;
     }
 
+
+
     this.itemSelected = function (item) {
 
-        for(var i=0;i<that.selectedItems.length;i++){   //CHANGE FOR DIFFERENT COMPARISIONS
-            if(that.selectedItems[i].id==item.id){
+        for (var i = 0; i < that.selectedItems.length; i++) {   //CHANGE FOR DIFFERENT COMPARISIONS
+            if (that.selectedItems[i].id == item.id) {
                 return true;
             }
         }
@@ -202,9 +226,9 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
 
     this.deselectedItem = function (item) {
 
-        for(var i=0;i<that.selectedItems.length;i++){   //CHANGE FOR DIFFERENT COMPARISIONS
-            if(that.selectedItems[i].id==item.id){
-                that.selectedItems.splice(i,1)
+        for (var i = 0; i < that.selectedItems.length; i++) {   //CHANGE FOR DIFFERENT COMPARISIONS
+            if (that.selectedItems[i].id == item.id) {
+                that.selectedItems.splice(i, 1)
                 return true;
             }
         }
@@ -223,18 +247,18 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
 
             var callbackFactory = function (actItem) {
                 return function () {
-                    if(actItem.addAll){
-                        if(that.selectedItems.length==that.origList.length){
+                    if (actItem.addAll) {
+                        if (that.selectedItems.length == that.origList.length) {
 
-                           var oldSelectedItems =    $.extend(true, [], that.selectedItems);
-                           that.selectedItems =[];
-                            for(var i=0;i<oldSelectedItems.length;i++){
+                            var oldSelectedItems = $.extend(true, [], that.selectedItems);
+                            that.selectedItems = [];
+                            for (var i = 0; i < oldSelectedItems.length; i++) {
                                 that.clickedItemCallback(oldSelectedItems[i]);
                             }
 
-                        }else{
-                            that.selectedItems =  $.extend(true, [], that.origList)
-                            for( i=0;i<that.selectedItems.length;i++){
+                        } else {
+                            that.selectedItems = $.extend(true, [], that.origList)
+                            for (i = 0; i < that.selectedItems.length; i++) {
                                 that.clickedItemCallback();
                                 that.clickedItemCallback(that.selectedItems[i]);
                             }
@@ -242,13 +266,13 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
 
 
                         that.renderList();
-                    }else{
-                        if(that.itemSelected(actItem)){
-                            if(that.multiSelect){
+                    } else {
+                        if (that.itemSelected(actItem)) {
+                            if (that.multiSelect) {
                                 that.deselectedItem(actItem)
                             }
-                        }else {
-                            if(!that.multiSelect){
+                        } else {
+                            if (!that.multiSelect) {
                                 that.selectedItems = [];
                             }
                             that.selectedItems.push(actItem);
@@ -258,25 +282,24 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
                     }
 
 
-
                 }
             }
 
-            if(that.itemSelected(item))
-               var selected = "selected";
+            if (that.itemSelected(item))
+                var selected = "selected";
             else
                 selected = "";
 
-            if(item.addAll)
+            if (item.addAll)
                 var addAll = "addAll";
             else
                 addAll = "";
 
 
             if (renderItemFunction)
-                var html = renderItemFunction(item);
+                var html = renderItemFunction(item,selected+" "+addAll);
             else
-                html = "<li class='"+selected+" "+addAll+"'><a>" + item.name + "</a></li>"
+                html = "<li class='" + selected + " " + addAll + "'><a>" + item.name + "</a></li>"
 
             searchListDom.append($(html).click(callbackFactory(item)));
 
@@ -288,7 +311,8 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin,multiSelect
         searchListDom.find("a").removeClass("ui-btn-icon-right ui-icon-carat-r");
 
 
-
     }
+
+
 
 }

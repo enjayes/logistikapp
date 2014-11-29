@@ -16,10 +16,18 @@ termineTab = {
     calender: null,
     calenderFactory: null,
     allowOpening: false,
+    searchWidget:null,
     init: function () {
 
 
-
+        this.searchWidget = new SearchWidget("#searchTerminLieferanten", "Suche nach Lieferanten...", 4, false, function (lieferant) {
+                termineController.waehleLieferant(lieferant);
+            }, function (lieferant, classes) {
+                return "<li class='" + classes + "'><a>" + lieferantenController.getLieferantFullName(lieferant) + "</a></li>";
+            }, function (visible,top,height) {
+                $("#pagecontent").css("min-height", visible?top+height:"");
+            }
+        )
 
     },
 
@@ -39,11 +47,13 @@ termineTab = {
 
             if (tabsController.tab() == termineTab) {
                 $("#lieferantenTerminReadyOnly").parent(".ui-input-text").hide();
-                $("#lieferantTermin").append($("#suchelieferantenwidget"));
                 $("#lieferantAnzeigen button").show();
+                $("#searchTerminLieferanten").show();
+
             } else{
                 $("#lieferantenTerminReadyOnly").parent(".ui-input-text").show();
                 $("#lieferantAnzeigen button").hide();
+                $("#searchTerminLieferanten").hide();
 
             }
 
@@ -53,12 +63,6 @@ termineTab = {
         $("#popupTermin").on("popupafterclose", function (event, ui) {
             tabsController.terminePopupOpen = false;
             $("#speichereaktuelleseventbutton, #abbrechenbearbeitungaktuelleseventbutton, #loescheaktuelleseventbutton").removeClass("fade");
-
-            $("#suchelieferantenwidget #filterBasic-input").val(termineTab.alterFilterInput);
-
-            if (tabsController.tab() == termineTab)
-                $("#suchelieferanten").prepend($("#suchelieferantenwidget"));
-
 
         });
 
@@ -72,6 +76,9 @@ termineTab = {
 
             delete termineController.calendarData.events;
 
+
+
+          $("#calendar .fc-today-button").addClass("fc-state-disabled").attr("disabled","disabled");
         }, 0);
 
     },
@@ -81,9 +88,6 @@ termineTab = {
         termineTab.calender.find('.fc-toolbar').show();
         termineTab.calender.fullCalendar( 'rerenderEvents' )
 
-    },
-    waehleLieferant: function (index) {
-        termineController.waehleLieferant(index);
     }
 
 

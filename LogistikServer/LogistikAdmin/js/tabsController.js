@@ -20,7 +20,7 @@ tabsController = {
         this.tabs[3] = lieferantenTab;
 
         //Init Tabs
-        for (var i = 0; i < tabsController.tabs.length-1 ; i++) {
+        for (var i = 0; i < tabsController.tabs.length ; i++) {
             this.tabs[i].init();
         }
 

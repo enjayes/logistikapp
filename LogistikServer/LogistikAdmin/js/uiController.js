@@ -45,8 +45,6 @@ uiController = {
         })
 
         //Buttons parents
-        $("#lieferanthinzufuegen").parent(".ui-input-btn").addClass("lieferanthinzufuegenparent");
-        $("#allelieferantenanzeigen").parent(".ui-input-btn").addClass("allelieferantenanzeigenparent");
 
         $("#eventDate").parent(".ui-input-text").addClass("eventDateparent");
 

@@ -17,7 +17,6 @@ lieferantenController = {
     init: function () {
 
 
-        this.renderLieferanten();
 
         $("#lieferantenInformationen input").on("input", function () {
             lieferantenController.aktuellerLieferantGespeichert = false;
@@ -25,63 +24,12 @@ lieferantenController = {
             $("#rueckgaengigLieferant").css("opacity", 1).removeClass("ui-disabled");
         })
 
-
-        //Zeige alle Lieferanten bei anklicken des Filters
-        $("#suchelieferantenwidget #filterBasic-input").on("focus",function () {
-            $("#suchelieferantenliste").show();
-
-            if (!lieferantenController.zeigeAlleLieferanten)
-                lieferantenController.zeigeLieferanten();
-
-        }).on("keydown", function (e) {
-
-                if (e.which == 13) {
-
-                    if (tabsController.tab() == lieferantenTab) {
-
-                        if (!lieferantenController.zeigeAlleLieferanten && ($("#suchelieferantenliste li").length - $("#suchelieferantenliste li.ui-screen-hidden").length == 1)) {
-                            $("#suchelieferantenliste li").filter(":visible").click();
-                        }
-
-                    }
-
-                }
-            });
-
-
-        var dismissFilter = function () {
-            if (!lieferantenController.lieferantenFilterDontDismiss) {
-                lieferantenController.lieferantenFilterDontDismiss = true;
-                setTimeout(function () {
-                    lieferantenController.lieferantenFilterDontDismiss = false;
-                }, 400)
-
-                if (lieferantenController.zeigeAlleLieferanten)
-                    lieferantenController.zeigeLieferanten();
-                else
-                    $("#suchelieferantenliste").filterable("refresh");
-
-                $("#suchelieferantenliste").hide();
-            }
-        }
-
-        //Breche Auswahl von Lieferant ab
-        $("#page").click(function () {
-            dismissFilter();
-        })
-
-        $("#suchelieferantenwidget #filterBasic-input").on("blur", function () {
-            setTimeout(function () {
-                if (!lieferantenController.lieferantenFilterDontDismissByBlur)
-                    dismissFilter();
-            }, 300)
-        })
-
-
     },
     ready: function () {
+
         //Get Lieferanten From Server
         var getLieferatenFromServer = function (lieferanten) {
+
             if (lieferanten) {
                 lieferantenController.lieferanten = lieferanten;
 
@@ -98,11 +46,12 @@ lieferantenController = {
                 }
                 if (termineController.aktuellerTerminLieferant) {
                     if (tabsController.tab() == termineTab)
-                        var lieferantenInput = $("#suchelieferantenwidget #filterBasic-input")
+                        var lieferantenInput = termineTab.searchWidget.getInput();
                     else
                         lieferantenInput = $("#lieferantenTerminReadyOnly");
 
                     var lieferant = lieferantenController.getLieferantByID(termineController.aktuellerTerminLieferant.id);
+
                     if (!lieferant) {
 
                         lieferantenInput.val("").trigger("input");
@@ -115,55 +64,29 @@ lieferantenController = {
 
                     }
                     else {
+
                         termineController.aktuellerTerminLieferant = $.extend(true, {}, lieferant);
                         lieferantenInput.val(lieferantenController.getLieferantFullName(lieferant));
+
                         if (tabsController.tab() == termineTab)
                             termineController.aktuellerTerminLieferant = lieferant;
 
-
                         $("#lieferantAnzeigen button").removeClass("ui-disabled")
+
 
                     }
                 }
 
-                lieferantenController.renderLieferanten();
 
-
-               //Update Nachrichtetab
+               //Update Lieferanten Widgets
                 nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
+                lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
+                termineTab.searchWidget.setList(lieferantenController.lieferanten);
 
 
             }
         }
         serverController.lieferant.getAll(getLieferatenFromServer);
-    },
-    renderLieferanten: function () {
-
-
-        var suchelieferantenlistejquery = $("#suchelieferantenliste");
-        suchelieferantenlistejquery.html("");
-
-
-        for (var i = 0; i < lieferantenController.lieferanten.length; i++) {
-            var lieferant = lieferantenController.lieferanten[i];
-
-            var selectedClass = (lieferantenController.aktuellerLieferant && (lieferantenController.lieferanten[i].id == lieferantenController.aktuellerLieferant.id)) ? "class='selected'" : "";
-
-            var name = lieferantenController.getLieferantFullName(lieferant);
-
-            suchelieferantenlistejquery.append(
-                '<li onclick= "tabsController.tab().waehleLieferant(' + i + ')" ' + selectedClass + '><a>' +
-                    '<h2>' + name + '</h2>' +
-                    '<p><strong>You\'ve been invited to a meeting at Filament Group in Boston, MA</strong></p>' +
-                    '<p>Hey Stephen, if you\'re available at 10am tomorrow, we\'ve got a meeting with the jQuery team.</p>' +
-                    '<p class="ui-li-aside"><strong>6:24</strong>PM</p>' +
-                    '</a></li>'
-            )
-
-        }
-        suchelieferantenlistejquery.listview("refresh");
-
-
     },
     aktuellerLieferantGespeichert: true,
 
@@ -195,7 +118,6 @@ lieferantenController = {
             $("#lieferantVorname").val(lieferantenController.aktuellerLieferant.vorname);
             $("#lieferantName").val(lieferantenController.aktuellerLieferant.name);
 
-
             $("#lieferantenInformationen").show();
             $("#lieferantenInformationen .redborder").removeClass("redborder");
 
@@ -203,8 +125,6 @@ lieferantenController = {
             $("#speichereLieferant").css("opacity", 0).addClass("ui-disabled");
             $("#rueckgaengigLieferant").css("opacity", 0).addClass("ui-disabled");
 
-
-            lieferantenController.renderLieferanten();
 
             if (!dontPush)
                 Router.pushState();
@@ -237,7 +157,9 @@ lieferantenController = {
 
                 lieferantenController.lieferanten.sort(lieferantenController.lieferantenCompare);
 
-                this.renderLieferanten();
+                nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
+                lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
+                termineTab.searchWidget.setList(lieferantenController.lieferanten);
 
                 //Update Server DB
                 serverController.lieferant.update(lieferantenController.aktuellerLieferant);
@@ -271,6 +193,10 @@ lieferantenController = {
         });
 
 
+        nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
+        lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
+        termineTab.searchWidget.setList(lieferantenController.lieferanten);
+
         //Update Server DB
         serverController.lieferant.delete(lieferantenController.aktuellerLieferant);
 
@@ -297,13 +223,11 @@ lieferantenController = {
             $("#lieferantenInformationen").hide();
 
 
-        lieferantenController.renderLieferanten();
-
-    }, waehleLieferant: function (index) {
+    }, waehleLieferant: function (lieferant) {
 
 
         var waehleLieferant = function () {
-            lieferantenController.aktuellerLieferant = $.extend(true, {}, lieferantenController.lieferanten[index]);
+            lieferantenController.aktuellerLieferant = $.extend(true, {},lieferant);
             $("#lieferantenInformationen").addClass("geladen").removeClass("geloescht");
             setTimeout(function () {
                 $("#lieferantenInformationen").removeClass("geladen");
@@ -351,10 +275,11 @@ lieferantenController = {
             lieferantenController.aktuellerLieferant = new lieferant(misc.titleUnbenannt, misc.titleUnbenannt);
 
             lieferantenController.lieferanten.push(lieferantenController.aktuellerLieferant);
-
-
             lieferantenController.lieferanten.sort(lieferantenController.lieferantenCompare);
 
+            nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
+            lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
+            termineTab.searchWidget.setList(lieferantenController.lieferanten);
 
             //Update Server DB
             serverController.lieferant.create(lieferantenController.aktuellerLieferant);

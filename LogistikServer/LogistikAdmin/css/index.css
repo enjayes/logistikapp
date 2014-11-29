@@ -1,18 +1,36 @@
 @media (max-device-width: 1400px) {
     #tabs, .ui-popup {
 
-        transform-origin: 50% 0%;
+        transform-origin: 50% 10px;
         -webkit-transform: scale(0.8);
         -moz-transform: scale(0.8);
         -ms-transform: scale(0.8);
         -o-transform: scale(0.8);
         transform: scale(0.8);
     }
+
+
+    .ui-navbar{
+        -webkit-transform:  translate(0,9px);
+        -moz-transform:  translate(0,9px);
+        -ms-transform: translate(0,9px);
+        -o-transform:  translate(0,9px);
+        transform: translate(0,9px);
+    }
 }
 
 /**
 Custom style jquery
 **/
+
+html {
+    overflow-y: scroll;
+}
+
+#page {
+ min-height: 100%;
+}
+
 
 .ui-page-theme-a .ui-btn:hover, html .ui-bar-a .ui-btn:hover, html .ui-body-a .ui-btn:hover, html body .ui-group-theme-a .ui-btn:hover, html head+body .ui-btn.ui-btn-a:hover, .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited {
     text-shadow: none !important;
@@ -277,14 +295,13 @@ Navbar
 }
 
 #selectedMessageLieferanten .selectedLieferantDefault{
-    padding: 15px 18px 15px 10px !important;
+    padding: 15px 18px 0 10px !important;
     color: #656565;
 }
 
 
-
 #messageLieferantenEditor {
-    margin-top:15px;
+    margin: 18px 0 8px 0;;
 }
 
 #selectedMessageLieferanten .selectedLieferantButton .selectedLieferantButtonRemove{
@@ -300,7 +317,9 @@ Navbar
 **/
 
 
-
+#searchInfoLieferanten{
+    position: relative;
+}
 
 #lieferantenInformationen{
     padding: 0px 15px 15px 15px;
@@ -321,7 +340,7 @@ Navbar
 
 #lieferantErzeugeEvent{
     position: absolute;
-    right: 130px;
+    right: 125px;
 }
 
 #lieferantLoeschen{
@@ -349,19 +368,13 @@ vertical-align: middle;
 }
 
 
-#suchelieferantenwidget {
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-}
 
-#popupTermin #suchelieferantenwidget {
+
+#popupTermin #searchTerminLieferanten {
     position: absolute;
     left: 20px;
     right: 70px;
-    display: inline-block!important;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 #popupTermin #suchelieferantenliste {
@@ -370,15 +383,12 @@ vertical-align: middle;
 }
 
 
-#popupTermin .lieferanthinzufuegenparent {
+#popupTermin #lieferanthinzufuegen {
     display: none!important;
 }
 
-#popupTermin .allelieferantenanzeigenparent {
-    display: none!important;
-}
 
-#popupTermin #suchelieferantenwidget .ui-input-search {
+#popupTermin #searchTerminLieferanten .ui-input-search {
     margin: 0!important;
 }
 
@@ -448,11 +458,6 @@ vertical-align: middle;
 }
 
 
-
-.allelieferantenanzeigenparent {
-    position: absolute !important;
-    right: 0 !important;
-}
 
 /**
  Termin Popup
@@ -640,7 +645,7 @@ Allgemein
 /**
 Colors
 **/
-.greenbutton, .lieferanthinzufuegenparent{
+.greenbutton{
     background-color: rgb(0, 113, 23)!important;
 }
 
