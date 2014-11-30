@@ -174,7 +174,6 @@ serverController = {
         buildDTO: function (nachricht) {
             var newNachricht = {
                 id: nachricht.id,
-                read: nachricht.read,
                 datum: nachricht.datum.getTime(),
                 nachricht: nachricht.nachricht,
                 lieferanten:nachricht.lieferanten

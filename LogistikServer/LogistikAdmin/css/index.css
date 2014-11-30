@@ -288,19 +288,30 @@ Navbar
  Nachrichten
 **/
 
+.ui-collapsible-heading-toggle, .ui-collapsible-heading{
+    border: none!important;
+}
+
+.ui-collapsible-inset{
+    border: 1px solid #ccc;
+}
+
+
+.ui-collapsible-content p{
+    margin-top: 0;
+}
 
 #sentMessageContainer .ui-collapsible-content, #recievedMessageContainer .ui-collapsible-content{
     background-color: #FFF;
     padding-bottom:55px;
+    position: relative;
 }
 
 #sentMessageContainer .ui-collapsible-content .deleteMessageButton, #recievedMessageContainer .ui-collapsible-content .deleteMessageButton{
     position: absolute;
     right: 5px;
+    bottom: 5px;
 }
-
-
-
 
 
 #sentMessageContainer .ui-collapsible-heading a, #recievedMessageContainer .ui-collapsible-heading a{
@@ -322,9 +333,6 @@ Navbar
 }
 
 
-#sentMessageContainer .ui-collapsible-content p.unread{
-  margin-top:3px;
-}
 
 
 #sentMessageContainer .ui-collapsible-content p.unread .msgunreadHint{
@@ -757,8 +765,26 @@ Allgemein
 /**
 Colors
 **/
+
+.lightgreenbutton{
+    background-color: rgb(0, 189, 12)!important;
+    color:#fff!important;
+}
+
+.lightgreenbutton:hover {
+    background-color: rgb(0, 179, 2)!important;
+}
+
+.lightgreenbutton:active {
+    background-color: rgb(0, 163, 0)!important;
+}
+
+
+
+
 .greenbutton{
     background-color: rgb(0, 113, 23)!important;
+    color:#fff!important;
 }
 
 .greenbutton:hover {
@@ -771,6 +797,8 @@ Colors
 
 .redbutton{
     background-color: rgb(113,0, 23)!important;
+    color:#fff!important;
+
 }
 
 .redbutton:hover{

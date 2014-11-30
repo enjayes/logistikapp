@@ -105,7 +105,6 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         var dismissFilter = function () {
 
             if (!that.DontDismiss && !that.DontDismissByBlur) {
-                console.log("!!!!!!!!!!!!")
                 that.DontDismiss = true;
                 setTimeout(function () {
                     that.DontDismiss = false;
