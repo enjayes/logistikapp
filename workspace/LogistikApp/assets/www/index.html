@@ -48,23 +48,24 @@
 <div class="app">
 
     <div id="jobSelector">
-
+        <label>Aufgabenwahl</label>
         <form>
             <label>
-                <input name="checkbox-0 " type="checkbox">Besuch
+            <input name="checkbox-0 " type="checkbox" id ="cb_besuch">Besuch
+        </label>
+            <label>
+                <input name="checkbox-0 " type="checkbox" id ="cb_bestellung">Bestellung
             </label>
             <label>
-                <input name="checkbox-0 " type="checkbox">Bestellung
+                <input name="checkbox-0 " type="checkbox" id ="cb_verraeumung">Verräumung
             </label>
             <label>
-                <input name="checkbox-0 " type="checkbox">Verräumung
-            </label>
-            <label>
-                <input name="checkbox-0 " type="checkbox">Austausch von Bruch und Verderb
+                <input name="checkbox-0 " type="checkbox" id ="cb_austausch">Austausch von Bruch und Verderb
             </label>
 
         </form>
-        <button id="weiterAufgaben">Weiter</button>
+        <button id="weiter_Aufgaben">Weiter</button>
+        <button id="zurueck_Aufgaben" style="float: left;">Zurück</button>
 
     </div>
 
@@ -75,8 +76,7 @@
                 <label>
                     Ziel
                 </label>
-            <td><textarea rows="4" cols="50">
-                At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+            <td><textarea rows="1" cols="50">
             </textarea></td>
         </tr>
         <tr>
@@ -84,8 +84,8 @@
                 <label>
                     Grund
                 </label>
-            <td><textarea rows="4" cols="50">
-                At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+            <td><textarea rows="1" cols="50">
+
             </textarea></td>
         </tr>
         <tr>
@@ -93,13 +93,13 @@
                 <label>
                     Thematik
                 </label>
-            <td><textarea rows="4" cols="50">
-                At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+            <td><textarea rows="1" cols="50">
+
             </textarea></td>
         </tr>
 
         <button id="weiter_lieferantenschein1">Weiter</button>
-        <button id="zurueck_lieferantenschein1" style="float: right;">Weiter</button>
+        <button id="zurueck_lieferantenschein1" style="float: left;">Zurück</button>
     </div>
 
 
@@ -150,7 +150,7 @@
 
                 <tr>
                     <td><label>
-                        <input name="checkbox-0 " type="checkbox">Aktionsabsprache
+                        <input name="checkbox-0 " type="checkbox">aktionsabsprache
                     </label></td>
                     <td><label>
                         <input name="checkbox-0 " type="checkbox">Bemusterung
@@ -170,6 +170,7 @@
 
         </form>
         <button >Weiter</button>
+        <button id="zurueck_lieferantenschein2" style="float: left;">Zurück</BUTTON>
 
     </div>
 
@@ -197,10 +198,14 @@
 <!--Own Libraries ------------------------------------------------->
 <script type="text/javascript" src="js/logistikapp.js"></script>
 <script type="text/javascript" src="js/clientView.js"></script>
+<script type="text/javascript" src="js/job.js"></script>
 
 <script type="text/javascript" src="js/devdata.js"></script>
 <script type="text/javascript" src="js/preferences.js"></script>
 
+
+
+<!--Imported libraries ------------------------------------------------->
 <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
 <script type="text/javascript" src="js/socket.io.js"></script>
