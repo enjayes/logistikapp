@@ -18,65 +18,198 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>LogistikApp</title>
-        <!--Install Console-->
-        <script type="text/javascript">
-            if(typeof window.console == "undefined")
-            {
-                window.console = {log:function(str){window.external.Notify(str);}};
-            }
-            window.onerror=function(e, url, lineNumber)
-            {
-                console.log("ERROR! : " +url + "(" + lineNumber + ") : " + JSON.stringify(e));
+<head>
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
+    <title>LogistikApp</title>
+    <!--Install Console-->
+    <script type="text/javascript">
+        if (typeof window.console == "undefined") {
+            window.console = {
+                log: function (str) {
+                    window.external.Notify(str);
+                }
             };
-        </script>
+        }
+        window.onerror = function (e, url, lineNumber) {
+            console.log("ERROR! : " + url + "(" + lineNumber + ") : " + JSON.stringify(e));
+        };
+    </script>
 
 
+</head>
+<body>
+<div class="app">
 
-    </head>
-    <body>
-        <div class="app">
+    <div id="jobSelector">
+
+        <form>
+            <label>
+                <input name="checkbox-0 " type="checkbox">Besuch
+            </label>
+            <label>
+                <input name="checkbox-0 " type="checkbox">Bestellung
+            </label>
+            <label>
+                <input name="checkbox-0 " type="checkbox">Verräumung
+            </label>
+            <label>
+                <input name="checkbox-0 " type="checkbox">Austausch von Bruch und Verderb
+            </label>
+
+        </form>
+        <button id="weiterAufgaben">Weiter</button>
+
+    </div>
+
+    <div id="lieferantenschein1" style="display:none">
+
+        <tr>
+            <td>
+                <label>
+                    Ziel
+                </label>
+            <td><textarea rows="4" cols="50">
+                At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+            </textarea></td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    Grund
+                </label>
+            <td><textarea rows="4" cols="50">
+                At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+            </textarea></td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    Thematik
+                </label>
+            <td><textarea rows="4" cols="50">
+                At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+            </textarea></td>
+        </tr>
+
+        <button id="weiter_lieferantenschein1">Weiter</button>
+        <button id="zurueck_lieferantenschein1" style="float: right;">Weiter</button>
+    </div>
 
 
-            <img src="img/logo.png
-            ">
+    <div id="lieferantenschein2" style="display:none">
+
+        <form>
+            <table style="border-style='none'" style="width:100%">
+                <tr>
+                    <td>
+                        <label>
+                            <input name="checkbox-0 " type="checkbox">Auftrag getätigt
+                        </label></td>
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">MHD-Kontrolle
+                    </label></td>
+                </tr>
+                <tr>
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">Rücknahme
+                    </label></td>
+
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">Reklamationsbearbeitung
+                    </label></td>
+                </tr>
+                <tr>
+                <td>  <label>
+                    <input name="checkbox-0 " type="checkbox">Warenaufbau
+                </label></td>
+                <td><label>
+                    <input name="checkbox-0 " type="checkbox">Umbau
+                </label></td>
+                </tr>
+                <tr>
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">Info-Gespräch
+                    </label></td>
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">Nummer-Abgabe
+                    </label></td>
+                </tr>
+                <td><label>
+                    <input name="checkbox-0 " type="checkbox">Verkostung
+                </label></td>
+                <td><label>
+                    <input name="checkbox-0 " type="checkbox">Sortimentsinfo
+                </label></td>
+
+                <tr>
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">Aktionsabsprache
+                    </label></td>
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">Bemusterung
+                    </label></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>
+                            <input name="checkbox-0 " type="checkbox">Verlosung
+                        </label>
+                    </td>
 
 
+                </tr>
+            </table>
 
-            <h1>Edeka Logistik</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+        </form>
+        <button >Weiter</button>
+
+    </div>
+
+
+    <!--Start page ------------------------------------------------->
+    <div style="display:none">
+
+
+        <img src="img/logo.png">
+
+
+        <h1>Edeka Logistik</h1>
+
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+
+            <p class="event received">Device is Ready</p>
         </div>
+    </div>
+</div>
 
 
+<input name="" type="text" size="30" maxlength="30">
 
-        <input name="" type="text" size="30" maxlength="30">
+<!--Own Libraries ------------------------------------------------->
+<script type="text/javascript" src="js/logistikapp.js"></script>
+<script type="text/javascript" src="js/clientView.js"></script>
 
-        <!--Own Libraries ------------------------------------------------->
-        <script src="js/logistikapp.js"></script>
+<script type="text/javascript" src="js/devdata.js"></script>
+<script type="text/javascript" src="js/preferences.js"></script>
 
-        <script src="js/devdata.js"></script>
-        <script src="js/preferences.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+<script type="text/javascript" src="js/socket.io.js"></script>
 
-        <script src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/socket.io.js"></script>
+<!--Cordova Libraries ------------------------------------------------->
 
-        <!--Cordova Libraries ------------------------------------------------->
-
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-
-
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 
 
-    </body>
+</body>
 </html>
