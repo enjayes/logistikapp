@@ -27,6 +27,9 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+
+        this.onDeviceReady();//TODO REMOVE
+
     },
     // deviceready Event Handler
     //
@@ -44,6 +47,7 @@ var app = {
 
         //Start Logistik App
         logistikapp.start();
+
 
 	   
     }

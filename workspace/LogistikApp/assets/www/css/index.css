@@ -38,6 +38,8 @@ body {
     background-attachment:fixed;
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
+    left:0%;
+    top:0%;
     height:100%;
     margin:0px;
     padding:0px;

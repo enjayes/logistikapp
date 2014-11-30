@@ -6,8 +6,9 @@
     "start": "node logistikserver.js"
   },
   "dependencies": {
+    "debug": "^2.1.0",
+    "express": "^4.10.2",
     "http": "*",
-    "express": "*",
     "mysql": "~2.5.3",
     "socket.io": "~1.2.0"
   }
