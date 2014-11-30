@@ -77,6 +77,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
             if (!that.showAll)
                 that.toggleShowAllItems();
 
+
         }).on("keydown", function (e) {
 
                 if (e.which == 13) {
@@ -91,8 +92,10 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
         //Bei Eingabe alle anzeigen deaktivieren
         $(that.domObject + " input").on("input change",function () {
+
             if (that.showAll)
                 that.toggleShowAllItems();
+
         }).click(function (event) {
                 event.stopPropagation()
             })
@@ -100,7 +103,9 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
         //Dismiss Selection bei Click elsewhere
         var dismissFilter = function () {
+
             if (!that.DontDismiss && !that.DontDismissByBlur) {
+                console.log("!!!!!!!!!!!!")
                 that.DontDismiss = true;
                 setTimeout(function () {
                     that.DontDismiss = false;
@@ -110,17 +115,21 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
                     that.toggleShowAllItems();
                 else
                     $(that.filterableDomObject).filterable("refresh");
+
                 $(that.filterableDomObject).hide();
+
                 if(afterFilteredCallback)
                     afterFilteredCallback(false,$(that.filterableDomObject).offset().top , $(that.filterableDomObject).height());
 
             }
+
         }
         $("#page").click(function () {
             dismissFilter();
         })
 
-        $(that.domObject + " .ui-input-clear").click(function () {
+        $(that.domObject + " .ui-input-clear").click(function (event) {
+            event.stopPropagation()
             that.DontDismissByBlur = true;
         })
 
@@ -153,7 +162,6 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
                     if(afterFilteredCallback)
                         afterFilteredCallback(true,$(that.filterableDomObject).offset().top , $(that.filterableDomObject).height());
                 }
-
 
 
 
@@ -209,6 +217,11 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
     this.getSelectedItems = function () {
         return that.selectedItems;
+    }
+
+    this.setSelectedItems = function (selectedItems) {
+        that.selectedItems = selectedItems;
+        this.renderList();
     }
 
 

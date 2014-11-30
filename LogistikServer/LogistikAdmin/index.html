@@ -20,6 +20,7 @@
 </head>
 <body style="display:none">
 
+<div id="servererror" style="display:none">Serververbindung unterbrochen...</div>
 
 <div id="page" data-role="page" style="opacity:0">
 
@@ -28,11 +29,11 @@
 <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
 <img id="banner" height="60px" src="img/bannerlogo.png">
 
-<div id="pagecontent"  data-demo-html="true">
+<div id="pagecontent" data-demo-html="true">
     <div data-role="tabs" id="tabs">
         <div data-role="navbar">
             <ul>
-                <li><a id="uebersichtTab" href="#uebersicht" data-ajax="false" class="ui-btn-active" onclick="tabsController.clickedTab(0)">Übersicht</a></li>
+                <li><a id="uebersichtTab" href="#uebersicht" data-ajax="false" onclick="tabsController.clickedTab(0)">Übersicht</a></li>
                 <li><a id="termineTab" href="#termine" data-ajax="false" onclick="tabsController.clickedTab(1)">Termine</a></li>
                 <li><a id="nachrichtenTab" href="#nachrichten" data-ajax="false" onclick="tabsController.clickedTab(2)">Nachrichten</a></li>
                 <li><a id="lieferantenTab" href="#lieferanten" data-ajax="false" onclick="tabsController.clickedTab(3)">Lieferanten</a></li>
@@ -46,26 +47,36 @@
         </div>
         <div id="termine" class="ui-body-d ui-content">
             <div class="tabinhalt">
-
-                 
                 <div id='calendar'></div>
             </div>
         </div>
         <div id="nachrichten" class="ui-body-d ui-content">
             <div class="tabinhalt">
-                <div id="selectedMessageLieferanten">
-                    <div class='selectedLieferantDefault'>An:</div>
+                <div id="writeMessageTabs" data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <a id="writeNewLieferantenMessage" onclick="nachrichtenTab.openSubTab(0)" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-plus active">Schreiben</a>
+                    <a id="sentNewLieferantenMessage" onclick="nachrichtenTab.openSubTab(1)" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-u">Gesendet</a>
+                    <a id="recievedNewLieferantenMessage" onclick="nachrichtenTab.openSubTab(2)" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-d">Empfangen</a>
                 </div>
-                <div id="searchMessageLieferanten"></div>
+                <div id="writeMessage" class="messageTab">
+                    <div id="selectedMessageLieferanten">
+                        <div class='selectedLieferantDefault'>An:</div>
+                    </div>
+                    <div id="searchMessageLieferanten"></div>
 
-                <div id="messageLieferantenEditor">
-                    <textarea id="messageLieferantenCKEditor"></textarea>
+                    <div id="messageLieferantenEditor">
+                        <textarea id="messageLieferantenCKEditor"></textarea>
+                    </div>
+
+                    <div id="sendMessageLieferant" class="greenbutton ui-disabled ui-btn ui-input-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-mail ui-btn-icon-left" onclick="nachrichtenController.sendeNachricht()">Senden
+                    </div>
                 </div>
-
-                <div id="sendMessageLieferant" class="greenbutton ui-btn ui-input-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-mail ui-btn-icon-left" onclick="lieferantenController.lieferantenHinzufuegen()">Senden
+                <div id="recievedMessage" class="messageTab" style="display:none">
+                    <div  id="recievedMessageContainer"></div>
                 </div>
-
-            </div>
+                <div id="sentMessage" class="messageTab" style="display:none">
+                   <div  id="sentMessageContainer"></div>
+                </div>
+                </div>
         </div>
         <div id="lieferanten">
             <div class="tabinhalt ">
@@ -168,13 +179,13 @@
 
         <div class="bottombuttons saved">
             <a id="speichereaktuelleseventbutton" onclick="termineController.speichereAktuellesEvent();" class="greenbutton ui-btn ui-corner-all ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check"
-                    style="display:none">Speichern
+               style="display:none">Speichern
             </a>
             <a id="abbrechenbearbeitungaktuelleseventbutton" onclick="termineController.abbrechenBearbeitungAktuellesEvent();"
-                    class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok
+               class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok
             </a>
             <a id="loescheaktuelleseventbutton" onclick="termineController.loescheAktuellenTermin();"
-                    class="redbutton ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-delete">Löschen
+               class="redbutton ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-delete">Löschen
             </a>
         </div>
     </div>

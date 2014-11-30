@@ -17,7 +17,6 @@ lieferantenController = {
     init: function () {
 
 
-
         $("#lieferantenInformationen input").on("input", function () {
             lieferantenController.aktuellerLieferantGespeichert = false;
             $("#speichereLieferant").css("opacity", 1).removeClass("ui-disabled");

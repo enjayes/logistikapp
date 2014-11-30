@@ -54,7 +54,7 @@ uiController = {
         //Window Resize Handling
         $(window).resize(uiController.updateSize);
 
-        //Init Tabs
+        //Init min-heightmin-heightTabs
         tabsController.ready();
 
         //Rearange Widgets
@@ -69,6 +69,41 @@ uiController = {
 
     },
     updateSize: function () {
-        $("#suchelieferantenliste").css("width", $("#suchelieferantenwidget").width());
+
+    },
+    toast: function (msg, time, touchFunc) {
+        $("#toastId").remove();
+        var toastclass = 'ui-loader ui-overlay-shadow ui-bar-e ui-corner-all fadein';
+        $("<div id='toastTest' 'class= '" + toastclass + "' style='white-space:nowrap'>" + msg + "</div>")
+            .css({ display: "inline-block", visibility: "visisble"})
+            .appendTo($.mobile.pageContainer)
+        $("<div class='" + toastclass + "' id = 'toastId'>" + msg + "</div>")
+            .css({
+
+                display: "block",
+                opacity: 0.8,
+                position: "fixed",
+                padding: "10px",
+                "text-align": "center",
+
+                "background-color": "rgba(248, 236, 25, 0.55)",
+                width: $("#toastTest").width() + 60,
+                left: ($(window).width() - ($("#toastTest").width() +60)) / 2,
+
+
+                top: $(window).height() / 2 - $("#toastTest").height() / 2})
+            .click(function () {
+                $("#toastId").hide();
+                touchFunc();
+            })
+            .appendTo($.mobile.pageContainer)
+            .fadeTo(400, 0.8)
+            .delay(time)
+            .fadeOut(400, function () {
+                $(this).remove();
+            });
+       $("#toastTest").remove();
+
+
     }
 }

@@ -49,26 +49,34 @@ serverController = {
 
         serverController.socket = io();
 
+
+        serverController.socket.on('disconnect', function () {
+            $("#page").css("opacity", 0.2).css("pointer-events", "none");
+            $("#servererror").show();
+        });
+
         //On Message
         serverController.socket.on('message', function (msg) {
             //Server Connected, send Connection message back
-            if (msg.t == serverController.messageType.connection)
+            if (msg.t == serverController.messageType.connection) {
                 serverController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
-            else if (msg.t == "cb") {
+                $("#page").css("opacity", "").css("pointer-events", "auto");
+                $("#servererror").hide();
+            }
+            else if (msg.t == serverController.messageType.callback) {
                 //Execute Callback
                 if (msg.callback && serverController.callbackHandler[msg.callback]) {
                     serverController.callbackHandler[msg.callback](msg.cbdata);
                     delete serverController.callbackHandler[msg.callback];
                 }
                 //Lieferanten wurde in anderem Fenster geändert
-            } else if (msg.t ==  serverController.lieferant.messageType.updateOthers) {
+            } else if (msg.t == serverController.lieferant.messageType.updateOthers) {
                 if (msg.l)
                     serverController.lieferant.getAllCallback(msg.l);
             } else if (msg.t == serverController.termin.messageType.updateOthers) {
                 if (msg.e)
                     serverController.termin.getAllCallback(msg.e);
             }
-
 
         });
 
@@ -81,7 +89,7 @@ serverController = {
             update: "lu",
             delete: "ld",
             get: "lg",
-            updateOthers:"luo"
+            updateOthers: "luo"
 
         },
         getAllCallback: null,
@@ -113,7 +121,7 @@ serverController = {
             update: "tu",
             delete: "td",
             get: "tg",
-            updateOthers:"tuo"
+            updateOthers: "tuo"
 
         },
         getAllCallback: null,
@@ -128,7 +136,7 @@ serverController = {
             }
 
             if (termin.end)
-                newTermin.end = termin.end.format()
+                newTermin.end = termin.end.format();
             else
                 newTermin.end = "";
 
@@ -156,8 +164,72 @@ serverController = {
         }
 
     },
+    nachricht: {
+        messageType: {
+            getAll: "nga",
+            create: "nc",
+            delete: "nd",
+            updateOthers: "nuo"
+        },
+        buildDTO: function (nachricht) {
+            var newNachricht = {
+                id: nachricht.id,
+                read: nachricht.read,
+                datum: nachricht.datum.getTime(),
+                nachricht: nachricht.nachricht,
+                lieferanten:nachricht.lieferanten
+            }
+
+
+            return newNachricht;
+        },
+        getAll: function (callback) {
+
+            var newCallback = function () {
+                serverController.nachricht.getAllCallback = callback;
+                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            }
+
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+        },
+        create: function (nachricht) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, n: this.buildDTO(nachricht)}));
+        },
+        delete: function (nachricht) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, n: nachricht}));
+        }
+
+    },
+    antwortNachricht: {
+        messageType: {
+            getAll: "aga",
+            update: "au",
+            delete: "ad",
+            updateOthers: "auo"
+        },
+        getAll: function (callback) {
+
+            var newCallback = function () {
+                serverController.antwortNachricht.getAllCallback = callback;
+                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            }
+
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+        },
+        update: function (nachricht) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, n: nachricht}));
+        },
+        delete: function (nachricht) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, n: nachricht}));
+        }
+
+    },
     getAllOnStartupCounter: 0,
-    getAllOnStartupMax: 2,
+    getAllOnStartupMax: 4,
     onLoadedGetAllOnStartup: function () {
         if (serverController.getAllOnStartupCounter == serverController.getAllOnStartupMax) {
             crossroads.parse(location.hash);

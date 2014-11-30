@@ -12,8 +12,10 @@
 tabsController.init();
 
 var initAfterServerConnection = function(){
+    nachrichtenController.init();
     lieferantenController.init();
     termineController.init();
+
     $(document).ready(function () {
         //Enable Routing
         setTimeout(function () {

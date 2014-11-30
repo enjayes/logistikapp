@@ -28,8 +28,27 @@ html {
 }
 
 #page {
- min-height: 100%;
+ min-height: 100%!important;
 }
+
+button{
+   outline: none!important;
+}
+
+#servererror{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #f00;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    padding: 7px;
+    z-index: 100000;
+}
+
 
 
 .ui-page-theme-a .ui-btn:hover, html .ui-bar-a .ui-btn:hover, html .ui-body-a .ui-btn:hover, html body .ui-group-theme-a .ui-btn:hover, html head+body .ui-btn.ui-btn-a:hover, .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited {
@@ -269,12 +288,84 @@ Navbar
  Nachrichten
 **/
 
+
+#sentMessageContainer .ui-collapsible-content, #recievedMessageContainer .ui-collapsible-content{
+    background-color: #FFF;
+    padding-bottom:55px;
+}
+
+#sentMessageContainer .ui-collapsible-content .deleteMessageButton, #recievedMessageContainer .ui-collapsible-content .deleteMessageButton{
+    position: absolute;
+    right: 5px;
+}
+
+
+
+
+
+#sentMessageContainer .ui-collapsible-heading a, #recievedMessageContainer .ui-collapsible-heading a{
+    font-weight: 100;
+}
+
+
+#recievedMessageContainer .ui-collapsible-heading.unread a{
+    border: 1px solid rgba(37, 211, 48, 0.55);
+    background-color: rgba(0, 189, 12, 1);
+    color: #fff;
+}
+
+
+#sentMessageContainer .ui-collapsible-heading.unread a{
+    border: 1px solid rgba(37, 211, 48, 0.55);
+    background-color: rgba(0, 189, 12, 1);
+    color: #fff;
+}
+
+
+#sentMessageContainer .ui-collapsible-content p.unread{
+  margin-top:3px;
+}
+
+
+#sentMessageContainer .ui-collapsible-content p.unread .msgunreadHint{
+    color: rgb(0, 105, 7);
+
+}
+
+#sendMessageLieferant{
+    position: absolute;
+    right: 0;
+    bottom: -55px;
+}
+
+
+
+#writeMessageTabs{
+    margin-bottom: 20px;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+
+#writeMessageTabs .ui-btn.active, #writeMessageTabs .ui-btn:active{
+    background-color: #38c!important;
+    background-image: none;
+    color:#fff;
+}
+
+#writeMessageTabs .ui-btn{
+
+
+}
+
+
+
 #searchMessageLieferanten{
     position: relative;
 }
 
 #selectedMessageLieferanten{
-    min-height:48px;
+    min-height:42px;
     background-color: #eee;
     border-color: #ddd;
     color: #333;
@@ -288,20 +379,20 @@ Navbar
 
 #selectedMessageLieferanten .selectedLieferantButton{
     display:inline-block;
-    margin: 5px 0 0 5px!important;
+    margin: 2px 0 -3px 2px!important;
     padding: 8px 8px 4px 8px;
     font-weight: normal!important;
     font-size: 16px;
 }
 
 #selectedMessageLieferanten .selectedLieferantDefault{
-    padding: 15px 18px 0 10px !important;
+    padding: 12px 18px 0 10px !important;
     color: #656565;
 }
 
 
 #messageLieferantenEditor {
-    margin: 18px 0 8px 0;;
+    margin: 18px 0 80px 0;
 }
 
 #selectedMessageLieferanten .selectedLieferantButton .selectedLieferantButtonRemove{
@@ -418,6 +509,8 @@ vertical-align: middle;
     float:right;
     margin-top: -5px;
 }
+
+
 
 
 
@@ -575,6 +668,25 @@ vertical-align: middle;
     display: none !important;
 }
 
+
+.fadein {
+    opacity: 0; /* make things invisible upon start */
+    -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation: fadeincomplete ease-in 1;
+    animation: fadeincomplete ease-in 1;
+
+    -webkit-animation-fill-mode: forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode: forwards; /*FF 5+*/
+    -o-animation-fill-mode: forwards; /*Not implemented yet*/
+    -ms-animation-fill-mode: forwards; /*IE 10+*/
+    animation-fill-mode: forwards; /*when the spec is finished*/
+
+    -webkit-animation-duration: 400ms;
+    -moz-animation-duration:  400ms;
+    animation-duration: 400ms;
+
+}
+
 /* make keyframes that tell the start state and the end state of our object */
 @-webkit-keyframes fadeincomplete {
     from {
@@ -649,9 +761,27 @@ Colors
     background-color: rgb(0, 113, 23)!important;
 }
 
+.greenbutton:hover {
+    background-color: rgb(20, 133, 43)!important;
+}
+
+.greenbutton:active {
+    background-color: rgb(0, 93, 3)!important;
+}
+
 .redbutton{
     background-color: rgb(113,0, 23)!important;
 }
+
+.redbutton:hover{
+    background-color: rgb(133,20 43)!important;
+}
+
+
+.redbutton:active{
+    background-color: rgb(93,0, 3)!important;
+}
+
 
 
 #lieferantenInformationen.neu{
