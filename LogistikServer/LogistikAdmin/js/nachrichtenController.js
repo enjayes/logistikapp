@@ -82,9 +82,9 @@ nachrichtenController = {
 
 
             if (lieferant)
-                lieferanten += "<a title ='" + lieferantenController.getLieferantFullName(lieferant) + "' class='ui-btn ui-btn-inline ui-mini' >" + lieferant.name + "</a> "
+                lieferanten += "<a title ='" + lieferantenController.getLieferantFullName(lieferant) + "' class='lieferantMsgButton ui-btn ui-btn-inline ui-mini' >" + lieferant.name + "</a> "
             else
-                lieferanten += "<a class='ui-btn ui-btn-inline ui-mini ui-disabled' >Gelöscht</a>";
+                lieferanten += "<a class='lieferantMsgButton ui-btn ui-btn-inline ui-mini ui-disabled' >Gelöscht</a>";
 
             lieferanten += '<br /><br /></span>';
 
@@ -187,7 +187,7 @@ nachrichtenController = {
                 var lieferant = lieferantenController.getLieferantByID(nachrichtenController.nachrichtenSent[i].lieferanten[j].lieferantid);
 
                 if (lieferant) {
-                    var lieferantDom = $("<a title ='" + lieferantenController.getLieferantFullName(lieferant) + "' class='ui-btn ui-btn-inline ui-mini' >" + lieferant.name + "</a> ");
+                    var lieferantDom = $("<a title ='" + lieferantenController.getLieferantFullName(lieferant) + "' class='lieferantMsgButton ui-btn ui-btn-inline ui-mini' >" + lieferant.name + "</a> ");
 
                     var clickLieferant = function(lieferantDom,lieferant){
                         lieferantDom.click(function () {
@@ -213,7 +213,7 @@ nachrichtenController = {
                 }
                 else{
                     countGelesen++;
-                    lieferantDom = "<a class='ui-btn ui-btn-inline ui-mini ui-disabled' >Gelöscht</a>";
+                    lieferantDom = "<a class='lieferantMsgButton ui-btn ui-btn-inline ui-mini ui-disabled' >Gelöscht</a>";
 
                 }
 

@@ -301,6 +301,11 @@ Navbar
     margin-top: 0;
 }
 
+.ui-collapsible-content p a.lieferantMsgButton{
+    margin: 2px;
+}
+
+
 #sentMessageContainer .ui-collapsible-content, #recievedMessageContainer .ui-collapsible-content{
     background-color: #FFF;
     padding-bottom:55px;
