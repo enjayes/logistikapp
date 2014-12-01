@@ -80,15 +80,21 @@ uiController = {
         $("<div class='" + toastclass + "' id = 'toastId'>" + msg + "</div>")
             .css({
 
+
                 display: "block",
                 opacity: 0.8,
                 position: "fixed",
                 padding: "10px",
                 "text-align": "center",
-
-                "background-color": "rgba(248, 236, 25, 0.55)",
+                "background-color": "rgba(1, 113, 23, 0.78)",
+                color: "#fff",
+                "font-weight": "bold",
+                "text-shadow": "none",
+                "-webkit-box-shadow": "1px 0 5px rgba(0, 0, 0, 0.65)",
+                "-moz-box-shadow": "1px 0 5px rgba(0, 0, 0, 0.65)",
+                "box-shadow": "1px 0 5px rgba(0, 0, 0, 0.65)",
                 width: $("#toastTest").width() + 60,
-                left: ($(window).width() - ($("#toastTest").width() +60)) / 2,
+                left: ($(window).width() - ($("#toastTest").width() + 60)) / 2,
 
 
                 top: $(window).height() / 2 - $("#toastTest").height() / 2})
@@ -102,7 +108,7 @@ uiController = {
             .fadeOut(400, function () {
                 $(this).remove();
             });
-       $("#toastTest").remove();
+        $("#toastTest").remove();
 
 
     }

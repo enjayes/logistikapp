@@ -285,7 +285,7 @@ nachrichtenController = {
             nachrichtenTab.searchWidget.setSelectedItems([]);
             nachrichtenTab.searchWidget.getInput().val("");
             nachrichtenTab.renderSelectedLieferanten();
-            uiController.toast("Die Nachricht wurde versendet...", 2000);
+            uiController.toast("Die Nachricht wurde versendet...", 1700);
 
 
         }

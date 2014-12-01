@@ -5,13 +5,13 @@
 }
 
 .fc-button.fc-corner-right {
-    border-top-right-radius: 1px!important ;
-    border-bottom-right-radius: 1px!important ;
+    border-top-right-radius: 4px!important ;
+    border-bottom-right-radius: 4px!important ;
 }
 
 .fc-button.fc-corner-left  {
-    border-top-left-radius: 1px!important ;
-    border-bottom-left-radius: 1px!important ;
+    border-top-left-radius: 4px!important ;
+    border-bottom-left-radius: 4px!important ;
 }
 
 .fc-button.fc-state-active,.fc-button.fc-state-down {

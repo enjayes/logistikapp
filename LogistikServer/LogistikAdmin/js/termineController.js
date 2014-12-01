@@ -150,12 +150,12 @@ termineController = {
         $(".input-group.clockpicker input").val(time);
 
         if (neuesEvent) {
-            $("#popupTermin .bottombuttons").addClass("newevent");
+            $("#popupTermin .bottombuttons, #loescheaktuelleseventbutton").addClass("newevent");
             $("#terminheader").text("Neuer Termin");
 
         }
         else {
-            $("#popupTermin .bottombuttons").removeClass("newevent");
+            $("#popupTermin .bottombuttons, #loescheaktuelleseventbutton").removeClass("newevent");
             $("#terminheader").text("Termin");
 
         }
@@ -387,8 +387,8 @@ termineController = {
     },
     zeigeSpeicherButton: function () {
 
-        $("#abbrechenbearbeitungaktuelleseventbutton, #loescheaktuelleseventbutton").css("opacity", 0).removeClass("fade");
-        $("#abbrechenbearbeitungaktuelleseventbutton, #loescheaktuelleseventbutton").show();
+        $("#abbrechenbearbeitungaktuelleseventbutton").css("opacity", 0).removeClass("fade");
+        $("#abbrechenbearbeitungaktuelleseventbuttonn").show();
         $("#speichereaktuelleseventbutton").hide().removeClass("fade");
 
 
@@ -396,7 +396,7 @@ termineController = {
             $("#popupTermin .bottombuttons").addClass("saved");
             $("#abbrechenbearbeitungaktuelleseventbutton").text("Ok").removeClass("ui-icon-delete").addClass("ui-icon-check");
             setTimeout(function () {
-                $("#abbrechenbearbeitungaktuelleseventbutton, #loescheaktuelleseventbutton").addClass("fade");
+                $("#abbrechenbearbeitungaktuelleseventbutton").addClass("fade");
             }, 0)
         } else {
             $("#popupTermin .bottombuttons").removeClass("saved");
@@ -405,7 +405,7 @@ termineController = {
             $("#abbrechenbearbeitungaktuelleseventbutton").text("Abbrechen").removeClass("ui-icon-check").addClass("ui-icon-delete");
 
             setTimeout(function () {
-                $("#abbrechenbearbeitungaktuelleseventbutton, #loescheaktuelleseventbutton").addClass("fade");
+                $("#abbrechenbearbeitungaktuelleseventbutton").addClass("fade");
                 $("#speichereaktuelleseventbutton").addClass("fade");
                 $("#speichereaktuelleseventbutton").show();
             }, 0)

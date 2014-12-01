@@ -259,7 +259,7 @@ background-color: #f9f9f9;
    **/
 
 #tabs .ui-tabs-panel {
-    padding: 15px;
+    padding: 20px 15px 15px 15px;
 }
 
 .ui-page-theme-a .ui-btn:focus, html .ui-bar-a .ui-btn:focus, html .ui-body-a .ui-btn:focus, html body .ui-group-theme-a .ui-btn:focus, html head+body .ui-btn.ui-btn-a:focus, .ui-page-theme-a .ui-focus, html .ui-bar-a .ui-focus, html .ui-body-a .ui-focus, html body .ui-group-theme-a .ui-focus, html head+body .ui-btn-a.ui-focus, html head+body .ui-body-a.ui-focus {
@@ -428,6 +428,11 @@ Navbar
     position: relative;
 }
 
+
+#searchInfoLieferanten .ui-input-search{
+   margin-top:0;
+}
+
 #lieferantenInformationen{
     padding: 0px 15px 15px 15px;
     background-color: #E5E5E5;
@@ -592,7 +597,7 @@ vertical-align: middle;
 #popupTermin .bottombuttons {
     margin-left: auto;
     margin-right: auto;
-    max-width: 360px;
+    max-width: 250px;
     overflow: visible;
     white-space: nowrap;
 
@@ -602,16 +607,16 @@ vertical-align: middle;
     max-width: 245px;
 }
 
-#popupTermin .bottombuttons.newevent #loescheaktuelleseventbutton {
+#popupTermin #loescheaktuelleseventbutton.newevent  {
    display:none!important;
 }
 
 
 #popupTermin .bottombuttons.saved {
-    max-width: 185px;
+    max-width: 75px;
 }
 
-#popupTermin .bottombuttons #speichereaktuelleseventbutton.fade, #popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton.fade, #popupTermin .bottombuttons #loescheaktuelleseventbutton.fade{
+#popupTermin .bottombuttons #speichereaktuelleseventbutton.fade, #popupTermin .bottombuttons #abbrechenbearbeitungaktuelleseventbutton.fade, #popupTermin  #loescheaktuelleseventbutton.fade{
     opacity: 0; /* make things invisible upon start */
     -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
     -moz-animation: fadeincomplete ease-in 1;
@@ -628,6 +633,11 @@ vertical-align: middle;
     animation-duration: 400ms;
 }
 
+#popupTermin #loescheaktuelleseventbutton{
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+}
 
 
 #popupTermin #terminheader {
