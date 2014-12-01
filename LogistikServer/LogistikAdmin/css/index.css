@@ -373,6 +373,7 @@ Navbar
 }
 
 #selectedMessageLieferanten{
+    position: relative;
     min-height:42px;
     background-color: #eee;
     border-color: #ddd;
@@ -393,9 +394,16 @@ Navbar
     font-size: 16px;
 }
 
-#selectedMessageLieferanten .selectedLieferantDefault{
-    padding: 12px 18px 0 10px !important;
+#selectedMessageLieferanten .selectedLieferantAn{
     color: #656565;
+    position:absolute;
+    top:12px;
+    left:10px;
+}
+
+#selectedMessageLieferanten .selectedLieferantAnMargin{
+    width:40px;
+    display:inline-block
 }
 
 

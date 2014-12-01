@@ -14,12 +14,12 @@ nachrichtenTab = {
     anchorName: "nachrichtenTab",
     controller: nachrichtenController,
     searchWidget: null,
-    selectedItemsDefaultHtml:"",
+    selectedItemsAnHtml:"",
     init: function () {
         var that = this;
 
         var selectedList = $("#selectedMessageLieferanten");
-        this.selectedItemsDefaultHtml = selectedList.html();
+        this.selectedItemsAnHtml = "<div class='selectedLieferantAn'>An:</div><div class='selectedLieferantAnMargin'></div>"
         selectedList.click(function (event) {
             event.stopPropagation();
             $("#searchMessageLieferanten input").focus();
@@ -29,6 +29,7 @@ nachrichtenTab = {
         this.searchWidget = new SearchWidget("#searchMessageLieferanten", "Suche nach Lieferanten...", null, true, function () {
                 nachrichtenTab.searchWidget.getInput().val("");
                 nachrichtenTab.renderSelectedLieferanten();
+                CKEDITOR.instances.messageLieferantenCKEditor.focus();
             },
             function (lieferant, classes) {
                 return "<li class='" + classes + "'><a>" + lieferantenController.getLieferantFullName(lieferant) + "</a></li>";
@@ -62,11 +63,10 @@ nachrichtenTab = {
             var selectedItems = that.searchWidget.getSelectedItems();
 
             var selectedList = $("#selectedMessageLieferanten");
+            selectedList.html(that.selectedItemsAnHtml);
 
-            if (selectedItems.length == 0)
-                selectedList.html(that.selectedItemsDefaultHtml);
-            else {
-                selectedList.html("");
+            if (selectedItems.length > 0)  {
+
                 for (var i = 0; i < selectedItems.length; i++) {   //CHANGE FOR DIFFERENT COMPARISIONS
 
                     var append = function (item) {
