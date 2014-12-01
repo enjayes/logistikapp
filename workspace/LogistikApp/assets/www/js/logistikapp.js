@@ -13,13 +13,16 @@ var logistikapp = {
 
     start:function(){
 
+        //Use Fastclick
+        FastClick.attach(document.body);
 
+        //Open Socket Connection
         var socket = io.connect(preferences.server);
-
         socket.on('message', function(msg){
             console.log('message: ' + msg);
         });
 
+        //Initialize View
         clientView.initialize();
 
         //TODO: call Client Log-In
