@@ -93,7 +93,7 @@ nachrichtenController = {
 
             if (lieferant){
                 var clickLieferant = function(lieferanten,lieferant){
-                    lieferanten.find("a").click(function () {
+                    lieferanten.find("a").click(function (event) {
                         event.stopPropagation();
                         lieferantenController.aktuellerLieferant = $.extend(true, {}, lieferant);
                         tabsController.openTabWithoutClick(3);
@@ -190,7 +190,7 @@ nachrichtenController = {
                     var lieferantDom = $("<a title ='" + lieferantenController.getLieferantFullName(lieferant) + "' class='lieferantMsgButton ui-btn ui-btn-inline ui-mini' >" + lieferant.name + "</a> ");
 
                     var clickLieferant = function(lieferantDom,lieferant){
-                        lieferantDom.click(function () {
+                        lieferantDom.click(function (event) {
                             event.stopPropagation();
 
                             lieferantenController.aktuellerLieferant = $.extend(true, {}, lieferant);

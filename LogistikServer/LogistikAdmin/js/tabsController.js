@@ -83,18 +83,22 @@ tabsController = {
     openTab: function (index) {
 
         if (index != this.aktuellerTab) {
+
             $(".tabinhalt").css("opacity", "0")
 
             setTimeout(function () {
                 tabsController.aktuellerTab = index;
+
+
+                $(".tabinhalt").addClass("animate");
+                setTimeout(function () {   $(".tabinhalt").css("opacity","1").removeClass("animate");  }, 350)
+
                 tabsController.tabs[index].open();
 
                 uiController.updateSize();
 
                 //Inhalt anzeigen nach Rendern
-                $(".tabinhalt").css("opacity", "1")
                 //State Updaten
-
                   Router.pushState();
 
             }, 0)

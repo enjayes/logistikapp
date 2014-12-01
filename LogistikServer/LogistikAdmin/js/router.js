@@ -100,6 +100,18 @@ Router = {
         }
     },
     pushState: function () {
+        //Set Tabs as marked
+        var colorTabs = function(){
+            $("#tabs #" + tabsController.tab().anchorName).addClass("ui-btn-active")
+            $("#page").css("opacity", "1");
+
+                $(".ui-navbar").hide().addClass("fadein").css("opacity", "");
+                $(".ui-navbar").show();
+
+        }
+
+
+        setTimeout(colorTabs, 0);
 
         if (location.hash == "" && tabsController.aktuellerTab == 0 && !lieferantenController.aktuellerLieferant)
             return;
@@ -113,11 +125,7 @@ Router = {
 
         location.hash = hashCode;
 
-        //Set Tabs as marked
-        setTimeout(function () {
-            $("#tabs #" + tabsController.tab().anchorName).addClass("ui-btn-active")
-            $("#page").css("opacity", "1")
-        }, 0);
+        setTimeout(colorTabs, 0);
 
 
     }

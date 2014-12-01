@@ -69,7 +69,7 @@ termineController = {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        defaultDate: '2014-11-12',
+        defaultDate: Date.now(),
         lang: "de",
         editable: true,
         eventLimit: true, // allow "more" link when too many events

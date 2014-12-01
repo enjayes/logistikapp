@@ -69,6 +69,12 @@ uiController = {
 
     },
     updateSize: function () {
+      var width = $("#tabs .ui-tabs-nav").width()+50;
+      $("#mainbackground").css({
+          width: width+4,
+          left:($("body").width()-width)/2
+
+      })
 
     },
     toast: function (msg, time, touchFunc) {
