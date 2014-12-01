@@ -43,7 +43,9 @@
 
 
         //Overwrite alert and prompt
-        window.prompt=function(msg){console.log("PROMPT: "+msg)}
+        window.prompt = function (msg) {
+            console.log("PROMPT: " + msg)
+        }
 
 
     </script>
@@ -51,136 +53,140 @@
 
 </head>
 <body>
-<div class="app">
 
-    <div id="jobSelector">
-        <label>Aufgabenwahl</label>
+<div class="centerapp">
 
-        <form>
-            <label>
-                <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch
-            </label>
-            <label>
-                <input name="checkbox-0 " type="checkbox" id="cb_bestellung">Bestellung
-            </label>
-            <label>
-                <input name="checkbox-0 " type="checkbox" id="cb_verraeumung">Verräumung
-            </label>
-            <label>
-                <input name="checkbox-0 " type="checkbox" id="cb_austausch">Austausch von Bruch und Verderb
-            </label>
+    <div class="app">
 
-        </form>
-        <br>
-        <button id="weiter_Aufgaben">Weiter</button>
-        <button id="zurueck_Aufgaben" style="float: left;">Zurück</button>
+        <div id="jobSelector">
+            <h2>Aufgabenwahl</h2>
 
-    </div>
-
-    <div id="lieferantenschein1" style="display:none">
-
-        <tr>
-            <td>
+            <form>
                 <label>
-                    Ziel
+                    <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch
                 </label>
-            <td><textarea rows="1" cols="50">
-            </textarea></td>
-        </tr>
-        <tr>
-            <td>
                 <label>
-                    Grund
+                    <input name="checkbox-0 " type="checkbox" id="cb_bestellung">Bestellung
                 </label>
-            <td><textarea rows="1" cols="50">
-
-            </textarea></td>
-        </tr>
-        <tr>
-            <td>
                 <label>
-                    Thematik
+                    <input name="checkbox-0 " type="checkbox" id="cb_verraeumung">Verräumung
                 </label>
-            <td><textarea rows="1" cols="50">
+                <label>
+                    <input name="checkbox-0 " type="checkbox" id="cb_austausch">Austausch von Bruch und Verderb
+                </label>
 
-            </textarea></td>
-        </tr>
-        <br>
-        <button id="weiter_lieferantenschein1">Weiter</button>
-        <button id="zurueck_lieferantenschein1" style="float: left;">Zurück</button>
-    </div>
+            </form>
+            <br>
+            <button id="weiter_Aufgaben">Weiter</button>
+            <button id="zurueck_Aufgaben" style="float: left;">Zurück</button>
+
+        </div>
+
+        <div id="lieferantenschein1" style="display:none">
+            <br>
+            <tr>
+                <td>
+                    <label>
+                        Ziel
+                    </label>
+                <td><textarea rows="1" cols="50">
+                </textarea></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        Grund
+                    </label>
+                <td><textarea rows="1" cols="50">
+
+                </textarea></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        Thematik
+                    </label>
+                <td><textarea rows="1" cols="50">
+
+                </textarea></td>
+            </tr>
+            <br>
+            <button id="weiter_lieferantenschein1">Weiter</button>
+            <button id="zurueck_lieferantenschein1" style="float: left;">Zurück</button>
+        </div>
 
 
-    <div id="lieferantenschein2" style="display:none">
-
-        <form>
-            <table style="border-style='none'" style="width:100%">
-                <tr>
-                    <td>
-                        <label>
-                            <input name="checkbox-0 " type="checkbox">Auftrag getätigt
+        <div id="lieferantenschein2" style="display:none">
+            <br>
+            <form>
+                <table style="width:100%;border: none">
+                    <tr>
+                        <td>
+                            <label>
+                                <input name="checkbox-0 " type="checkbox">Auftrag getätigt
+                            </label></td>
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">MHD-Kontrolle
                         </label></td>
+                    </tr>
+                    <tr>
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">Rücknahme
+                        </label></td>
+
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">Reklamationsbearbeitung
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">Warenaufbau
+                        </label></td>
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">Umbau
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">Info-Gespräch
+                        </label></td>
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">Nummer-Abgabe
+                        </label></td>
+                    </tr>
                     <td><label>
-                        <input name="checkbox-0 " type="checkbox">MHD-Kontrolle
+                        <input name="checkbox-0 " type="checkbox">Verkostung
                     </label></td>
-                </tr>
-                <tr>
                     <td><label>
-                        <input name="checkbox-0 " type="checkbox">Rücknahme
+                        <input name="checkbox-0 " type="checkbox">Sortimentsinfo
                     </label></td>
 
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox">Reklamationsbearbeitung
-                    </label></td>
-                </tr>
-                <tr>
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox">Warenaufbau
-                    </label></td>
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox">Umbau
-                    </label></td>
-                </tr>
-                <tr>
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox">Info-Gespräch
-                    </label></td>
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox">Nummer-Abgabe
-                    </label></td>
-                </tr>
-                <td><label>
-                    <input name="checkbox-0 " type="checkbox">Verkostung
-                </label></td>
-                <td><label>
-                    <input name="checkbox-0 " type="checkbox">Sortimentsinfo
-                </label></td>
+                    <tr>
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">Aktionsabsprache
+                        </label></td>
+                        <td><label>
+                            <input name="checkbox-0 " type="checkbox">Bemusterung
+                        </label></td>
+                    </tr>
 
-                <tr>
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox">aktionsabsprache
-                    </label></td>
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox">Bemusterung
-                    </label></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label>
-                            <input name="checkbox-0 " type="checkbox">Verlosung
-                        </label>
-                    </td>
+                    <tr>
+                        <td>
+                            <label>
+                                <input name="checkbox-0 " type="checkbox">Verlosung
+                            </label>
+                        </td>
 
 
-                </tr>
-            </table>
+                    </tr>
+                </table>
 
-        </form>
-        <br>
-        <button>Weiter</button>
-        <button id="zurueck_lieferantenschein2" style="float: left;">Zurück</BUTTON>
+            </form>
+            <br>
+            <button>Weiter</button>
+            <button id="zurueck_lieferantenschein2" style="float: left;">Zurück</BUTTON>
 
+        </div>
     </div>
 
 
