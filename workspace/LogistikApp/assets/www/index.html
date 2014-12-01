@@ -23,8 +23,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no"/>
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-    <meta name="viewport"
-          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=600, height=device-height, target-densitydpi=device-dpi"/>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=550, height=device-height, target-densitydpi=device-dpi"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
     <title>LogistikApp</title>
@@ -42,9 +41,7 @@
             console.log("ERROR! : " + url + "(" + lineNumber + ") : " + JSON.stringify(e));
         };
 
-
-        //Overwrite alert and prompt
-        console.log(window.location.hash)
+        //Overwrite alert and prompt if in browser
         if (window.location.hash != "#android")
             window.prompt = function (msg) {
                 console.log("PROMPT: " + msg)

@@ -13,6 +13,8 @@ var logistikapp = {
 
     start:function(){
 
+        console.log($(window).width())
+
         //Use Fastclick
         FastClick.attach(document.body);
 
