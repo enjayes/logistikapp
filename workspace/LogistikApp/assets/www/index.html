@@ -40,6 +40,12 @@
         window.onerror = function (e, url, lineNumber) {
             console.log("ERROR! : " + url + "(" + lineNumber + ") : " + JSON.stringify(e));
         };
+
+
+        //Overwrite alert and prompt
+        window.prompt=function(msg){console.log("PROMPT: "+msg)}
+
+
     </script>
 
 
@@ -49,21 +55,23 @@
 
     <div id="jobSelector">
         <label>Aufgabenwahl</label>
+
         <form>
             <label>
-            <input name="checkbox-0 " type="checkbox" id ="cb_besuch">Besuch
-        </label>
-            <label>
-                <input name="checkbox-0 " type="checkbox" id ="cb_bestellung">Bestellung
+                <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch
             </label>
             <label>
-                <input name="checkbox-0 " type="checkbox" id ="cb_verraeumung">Verräumung
+                <input name="checkbox-0 " type="checkbox" id="cb_bestellung">Bestellung
             </label>
             <label>
-                <input name="checkbox-0 " type="checkbox" id ="cb_austausch">Austausch von Bruch und Verderb
+                <input name="checkbox-0 " type="checkbox" id="cb_verraeumung">Verräumung
+            </label>
+            <label>
+                <input name="checkbox-0 " type="checkbox" id="cb_austausch">Austausch von Bruch und Verderb
             </label>
 
         </form>
+        <br>
         <button id="weiter_Aufgaben">Weiter</button>
         <button id="zurueck_Aufgaben" style="float: left;">Zurück</button>
 
@@ -97,7 +105,7 @@
 
             </textarea></td>
         </tr>
-
+        <br>
         <button id="weiter_lieferantenschein1">Weiter</button>
         <button id="zurueck_lieferantenschein1" style="float: left;">Zurück</button>
     </div>
@@ -126,12 +134,12 @@
                     </label></td>
                 </tr>
                 <tr>
-                <td>  <label>
-                    <input name="checkbox-0 " type="checkbox">Warenaufbau
-                </label></td>
-                <td><label>
-                    <input name="checkbox-0 " type="checkbox">Umbau
-                </label></td>
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">Warenaufbau
+                    </label></td>
+                    <td><label>
+                        <input name="checkbox-0 " type="checkbox">Umbau
+                    </label></td>
                 </tr>
                 <tr>
                     <td><label>
@@ -169,31 +177,15 @@
             </table>
 
         </form>
-        <button >Weiter</button>
+        <br>
+        <button>Weiter</button>
         <button id="zurueck_lieferantenschein2" style="float: left;">Zurück</BUTTON>
 
     </div>
 
 
-    <!--Start page ------------------------------------------------->
-    <div style="display:none">
-
-
-        <img src="img/logo.png">
-
-
-        <h1>Edeka Logistik</h1>
-
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-
-            <p class="event received">Device is Ready</p>
-        </div>
-    </div>
 </div>
 
-
-<input name="" type="text" size="30" maxlength="30">
 
 <!--Own Libraries ------------------------------------------------->
 <script type="text/javascript" src="js/logistikapp.js"></script>
@@ -202,7 +194,6 @@
 
 <script type="text/javascript" src="js/devdata.js"></script>
 <script type="text/javascript" src="js/preferences.js"></script>
-
 
 
 <!--Imported libraries ------------------------------------------------->

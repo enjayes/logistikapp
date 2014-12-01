@@ -14,12 +14,10 @@ var logistikapp = {
     start:function(){
 
 
-
-
         var socket = io.connect(preferences.server);
 
         socket.on('message', function(msg){
-            alert('message: ' + msg);
+            console.log('message: ' + msg);
         });
 
         clientView.initialize();

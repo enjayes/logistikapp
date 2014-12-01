@@ -16,6 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+
+
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -38,12 +42,6 @@ var app = {
     onDeviceReady: function() {
        
 
-        var parentElement = document.getElementById("deviceready");
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
 
         //Start Logistik App
         logistikapp.start();
