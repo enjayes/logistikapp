@@ -76,6 +76,12 @@ serverController = {
             } else if (msg.t == serverController.termin.messageType.updateOthers) {
                 if (msg.e)
                     serverController.termin.getAllCallback(msg.e);
+            } else if (msg.t == serverController.nachricht.messageType.updateOthers) {
+                if (msg.n)
+                    serverController.nachricht.getAllCallback(msg.n);
+            }  else if (msg.t == serverController.antwortNachricht.messageType.updateOthers) {
+                if (msg.a)
+                    serverController.antwortNachricht.getAllCallback(msg.a);
             }
 
         });
@@ -220,10 +226,10 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         update: function (nachricht) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, n: nachricht}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, a: nachricht}));
         },
         delete: function (nachricht) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, n: nachricht}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, a: nachricht}));
         }
 
     },

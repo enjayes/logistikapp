@@ -98,7 +98,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
         }).click(function (event) {
                 event.stopPropagation()
-            })
+            });
 
 
         //Dismiss Selection bei Click elsewhere
@@ -122,22 +122,22 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
             }
 
-        }
+        };
         $("#page").click(function () {
             dismissFilter();
-        })
+        });
 
         $(that.domObject + " .ui-input-clear").click(function (event) {
             event.stopPropagation()
             that.DontDismissByBlur = true;
-        })
+        });
 
         $(that.domObject + " input").on("blur", function () {
             setTimeout(function () {
 
                 dismissFilter();
             }, 300)
-        })
+        });
 
         //Filterable Methods
         $(that.filterableDomObject).filterable({
@@ -196,32 +196,45 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         if (that.multiSelect)
             that.list.unshift({name: "Alle", addAll: true});
 
-        that.renderList();
-    }
+        //Update Selected Elements
+        //Remove from receipients list in nachrichten Tab
+        var newSelectedLieferanten = [];
+        var selectedLieferanten = that.getSelectedItems();
+        that.list.forEach(function(actEl){
+            var lieferant = selectedLieferanten.filter(function (el) {
+                return el.id == actEl.id;
+            });
+
+            if(lieferant.length>0){
+                newSelectedLieferanten.push(actEl)
+            }
+        });
+        that.setSelectedItems(newSelectedLieferanten);  //Also Renderes List
+    };
 
 
     this.getInput = function () {
         return $(that.domObject+" input");
-    }
+    };
 
     this.getDomList = function () {
         return $(that.filterableDomObject);
-    }
+    };
 
 
     this.setInputText = function (text) {
        $(that.domObject+" input").val(text);
-    }
+    };
 
 
     this.getSelectedItems = function () {
         return that.selectedItems;
-    }
+    };
 
     this.setSelectedItems = function (selectedItems) {
         that.selectedItems = selectedItems;
-        this.renderList();
-    }
+        that.renderList();
+    };
 
 
 
@@ -233,7 +246,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
             }
         }
         return false;
-    }
+    };
 
 
     this.deselectedItem = function (item) {
@@ -245,13 +258,12 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
             }
         }
         return false;
-    }
+    };
 
     this.renderList = function () {
 
         var searchListDom = $(domObject + " .searchWidget-resultlist");
         searchListDom.html("");
-
 
         for (var i = 0; i < that.list.length; i++) {
             var item = that.list[i];
@@ -295,7 +307,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
 
                 }
-            }
+            };
 
             if (that.itemSelected(item))
                 var selected = "selected";
@@ -327,4 +339,4 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
 
 
-}
+};

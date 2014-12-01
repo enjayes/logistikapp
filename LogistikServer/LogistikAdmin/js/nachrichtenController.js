@@ -58,6 +58,15 @@ nachrichtenController = {
         container.html("");
         nachrichtenController.ungeleseneNachrichten = 0;
 
+
+        //Save opened Collapsibles
+        var openedCollapsiblesDom = $("#recievedMessageContainer .ui-collapsible:not(.ui-collapsible-collapsed)");
+        var openedCollapsibles = [];
+        for(var j =0;j<openedCollapsiblesDom.length;j++){
+            openedCollapsibles.push(openedCollapsiblesDom[j].id)
+        }
+
+
         for (var i = 0; i < this.nachrichtenRecieved.length; i++) {
             var nachricht = this.nachrichtenRecieved[i];
             if (!nachricht.read)
@@ -136,6 +145,12 @@ nachrichtenController = {
 
         nachrichtenController.renderUngeleseneNachrichtenCounter();
 
+
+        //Reopen Collapsibles
+        for(var j =0;j<openedCollapsibles.length;j++){
+            $("#"+openedCollapsibles[j]).collapsible( "expand" );
+        }
+
     },
     renderUngeleseneNachrichtenCounter: function () {
         if (nachrichtenController.ungeleseneNachrichten > 0) {
@@ -149,6 +164,15 @@ nachrichtenController = {
     }, renderGesendeteNachrichten: function () {
 
         var container = $("#sentMessageContainer");
+
+        //Save opened Collapsibles
+        var openedCollapsiblesDom = $("#sentMessageContainer .ui-collapsible:not(.ui-collapsible-collapsed)");
+        var openedCollapsibles = [];
+        for(var j =0;j<openedCollapsiblesDom.length;j++){
+            openedCollapsibles.push(openedCollapsiblesDom[j].id)
+        }
+
+
         container.html("");
         for (var i = 0; i < nachrichtenController.nachrichtenSent.length; i++) {
             var nachricht = nachrichtenController.nachrichtenSent[i];
@@ -227,6 +251,13 @@ nachrichtenController = {
             }
             append(nachricht)
         }
+
+        //Reopen Collapsibles
+        for(var j =0;j<openedCollapsibles.length;j++){
+            $("#"+openedCollapsibles[j]).collapsible( "expand" );
+        }
+
+
     },
     sendeNachricht: function () {
 
@@ -235,7 +266,7 @@ nachrichtenController = {
         var lieferantenIds = [];
 
         for (var i = 0; i < lieferanten.length; i++) {
-            lieferantenIds.push({lieferantenid: lieferanten[i].id,read:false});
+            lieferantenIds.push({lieferantid: lieferanten[i].id,read:false});
         }
         var nachrichtText = CKEDITOR.instances.messageLieferantenCKEditor.getData();
 

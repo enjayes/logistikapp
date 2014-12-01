@@ -80,11 +80,15 @@ lieferantenController = {
                //Update Lieferanten Widgets
                 nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
                 lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
+
+
+
                 termineTab.searchWidget.setList(lieferantenController.lieferanten);
+                nachrichtenTab.renderSelectedLieferanten();
 
                 nachrichtenController.renderEmpfangeneNachrichten();
                 nachrichtenController.renderGesendeteNachrichten();
-
+                nachrichtenTab.renderSelectedLieferanten();
             }
         }
         serverController.lieferant.getAll(getLieferatenFromServer);
@@ -162,6 +166,10 @@ lieferantenController = {
                 lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
                 termineTab.searchWidget.setList(lieferantenController.lieferanten);
 
+                nachrichtenController.renderEmpfangeneNachrichten();
+                nachrichtenController.renderGesendeteNachrichten();
+                nachrichtenTab.renderSelectedLieferanten();
+
                 //Update Server DB
                 serverController.lieferant.update(lieferantenController.aktuellerLieferant);
 
@@ -194,9 +202,14 @@ lieferantenController = {
         });
 
 
+
         nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
         lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
         termineTab.searchWidget.setList(lieferantenController.lieferanten);
+
+        nachrichtenController.renderEmpfangeneNachrichten();
+        nachrichtenController.renderGesendeteNachrichten();
+        nachrichtenTab.renderSelectedLieferanten();
 
         //Update Server DB
         serverController.lieferant.delete(lieferantenController.aktuellerLieferant);
@@ -281,6 +294,10 @@ lieferantenController = {
             nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
             lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
             termineTab.searchWidget.setList(lieferantenController.lieferanten);
+
+            nachrichtenController.renderEmpfangeneNachrichten();
+            nachrichtenController.renderGesendeteNachrichten();
+            nachrichtenTab.renderSelectedLieferanten();
 
             //Update Server DB
             serverController.lieferant.create(lieferantenController.aktuellerLieferant);
