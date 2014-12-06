@@ -53,6 +53,36 @@ var clientView = {
 
         $("#weiter_lieferantenschein1").click(function()
         {
+
+
+            $("#lieferantenschein2").show();
+            $("#lieferantenschein1").hide();
+
+        });
+
+
+        $("#zurueck_lieferantenschein1").click(function()
+        {
+
+
+
+            //end get values
+            $("#jobSelector").show();
+            $("#lieferantenschein1").hide();
+
+        });
+
+        $("#zurueck_lieferantenschein2").click(function()
+        {
+            $("#lieferantenschein1").show();
+            $("#lieferantenschein2").hide();
+
+        });
+
+
+        $("#weiter_lieferantenschein2").click(function()
+        {
+
             //check input
             if ($('#cb_auftrag_getaetigt').is(":checked")) {
                 job.cb_auftrag_getaetigt = true;//Auftrag getätigt
@@ -137,27 +167,10 @@ var clientView = {
             else{
                 job.cb_bemusterung=false;
             }
-            $("#lieferantenschein2").show();
-            $("#lieferantenschein1").hide();
-
-        });
 
 
-        $("#zurueck_lieferantenschein1").click(function()
-        {
+            console.dir(job);
 
-
-
-            //end get values
-            $("#jobSelector").show();
-            $("#lieferantenschein1").hide();
-
-        });
-
-        $("#zurueck_lieferantenschein2").click(function()
-        {
-            $("#lieferantenschein1").show();
-            $("#lieferantenschein2").hide();
 
         });
 
