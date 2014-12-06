@@ -12,6 +12,8 @@ var clientView = {
 
         $("#weiter_Aufgaben").click(function()
         {
+            //
+
             //check input
             if ($('#cb_besuch').is(":checked"))
             {
