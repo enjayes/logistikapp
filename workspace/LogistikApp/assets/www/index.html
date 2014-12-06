@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
     <title>LogistikApp</title>
     <!--Install Console-->
+    <script type="text/javascript" src="js/misc.js"></script>
     <script type="text/javascript">
 
         if (typeof window.console == "undefined") {
@@ -42,7 +43,7 @@
         };
 
         //Overwrite alert and prompt if in browser
-        if (util.isMobileApp()){
+        if (misc.isMobileApp()==false){
             window.prompt = function (msg) {
                 console.log("PROMPT: " + msg)
             }
@@ -198,7 +199,7 @@
 <!--Own Libraries ------------------------------------------------->
 <script type="text/javascript" src="js/fastclick.js"></script>
 
-<script type="text/javascript" src="js/misc.js"></script>
+
 <script type="text/javascript" src="js/serverController.js"></script>
 
 <script type="text/javascript" src="js/logistikapp.js"></script>
