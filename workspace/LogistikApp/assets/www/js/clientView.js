@@ -143,6 +143,7 @@ var clientView = {
         $("#weiter_Aufgaben").click(function()
         {
             //
+            notifications.show("Ich trink nen Sekt vielleicht!");
 
             //check input
             if ($('#cb_besuch').is(":checked"))

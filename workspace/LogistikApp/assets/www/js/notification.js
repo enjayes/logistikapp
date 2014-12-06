@@ -17,7 +17,7 @@ var notifications = {
     show: function(message, callback) {
 
         $.toast({
-            text : "Your toast message goes here"
+            text : message
         })
 
     }
