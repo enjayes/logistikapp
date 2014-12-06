@@ -128,7 +128,12 @@ var clientView = {
             job.cb_bemusterung=false;
         }
 
-
+        if ($('#cb_verlosung').is(":checked")) {
+            job.cb_verlosung=true;
+        }
+        else{
+            job.cb_verlosung=false;
+        }
         console.dir(job);
         return job;
 
