@@ -99,13 +99,13 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: job}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, j: job}));
         },
         update: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: job}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, j: job}));
         },
         delete: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, l: job}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: job}));
         }
 
     },
