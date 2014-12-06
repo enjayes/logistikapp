@@ -16,5 +16,16 @@ misc = {
             var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
             return v.toString(16);
         });
+    },
+
+
+    isMobileApp: function() {
+        if(window.location.hash != "#android"){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

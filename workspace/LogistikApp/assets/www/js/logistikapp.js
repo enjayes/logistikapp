@@ -16,7 +16,7 @@ var logistikapp = {
         console.log($(window).width())
 
         //Use Fastclick
-        if(){
+        if(misc.isMobileApp()){
         FastClick.attach(document.body);
         }
         //Open Socket Connection
