@@ -32,7 +32,7 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
 
-        this.onDeviceReady();//TODO REMOVE
+       // this.onDeviceReady();//TODO REMOVE
 
     },
     // deviceready Event Handler

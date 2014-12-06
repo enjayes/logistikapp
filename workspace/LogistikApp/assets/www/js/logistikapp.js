@@ -17,7 +17,8 @@ var logistikapp = {
 
         //Use Fastclick
         if(misc.isMobileApp()){
-        FastClick.attach(document.body);
+            FastClick.attach(document.body);
+
         }
         //Open Socket Connection
         var socket = io.connect(preferences.server);

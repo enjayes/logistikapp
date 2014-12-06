@@ -14,10 +14,14 @@
 var notifications = {
 
 
-    show: function(message, callback) {
+    show: function(title,message, callback) {
 
         $.toast({
-            text : message
+            heading: title,
+            text : message,
+            stack: 50,
+            hideAfter: 6000000
+
         })
 
     }

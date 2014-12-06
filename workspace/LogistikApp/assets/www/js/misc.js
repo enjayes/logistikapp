@@ -21,11 +21,11 @@ misc = {
 
     isMobileApp: function() {
         if(window.location.hash != "#android"){
-            return true;
+            return false;
         }
         else
         {
-            return false;
+            return true;
         }
     }
 }

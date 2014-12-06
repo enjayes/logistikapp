@@ -143,7 +143,7 @@ var clientView = {
         $("#weiter_Aufgaben").click(function()
         {
             //
-            notifications.show("Ich trink nen Sekt vielleicht!");
+            notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
 
             //check input
             if ($('#cb_besuch').is(":checked"))
@@ -187,7 +187,7 @@ var clientView = {
 
         $("#weiter_lieferantenschein1").click(function()
         {
-
+            notifications.show("Geschäftsführer","Bring mir mal ne Flasche Bier!");
 
             $("#lieferantenschein2").show();
             $("#lieferantenschein1").hide();
