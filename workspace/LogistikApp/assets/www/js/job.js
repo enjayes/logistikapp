@@ -17,5 +17,22 @@ function Job (id) {
     this.verraeumung = false;
     this.austausch = false;
 
-    //TODO: lieferantenschein 1 und 2
+    //TODO: lieferantenschein1
+
+    //lieferantenschein2
+
+    cb_auftrag_getaetigt=false;//Auftrag getätigt
+    cb_mhd=false;//MHD-Kontrolle
+    cb_ruecknahme = false; //Rücknahme
+    cb_reklamation=false; //Reklamationsbearbeitung
+    cb_warenaufbau=false; //Warenaufbau
+    cb_umbau = false; //Umbau
+    cb_info_gespraech=false //Info-Gespräch
+    cb_nr_abgabe=false; //Nummer-Abgabe
+    cb_verkostung = false; //Verkostung
+    cb_sortimentsinfo = false; //Sortimentsinfo
+    cb_aktionsabsprache=false;
+    cb_bemusterung=false; //Bemusterung
+    cb_verkostung=false; //Verlosung
+
 }

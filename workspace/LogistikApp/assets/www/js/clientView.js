@@ -53,6 +53,90 @@ var clientView = {
 
         $("#weiter_lieferantenschein1").click(function()
         {
+            //check input
+            if ($('#cb_auftrag_getaetigt').is(":checked")) {
+                job.cb_auftrag_getaetigt = true;//Auftrag getätigt
+            }
+            else
+            {
+                job.cb_auftrag_getaetigt = false;
+            }
+            if ($('#cb_mhd').is(":checked")) {
+                job.cb_mhd = true;//MHD-Kontrolle
+            }
+            else{
+                job.cb_mhd = false;
+            }
+            if ($('#cb_ruecknahme').is(":checked")) {
+                job.cb_ruecknahme = true; //Rücknahme
+            }
+            else
+            {
+                job.cb_ruecknahme = false; //Rücknahme
+            }
+
+            if ($('#cb_warenaufbau').is(":checked")) {
+                job.cb_warenaufbau=true;
+            }
+            else{
+                job.cb_warenaufbau=false;
+            }
+
+            if ($('#cb_reklamation').is(":checked")) {
+                job.cb_reklamation=true;
+            }
+            else{
+                job.cb_reklamation=false; //Reklamationsbearbeitung
+            }
+
+            if ($('#cb_umbau').is(":checked")) {
+                job.cb_umbau=true;
+            }
+            else{
+                job.cb_umbau=false;
+            }
+
+            if ($('#cb_info_gespraech').is(":checked")) {
+                job.cb_info_gespraech=true;
+            }
+            else{
+                job.cb_info_gespraech=false;
+            }
+
+            if ($('#cb_nr_abgabe').is(":checked")) {
+                job.cb_nr_abgabe=true;
+            }
+            else{
+                job.cb_nr_abgabe=false;
+            }
+
+            if ($('#cb_verkostung').is(":checked")) {
+                job.cb_verkostung=true;
+            }
+            else{
+                job.cb_verkostung=false;
+            }
+
+            if ($('#cb_sortimentsinfo').is(":checked")) {
+                job.cb_sortimentsinfo=true;
+            }
+            else{
+                job.cb_sortimentsinfo=false;
+            }
+
+            if ($('#cb_aktionsabsprache').is(":checked")) {
+                job.cb_aktionsabsprache=true;
+            }
+            else{
+                job.cb_aktionsabsprache=false;
+            }
+
+            if ($('#cb_bemusterung').is(":checked")) {
+                job.cb_bemusterung=true;
+            }
+            else{
+                job.cb_bemusterung=false;
+            }
             $("#lieferantenschein2").show();
             $("#lieferantenschein1").hide();
 
@@ -61,6 +145,10 @@ var clientView = {
 
         $("#zurueck_lieferantenschein1").click(function()
         {
+
+
+
+            //end get values
             $("#jobSelector").show();
             $("#lieferantenschein1").hide();
 
