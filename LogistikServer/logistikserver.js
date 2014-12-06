@@ -41,6 +41,7 @@ mysqlConnection.connect(function (err) {
 //Custom Controllers
 var connectionController = require('connectionController');
 var adminController = require('admincontroller/adminController.js');
+var appController = require('appcontroller/appController.js');
 
 //Init Controllers
 connectionController.init(preferences,io,http,adminController);

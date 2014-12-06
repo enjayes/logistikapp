@@ -21,10 +21,10 @@ var logistikapp = {
 
         }
         //Open Socket Connection
-        var socket = io.connect(preferences.server);
-        socket.on('message', function(msg){
-            console.log('message: ' + msg);
-        });
+
+        serverController.init();
+
+
 
         //Initialize View
         clientView.initialize();

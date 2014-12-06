@@ -12,7 +12,7 @@
 
 
 var ServerMessage = function (data, type) {
-    //It is aan app message
+    //It is an app message  0 = App
     this.c = 0;
     //Define type of message
     if (type)
@@ -47,7 +47,7 @@ serverController = {
     init: function (callback) {
         //Load Socket io and connect
 
-        serverController.socket = io();
+        serverController.socket = io.connect(preferences.server);
 
 
         serverController.socket.on('disconnect', function () {
@@ -90,7 +90,7 @@ serverController = {
         },
         getAllCallback: null,
         getAll: function (callback) {
-            serverController.lieferant.getAllCallback = callback;
+            serverController.job.getAllCallback = callback;
             var newCallback = function () {
                 callback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
@@ -99,13 +99,13 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: lieferant}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: job}));
         },
         update: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: lieferant}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: job}));
         },
         delete: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, l: lieferant}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, l: job}));
         }
 
     },

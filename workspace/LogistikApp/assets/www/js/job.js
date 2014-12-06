@@ -5,8 +5,10 @@
 
 function Job (id) {
     this.id = id;
+    //client_id = ...
     this.timestamp_start =  new Date();
-    //this.timestamp_end =;
+    //this.timestamp_end =; //TODO:
+
     //status
     this.pending = true;
     this.finished = false;
@@ -33,6 +35,6 @@ function Job (id) {
     cb_sortimentsinfo = false; //Sortimentsinfo
     cb_aktionsabsprache=false;
     cb_bemusterung=false; //Bemusterung
-    cb_verkostung=false; //Verlosung
+    cb_verlosung=false; //Verlosung
 
 }
