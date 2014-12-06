@@ -17,17 +17,33 @@ var clientView = {
             {
                 job.besuch = true;
             }
+            else
+            {
+                job.besuch = false;
+            }
             if ($('#cb_cb_bestellung').is(":checked"))
             {
                 job.bestellung = true;
+            }
+            else
+            {
+                job.bestellung = false;
             }
             if ($('#cb_verraeumung').is(":checked"))
             {
                 job.verraeumung = true;
             }
+            else
+            {
+                job.verraeumung = false;
+            }
             if ($('#cb_cb_austausch').is(":checked"))
             {
                 job.austausch = true;
+            }
+            else
+            {
+                job.ausstausch = false;
             }
 
             $("#lieferantenschein1").show();

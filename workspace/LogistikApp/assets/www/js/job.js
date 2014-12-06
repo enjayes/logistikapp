@@ -5,7 +5,8 @@
 
 function Job (id) {
     this.id = id;
-
+    this.timestamp_start =  new Date();
+    //this.timestamp_end =;
     //status
     this.pending = true;
     this.finished = false;
