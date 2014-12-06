@@ -218,7 +218,7 @@ var clientView = {
             job = that.check_input(job);
 
 
-
+            serverController.job.create(job);
 
         });
 
