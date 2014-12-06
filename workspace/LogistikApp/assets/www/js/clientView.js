@@ -5,7 +5,7 @@
 
 var clientView = {
 
-    check_input: function() {
+    check_input: function(job) {
         //check input Aufg
         if ($('#cb_besuch').is(":checked"))
         {
@@ -130,6 +130,7 @@ var clientView = {
 
 
         console.dir(job);
+        return job;
 
     },
 
@@ -137,6 +138,7 @@ var clientView = {
     initialize: function() {
         var id = 1; //TODO: generate id
         var job = new Job(id);
+        var that = this;
 
         $("#weiter_Aufgaben").click(function()
         {
@@ -213,7 +215,7 @@ var clientView = {
 
         $("#weiter_lieferantenschein2").click(function()
         {
-            check_input();
+            job = that.check_input(job);
 
         });
 
