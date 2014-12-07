@@ -44,7 +44,7 @@ serverController = {
             return callBackName;
         }
     },
-    init: function (callback) {
+    initialize: function (callback) {
         //Load Socket io and connect
 
         serverController.socket = io.connect(preferences.server);

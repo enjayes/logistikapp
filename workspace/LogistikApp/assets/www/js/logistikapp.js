@@ -20,9 +20,9 @@ var logistikapp = {
             FastClick.attach(document.body);
 
         }
-        //Open Socket Connection
 
-        serverController.init();
+        //Establish Socket Connection
+        serverController.initialize();
 
 
 

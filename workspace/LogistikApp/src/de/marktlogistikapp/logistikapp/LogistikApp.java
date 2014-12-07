@@ -17,12 +17,14 @@
        under the License.
  */
 
+
 package de.marktlogistikapp.logistikapp;
 
 import android.os.Bundle;
 import android.webkit.WebSettings;
 
 import org.apache.cordova.*;
+
 
 
 public class LogistikApp extends CordovaActivity
@@ -34,8 +36,7 @@ public class LogistikApp extends CordovaActivity
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl+"#android");
         String installCount = "7";
-        
-        
+               
         WebSettings settings = appView.getSettings(); 
         settings.setUseWideViewPort(true); 
         settings.setLoadWithOverviewMode(true); 
