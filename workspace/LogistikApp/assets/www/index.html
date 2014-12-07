@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
     <title>LogistikApp</title>
     <!--Install Console-->
+
     <script type="text/javascript" src="js/misc.js"></script>
     <script type="text/javascript">
 
@@ -59,6 +60,31 @@
 <div class="centerapp">
 
     <div class="app">
+
+
+
+        <!--<a href="skype:004908941150015?call">Call the Skype Echo / Sound Test Service</a>
+
+
+
+        -->
+        <a onclick="alert('skype!');window.open('skype:00498941150015?call', '_system');return false;" href="">Oruafa!</a>
+
+        <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
+
+
+        <div id="SkypeButton" >
+            <script type="text/javascript">
+                Skype.ui({
+                    name: "call",
+                    element: "SkypeButton",
+                    participants: ["00498941150015"],
+                    imageSize: 32,
+                    imageColor: "black"
+                });
+            </script>
+        </div>
+
 
         <div id="jobSelector">
             <h2>Aufgabenwahl</h2>
@@ -196,7 +222,13 @@
 </div>
 
 
+
+
+
+
+
 <!--Own Libraries ------------------------------------------------->
+
 <script type="text/javascript" src="js/fastclick.js"></script>
 
 
