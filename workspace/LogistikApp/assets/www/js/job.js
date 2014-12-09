@@ -11,7 +11,8 @@ function Job (id) {
 
     //status
     this.pending = true;
-    this.finished = false;
+    this.finished = false;#
+    checked_out = false; //lieferant hat den job explicit abgeschlossen, d.h. sich ausgeloggt
 
     //job_selector
     this.besuch = false;
@@ -20,6 +21,10 @@ function Job (id) {
     this.austausch = false;
 
     //TODO: lieferantenschein1
+    //lieferantenschein1
+    this.t_ziel
+    this.t_grund
+    this.t_thematik
 
     //lieferantenschein2
 
