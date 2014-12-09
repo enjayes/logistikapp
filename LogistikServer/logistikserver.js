@@ -28,24 +28,19 @@ var http = require('http').Server(app);
 //Socket.IO
 var io = require('socket.io')(http);
 
-//MySql
-var mysql = require('mysql');
 
-//Connect to MySql database
-mysqlConnection = mysql.createConnection(preferences.mysql);
-mysqlConnection.connect(function (err) {
-    if (err) throw err;
-    console.log('Connected to MySql database');
-});
-
-//Custom Controllers
+//Load Controllers
 var connectionController = require('connectionController');
 var adminController = require('admincontroller/adminController.js');
 var appController = require('appcontroller/appController.js');
+var dataController = require('dataController.js');
+
 
 //Init Controllers
+dataController.init(preferences);
 connectionController.init(preferences,io,http,adminController);
-adminController.init(preferences,io,app,express,mysqlConnection);
+adminController.init(preferences,dataController,io,app,express);
+appController.init(preferences,dataController,io,app,express);
 
 
 

@@ -20,7 +20,7 @@ jobsController = {
         //Get Lieferanten From Server
         var getJobsFromServer = function (jobs) {
             if(jobs){
-                console.og("JOBS!!");
+                console.log("JOBS!!");
                 console.dir(jobs)
                 jobsController.jobs = jobs;
             }

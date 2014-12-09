@@ -65,6 +65,7 @@ serverController = {
             }
             else if (msg.t == serverController.messageType.callback) {
                 //Execute Callback
+
                 if (msg.callback && serverController.callbackHandler[msg.callback]) {
                     serverController.callbackHandler[msg.callback](msg.cbdata);
                     delete serverController.callbackHandler[msg.callback];
@@ -79,7 +80,7 @@ serverController = {
             } else if (msg.t == serverController.nachricht.messageType.updateOthers) {
                 if (msg.n)
                     serverController.nachricht.getAllCallback(msg.n);
-            }  else if (msg.t == serverController.antwortNachricht.messageType.updateOthers) {
+            } else if (msg.t == serverController.antwortNachricht.messageType.updateOthers) {
                 if (msg.a)
                     serverController.antwortNachricht.getAllCallback(msg.a);
             }
@@ -182,7 +183,7 @@ serverController = {
                 id: nachricht.id,
                 datum: nachricht.datum.getTime(),
                 nachricht: nachricht.nachricht,
-                lieferanten:nachricht.lieferanten
+                lieferanten: nachricht.lieferanten
             }
 
 
@@ -233,9 +234,43 @@ serverController = {
         }
 
     },
+
+
+    job: {
+        messageType: {
+            getAll: "jga",
+            create: "jc",
+            update: "ju",
+            delete: "jd",
+            get: "jg",
+            updateOthers: "juo"
+
+        },
+        getAllCallback: null,
+        getAll: function (callback) {
+            serverController.job.getAllCallback = callback;
+            var newCallback = function () {
+                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            }
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+        },
+        create: function (lieferant) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, j: lieferant}));
+        },
+        update: function (lieferant) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, j: lieferant}));
+        },
+        delete: function (lieferant) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: lieferant}));
+        }
+
+    },
     getAllOnStartupCounter: 0,
-    getAllOnStartupMax: 4,
+    getAllOnStartupMax: 5,
     onLoadedGetAllOnStartup: function () {
+        console.log(serverController.getAllOnStartupCounter +"="+ serverController.getAllOnStartupMax)
         if (serverController.getAllOnStartupCounter == serverController.getAllOnStartupMax) {
             crossroads.parse(location.hash);
         }
