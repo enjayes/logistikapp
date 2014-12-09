@@ -11,7 +11,7 @@ function Job (id) {
 
     //status
     this.pending = true;
-    this.finished = false;#
+    this.finished = false;
     checked_out = false; //lieferant hat den job explicit abgeschlossen, d.h. sich ausgeloggt
 
     //job_selector
