@@ -270,7 +270,6 @@ serverController = {
     getAllOnStartupCounter: 0,
     getAllOnStartupMax: 5,
     onLoadedGetAllOnStartup: function () {
-        console.log(serverController.getAllOnStartupCounter +"="+ serverController.getAllOnStartupMax)
         if (serverController.getAllOnStartupCounter == serverController.getAllOnStartupMax) {
             crossroads.parse(location.hash);
         }

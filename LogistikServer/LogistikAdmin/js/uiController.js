@@ -66,7 +66,6 @@ uiController = {
 
         $("#popupTermin .eventDateparent").append($("#popupTermin .input-group-addon").clone())
 
-
         //Execute resize actions
         uiController.updateSize();
 

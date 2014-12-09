@@ -11,21 +11,32 @@
 //Init Controllers
 tabsController.init();
 
-var initAfterServerConnection = function(){
-    nachrichtenController.init();
-    lieferantenController.init();
-    termineController.init();
-    jobsController.init();
+var initializedAfterFirstServerConnection = false;
+var initAfterServerConnection = function () {
 
-    $(document).ready(function () {
-        //Enable Routing
-        setTimeout(function () {
-        uiController.ready();
-            Router.init();
 
-        },0)
-    });
+    if (!initializedAfterFirstServerConnection) {
+        initializedAfterFirstServerConnection = true;
+        nachrichtenController.init();
+        lieferantenController.init();
+        termineController.init();
+        jobsController.init();
+
+        $(document).ready(function () {
+
+            //Enable Routing
+            setTimeout(function () {
+                uiController.ready();
+                Router.init();
+
+            }, 0)
+
+        });
+    }
+
+
 }
+
 serverController.init(initAfterServerConnection);
 
 
