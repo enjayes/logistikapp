@@ -66,6 +66,7 @@ tabsController = {
         for (var i = 0; i < tabsController.tabs.length; i++) {
             tabsController.tabs[i].ready();
         }
+        //Init Controllers
         setTimeout(function(){
             for (var i = 0; i < tabsController.tabs.length; i++) {
                 tabsController.tabs[i].controller.ready();

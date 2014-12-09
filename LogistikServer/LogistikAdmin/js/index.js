@@ -15,6 +15,7 @@ var initAfterServerConnection = function(){
     nachrichtenController.init();
     lieferantenController.init();
     termineController.init();
+    jobsController.init();
 
     $(document).ready(function () {
         //Enable Routing

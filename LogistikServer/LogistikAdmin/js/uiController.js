@@ -54,8 +54,12 @@ uiController = {
         //Window Resize Handling
         $(window).resize(uiController.updateSize);
 
-        //Init min-heightmin-heightTabs
+        //Confirm Ready for Tabs and Corresponding Controllers
         tabsController.ready();
+
+        //Confirm Ready for other Controllers
+        jobsController.ready();
+
 
         //Rearange Widgets
         $("#popupTermin .eventDateparent").after($("#popupTermin .input-group.clockpicker"))
