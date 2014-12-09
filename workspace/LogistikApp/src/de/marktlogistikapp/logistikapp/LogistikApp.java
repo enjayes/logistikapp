@@ -27,6 +27,7 @@ import org.apache.cordova.*;
 
 
 
+
 public class LogistikApp extends CordovaActivity
 {
     @Override
