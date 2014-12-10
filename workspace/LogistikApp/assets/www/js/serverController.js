@@ -106,7 +106,7 @@ serverController = {
                 timestamp_start: job.timestamp_start.getTime(),
                 pending: job.pending,
                 besuch: job.besuch,
-                ziel: job.ziel,
+                ziel: job.t_ziel,
                 auftrag_getaetigt: job.auftrag_getaetigt
             }
         },
