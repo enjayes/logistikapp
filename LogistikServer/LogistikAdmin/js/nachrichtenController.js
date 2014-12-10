@@ -21,16 +21,10 @@ nachrichtenController = {
     ready: function () {
 
         var getNachrichtenFromServer = function (nachrichten) {
-
-            console.log("ßßßß")
-            console.dir(nachrichten)
             nachrichtenController.nachrichtenSent = nachrichten;
-
             for (var i = 0; i < nachrichtenController.nachrichtenSent.length; i++) {
                 var nachricht = nachrichtenController.nachrichtenSent[i];
                 nachricht.datum = new Date(nachricht.datum);
-
-
             }
             nachrichtenController.renderGesendeteNachrichten();
         }
@@ -130,9 +124,7 @@ nachrichtenController = {
 
                 })
 
-
                 nachrichtDom.find("p").prepend(lieferanten);
-
                 nachrichtDom.find(".deleteMessageButton").click(function () {
                     nachrichtenController.loescheEmpfangeneNachricht(nachricht);
                 })

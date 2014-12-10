@@ -253,8 +253,6 @@ serverController = {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.nachricht.parseDTO(list[i]);
                 }
-                console.log(list)
-                return callback(list);
             };
             var newCallback = function () {
 
@@ -337,7 +335,7 @@ serverController = {
 
         },
         buildDTO: function (job) {
-            var job;//TODO
+            return job;//TODO
         },
         parseDTO:function(job){
             return job;

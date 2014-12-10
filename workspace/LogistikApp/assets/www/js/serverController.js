@@ -51,7 +51,7 @@ serverController = {
 
 
         serverController.socket.on('disconnect', function () {
-           console.log("DISCONNECT")
+            console.log("DISCONNECT")
         });
 
         //On Message
@@ -68,10 +68,10 @@ serverController = {
                     delete serverController.callbackHandler[msg.callback];
                 }
 
-            /*} else if (msg.t == serverController.lieferant.messageType.updateOthers) {
-                if (msg.l)
-                    serverController.lieferant.getAllCallback(msg.l);
-             */
+                /*} else if (msg.t == serverController.lieferant.messageType.updateOthers) {
+                 if (msg.l)
+                 serverController.lieferant.getAllCallback(msg.l);
+                 */
             }
 
         });
@@ -88,32 +88,44 @@ serverController = {
             updateOthers: "juo"
 
         },
+        buildDTO: function (job) {
+            return job;//TODO
+        },
+        parseDTO: function (job) {
+            return job;
+        },
         getAllCallback: null,
         getAll: function (callback) {
-            serverController.job.getAllCallback = callback;
+            serverController.job.getAllCallback =  function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.job.parseDTO(list[i]);
+                }
+                return callback(list);
+            };
             var newCallback = function () {
-                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.job.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             }
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, j: job}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, j: this.buildDTO(job)}));
         },
         update: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, j: job}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, j: this.buildDTO(job)}));
         },
         delete: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: job}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: this.buildDTO(job)}));
         }
+
 
     },
     getAllOnStartupCounter: 0,
     getAllOnStartupMax: 1,
     onLoadedGetAllOnStartup: function () {
         if (serverController.getAllOnStartupCounter == serverController.getAllOnStartupMax) {
-          console.log("Get All complete")
+            console.log("Get All complete")
         }
 
     }
