@@ -119,7 +119,6 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: this.buildDTO(job)}));
         }
 
-
     },
     getAllOnStartupCounter: 0,
     getAllOnStartupMax: 1,

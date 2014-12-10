@@ -163,16 +163,15 @@ serverController = {
                 id: termin.id,
                 Title: termin.title,
                 Start: termin.start.format(),
-                End: termin.end,
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant
             }
 
             if (termin.end)
-                newTermin.end = termin.end.format();
+                newTermin.End = termin.end.format();
             else
-                newTermin.end = "";
+                newTermin.End = "";
 
             return newTermin;
         },

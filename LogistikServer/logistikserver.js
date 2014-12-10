@@ -38,7 +38,7 @@ var dataController = require('dataController.js');
 
 //Init Controllers
 dataController.init(preferences);
-connectionController.init(preferences,io,http,adminController);
+connectionController.init(preferences,io,http,adminController,appController);
 adminController.init(preferences,dataController,io,app,express);
 appController.init(preferences,dataController,io,app,express);
 
