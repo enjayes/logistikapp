@@ -22,6 +22,8 @@ nachrichtenController = {
 
         var getNachrichtenFromServer = function (nachrichten) {
 
+            console.log("ßßßß")
+            console.dir(nachrichten)
             nachrichtenController.nachrichtenSent = nachrichten;
 
             for (var i = 0; i < nachrichtenController.nachrichtenSent.length; i++) {

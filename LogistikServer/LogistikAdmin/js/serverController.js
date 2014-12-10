@@ -98,25 +98,52 @@ serverController = {
             get: "lg",
             updateOthers: "luo"
 
+        }, buildDTO: function (lieferant) {
+            return {
+                id: lieferant.id,
+                Vorname: lieferant.vorname,
+                Name: lieferant.name,
+                Telefon: lieferant.telefon,
+                EMail: lieferant.email,
+                Adresse: lieferant.adresse,
+                Notizen: lieferant.notizen
+            }
+        }, parseDTO: function (lieferant) {
+            return {
+                id: lieferant.id,
+                vorname: lieferant.Vorname,
+                name: lieferant.Name,
+                telefon: lieferant.Telefon,
+                email: lieferant.EMail,
+                adresse: lieferant.Adresse,
+                notizen: lieferant.Notizen
+            }
         },
         getAllCallback: null,
         getAll: function (callback) {
-            serverController.lieferant.getAllCallback = callback;
+
+            serverController.lieferant.getAllCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.lieferant.parseDTO(list[i]);
+                }
+                return callback(list);
+            }
+
             var newCallback = function () {
-                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.lieferant.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             }
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: lieferant}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: this.buildDTO(lieferant)}));
         },
         update: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: lieferant}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: this.buildDTO(lieferant)}));
         },
         delete: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, l: lieferant}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, l: this.buildDTO(lieferant)}));
         }
 
     },
@@ -131,15 +158,15 @@ serverController = {
             updateOthers: "tuo"
 
         },
-        getAllCallback: null,
         buildDTO: function (termin) {
             var newTermin = {
                 id: termin.id,
-                title: termin.title,
-                start: termin.start.format(),
-                allDay: termin.allDay,
-                notizen: termin.notizen,
-                lieferant: termin.lieferant
+                Title: termin.title,
+                Start: termin.start.format(),
+                End: termin.end,
+                AllDay: termin.allDay,
+                Notizen: termin.notizen,
+                Lieferant: termin.lieferant
             }
 
             if (termin.end)
@@ -149,11 +176,38 @@ serverController = {
 
             return newTermin;
         },
+        parseDTO:function(termin){
+             var newTermin = {
+                id: termin.id,
+                title: termin.Title,
+                start: termin.Start,
+                allDay: termin.AllDay,
+                notizen: termin.Notizen,
+                lieferant: termin.Lieferant
+
+            };
+
+            if (termin.end != "")
+                newTermin.end = termin.End;
+            else
+                newTermin.end = undefined;
+
+            return newTermin;
+        },
+        getAllCallback: null,
         getAll: function (callback) {
+            serverController.termin.getAllCallback =  function (list) {
+
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                }
+                return callback(list);
+            }
 
             var newCallback = function () {
-                serverController.termin.getAllCallback = callback;
-                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+
+                serverController.termin.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             }
@@ -179,21 +233,32 @@ serverController = {
             updateOthers: "nuo"
         },
         buildDTO: function (nachricht) {
-            var newNachricht = {
+            return {
                 id: nachricht.id,
                 datum: nachricht.datum.getTime(),
                 nachricht: nachricht.nachricht,
                 lieferanten: nachricht.lieferanten
             }
-
-
-            return newNachricht;
+        },
+        parseDTO:function(nachricht){
+            return {
+                id: nachricht.id,
+                datum: parseInt(nachricht.datum),
+                nachricht: nachricht.nachricht,
+                lieferanten:nachricht.lieferanten
+            }
         },
         getAll: function (callback) {
-
+            serverController.nachricht.getAllCallback =   function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.nachricht.parseDTO(list[i]);
+                }
+                console.log(list)
+                return callback(list);
+            };
             var newCallback = function () {
-                serverController.nachricht.getAllCallback = callback;
-                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+
+                serverController.nachricht.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             }
@@ -204,7 +269,7 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, n: this.buildDTO(nachricht)}));
         },
         delete: function (nachricht) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, n: nachricht}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, n: this.buildDTO(nachricht)}));
         }
 
     },
@@ -215,11 +280,36 @@ serverController = {
             delete: "ad",
             updateOthers: "auo"
         },
+        buildDTO: function (nachricht) {
+            var newNachricht = {
+                id: nachricht.id,
+                lieferantid: nachricht.lieferantid,
+                read: nachricht.read == true ? 1 : 0,
+                datum: nachricht.datum,
+                nachricht: nachricht.nachricht
+            }
+
+            return newNachricht;
+        },
+        parseDTO:function(nachricht){
+            return  {
+                id: nachricht.id,
+                lieferantid: nachricht.lieferantid,
+                read: nachricht.read==1?true:false,
+                datum: parseInt(nachricht.datum),
+                nachricht: nachricht.nachricht
+            };
+        },
         getAll: function (callback) {
+            serverController.antwortNachricht.getAllCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.antwortNachricht.parseDTO(list[i]);
+                }
+                return callback(list);
+            };
 
             var newCallback = function () {
-                serverController.antwortNachricht.getAllCallback = callback;
-                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.antwortNachricht.getAllCallback (arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             }
@@ -227,10 +317,10 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         update: function (nachricht) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, a: nachricht}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, a: this.buildDTO(nachricht)}));
         },
         delete: function (nachricht) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, a: nachricht}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, a: this.buildDTO(nachricht)}));
         }
 
     },
@@ -246,24 +336,35 @@ serverController = {
             updateOthers: "juo"
 
         },
+        buildDTO: function (job) {
+            var job;//TODO
+        },
+        parseDTO:function(job){
+            return job;
+        },
         getAllCallback: null,
         getAll: function (callback) {
-            serverController.job.getAllCallback = callback;
+            serverController.job.getAllCallback =  function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.job.parseDTO(list[i]);
+                }
+                return callback(list);
+            };
             var newCallback = function () {
-                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.job.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             }
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
-        create: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, j: lieferant}));
+        create: function (job) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, j: this.buildDTO(job)}));
         },
-        update: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, j: lieferant}));
+        update: function (job) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, j: this.buildDTO(job)}));
         },
-        delete: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: lieferant}));
+        delete: function (job) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: this.buildDTO(job)}));
         }
 
     },
