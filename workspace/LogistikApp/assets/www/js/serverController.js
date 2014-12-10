@@ -90,6 +90,7 @@ serverController = {
         },
         buildDTO: function (job) {
             return job;//TODO
+
         },
         parseDTO: function (job) {
             return job;
