@@ -6,7 +6,7 @@
 var clientView = {
 
     check_input: function(job) {
-        //check input Aufg
+        //check input Aufgabenwahl
         if ($('#cb_besuch').is(":checked"))
         {
             job.besuch = true;
@@ -40,7 +40,12 @@ var clientView = {
             job.austausch = false;
         }
 
-        //
+        //input lieferantenschein1
+
+        job.t_ziel = $("#t_ziel").val();
+        job.t_grund = $("#t_grund").val();
+        job.t_thematik = $("#t_thematik").val();
+
         //input lieferantenschein2
 
 
