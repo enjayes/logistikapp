@@ -1,11 +1,11 @@
 /**
  * lieferantenTab.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 19.11.14 - 22:13
- * @copyright munichDev UG
+ *
  */
 
 

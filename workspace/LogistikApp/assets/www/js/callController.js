@@ -1,6 +1,6 @@
 /** * callController.
  *
- * >>Description<<
+ *
  *
  * @author Norbert
  * @date 06.12.14 - 21:52

@@ -1,11 +1,11 @@
 /**
  * logistikapp.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 19.11.14 - 14:43
- * @copyright urlyRaptor
+ *
  */
 
 

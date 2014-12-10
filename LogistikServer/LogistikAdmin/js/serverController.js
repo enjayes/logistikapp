@@ -1,15 +1,3 @@
-/**
- * serverController.
- *
- * >>Description<<
- *
- * @author Manfred
- * @date 21.11.14 - 00:19
- * @copyright munichDev UG
- */
-
-
-
 
 var ServerMessage = function (data, type) {
     //It is a website message

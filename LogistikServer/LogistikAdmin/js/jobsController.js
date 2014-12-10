@@ -1,11 +1,11 @@
 /**
  * jobsController.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 09.12.14 - 17:52
- * @copyright munichDev UG
+ *
  */
 
 

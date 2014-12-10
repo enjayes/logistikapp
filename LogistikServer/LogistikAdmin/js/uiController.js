@@ -1,11 +1,11 @@
 /**
  * uiController.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 19.11.14 - 22:11
- * @copyright munichDev UG
+ *
  */
 
 

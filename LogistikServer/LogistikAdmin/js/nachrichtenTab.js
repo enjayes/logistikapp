@@ -1,11 +1,11 @@
 /**
  * nachrichtenTab.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 27.11.14 - 22:47
- * @copyright munichDev UG
+ *
  */
 
 

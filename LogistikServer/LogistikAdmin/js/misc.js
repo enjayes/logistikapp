@@ -1,11 +1,11 @@
 /**
  * misc.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 20.11.14 - 15:29
- * @copyright munichDev UG
+ *
  */
 
 

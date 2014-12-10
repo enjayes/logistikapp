@@ -1,11 +1,11 @@
 /**
  * searchWidget.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 27.11.14 - 23:02
- * @copyright munichDev UG
+ *
  */
 
 

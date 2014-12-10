@@ -1,11 +1,11 @@
 /**
  * termineTab.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 19.11.14 - 21:58
- * @copyright munichDev UG
+ *
  */
 
 

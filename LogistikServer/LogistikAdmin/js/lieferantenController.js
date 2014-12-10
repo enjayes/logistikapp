@@ -1,11 +1,11 @@
 /**
  * lieferantenController.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 19.11.14 - 22:46
- * @copyright munichDev UG
+ *
  */
 
 
