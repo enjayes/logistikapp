@@ -17,7 +17,6 @@ var callController = {
 
     },
 
-
     call: function() {
 
        //todo start skype call

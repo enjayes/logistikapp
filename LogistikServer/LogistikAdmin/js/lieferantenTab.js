@@ -1,5 +1,5 @@
 /**
- * lieferantenTab.
+ * lieferantenTab
  *
  *
  *

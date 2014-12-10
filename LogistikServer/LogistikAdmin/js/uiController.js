@@ -1,5 +1,5 @@
 /**
- * uiController.
+ * uiController
  *
  *
  *

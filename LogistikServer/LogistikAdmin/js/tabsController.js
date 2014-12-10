@@ -1,5 +1,5 @@
 /**
- * tabsController.
+ * tabsController
  *
  *
  *

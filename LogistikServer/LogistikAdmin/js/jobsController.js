@@ -1,5 +1,5 @@
 /**
- * jobsController.
+ * jobsController
  *
  *
  *

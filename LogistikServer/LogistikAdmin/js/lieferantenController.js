@@ -1,5 +1,5 @@
 /**
- * lieferantenController.
+ * lieferantenController
  *
  *
  *

@@ -1,5 +1,5 @@
 /**
- * calenderEvent.
+ * calenderEvent
  *
  *
  *
@@ -26,8 +26,6 @@ CalenderEventFactory = {
 
         console.log(start.hasTime())
         console.log(start.format())
-
-
 
         var event =   new CalenderEvent();
         event.title = title;

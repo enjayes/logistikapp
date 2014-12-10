@@ -1,5 +1,5 @@
 /**
- * termineController.
+ * termineController
  *
  *
  *

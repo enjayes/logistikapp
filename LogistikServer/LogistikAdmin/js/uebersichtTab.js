@@ -1,5 +1,5 @@
 /**
- * uebersichtTab.
+ * uebersichtTab
  *
  *
  *

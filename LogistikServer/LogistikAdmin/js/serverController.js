@@ -1,3 +1,12 @@
+/**
+ * serverController
+ *
+ *
+ *
+ *
+ * @date 20.11.14 - 01:07
+ *
+ */
 
 var ServerMessage = function (data, type) {
     //It is a website message

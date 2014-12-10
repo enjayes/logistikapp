@@ -1,5 +1,5 @@
 /**
- * termineTab.
+ * termineTab
  *
  *
  *

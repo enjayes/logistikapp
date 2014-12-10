@@ -1,5 +1,5 @@
 /**
- * nachrichtenTab.
+ * nachrichtenTab
  *
  *
  *

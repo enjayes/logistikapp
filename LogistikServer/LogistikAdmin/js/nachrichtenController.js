@@ -1,5 +1,5 @@
 /**
- * nachrichtenController.
+ * nachrichtenController
  *
  *
  *
