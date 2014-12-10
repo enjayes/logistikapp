@@ -88,9 +88,27 @@ serverController = {
             updateOthers: "juo"
 
         },
-        buildDTO: function (job) {
-            return job;//TODO
 
+        /*
+         buildDTO: function (nachricht) {
+         return {
+         id: nachricht.id,
+         datum: nachricht.datum.getTime(),
+         nachricht: nachricht.nachricht,
+         lieferanten: nachricht.lieferanten
+         }
+         },
+         */
+
+        buildDTO: function (job) {
+            return{
+                id: job.id,
+                timestamp_start: job.timestamp_start.getTime(),
+                pending: job.pending,
+                besuch: job.besuch,
+                ziel: job.ziel,
+                auftrag_getaetigt: job.auftrag_getaetigt
+            }
         },
         parseDTO: function (job) {
             return job;
