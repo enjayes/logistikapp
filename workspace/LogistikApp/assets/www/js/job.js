@@ -5,9 +5,11 @@
 
 function Job (id) {
     this.id = id;
-    client_id = 1; //TODO:
+    this.client_id = 1; //TODO:
+    markt_id="leonberg"; //TODO configure
     this.timestamp_start =  new Date();
     this.timestamp_end;
+    this.fixtermin;
 
     //status
     this.pending = true;
@@ -36,6 +38,7 @@ function Job (id) {
     cb_umbau = false; //Umbau
     cb_info_gespraech=false //Info-Gespräch
     cb_nr_abgabe=false; //Nummer-Abgabe
+    this.t_vk_euro_abgabe;
     cb_verkostung = false; //Verkostung
     cb_sortimentsinfo = false; //Sortimentsinfo
     cb_aktionsabsprache=false;

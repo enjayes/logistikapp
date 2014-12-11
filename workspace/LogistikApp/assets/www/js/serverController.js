@@ -101,12 +101,16 @@ serverController = {
          */
 
         buildDTO: function (job) {
+
             return{
                //general
                 id: job.id,
                 client_id: job.client_id,
+                markt_id: job.markt_id,
                 timestamp_start: job.timestamp_start.getTime(),
                 timestamp_end: job.timestamp_end.getTime(),
+                fixtermin: job.fixtermin,
+
     
                 //status
                 pending: job.pending,
@@ -126,7 +130,7 @@ serverController = {
     
                 //lieferantenschein2
 
-                auftrag_getaetigt: job.auftrag_getaetigt,
+                cb_auftrag_getaetigt: job.cb_auftrag_getaetigt,
                 cb_mhd: job.cb_mhd,
                 cb_ruecknahme : job.cb_ruecknahme, //Rücknahme
                 cb_reklamation: job.cb_reklamation, //Reklamationsbearbeitung
@@ -134,6 +138,7 @@ serverController = {
                 cb_umbau: job.cb_umbau, //Umbau
                 cb_info_gespraech: job.cb_info_gespraech, //Info-Gespräch
                 cb_nr_abgabe: job.cb_nr_abgabe, //Nummer-Abgabe
+                t_vk_euro_abgabe: job.t_vk_euro_abgabe,
                 cb_verkostung : job.cb_verkostung, //Verkostung
                 cb_sortimentsinfo : job.cb_sortimentsinfo, //Sortimentsinfo
                 cb_aktionsabsprache: job.cb_aktionsabsprache,
