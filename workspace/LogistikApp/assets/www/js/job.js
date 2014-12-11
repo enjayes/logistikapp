@@ -39,10 +39,14 @@ function Job (id) {
     cb_info_gespraech=false //Info-Gespräch
     cb_nr_abgabe=false; //Nummer-Abgabe
     this.t_vk_euro_abgabe;
+    this.t_warengruppe
     cb_verkostung = false; //Verkostung
     cb_sortimentsinfo = false; //Sortimentsinfo
     cb_aktionsabsprache=false;
     cb_bemusterung=false; //Bemusterung
     cb_verlosung=false; //Verlosung
+
+    //logout
+    this.t_notizen
 
 }
