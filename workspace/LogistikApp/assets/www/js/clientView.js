@@ -145,6 +145,62 @@ var clientView = {
     },
 
 
+    setJob: function(job){
+        $('#cb_besuch').prop('checked', job.besuch);
+
+        $('#cb_cb_bestellung').prop('checked',job.bestellung);
+
+
+        $('#cb_verraeumung').prop('checked', job.verraeumung);
+
+        $('#cb_cb_austausch').prop('checked', job.austausch);
+
+        $("#t_ziel").val(job.t_ziel);
+        $("#t_grund").val(job.t_grund);
+        $("#t_thematik").val(job.t_thematik);
+
+
+        $('#cb_auftrag_getaetigt').prop('checked',job.cb_auftrag_getaetigt);
+
+        $('#cb_mhd').prop('checked',job.cb_mhd);
+
+
+
+        $('#cb_ruecknahme').prop('checked',job.cb_ruecknahme);
+
+
+        $('#cb_warenaufbau').prop('checked',job.cb_warenaufbau);
+
+
+        $('#cb_reklamation').prop('checked',job.cb_reklamation);
+
+
+        $('#cb_umbau').prop('checked',   job.cb_umbau);
+
+
+        $('#cb_info_gespraech').prop('checked',job.cb_info_gespraech);
+
+
+        $('#cb_nr_abgabe').prop('checked',job.cb_nr_abgabe);
+
+
+        $('#cb_verkostung').prop('checked',job.cb_verkostung);
+
+
+        $('#cb_sortimentsinfo').prop('checked', job.cb_sortimentsinfo);
+
+
+        $('#cb_aktionsabsprache').prop('checked',job.cb_aktionsabsprache);
+
+
+        $('#cb_bemusterung').prop('checked',job.cb_bemusterung);
+
+
+        $('#cb_verlosung').prop('checked', job.cb_verlosung);
+
+        console.dir(job);
+    },
+
     initialize: function() {
         var id = misc.getUniqueID();
         var job = new Job(id);
