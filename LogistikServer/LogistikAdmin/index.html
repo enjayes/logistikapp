@@ -47,11 +47,20 @@
         <div id="uebersicht" class="ui-body-d ui-content">
             <div class="tabinhalt">
                 <div id="uebersichtMessageTabs" class="subTabToggle"  data-role="controlgroup" data-type="horizontal" data-mini="true">
-                    <a id="" onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-bars active">Allgemein</a>
-                    <a id="" onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user">Lieferanten</a>
+                    <a onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-bars active">Allgemein</a>
+                    <a  onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user">Lieferanten</a>
                 </div>
+                <br>
+                <h3>Aufteilung</h3>
+                <div class="labeled-chart-container">
+                    <div class="canvas-holder">
+                    <canvas id="aufteilung-chart-area" width="150" height="150"/>
 
+                </div>
+                    <div id="aufteilung-legend">
 
+                    </div>
+                </div>
             </div>
         </div>
         <div id="termine" class="ui-body-d ui-content">
@@ -265,16 +274,6 @@
 
 <script src="libs/jquery-1.11.1.min.js"></script>
 
-<!--script>
-    //Disable jquery binding features
-    $(document).on("mobileinit", function () {
-        $.extend($.mobile, {
-            linkBindingEnabled: false,
-            ajaxEnabled: false
-        });
-    });
-</script-->
-
 <!-- Routing -->
 
 <script src="libs/jquery.mobile.router.js"></script>
@@ -290,6 +289,9 @@
 
 <script src="libs/signals.min.js"></script>
 <script src="libs/crossroads.js"></script>
+
+
+<script src="libs/Chart.min.js"></script>
 
 
 <!--CKEditor-->
