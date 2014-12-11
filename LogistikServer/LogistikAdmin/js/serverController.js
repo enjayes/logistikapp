@@ -36,7 +36,7 @@ serverController = {
     },
     callbackHandler: {
         register: function (callback) {
-            var callBackName = "cb" + Date.now() + ((Math.random() * 1000000.0) + "").replace(".", "");
+            var callBackName = "cb" + Date.now()  + "x"+((Math.random() * 1000000.0) + "").replace(".", "");
             this[callBackName] = callback;
             return callBackName;
         }

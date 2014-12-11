@@ -39,7 +39,7 @@ serverController = {
     },
     callbackHandler: {
         register: function (callback) {
-            var callBackName = "cb" + Date.now() + ((Math.random() * 1000000.0) + "").replace(".", "");
+            var callBackName = "cb" + Date.now() + "x"+((Math.random() * 1000000.0) + "").replace(".", "");
             this[callBackName] = callback;
             return callBackName;
         }
@@ -92,11 +92,12 @@ serverController = {
             updateOthers: "luo"
 
         },
-        login: function (pinSha) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.login, p: pinSha}));
+        login: function (pinSha, callback) {
+            var newCallback = function () {
+                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+            };
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.login,  p: pinSha,callback: serverController.callbackHandler.register(newCallback)}));
         }
-
-
     },
     job: {
         messageType: {
@@ -136,7 +137,7 @@ serverController = {
                 serverController.job.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
-            }
+            };
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (job) {

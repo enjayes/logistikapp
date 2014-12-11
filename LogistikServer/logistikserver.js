@@ -29,6 +29,10 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 
+//CryptoJS
+var CryptoJS = require("crypto-js");
+
+
 //Load Controllers
 var connectionController = require('connectionController');
 var adminController = require('admincontroller/adminController.js');
@@ -37,7 +41,7 @@ var dataController = require('dataController.js');
 
 
 //Init Controllers
-dataController.init(preferences);
+dataController.init(preferences,CryptoJS);
 connectionController.init(preferences,io,http,adminController,appController);
 adminController.init(preferences,dataController,io,app,express);
 appController.init(preferences,dataController,io,app,express);
