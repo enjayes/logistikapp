@@ -76,6 +76,22 @@ var logistikapp = {
             loginController.login(code);
         })
 
+
+        if ($('#cb_besuch').is(":checked"))
+        {
+            job.besuch = true;
+        }
+
+        //config_menue
+        $("#save_config").click(function()
+        {
+            logistikapp.servername = $("#t_server").val();
+            Logistikapp.server_port = $("#t_port").val();
+            Logistikapp.markt_id = $("#markt_id").val();
+
+        });
+
+
         //Initialize View
 
         clientView.initialize();
