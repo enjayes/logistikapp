@@ -56,13 +56,15 @@ CREATE TABLE IF NOT EXISTS `adminnachrichtgesendet` (
 CREATE TABLE IF NOT EXISTS `lieferanten` (
   `id` varchar(36) NOT NULL,
   `Pin` text NOT NULL,
+  `PinSHA` text NOT NULL,
   `Vorname` text NOT NULL,
   `Name` text NOT NULL,
   `Telefon` text NOT NULL,
   `Email` text NOT NULL,
   `Adresse` text NOT NULL,
   `Aufgaben` text NOT NULL,
-  `Notizen` text NOT NULL
+  `Notizen` text NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------

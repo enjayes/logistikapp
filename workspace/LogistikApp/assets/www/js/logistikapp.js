@@ -70,11 +70,6 @@ var logistikapp = {
 
 
 
-        new PinPad("#PINcode",function(code){
-            loginController.login(code);
-        })
-
-
         if ($('#cb_besuch').is(":checked"))
         {
             job.besuch = true;
@@ -123,12 +118,9 @@ var logistikapp = {
 
         });
 
-
-
-
-
-
-        //Initialize View
+        
+        //Initialize Views
+        loginView.initialize();
 
         clientView.initialize();
 

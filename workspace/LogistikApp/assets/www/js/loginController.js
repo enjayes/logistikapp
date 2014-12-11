@@ -11,11 +11,28 @@
 
 loginController = {
 
-    login:function(code){
 
-           alert("LOGIN: "+code)
 
-           alert(CryptoJS.SHA3("sldagjdailgjhsödjhdjgdsiö"+code, { outputLength: 512 }));
+    login:function(pin){
+
+        var loginCallback =function(lieferant){
+
+            if(!lieferant||!lieferant.id){
+                alert("Error")
+
+            }else{
+                alert("Eingeloggt")
+            }
+
+        };
+
+
+        //Create Pin 4 digits
+        var pad = "0000";
+        pin = pad.substring(0, pad.length - pin.length) + pin;
+
+        var pinSha = ""+CryptoJS.SHA3("dfjo58443pggd9gudf9"+pin, { outputLength: 512 });
+        serverController.lieferant.login(pinSha,loginCallback);
 
     }
 
