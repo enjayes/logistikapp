@@ -1,9 +1,5 @@
 /**
  * logistikapp.
- *
- *
- *
- *
  * @date 19.11.14 - 14:43
  *
  */
@@ -18,25 +14,23 @@ var logistikapp = {
     retrievePersistentStorage:function(){
 
 
-        alert("retrievePersistentStorage");
-
         alert_string = "";
         if(typeof(Storage) !== "undefined")
         {
-            if (localStorage.servername) {
+            if (localStorage.servername && localStorage.servername!="") {
                 logistikapp.servername = localStorage.servername;
             } else
             {
                 alert_string += "Server undefined "
             }
-            if (localStorage.server_port) {
-                logistikapp.servername = localStorage.servername;
+            if (localStorage.server_port && localStorage.server_port!=0) {
+                logistikapp.server_port = localStorage.server_port;
             } else
             {
                 alert_string += "Port undefined "
             }
-            if (localStorage.markt_id) {
-                logistikapp.servername = localStorage.servername;
+            if (localStorage.markt_id && localStorage.markt_id!="") {
+                logistikapp.markt_id = localStorage.markt_id;
             } else
             {
                 alert_string += "Marktname undefined "
@@ -80,8 +74,42 @@ var logistikapp = {
         $("#save_config").click(function()
         {
             logistikapp.servername = $("#t_server").val();
-            Logistikapp.server_port = $("#t_port").val();
-            Logistikapp.markt_id = $("#markt_id").val();
+            logistikapp.server_port = $("#t_port").val();
+            logistikapp.markt_id = $("#markt_id").val();
+
+            if(typeof(Storage) !== "undefined")
+            {
+                localStorage.servername = logistikapp.servername;
+                localStorage.server_port = logistikapp.server_port;
+                localStorage.markt_id = logistikapp.markt_id;
+                alert("Gespeichert!");
+            }
+            else
+            {
+                alert("Sorry, your browser does not support web storage...");
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+            }
+
+        });
+
+        //open konfig
+        $("#b_konfig").click(function()
+        {
+
+            if(typeof(Storage) !== "undefined")
+            {
+                $("#t_server").val(localStorage.servername);
+                $("#t_port").val(localStorage.server_port);
+                $("#markt_id").val(localStorage.markt_id);
+            }
+            else
+            {
+                alert("Sorry, your browser does not support web storage...");
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+            }
+
+            $('#startScreen').hide();
+            $('#konfi_menue').show();
 
         });
 
@@ -89,10 +117,8 @@ var logistikapp = {
         //Initialize Views
         startView.initialize();
         loginView.initialize();
+
         clientView.initialize();
-
-
-        //TODO: call Client Log-In
 
         // TODO: load client data
 

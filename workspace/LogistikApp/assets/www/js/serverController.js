@@ -1,11 +1,6 @@
 /**
  * serverController.
- *
- *
- *
- *
  * @date 21.11.14 - 00:19
- * @copyright munichDev UG
  */
 
 
@@ -47,7 +42,10 @@ serverController = {
     initialize: function (callback) {
         //Load Socket io and connect
 
-        serverController.socket = io.connect(preferences.server);
+        //serverController.socket = io.connect(preferences.server);
+        address = logistikapp.servername +":"+ logistikapp.server_port;
+        alert(address);
+        serverController.socket = io.connect(address);
 
 
         serverController.socket.on('disconnect', function () {
