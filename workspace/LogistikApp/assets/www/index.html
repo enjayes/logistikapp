@@ -23,9 +23,10 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no"/>
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=550, height=device-height, target-densitydpi=device-dpi"/>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=360, height=device-height, target-densitydpi=device-dpi"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
+    <link rel="stylesheet" type="text/css" href="css/PINpad.css"  />
     <title>LogistikApp</title>
     <!--Install Console-->
 
@@ -67,7 +68,6 @@
 
 
         -->
-        <a class="ui-btn" onclick="window.open('skype:00498941150015?call', '_system');return false;" href="">Oruafa!</a>
 
 
 
@@ -88,19 +88,21 @@
             <br>
             <a onclick="$('#startScreen').hide();$('#lieferantenLogin').show();" class="ui-btn">Anmelden</a>
             <br>
+            <a class="ui-btn" onclick="window.open('skype:00498941150015?call', '_system');return false;" href="">Oruafa!</a>
+
             <br>
             <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn">JOB EINGEBEN (TODO:REMOVE)</a>
             <br>
         </div>
 
 
-        <div id="lieferantenLogin"  style="display:none">
+        <div id="lieferantenLogin"  style="display:none" >
 
+            <div id="PINcode" data-enhance="false"></div>
+            <br>
+            <button  onclick="$('#lieferantenLogin').hide();$('#startScreen').show();" id="zurueck_Aufgaben" style="float: left;">Zurück</button>
 
-            <div id="reader" style="width:300px;height:250px">
-            </div>
-
-       </div>
+        </div>
 
 
         <div id="jobSelector" style="display:none">
@@ -243,11 +245,16 @@
 
 
 
-
+                                                    <q></q>
 <!--Own Libraries ------------------------------------------------->
+
+<!-- ---->
+<script type="text/javascript" src="js/sjcl.js"></script>
+<!-- ---->
 
 <script type="text/javascript" src="js/fastclick.js"></script>
 
+<script type="text/javascript" src="js/loginController.js"></script>
 
 <script type="text/javascript" src="js/serverController.js"></script>
 
@@ -262,6 +269,11 @@
 
 <!--Imported libraries ------------------------------------------------->
 <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<script>
+    $(document).on("mobileinit", function(){
+        $.mobile.ignoreContentEnabled = true;
+    });
+</script>
 <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
 <script type="text/javascript" src="js/socket.io.js"></script>
 
@@ -270,8 +282,8 @@
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
-<!--QR ------------------------------------------------->
-<script type="text/javascript" src="js/html5-qrcode.min.js"></script>
+<!--PinPad ------------------------------------------------->
+<script src="js/PINpad.js"></script>
 
 
 <!--Toast------------------------------------------------->

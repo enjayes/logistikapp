@@ -56,6 +56,9 @@ serverController = {
 
         //On Message
         serverController.socket.on('message', function (msg) {
+
+
+
             //Server Connected, send Connection message back
             if (msg.t == serverController.messageType.connection) {
                 serverController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));

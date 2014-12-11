@@ -26,8 +26,6 @@ import android.webkit.WebSettings;
 import org.apache.cordova.*;
 
 
-
-
 public class LogistikApp extends CordovaActivity
 {
     @Override
@@ -44,3 +42,5 @@ public class LogistikApp extends CordovaActivity
     }
         
 }
+
+

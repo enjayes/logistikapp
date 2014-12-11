@@ -82,7 +82,6 @@ lieferantenController = {
                 lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
 
 
-
                 termineTab.searchWidget.setList(lieferantenController.lieferanten);
                 nachrichtenTab.renderSelectedLieferanten();
 

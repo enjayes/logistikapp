@@ -5135,7 +5135,8 @@ function encodeAsString(obj) {
     str += json.stringify(obj.data);
   }
 
-  debug('encoded %j as %s', obj, str);
+  str = str.substr(0,1)+sjcl.encrypt("kdjg234cjilh3o53", str.substr(1));//CHANGED .......
+
   return str;
 }
 
@@ -5230,6 +5231,9 @@ Decoder.prototype.add = function(obj) {
 function decodeString(str) {
   var p = {};
   var i = 0;
+
+  str =  str.substr(0,1)+sjcl.decrypt("kdjg234cjilh3o53", str.substr(1));//CHANGED-------
+
 
   // look up type
   p.type = Number(str.charAt(0));
