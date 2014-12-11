@@ -15,7 +15,7 @@ var clientView = {
         {
             job.besuch = false;
         }
-        if ($('#cb_cb_bestellung').is(":checked"))
+        if ($('#cb_bestellung').is(":checked"))
         {
             job.bestellung = true;
         }
@@ -31,7 +31,7 @@ var clientView = {
         {
             job.verraeumung = false;
         }
-        if ($('#cb_cb_austausch').is(":checked"))
+        if ($('#cb_austausch').is(":checked"))
         {
             job.austausch = true;
         }
@@ -105,6 +105,8 @@ var clientView = {
             job.cb_nr_abgabe=false;
         }
 
+        job.t_vk_euro_abgabe = $("#t_vk_euro_abgabe").val();
+
         if ($('#cb_verkostung').is(":checked")) {
             job.cb_verkostung=true;
         }
@@ -139,55 +141,86 @@ var clientView = {
         else{
             job.cb_verlosung=false;
         }
-        console.dir(job);
+        //console.dir(job);
         return job;
 
     },
 
+    check_out: function(job) {
+        job.timestamp_end = new Date();
+        job.finished = true;
+        job.pending=false;
+        job.checked_out=true;
+        console.dir(job);
+        return job;
+    },
+
+
+
+    setJob: function(job){
+        $('#cb_besuch').prop('checked', job.besuch);
+
+        $('#cb_cb_bestellung').prop('checked',job.bestellung);
+
+
+        $('#cb_verraeumung').prop('checked', job.verraeumung);
+
+        $('#cb_cb_austausch').prop('checked', job.austausch);
+
+        $("#t_ziel").val(job.t_ziel);
+        $("#t_grund").val(job.t_grund);
+        $("#t_thematik").val(job.t_thematik);
+
+
+        $('#cb_auftrag_getaetigt').prop('checked',job.cb_auftrag_getaetigt);
+
+        $('#cb_mhd').prop('checked',job.cb_mhd);
+
+
+
+        $('#cb_ruecknahme').prop('checked',job.cb_ruecknahme);
+
+
+        $('#cb_warenaufbau').prop('checked',job.cb_warenaufbau);
+
+
+        $('#cb_reklamation').prop('checked',job.cb_reklamation);
+
+
+        $('#cb_umbau').prop('checked',   job.cb_umbau);
+
+
+        $('#cb_info_gespraech').prop('checked',job.cb_info_gespraech);
+
+
+        $('#cb_nr_abgabe').prop('checked',job.cb_nr_abgabe);
+
+
+        $('#cb_verkostung').prop('checked',job.cb_verkostung);
+
+
+        $('#cb_sortimentsinfo').prop('checked', job.cb_sortimentsinfo);
+
+
+        $('#cb_aktionsabsprache').prop('checked',job.cb_aktionsabsprache);
+
+
+        $('#cb_bemusterung').prop('checked',job.cb_bemusterung);
+
+
+        $('#cb_verlosung').prop('checked', job.cb_verlosung);
+
+        console.dir(job);
+    },
 
     initialize: function() {
-        var id = 1; //TODO: generate id
+        var id = misc.getUniqueID();
         var job = new Job(id);
         var that = this;
 
         $("#weiter_Aufgaben").click(function()
         {
-            //
-            notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
-
-            //check input
-            if ($('#cb_besuch').is(":checked"))
-            {
-                job.besuch = true;
-            }
-            else
-            {
-                job.besuch = false;
-            }
-            if ($('#cb_cb_bestellung').is(":checked"))
-            {
-                job.bestellung = true;
-            }
-            else
-            {
-                job.bestellung = false;
-            }
-            if ($('#cb_verraeumung').is(":checked"))
-            {
-                job.verraeumung = true;
-            }
-            else
-            {
-                job.verraeumung = false;
-            }
-            if ($('#cb_cb_austausch').is(":checked"))
-            {
-                job.austausch = true;
-            }
-            else
-            {
-                job.ausstausch = false;
-            }
+            //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
 
 
             $("#lieferantenschein1").show();
@@ -197,7 +230,7 @@ var clientView = {
 
         $("#weiter_lieferantenschein1").click(function()
         {
-            notifications.show("Geschäftsführer","Bring mir mal ne Flasche Bier!");
+            //notifications.show("Geschäftsführer","Bring mir mal ne Flasche Bier!");
 
             $("#lieferantenschein2").show();
             $("#lieferantenschein1").hide();
@@ -209,8 +242,6 @@ var clientView = {
         {
 
 
-
-            //end get values
             $("#jobSelector").show();
             $("#lieferantenschein1").hide();
 
@@ -224,10 +255,10 @@ var clientView = {
         });
 
 
-        $("#weiter_lieferantenschein2").click(function()
+        $("#checkout_lieferantenschein2").click(function()
         {
             job = that.check_input(job);
-
+            job = that.check_out(job);
 
             serverController.job.create(job);
 

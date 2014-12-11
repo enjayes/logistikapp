@@ -104,13 +104,49 @@ serverController = {
          */
 
         buildDTO: function (job) {
+
             return{
+               //general
                 id: job.id,
+                client_id: job.client_id,
+                markt_id: job.markt_id,
                 timestamp_start: job.timestamp_start.getTime(),
+                timestamp_end: job.timestamp_end.getTime(),
+                fixtermin: job.fixtermin,
+
+    
+                //status
                 pending: job.pending,
+                finished: job.finished,
+                checked_out: job.checked_out, //lieferant hat den job explizit abgeschlossen, d.h. sich ausgeloggt
+    
+                //job_selector
                 besuch: job.besuch,
-                ziel: job.t_ziel,
-                auftrag_getaetigt: job.auftrag_getaetigt
+                bestellung : job.bestellung,
+                verraeumung : job.verraeumung,
+                austausch : job.austausch,
+
+                //lieferantenschein1
+                t_ziel: job.t_ziel,
+                t_grund: job.t_grund,
+                t_thematik: job.t_thematik,
+    
+                //lieferantenschein2
+
+                cb_auftrag_getaetigt: job.cb_auftrag_getaetigt,
+                cb_mhd: job.cb_mhd,
+                cb_ruecknahme : job.cb_ruecknahme, //Rücknahme
+                cb_reklamation: job.cb_reklamation, //Reklamationsbearbeitung
+                cb_warenaufbau: job.cb_warenaufbau, //Warenaufbau
+                cb_umbau: job.cb_umbau, //Umbau
+                cb_info_gespraech: job.cb_info_gespraech, //Info-Gespräch
+                cb_nr_abgabe: job.cb_nr_abgabe, //Nummer-Abgabe
+                t_vk_euro_abgabe: job.t_vk_euro_abgabe,
+                cb_verkostung : job.cb_verkostung, //Verkostung
+                cb_sortimentsinfo : job.cb_sortimentsinfo, //Sortimentsinfo
+                cb_aktionsabsprache: job.cb_aktionsabsprache,
+                cb_bemusterung: job.cb_bemusterung, //Bemusterung
+                cb_verlosung: job.cb_verlosung //Verlosung
             }
         },
         parseDTO: function (job) {

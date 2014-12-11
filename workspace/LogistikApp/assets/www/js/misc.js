@@ -1,11 +1,12 @@
 /**
  * misc.
  *
+
  *
  *
  *
  * @date 20.11.14 - 15:29
- * @copyright munichDev UG
+ * @copyright
  */
 
 
