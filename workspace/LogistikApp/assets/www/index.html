@@ -88,7 +88,7 @@
             <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn">JOB EINGEBEN (TODO:REMOVE)</a>
             <br>
 
-            <button  onclick="$('#startScreen').hide();$('#konfi_menue').show();" style="float: left;">Konfiguration</button>
+            <button  id="b_konfig" style="float: left;">Konfiguration</button>
         </div>
 
 
@@ -103,7 +103,7 @@
                             <label>
                                 Server
                             </label></td>
-                            <td><textarea id="t_server" rows="1" cols="50"></textarea>
+                            <td><input id="t_server"></input>
                         </td>
                     </tr>
 
@@ -114,7 +114,7 @@
                             <label>
                                 Port
                             </label></td>
-                        <td><textarea id="t_port" rows="1" cols="50"></textarea>
+                        <td><input id="t_port"></input>
                         </td>
                     </tr>
 
@@ -124,7 +124,7 @@
                             <label>
                                 Marktname
                             </label></td>
-                        <td><textarea id="markt_id" rows="1" cols="50"></textarea>
+                        <td><input id="markt_id"></input>
                         </td>
                     </tr>
 
