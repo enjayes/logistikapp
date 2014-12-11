@@ -80,10 +80,27 @@ serverController = {
         });
 
     },
+    lieferant: {
+        messageType: {
+            login: "ll",
+            getNewPin: "lgnp",
+            getAll: "lga",
+            create: "lc",
+            update: "lu",
+            delete: "ld",
+            get: "lg",
+            updateOthers: "luo"
 
+        },
+        login: function (pinSha) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.login, p: pinSha}));
+        }
+
+
+    },
     job: {
         messageType: {
-            login:"ll",
+
             getAll: "jga",
             create: "jc",
             update: "ju",
@@ -91,23 +108,11 @@ serverController = {
             get: "jg",
             updateOthers: "juo"
         },
-
-        /*
-         buildDTO: function (nachricht) {
-         return {
-         id: nachricht.id,
-         datum: nachricht.datum.getTime(),
-         nachricht: nachricht.nachricht,
-         lieferanten: nachricht.lieferanten
-         }
-         },
-         */
-
         buildDTO: function (job) {
 
             var newJob = $.extend(true, {}, job);
             newJob.timestamp_start = job.timestamp_start.getTime();
-            newJob. timestamp_end = job.timestamp_end.getTime();
+            newJob.timestamp_end = job.timestamp_end.getTime();
 
             // t_vk_euro_abgabe: job.t_vk_euro_abgabe, //TODO
             //logout
@@ -121,7 +126,7 @@ serverController = {
         },
         getAllCallback: null,
         getAll: function (callback) {
-            serverController.job.getAllCallback =  function (list) {
+            serverController.job.getAllCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.job.parseDTO(list[i]);
                 }

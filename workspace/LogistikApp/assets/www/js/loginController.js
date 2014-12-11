@@ -17,6 +17,7 @@ loginController = {
 
            alert(CryptoJS.SHA3("sldagjdailgjhsödjhdjgdsiö"+code, { outputLength: 512 }));
 
+        serverController.liefer
     }
 
 }
