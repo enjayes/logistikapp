@@ -146,8 +146,9 @@ var clientView = {
 
 
     initialize: function() {
-        var id = 1; //TODO: generate id
+        var id = misc.getUniqueID();
         var job = new Job(id);
+        alert("time: " + job.timestamp_start);
         var that = this;
 
         $("#weiter_Aufgaben").click(function()
@@ -227,6 +228,7 @@ var clientView = {
         $("#weiter_lieferantenschein2").click(function()
         {
             job = that.check_input(job);
+            job.timestamp_end = new Date();
 
 
             serverController.job.create(job);

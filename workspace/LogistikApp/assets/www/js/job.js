@@ -5,9 +5,9 @@
 
 function Job (id) {
     this.id = id;
-    //client_id = ...
+    client_id = 1; //TODO:
     this.timestamp_start =  new Date();
-    //this.timestamp_end =; //TODO:
+    this.timestamp_end;
 
     //status
     this.pending = true;
