@@ -42,11 +42,6 @@ var configView = {
             }
 
 
-            $("#save_config").css("background","rgb(52, 159, 52)");
-            setTimeout(function(){
-                $("#save_config").css("background","");
-            },500);
-
             //Establish Socket Connection
             serverController.initialize();
 
@@ -75,7 +70,6 @@ var configView = {
 
             configView.pinPad.clear();
 
-            $("#save_config").css("background","");
 
             $('#startScreen').hide();
 

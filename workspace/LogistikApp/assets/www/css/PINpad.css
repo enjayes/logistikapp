@@ -17,14 +17,14 @@ button:focus {
 	font-size: 4em;
 	text-align: center;
 	border: none;
-	border-top: 2px solid #506CE8;
-	border-bottom: 2px solid #506CE8;
+	border-top: 2px solid #2b0e97;
+	border-bottom: 2px solid #2b0e97;
 	background: #fff;
 }
 .PINbutton {
 	background: #fff;
-	color: #3E54B5;
-	border: 2px solid #506CE8;
+	color: #123017;
+	border: 2px solid #334694;
 	border-radius: 50%;
 	font-size: 1.5em;
 	text-align: center;
@@ -36,14 +36,16 @@ button:focus {
 	font-size: 1em;
 }
 .PINbutton:active {
-	background: #fff;
-	border: 2px solid #FF5A59;
-	color: #FF5A59;
+	background: #ffffff;
+    border:  2px solid #000;
+    color: #000;
+
+
 }
 
 .PINenter {
-    border-color: #ddd /*{a-bup-border}*/!important;
-    background-color: rgb(84, 191, 84);
+    border: 2px solid #ddd!important;
+
     color: #fff!important;
     font-weight: bold;
     -webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.15) /*{global-box-shadow-color}*/!important;
@@ -51,6 +53,3 @@ button:focus {
     box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.15) /*{global-box-shadow-color}*/!important;
 }
 
-.PINenter:active {
-    background-color:rgb(72, 179, 72);
-}

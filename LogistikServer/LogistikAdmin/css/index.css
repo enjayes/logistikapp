@@ -242,7 +242,7 @@ input-group-addon {
     -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.5);
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.5);
-    border: 4px solid #F8EC00;
+    border: 1px solid #F1F1F1;
 }
 
 #banner {
@@ -301,6 +301,23 @@ Navbar
 
 .ui-tabs-panel {
     overflow: visible !important;
+}
+
+
+.subTabToggle {
+    margin-bottom: 20px;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.subTabToggle .ui-btn.active, .subTabToggle  .ui-btn:active {
+    background-color: #38c !important;
+    background-image: none;
+    color: #fff!important;
+}
+
+.subTabToggle .ui-btn {
+
 }
 
 /**
@@ -367,21 +384,6 @@ Navbar
     bottom: -55px;
 }
 
-#writeMessageTabs {
-    margin-bottom: 20px;
-    margin-top: 0;
-    margin-left: 0;
-}
-
-#writeMessageTabs .ui-btn.active, #writeMessageTabs .ui-btn:active {
-    background-color: #38c !important;
-    background-image: none;
-    color: #fff;
-}
-
-#writeMessageTabs .ui-btn {
-
-}
 
 #searchMessageLieferanten {
     position: relative;

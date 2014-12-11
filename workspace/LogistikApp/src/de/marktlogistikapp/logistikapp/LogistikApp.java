@@ -41,7 +41,6 @@ public class LogistikApp extends CordovaActivity
         settings.setLoadWithOverviewMode(true); 
     }
     
-      
     
 }
 
