@@ -25,6 +25,7 @@ var ServerMessage = function (data, type) {
 serverController = {
 
     socket: null,
+    connected: false,
     id: misc.getUniqueID(),
 
     messageType: {
@@ -34,29 +35,39 @@ serverController = {
     },
     callbackHandler: {
         register: function (callback) {
-            var callBackName = "cb" + Date.now() + "x"+((Math.random() * 1000000.0) + "").replace(".", "");
+            var callBackName = "cb" + Date.now() + "x" + ((Math.random() * 1000000.0) + "").replace(".", "");
             this[callBackName] = callback;
             return callBackName;
         }
     },
     initialize: function (callback) {
+
         //Load Socket io and connect
 
         //serverController.socket = io.connect(preferences.server);
-        address = logistikapp.servername +":"+ logistikapp.server_port;
-        alert(address);
-        serverController.socket = io.connect(address);
+
+        var address = logistikapp.servername + ":" + logistikapp.server_port;
+         console.log(address)
 
 
+        console.log( serverController.socket = io.connect(address,{"force new connection":true}))
+
+
+        var upDateNoConnection = function () {
+            $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
+        }
+
+        upDateNoConnection();
         serverController.socket.on('disconnect', function () {
+            upDateNoConnection();
+            serverController.connected = false;
             console.log("DISCONNECT")
         });
 
         //On Message
         serverController.socket.on('message', function (msg) {
-
-
-
+            $("#server_status").css("color", "rgb(84, 191, 84)").text("Mit Server verbunden...");
+            serverController.connected = true;
             //Server Connected, send Connection message back
             if (msg.t == serverController.messageType.connection) {
                 serverController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
@@ -103,13 +114,13 @@ serverController = {
         },
         login: function (pinSha, callback) {
             var newCallback = function () {
-                if(arguments[0]){
+                if (arguments[0]) {
                     var lieferant = serverController.lieferant.parseDTO(arguments[0]);
                     callback(lieferant);
                 } else
-                 callback();
+                    callback();
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.login,  p: pinSha,callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.login, p: pinSha, callback: serverController.callbackHandler.register(newCallback)}));
         }
     },
     job: {

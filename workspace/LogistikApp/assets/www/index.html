@@ -56,7 +56,7 @@
 </head>
 <body>
 
-<div class="centerapp">
+<div class="centerapp" style="display:none">
 
     <div class="app">
 
@@ -79,26 +79,28 @@
         </div-->
 
         <div id="startScreen">
-            <br>
-            <a id="start_anmelden" class="ui-btn">Anmelden</a>
-            <br>
-
-            <a class="ui-btn" onclick="window.open('skype:00498941150015?call', '_system');return false;" href="">Oruafa!</a>
+            <h2>Edeka Baisch</h2>
 
             <br>
-            <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn">JOB EINGEBEN (TODO:REMOVE)</a>
+            <a id="start_anmelden" class="ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">Anmelden</a>
+            <br>
+
+            <a class="ui-btn ui-shadow ui-corner-all" onclick="window.open('skype:00498941150015?call', '_system');return false;" href="">Oruafa!</a>
+
+            <br>
+            <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn ui-shadow ui-corner-all">JOB EINGEBEN (TODO:REMOVE)</a>
 
             <br>
 
-            <a id="sb_konfig" class="ui-btn" style="float: left;">Konfiguration</a>
+            <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-left" style="float: left;">Konfiguration</a>
 
         </div>
 
 
         <div id="konfi_menue"  style="display:none" >
-            <label>
-                Konfigurationsmenü
-            </label>
+
+            <h2>Konfigurationsmenü</h2>
+            <h3 id="server_status"></h3>
             <form>
                 <table style="width:100%;border: none">
                     <tr>
@@ -106,7 +108,7 @@
                             <label>
                                 Server
                             </label></td>
-                            <td><input id="t_server"></input>
+                            <td><input id="t_server">
                         </td>
                     </tr>
 
@@ -117,7 +119,7 @@
                             <label>
                                 Port
                             </label></td>
-                        <td><input id="t_port"></input>
+                        <td><input id="t_port">
                         </td>
                     </tr>
 
@@ -127,23 +129,27 @@
                             <label>
                                 Marktname
                             </label></td>
-                        <td><input id="markt_id"></input>
+                        <td><input id="markt_id">
                         </td>
                     </tr>
 
 
                 </table>
             </form>
-            <button   onclick="$('#konfi_menue').hide();$('#startScreen').show();" style="float: left;">Zurück</button>
-            <button  id="save_config">Speichern</button>
+
+
+            <a id="save_config" class="ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
+            <a id="config_zurueck" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
 
         </div>
 
         <div id="lieferantenLogin"  style="display:none" >
+            <h2>Anmelden</h2>
 
             <div id="PINcode" data-enhance="false"></div>
             <br>
-            <button id="login_zurueck_start"  style="float: left;">Zurück</button>
+            <a id="login_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
 
@@ -154,24 +160,26 @@
 
             <form>
                 <label>
-                    <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch</input>
+                    <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch
                 </label>
                 <label>
-                    <input name="checkbox-0 " type="checkbox" id="cb_bestellung">Bestellung</input>
+                    <input name="checkbox-0 " type="checkbox" id="cb_bestellung">Bestellung
                 </label>
                 <label>
-                    <input name="checkbox-0 " type="checkbox" id="cb_verraeumung">Verräumung</input>
+                    <input name="checkbox-0 " type="checkbox" id="cb_verraeumung">Verräumung
                 </label>
                 <label>
-                    <input name="checkbox-0 " type="checkbox" id="cb_austausch">Austausch von Bruch und Verderb</input>
+                    <input name="checkbox-0 " type="checkbox" id="cb_austausch">Austausch von Bruch und Verderb
                 </label>
 
 
             </form>
             <br>
             <button onclick="alert('Aufgaben');" id="cb_vorlagen">Gespeicherte Vorlagen</button>
-            <button id="weiter_Aufgaben">Weiter</button>
-            <button id="job_zurueck_start" style="float: left;">Zurück</button>
+            <br>
+
+            <a id="weiter_Aufgaben" class="ui-btn ui-shadow ui-corner-all ui-icon-forward ui-btn-icon-left">Weiter</a>
+            <a id="job_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
 
@@ -204,8 +212,9 @@
                 </textarea></td>
             </tr>
             <br>
-            <button id="weiter_lieferantenschein1">Weiter</button>
-            <button id="zurueck_lieferantenschein1" style="float: left;">Zurück</button>
+            <a id="weiter_lieferantenschein1" class="ui-btn ui-shadow ui-corner-all ui-icon-forward ui-btn-icon-left">Weiter</a>
+            <a id="zurueck_lieferantenschein1" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
         </div>
 
 
@@ -279,7 +288,7 @@
             </form>
             <br>
             <button id="checkout_lieferantenschein2">Checkout</button>
-            <button id="zurueck_lieferantenschein2" style="float: left;">Zurück</BUTTON>
+            <a id="zurueck_lieferantenschein2" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
 
@@ -311,6 +320,7 @@
 <script type="text/javascript" src="js/logistikapp.js"></script>
 
 <script type="text/javascript" src="js/startView.js"></script>
+<script type="text/javascript" src="js/configView.js"></script>
 
 <script type="text/javascript" src="js/loginView.js"></script>
 
