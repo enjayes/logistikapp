@@ -141,12 +141,16 @@ serverController = {
                 cb_umbau: job.cb_umbau, //Umbau
                 cb_info_gespraech: job.cb_info_gespraech, //Info-Gespräch
                 cb_nr_abgabe: job.cb_nr_abgabe, //Nummer-Abgabe
-                t_vk_euro_abgabe: job.t_vk_euro_abgabe,
+                t_vk_euro_abgabe: job.t_vk_euro_abgabe, //TODO
+                t_warengruppe: job.t_warengruppe,
                 cb_verkostung : job.cb_verkostung, //Verkostung
                 cb_sortimentsinfo : job.cb_sortimentsinfo, //Sortimentsinfo
                 cb_aktionsabsprache: job.cb_aktionsabsprache,
                 cb_bemusterung: job.cb_bemusterung, //Bemusterung
-                cb_verlosung: job.cb_verlosung //Verlosung
+                cb_verlosung: job.cb_verlosung, //Verlosung
+
+                //logout
+                //TODO t_notizen: job.t_notizen
             }
         },
         parseDTO: function (job) {

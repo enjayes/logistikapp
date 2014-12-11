@@ -100,6 +100,9 @@ var clientView = {
 
         if ($('#cb_nr_abgabe').is(":checked")) {
             job.cb_nr_abgabe=true;
+            $("#t_vk_euro_abgabe").val(job.t_vk_euro_abgabe);
+            $("#t_warengruppe").val(job.t_warengruppe);
+
         }
         else{
             job.cb_nr_abgabe=false;
@@ -196,6 +199,7 @@ var clientView = {
         $('#cb_nr_abgabe').prop('checked',job.cb_nr_abgabe);
 
 
+
         $('#cb_verkostung').prop('checked',job.cb_verkostung);
 
 
@@ -209,6 +213,8 @@ var clientView = {
 
 
         $('#cb_verlosung').prop('checked', job.cb_verlosung);
+
+        $("#t_notizen").val(job.t_notizen);
 
         console.dir(job);
     },
