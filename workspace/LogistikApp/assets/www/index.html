@@ -56,7 +56,7 @@
 </head>
 <body>
 
-<div class="centerapp" style="display:none">
+<div class="centerapp" style="display:none" class="fadein" >
 
     <div class="app">
 
@@ -78,8 +78,9 @@
             </script>
         </div-->
 
-        <div id="startScreen">
-            <h2>Edeka Baisch</h2>
+        <div id="startScreen" class="fadein" >
+            <h2 id="gruppenname_title"></h2>
+            <h3 id="marktname_title"></h3>
 
             <br>
             <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">Anmelden</a>
@@ -104,14 +105,29 @@
 
 
         </div>
+        <div id="konfi_login_menue" class="fadein" style="display:none" >
+            <h2>Konfiguration</h2>
+            <h3>Bitte PIN eingeben... TODO RMV 1234</h3>
+            <div id="PINcodeConfig" data-enhance="false"></div>
+            <br>
+            <a id="konfi_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+        </div>
 
-
-        <div id="konfi_menue"  style="display:none" >
+        <div id="konfi_menue"  class="fadein"  style="display:none" >
 
             <h2>Konfigurationsmenü</h2>
             <h3 id="server_status"></h3>
             <form>
                 <table style="width:100%;border: none">
+                    <tr>
+                        <td>
+                            <label>
+                                Marktname
+                            </label></td>
+                        <td><input id="markt_id">
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>
                             <label>
@@ -133,14 +149,7 @@
                     </tr>
 
 
-                    <tr>
-                        <td>
-                            <label>
-                                Marktname
-                            </label></td>
-                        <td><input id="markt_id">
-                        </td>
-                    </tr>
+
 
 
                 </table>
@@ -153,8 +162,9 @@
 
         </div>
 
-        <div id="lieferantenLogin"  style="display:none" >
+        <div id="lieferantenLogin" class="fadein"  style="display:none" >
             <h2>Anmelden</h2>
+            <h3>Bitte PIN eingeben...</h3>
 
             <div id="PINcode" data-enhance="false"></div>
             <br>
@@ -163,10 +173,10 @@
         </div>
 
 
-        <div id="jobSelector" style="display:none">
-            <h2 id="greetingLieferant"></h2>
-            <h2>Aufgabenwahl</h2>
-
+        <div id="jobSelector" class="fadein"  style="display:none">
+            <h2 class="greetingLieferant"></h2>
+            <h3>Aufgabenwahl</h3>
+            <br>
             <form>
                 <label>
                     <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch
@@ -193,7 +203,9 @@
 
         </div>
 
-        <div id="lieferantenschein1" style="display:none">
+        <div id="lieferantenschein1" class="fadein"  style="display:none">
+            <h2 class="greetingLieferant"></h2>
+
             <br>
             <tr>
                 <td>
@@ -228,7 +240,9 @@
         </div>
 
 
-        <div id="lieferantenschein2" style="display:none">
+        <div id="lieferantenschein2" class="fadein"  style="display:none">
+            <h2 class="greetingLieferant"></h2>
+
             <br>
 
             <form>

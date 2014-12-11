@@ -17,15 +17,12 @@ loginController = {
 
         var loginCallback =function(lieferant){
 
-            if(!lieferant||!lieferant.id){
-                alert("Error")
-
-            }else{
+            if(lieferant&&lieferant.id){
                 $('#lieferantenLogin').hide();
                 $('#jobSelector').show();
                 clientView.lieferant = lieferant;
                 console.dir(lieferant)
-                $("#greetingLieferant").html(clientView.getLieferantFullName())
+                $(".greetingLieferant").html(clientView.getLieferantFullName())
 
             }
 

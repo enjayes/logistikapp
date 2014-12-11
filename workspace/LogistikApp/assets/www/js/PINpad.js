@@ -30,6 +30,11 @@ var PinPad = function(selector,callback){
        that.pinBox.val(that.pinBox.val() + element.value);
     }
 
+    this.clear = function(){
+        that.pinBox.val("");
+
+    }
+
 };
 
 

@@ -10,6 +10,7 @@ var logistikapp = {
     servername:"",
     server_port:0,
     markt_id:"",
+    gruppe_id: "Edeka Baisch",
 
     retrievePersistentStorage:function(){
 
@@ -38,8 +39,7 @@ var logistikapp = {
         }
         else
         {
-            alert("Sorry, your browser does not support web storage...");
-            document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+            alert("Error: HTML5 Storage not supported");
         }
 
         if(!(alert_string==""))
@@ -54,6 +54,11 @@ var logistikapp = {
 
         //servername etc
         logistikapp.retrievePersistentStorage();
+
+
+        $("#gruppenname_title").text(logistikapp.gruppe_id);
+        $("#marktname_title").text(logistikapp.markt_id);
+
 
         //Use Fastclick
         if(misc.isMobileApp()){
