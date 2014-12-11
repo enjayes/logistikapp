@@ -82,17 +82,26 @@
             <h2>Edeka Baisch</h2>
 
             <br>
-            <a id="start_anmelden" class="ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">Anmelden</a>
+            <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">Anmelden</a>
+            <br>
+            <br>
+            <br>
+            <br>
+            <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-left" style="float: right;">Konfiguration</a>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <br>
 
+            <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn ui-shadow ui-corner-all">Job einegem!</a>
+            <br>
             <a class="ui-btn ui-shadow ui-corner-all" onclick="window.open('skype:00498941150015?call', '_system');return false;" href="">Oruafa!</a>
 
-            <br>
-            <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn ui-shadow ui-corner-all">JOB EINGEBEN (TODO:REMOVE)</a>
-
-            <br>
-
-            <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-left" style="float: left;">Konfiguration</a>
 
         </div>
 
@@ -138,7 +147,7 @@
             </form>
 
 
-            <a id="save_config" class="ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
+            <a id="save_config" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
             <a id="config_zurueck" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
 
@@ -175,7 +184,8 @@
 
             </form>
             <br>
-            <button onclick="alert('Aufgaben');" id="cb_vorlagen">Gespeicherte Vorlagen</button>
+            <a id="cb_vorlagen"  onclick="alert('Aufgaben');" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left">Gespeicherte Vorlagen</a>
+
             <br>
 
             <a id="weiter_Aufgaben" class="ui-btn ui-shadow ui-corner-all ui-icon-forward ui-btn-icon-left">Weiter</a>

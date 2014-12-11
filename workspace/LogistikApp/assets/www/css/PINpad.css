@@ -7,8 +7,8 @@ button:focus {
 #PINform {
     width: 300px;
     height: 450px;
-    left: 50%;
-    top: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #PINbox {
@@ -39,4 +39,18 @@ button:focus {
 	background: #fff;
 	border: 2px solid #FF5A59;
 	color: #FF5A59;
+}
+
+.PINenter {
+    border-color: #ddd /*{a-bup-border}*/!important;
+    background-color: rgb(84, 191, 84);
+    color: #fff!important;
+    font-weight: bold;
+    -webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.15) /*{global-box-shadow-color}*/!important;
+    -moz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.15) /*{global-box-shadow-color}*/!important;
+    box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.15) /*{global-box-shadow-color}*/!important;
+}
+
+.PINenter:active {
+    background-color:rgb(72, 179, 72);
 }

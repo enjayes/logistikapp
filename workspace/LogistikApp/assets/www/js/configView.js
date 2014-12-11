@@ -24,10 +24,10 @@ var configView = {
                 localStorage.server_port = logistikapp.server_port;
                 localStorage.markt_id = logistikapp.markt_id;
 
-                $("#save_config").css("background","rgb(84, 191, 84)");
+                $("#save_config").css("background","rgb(52, 159, 52)");
                 setTimeout(function(){
                     $("#save_config").css("background","");
-                },1500);
+                },500);
 
                 //Establish Socket Connection
                 serverController.initialize();

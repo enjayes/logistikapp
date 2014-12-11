@@ -56,7 +56,7 @@ button {
     display: inline-block;
     padding: 15px;
     text-align: left;
-
+    min-width: 360px;
 }
 
 /* Landscape layout (with min-width) */
@@ -67,7 +67,20 @@ button {
 
 
 
-#lieferantenLogin{
+.ui-page-theme-a .greenbutton.ui-btn{
+    background-color:rgb(84, 191, 84);
+    text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #008814 /*{a-bup-shadow-color}*/!important;
+    color: #fff!important;
+
+}
+
+.ui-page-theme-a .greenbutton.ui-btn:hover{
+    background-color:rgb(84, 191, 84);
+
+}
+
+.ui-page-theme-a .greenbutton.ui-btn:active{
+    background-color:rgb(72, 179, 72);
 
 }
 
