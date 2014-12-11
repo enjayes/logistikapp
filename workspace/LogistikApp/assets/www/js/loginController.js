@@ -21,7 +21,12 @@ loginController = {
                 alert("Error")
 
             }else{
-                alert("Eingeloggt")
+                $('#lieferantenLogin').hide();
+                $('#jobSelector').show();
+                clientView.lieferant = lieferant;
+                console.dir(lieferant)
+                $("#greetingLieferant").html(clientView.getLieferantFullName())
+
             }
 
         };

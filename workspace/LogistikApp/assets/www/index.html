@@ -80,15 +80,18 @@
 
         <div id="startScreen">
             <br>
-            <a onclick="$('#startScreen').hide();$('#lieferantenLogin').show();" class="ui-btn">Anmelden</a>
+            <a id="start_anmelden" class="ui-btn">Anmelden</a>
             <br>
+
             <a class="ui-btn" onclick="window.open('skype:00498941150015?call', '_system');return false;" href="">Oruafa!</a>
 
             <br>
             <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn">JOB EINGEBEN (TODO:REMOVE)</a>
+
             <br>
 
-            <button  onclick="$('#startScreen').hide();$('#konfi_menue').show();" style="float: left;">Konfiguration</button>
+            <a id="start_konfiguration" class="ui-btn" style="float: left;">Konfiguration</a>
+
         </div>
 
 
@@ -131,7 +134,7 @@
 
                 </table>
             </form>
-            <button  onclick="$('#konfi_menue').hide();$('#startScreen').show();" style="float: left;">Zurück</button>
+            <button   onclick="$('#konfi_menue').hide();$('#startScreen').show();" style="float: left;">Zurück</button>
             <button  id="save_config">Speichern</button>
 
         </div>
@@ -140,12 +143,13 @@
 
             <div id="PINcode" data-enhance="false"></div>
             <br>
-            <button  onclick="$('#lieferantenLogin').hide();$('#startScreen').show();" id="zurueck_Aufgaben" style="float: left;">Zurück</button>
+            <button id="login_zurueck_start"  style="float: left;">Zurück</button>
 
         </div>
 
 
         <div id="jobSelector" style="display:none">
+            <h2 id="greetingLieferant"></h2>
             <h2>Aufgabenwahl</h2>
 
             <form>
@@ -167,7 +171,7 @@
             <br>
             <button onclick="alert('Aufgaben');" id="cb_vorlagen">Gespeicherte Vorlagen</button>
             <button id="weiter_Aufgaben">Weiter</button>
-            <button  onclick="$('#jobSelector').hide();$('#startScreen').show();" id="zurueck_Aufgaben" style="float: left;">Zurück</button>
+            <button id="job_zurueck_start" style="float: left;">Zurück</button>
 
         </div>
 
@@ -305,6 +309,9 @@
 <script type="text/javascript" src="js/serverController.js"></script>
 
 <script type="text/javascript" src="js/logistikapp.js"></script>
+
+<script type="text/javascript" src="js/startView.js"></script>
+
 <script type="text/javascript" src="js/loginView.js"></script>
 
 <script type="text/javascript" src="js/clientView.js"></script>

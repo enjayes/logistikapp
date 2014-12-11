@@ -4,7 +4,13 @@
 
 
 var clientView = {
-
+    lieferant:null,
+    getLieferantFullName: function () {
+        var name = this.lieferant.name;
+        if (this.lieferant.vorname && this.lieferant.vorname.trim() != "")
+            name =  this.lieferant.vorname.trim()+" "+name;
+        return name
+    },
     check_input: function(job) {
         //check input Aufgabenwahl
         if ($('#cb_besuch').is(":checked"))
@@ -223,6 +229,15 @@ var clientView = {
         var id = misc.getUniqueID();
         var job = new Job(id);
         var that = this;
+
+
+        $("#job_zurueck_start").click(function()
+        {
+            $('#startScreen').show();
+            $('#jobSelector').hide();
+
+
+        });
 
         $("#weiter_Aufgaben").click(function()
         {

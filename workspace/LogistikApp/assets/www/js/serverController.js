@@ -91,10 +91,25 @@ serverController = {
             get: "lg",
             updateOthers: "luo"
 
+        }, parseDTO: function (lieferant) {
+            return {
+                id: lieferant.id,
+                pin: lieferant.Pin,
+                vorname: lieferant.Vorname,
+                name: lieferant.Name,
+                telefon: lieferant.Telefon,
+                email: lieferant.EMail,
+                adresse: lieferant.Adresse,
+                notizen: lieferant.Notizen
+            }
         },
         login: function (pinSha, callback) {
             var newCallback = function () {
-                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                if(arguments[0]){
+                    var lieferant = serverController.lieferant.parseDTO(arguments[0]);
+                    callback(lieferant);
+                } else
+                 callback();
             };
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.login,  p: pinSha,callback: serverController.callbackHandler.register(newCallback)}));
         }

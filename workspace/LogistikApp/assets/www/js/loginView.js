@@ -18,6 +18,14 @@ var loginView = {
             loginController.login(code);
         })
 
+        $("#login_zurueck_start").click(function()
+        {
+            $('#lieferantenLogin').hide();
+            $('#startScreen').show();
+
+        });
+
+
 
 
     }

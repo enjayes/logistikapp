@@ -71,7 +71,6 @@ var logistikapp = {
         serverController.initialize();
 
 
-
         if ($('#cb_besuch').is(":checked"))
         {
             job.besuch = true;
@@ -88,6 +87,7 @@ var logistikapp = {
 
 
         //Initialize Views
+        startView.initialize();
         loginView.initialize();
         clientView.initialize();
 
