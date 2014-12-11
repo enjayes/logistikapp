@@ -1,11 +1,6 @@
 /**
  * serverController.
- *
- *
- *
- *
  * @date 21.11.14 - 00:19
- * @copyright munichDev UG
  */
 
 
