@@ -49,6 +49,8 @@ var configView = {
 
             //Establish Socket Connection
             serverController.initialize();
+
+            //Set Markt title
             $("#marktname_title").text(logistikapp.markt_id);
 
 

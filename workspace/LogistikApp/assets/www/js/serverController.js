@@ -47,10 +47,10 @@ serverController = {
         //serverController.socket = io.connect(preferences.server);
 
         var address = logistikapp.servername + ":" + logistikapp.server_port;
-         console.log(address)
+         console.log(":::" +address+ "::::")
 
 
-        console.log( serverController.socket = io.connect(address,{"force new connection":true}))
+        serverController.socket = io.connect(address,{"force new connection":true});
 
 
         var upDateNoConnection = function () {

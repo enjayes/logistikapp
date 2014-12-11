@@ -56,7 +56,7 @@ button {
     display: inline-block;
     padding: 15px;
     text-align: left;
-    min-width: 360px;
+    min-width: 330px;
 }
 
 /* Landscape layout (with min-width) */
