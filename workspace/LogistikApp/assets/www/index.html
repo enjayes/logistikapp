@@ -93,8 +93,46 @@
 
 
         <div id="konfi_menue"  style="display:none" >
+            <label>
+                Konfigurationsmenü
+            </label>
+            <form>
+                <table style="width:100%;border: none">
+                    <tr>
+                        <td>
+                            <label>
+                                Server
+                            </label></td>
+                            <td><textarea id="t_server" rows="1" cols="50"></textarea>
+                        </td>
+                    </tr>
 
 
+
+                    <tr>
+                        <td>
+                            <label>
+                                Port
+                            </label></td>
+                        <td><textarea id="t_port" rows="1" cols="50"></textarea>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <label>
+                                Marktname
+                            </label></td>
+                        <td><textarea id="markt_id" rows="1" cols="50"></textarea>
+                        </td>
+                    </tr>
+
+
+                </table>
+            </form>
+            <button  onclick="$('#konfi_menue').hide();$('#startScreen').show();" style="float: left;">Zurück</button>
+            <button  id="save_config">Speichern</button>
 
         </div>
 
