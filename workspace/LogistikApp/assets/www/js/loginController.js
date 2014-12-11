@@ -12,7 +12,10 @@
 loginController = {
 
     login:function(code){
-                    alert("LOGIN: "+code)
+
+           alert("LOGIN: "+code)
+
+           alert(CryptoJS.SHA3("sldagjdailgjhsödjhdjgdsiö"+code, { outputLength: 512 }));
 
     }
 
