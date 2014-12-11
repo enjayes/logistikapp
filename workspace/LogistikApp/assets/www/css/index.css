@@ -84,6 +84,24 @@ button {
 }
 
 
+.bluebutton{
+    background-color:rgb(0, 23,113)!important;
+    text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #001488 /*{a-bup-shadow-color}*/!important;
+    color: #fff!important;
+
+}
+
+.bluebutton:hover{
+    background-color:rgb(0, 23,113)!important;;
+
+}
+.bluebutton:active{
+    background-color:rgb(0,  3,93)!important;;
+
+}
+
+
+
 
  .fadein{
 -webkit-animation: fadeslideincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
