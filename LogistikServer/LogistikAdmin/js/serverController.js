@@ -88,6 +88,7 @@ serverController = {
 
     lieferant: {
         messageType: {
+            getNewPin: "lgnp",
             getAll: "lga",
             create: "lc",
             update: "lu",
@@ -98,6 +99,7 @@ serverController = {
         }, buildDTO: function (lieferant) {
             return {
                 id: lieferant.id,
+                Pin: lieferant.pin,
                 Vorname: lieferant.vorname,
                 Name: lieferant.name,
                 Telefon: lieferant.telefon,
@@ -108,6 +110,7 @@ serverController = {
         }, parseDTO: function (lieferant) {
             return {
                 id: lieferant.id,
+                pin: lieferant.Pin,
                 vorname: lieferant.Vorname,
                 name: lieferant.Name,
                 telefon: lieferant.Telefon,
@@ -117,6 +120,16 @@ serverController = {
             }
         },
         getAllCallback: null,
+        getNewPin: function(lieferant,callback){
+            var newCallback = function () {
+                if(arguments[0]){
+                    var lieferant = serverController.lieferant.parseDTO(arguments[0]);
+                    callback(lieferant);
+                }
+            }
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getNewPin,l: this.buildDTO(lieferant), callback: serverController.callbackHandler.register(newCallback)}));
+
+        },
         getAll: function (callback) {
 
             serverController.lieferant.getAllCallback = function (list) {

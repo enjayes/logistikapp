@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `adminnachrichtgesendet` (
 
 CREATE TABLE IF NOT EXISTS `lieferanten` (
   `id` varchar(36) NOT NULL,
+  `Pin` text NOT NULL,
   `Vorname` text NOT NULL,
   `Name` text NOT NULL,
   `Telefon` text NOT NULL,

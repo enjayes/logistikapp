@@ -12,6 +12,7 @@
 
 lieferantenController = {
     titleUnbenannt: "Unbenannt",
+    defaultPin:"0000",
     lieferanten: [],
 
     init: function () {
@@ -121,6 +122,10 @@ lieferantenController = {
             //Setze werte
             $("#lieferantVorname").val(lieferantenController.aktuellerLieferant.vorname);
             $("#lieferantName").val(lieferantenController.aktuellerLieferant.name);
+
+            $("#lieferantPin").val(lieferantenController.aktuellerLieferant.pin);
+
+
 
             $("#lieferantenInformationen").show();
             $("#lieferantenInformationen .redborder").removeClass("redborder");
@@ -271,19 +276,6 @@ lieferantenController = {
             if (lieferantenController.zeigeAlleLieferanten)
                 lieferantenController.zeigeLieferanten();
 
-            if (lieferantenController.aktuellerLieferant) {
-                $("#lieferantenInformationen").addClass("neumitalt");
-                setTimeout(function () {
-                    $("#lieferantenInformationen").removeClass("neumitalt");
-                }, 1300)
-
-            } else {
-                $("#lieferantenInformationen").addClass("neu");
-                setTimeout(function () {
-                    $("#lieferantenInformationen").removeClass("neu");
-                }, 1300)
-            }
-
 
             lieferantenController.aktuellerLieferant = new lieferant(misc.titleUnbenannt, misc.titleUnbenannt);
 
@@ -300,12 +292,47 @@ lieferantenController = {
 
             //Update Server DB
             serverController.lieferant.create(lieferantenController.aktuellerLieferant);
+            //Get New Pin for Lieferant
+            serverController.lieferant.getNewPin(lieferantenController.aktuellerLieferant, function(lieferant){
+
+                if(lieferant){
+                    var newPin = lieferant.pin;
+                    console.log( lieferant.pin)
+                    console.dir(lieferant);
+                    lieferant =    lieferantenController.getLieferantByID(lieferant.id)
+                    if(lieferant){
+                        console.log("!")
+                        lieferant.pin =  newPin;
+                        if(lieferant.id==lieferantenController.aktuellerLieferant.id){
+
+                            if (lieferantenController.aktuellerLieferant) {
+                                $("#lieferantenInformationen").addClass("neumitalt");
+                                setTimeout(function () {
+                                    $("#lieferantenInformationen").removeClass("neumitalt");
+                                }, 1300)
+
+                            } else {
+                                $("#lieferantenInformationen").addClass("neu");
+                                setTimeout(function () {
+                                    $("#lieferantenInformationen").removeClass("neu");
+                                }, 1300)
+                            }
+
+
+                            lieferantenController.zeigeAktuellenLieferanten();
+                            $("#lieferantVorname").select();
+
+                        }
+
+                    }
+                }
+
+            });
 
 
             $("#suchelieferantenliste").hide();
 
-            lieferantenController.zeigeAktuellenLieferanten();
-            $("#lieferantVorname").select();
+
 
 
         }

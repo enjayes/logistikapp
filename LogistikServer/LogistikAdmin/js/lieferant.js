@@ -12,6 +12,7 @@
 
 lieferant = function(vorname,name){
     this.id = misc.getUniqueID();
+    this.pin = lieferantenController.defaultPin;
     this.vorname = vorname;
     this.name = name;
     this.telefon="";
