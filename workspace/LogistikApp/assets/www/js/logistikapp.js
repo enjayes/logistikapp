@@ -1,9 +1,5 @@
 /**
  * logistikapp.
- *
- *
- *
- *
  * @date 19.11.14 - 14:43
  *
  */
@@ -118,14 +114,11 @@ var logistikapp = {
 
         });
 
-        
+
         //Initialize Views
         loginView.initialize();
 
         clientView.initialize();
-
-
-        //TODO: call Client Log-In
 
         // TODO: load client data
 
