@@ -20,6 +20,7 @@ var loginView = {
 
         $("#login_zurueck_start").click(function()
         {
+
             $('#lieferantenLogin').hide();
             $('#startScreen').show();
 

@@ -15,7 +15,7 @@ var logistikapp = {
     retrievePersistentStorage:function(){
 
 
-        alert_string = "";
+        var alert_string = "";
         if(typeof(Storage) !== "undefined")
         {
             if (localStorage.servername && localStorage.servername!="") {
@@ -43,14 +43,16 @@ var logistikapp = {
         }
 
         if(!(alert_string==""))
-        {
-            alert(alert_string);
-        }
+            console.log(alert_string);
+
 
     },
 
 
     start:function(){
+
+
+
 
         //servername etc
         logistikapp.retrievePersistentStorage();
