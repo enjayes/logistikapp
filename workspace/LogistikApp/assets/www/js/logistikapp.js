@@ -11,8 +11,55 @@
 
 var logistikapp = {
 
+    servername:"",
+    server_port:0,
+    markt_id:"",
+
+    retrievePersistentStorage:function(){
+
+
+        alert("retrievePersistentStorage");
+
+        alert_string = "";
+        if(typeof(Storage) !== "undefined")
+        {
+            if (localStorage.servername) {
+                logistikapp.servername = localStorage.servername;
+            } else
+            {
+                alert_string += "Server undefined "
+            }
+            if (localStorage.server_port) {
+                logistikapp.servername = localStorage.servername;
+            } else
+            {
+                alert_string += "Port undefined "
+            }
+            if (localStorage.markt_id) {
+                logistikapp.servername = localStorage.servername;
+            } else
+            {
+                alert_string += "Marktname undefined "
+            }
+        }
+        else
+        {
+            alert("Sorry, your browser does not support web storage...");
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+        }
+
+        if(!(alert_string==""))
+        {
+            alert(alert_string);
+        }
+
+    },
+
+
     start:function(){
 
+        //servername etc
+        logistikapp.retrievePersistentStorage();
 
         //Use Fastclick
         if(misc.isMobileApp()){
