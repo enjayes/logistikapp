@@ -46,10 +46,9 @@
         //Overwrite alert and prompt if in browser
         if (misc.isMobileApp()==false){
             window.prompt = function (msg) {
-                console.log("PROMPT: " + msg)
+               // console.log("PROMPT: " + msg)
             }
         }
-
 
     </script>
 
@@ -85,8 +84,26 @@
             </script>
         </div-->
 
+        <div id="startScreen">
+            <br>
+            <a onclick="$('#startScreen').hide();$('#lieferantenLogin').show();" class="ui-btn">Anmelden</a>
+            <br>
+            <br>
+            <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn">JOB EINGEBEN (TODO:REMOVE)</a>
+            <br>
+        </div>
 
-        <div id="jobSelector">
+
+        <div id="lieferantenLogin"  style="display:none">
+
+
+            <div id="reader" style="width:300px;height:250px">
+            </div>
+
+       </div>
+
+
+        <div id="jobSelector" style="display:none">
             <h2>Aufgabenwahl</h2>
 
             <form>
@@ -106,7 +123,7 @@
             </form>
             <br>
             <button id="weiter_Aufgaben">Weiter</button>
-            <button id="zurueck_Aufgaben" style="float: left;">Zurück</button>
+            <button  onclick="$('#jobSelector').hide();$('#startScreen').show();" id="zurueck_Aufgaben" style="float: left;">Zurück</button>
 
         </div>
 
@@ -252,6 +269,10 @@
 
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+
+<!--QR ------------------------------------------------->
+<script type="text/javascript" src="js/html5-qrcode.min.js"></script>
+
 
 <!--Toast------------------------------------------------->
 <link href="js/notifications/jquery.toast.min.css" rel="stylesheet" type="text/css">

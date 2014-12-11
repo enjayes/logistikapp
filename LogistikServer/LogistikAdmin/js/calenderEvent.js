@@ -1,11 +1,11 @@
 /**
- * calenderEvent.
+ * calenderEvent
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 20.11.14 - 01:07
- * @copyright munichDev UG
+ *
  */
 
 
@@ -26,8 +26,6 @@ CalenderEventFactory = {
 
         console.log(start.hasTime())
         console.log(start.format())
-
-
 
         var event =   new CalenderEvent();
         event.title = title;

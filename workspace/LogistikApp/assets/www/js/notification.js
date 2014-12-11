@@ -1,6 +1,6 @@
 /** * notification.js.
  *
- * >>Description<<
+ *
  *
  * @author Norbert
  * @date 06.12.14 - 20:28

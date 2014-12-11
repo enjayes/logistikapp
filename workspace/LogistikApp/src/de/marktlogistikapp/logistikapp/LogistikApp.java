@@ -36,12 +36,11 @@ public class LogistikApp extends CordovaActivity
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl+"#android");
-        String installCount = "7";
-               
+        String installCount = "8";
+                  
         WebSettings settings = appView.getSettings(); 
         settings.setUseWideViewPort(true); 
         settings.setLoadWithOverviewMode(true); 
     }
-    
-    
+        
 }

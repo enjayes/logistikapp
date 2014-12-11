@@ -1,11 +1,11 @@
 /**
- * router.
+ * router
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 22.11.14 - 00:27
- * @copyright munichDev UG
+ *
  */
 
 

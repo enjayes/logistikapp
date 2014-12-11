@@ -1,11 +1,11 @@
 /**
  * index.js.
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 19.11.14 - 17:10
- * @copyright munichDev UG
+ *
  */
 
 //Init Controllers

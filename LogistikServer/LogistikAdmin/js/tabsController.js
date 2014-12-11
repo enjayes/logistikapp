@@ -1,11 +1,11 @@
 /**
- * tabsController.
+ * tabsController
  *
- * >>Description<<
  *
- * @author Manfred
+ *
+ *
  * @date 19.11.14 - 22:03
- * @copyright munichDev UG
+ *
  */
 
 

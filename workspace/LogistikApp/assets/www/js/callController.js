@@ -1,6 +1,6 @@
 /** * callController.
  *
- * >>Description<<
+ *
  *
  * @author Norbert
  * @date 06.12.14 - 21:52
@@ -16,7 +16,6 @@ var callController = {
         //todo start skype notification
 
     },
-
 
     call: function() {
 
