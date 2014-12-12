@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="libs/timepicker/jquery-clockpicker.min.css"/>
 
+    <link rel="stylesheet" href="css/charts.css"/>
+
     <link type="image/x-icon" href="img/favicon.ico" rel="shortcut icon">
 
 </head>
@@ -34,7 +36,7 @@
 
 <div id="pagecontent" data-demo-html="true">
     <div data-role="tabs" id="tabs">
-        <div data-role="navbar"  style="opacity:0">
+        <div data-role="navbar" style="opacity:0">
             <ul>
                 <li><a id="uebersichtTab" href="#uebersicht" data-ajax="false" onclick="tabsController.clickedTab(0)">Übersicht</a></li>
                 <li><a id="termineTab" href="#termine" data-ajax="false" onclick="tabsController.clickedTab(1)">Termine</a></li>
@@ -46,20 +48,24 @@
         </div>
         <div id="uebersicht" class="ui-body-d ui-content">
             <div class="tabinhalt">
-                <div id="uebersichtMessageTabs" class="subTabToggle"  data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <div id="uebersichtMessageTabs" class="subTabToggle" data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <a onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-bars active">Allgemein</a>
-                    <a  onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user">Lieferanten</a>
+                    <a onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user">Lieferanten</a>
                 </div>
-                <br>
                 <h3>Aufteilung</h3>
-                <div class="labeled-chart-container">
+
+                <div id="aufteilungChart" class="labeled-chart-container">
                     <div class="canvas-holder">
-                    <canvas id="aufteilung-chart-area" width="150" height="150"/>
-
-                </div>
-                    <div id="aufteilung-legend">
-
+                        <canvas class="chart-area" width="150" height="150"/>
                     </div>
+                    <div class="legend"></div>
+                </div>
+
+                <div id="zweiterChart" class="labeled-chart-container">
+                    <div class="canvas-holder">
+                        <canvas class="chart-area" width="150" height="150"/>
+                    </div>
+                    <div class="legend"></div>
                 </div>
             </div>
         </div>
@@ -85,23 +91,24 @@
                         <textarea id="messageLieferantenCKEditor"></textarea>
                     </div>
 
-                    <div id="sendMessageLieferant" class="greenbutton ui-disabled ui-btn ui-input-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-mail ui-btn-icon-left" onclick="nachrichtenController.sendeNachricht()">Nachricht senden
+                    <div id="sendMessageLieferant" class="greenbutton ui-disabled ui-btn ui-input-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-mail ui-btn-icon-left" onclick="nachrichtenController.sendeNachricht()">
+                        Nachricht senden
                     </div>
                 </div>
                 <div id="recievedMessage" class="messageTab" style="display:none">
-                    <div  id="recievedMessageContainer"></div>
+                    <div id="recievedMessageContainer"></div>
                 </div>
                 <div id="sentMessage" class="messageTab" style="display:none">
-                   <div  id="sentMessageContainer"></div>
+                    <div id="sentMessageContainer"></div>
                 </div>
-                </div>
+            </div>
         </div>
         <div id="lieferanten">
             <div class="tabinhalt ">
 
                 <div id="suchelieferanten" data-demo-html="true">
 
-                    <div id="searchInfoLieferantenLabel" >Lieferant auswählen:</div>
+                    <div id="searchInfoLieferantenLabel">Lieferant auswählen:</div>
                     <div id="searchInfoLieferanten"></div>
 
                     <div id="lieferanthinzufuegen" class="greenbutton ui-btn ui-input-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-plus ui-btn-icon-left" onclick="lieferantenController.lieferantenHinzufuegen()">
@@ -322,6 +329,10 @@
 <script src='js/serverController.js'></script>
 <script src='js/tabsController.js'></script>
 
+
+<script src='js/chartFactory.js'></script>
+
+
 <script src='js/uebersichtController.js'></script>
 <script src='js/termineController.js'></script>
 <script src='js/nachrichtenController.js'></script>
@@ -338,8 +349,6 @@
 
 
 <script src='js/index.js'></script>
-
-
 
 
 </body>

@@ -17,6 +17,7 @@ var initAfterServerConnection = function () {
 
     if (!initializedAfterFirstServerConnection) {
         initializedAfterFirstServerConnection = true;
+        uebersichtController.init();
         nachrichtenController.init();
         lieferantenController.init();
         termineController.init();

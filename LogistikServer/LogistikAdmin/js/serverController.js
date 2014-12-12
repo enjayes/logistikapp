@@ -262,6 +262,7 @@ serverController = {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.nachricht.parseDTO(list[i]);
                 }
+                return callback(list);
             };
             var newCallback = function () {
 
@@ -372,8 +373,30 @@ serverController = {
         },
         delete: function (job) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: this.buildDTO(job)}));
+        },
+        get: function (jobId,callback) {
+            var newCallback = function () {
+                if(arguments[0]){
+                    var job = serverController.job.parseDTO(arguments[0]);
+                    callback(job);
+                }
+            }
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.get, j: jobId , callback: serverController.callbackHandler.register(newCallback)}));
         }
 
+    }, statistics: {
+        messageType: {
+            get: "sg"
+        },
+        get:function(callback){
+            var newCallback = function () {
+                if(arguments[0])
+                    callback( arguments[0]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            }
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.get, callback: serverController.callbackHandler.register(newCallback)}));
+        }
     },
     getAllOnStartupCounter: 0,
     getAllOnStartupMax: 5,
