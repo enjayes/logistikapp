@@ -13,20 +13,17 @@ jobsController = {
     jobs: [],
 
     init: function () {
+        //Get Lieferant From Server
+
+       /*
+        serverController.job.get("27ab9eca-40fd-43b6-94dd-133a36245635",function(job){
+            console.dir(job)
+        });
+        */
 
     },
     ready: function () {
 
-        //Get Lieferanten From Server
-        var getJobsFromServer = function (jobs) {
-            if(jobs){
-                console.log("JOBS!!----------");
-                console.dir(jobs)
-                console.log("----------------");
 
-                jobsController.jobs = jobs;
-            }
-        }
-        serverController.job.getAll(getJobsFromServer);
     }
 }
