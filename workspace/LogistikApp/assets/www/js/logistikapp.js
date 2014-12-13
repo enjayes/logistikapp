@@ -54,6 +54,10 @@ var logistikapp = {
 
 
 
+
+
+
+
         //servername etc
         logistikapp.retrievePersistentStorage();
 
@@ -69,7 +73,12 @@ var logistikapp = {
         }
 
         //Establish Socket Connection
-        serverController.initialize();
+        serverController.initialize(function(){
+
+
+
+
+        });
 
         //Initialize Views
         startView.initialize();

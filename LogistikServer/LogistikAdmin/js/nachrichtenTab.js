@@ -15,6 +15,7 @@ nachrichtenTab = {
     controller: nachrichtenController,
     searchWidget: null,
     selectedItemsAnHtml:"",
+    nachrichtenMarktSelectionWidget:null,
     init: function () {
         var that = this;
 
@@ -25,8 +26,7 @@ nachrichtenTab = {
             $("#searchMessageLieferanten input").focus();
         })
 
-
-        this.searchWidget = new SearchWidget("#searchMessageLieferanten", "Suche nach Lieferanten...", null, true, function () {
+        this.searchWidget = new SearchWidget("#searchMessageLieferanten", "Suche nach Lieferanten...", 5, true, function () {
                 nachrichtenTab.searchWidget.getInput().val("");
                 nachrichtenTab.renderSelectedLieferanten();
                 CKEDITOR.instances.messageLieferantenCKEditor.focus();
@@ -40,9 +40,11 @@ nachrichtenTab = {
         );
 
 
+        //Markt auswahl
+        this.nachrichtenMarktSelectionWidget = new MultipleSelectionWidget("#nachrichtenMarktSelection");
+
+        //Editor
         CKEDITOR.replace('messageLieferantenCKEditor');
-
-
         CKEDITOR.instances.messageLieferantenCKEditor.on('change', that.disableSendButton);
 
     },

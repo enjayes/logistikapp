@@ -1,0 +1,7 @@
+.multipleselections{
+    margin: 0 0 20px 0;
+}
+
+.multipleselections.ui-controlgroup label{
+    border-color: rgb(221, 221, 221)!important;
+}

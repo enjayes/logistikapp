@@ -60,7 +60,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         '<form>' +
             '<input class="searchWidget-filterable" placeholder="' + that.searchPlaceHolder + '" data-type="search">' +
             ' </form>' +
-            '<ul class="searchWidget-resultlist" style="top:' + topMargin + 'px;" data-role="listview" data-inset="true" data-filter="true" data-input="' + that.domObject + ' .searchWidget-filterable"></ul>'
+            '<ul class="searchWidget-resultlist" style="z-index:1000!important;top:' + topMargin + 'px;" data-role="listview" data-inset="true" data-filter="true" data-input="' + that.domObject + ' .searchWidget-filterable"></ul>'
 
     );
 

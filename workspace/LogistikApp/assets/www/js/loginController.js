@@ -17,7 +17,21 @@ loginController = {
 
         var loginCallback =function(lieferant){
 
+            //Login hat funktioniert
             if(lieferant&&lieferant.id){
+
+                serverController.nachricht.getAll(function(nachrichten){
+                    //Nachrichten
+                    console.dir(nachrichten);
+
+                    for(var i= 0;i<nachrichten.length;i++){
+                        notifications.show("Nachricht",nachrichten[i].nachricht, function(){})
+
+                    }
+                })
+
+
+
                 $('#lieferantenLogin').hide();
                 $('#jobSelector').show();
                 clientView.lieferant = lieferant;

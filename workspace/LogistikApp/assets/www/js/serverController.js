@@ -72,6 +72,13 @@ serverController = {
             if (msg.t == serverController.messageType.connection) {
                 serverController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
 
+
+
+
+
+
+
+
             }
             else if (msg.t == serverController.messageType.callback) {
                 //Execute Callback
@@ -123,6 +130,48 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.login, p: pinSha, callback: serverController.callbackHandler.register(newCallback)}));
         }
     },
+    nachricht: {
+        messageType: {
+            getAll: "nga",
+            create: "nc",
+            delete: "nd",
+            updateOthers: "nuo"
+        },
+        buildDTO: function (nachricht) {
+            return {
+                id: nachricht.id,
+                datum: nachricht.datum.getTime(),
+                nachricht: nachricht.nachricht,
+                lieferanten: nachricht.lieferanten
+            }
+        },
+        parseDTO: function (nachricht) {
+            return {
+                id: nachricht.id,
+                datum: parseInt(nachricht.datum),
+                nachricht: nachricht.nachricht,
+                lieferanten: nachricht.lieferanten
+            }
+        },
+        getAll: function (callback) {
+            serverController.nachricht.getAllCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.nachricht.parseDTO(list[i]);
+                }
+                return callback(list);
+            };
+            var newCallback = function () {
+
+                serverController.nachricht.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            };
+
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+        }
+
+    }
+    ,
     job: {
         messageType: {
 
@@ -175,6 +224,7 @@ serverController = {
         }
 
     },
+
     getAllOnStartupCounter: 0,
     getAllOnStartupMax: 1,
     onLoadedGetAllOnStartup: function () {

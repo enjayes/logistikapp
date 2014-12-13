@@ -267,6 +267,40 @@ input-group-addon {
     margin-top: 85px
 }
 
+#maintabs #konfigurationTabParent{
+    width: 40px;
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+}
+
+#maintabs #konfigurationTabParent a{
+    padding-bottom: 3px;
+}
+
+#maintabs #konfigurationTabParent a:after{
+    top: .4525em;
+}
+
+
+#maintabs li{
+    width: 23.9%;
+}
+
+@media (max-width: 600px) {
+    #maintabs li{
+        width: 23.3%;
+    }
+}
+
+@media (max-width: 450px) {
+    #maintabs li{
+        width: 22.7%;
+    }
+}
+
+
+
 /**
 background-color: #FFFFFF;
 
@@ -1011,6 +1045,8 @@ Colors
     margin-right: auto !important;
     position: relative !important;
 }
+
+
 
 
 

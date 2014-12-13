@@ -16,6 +16,7 @@ termineController = {
         this.calendarData.events = termineController.events;
 
 
+
     },
     ready:function(){
         //Get Lieferanten From Server
@@ -60,6 +61,7 @@ termineController = {
         }
 
         serverController.termin.getAll(getTermineFromServer);
+
 
     },
     events: [],
@@ -183,11 +185,9 @@ termineController = {
                 lieferantenInput.val("");
             }
 
-
         } else {
             $("#lieferantAnzeigen button").addClass("ui-disabled")
             lieferantenInput.val("");
-
         }
 
 

@@ -17,6 +17,7 @@ termineTab = {
     calenderFactory: null,
     allowOpening: false,
     searchWidget:null,
+    termineMarktSelectionWidget:null,
     init: function () {
 
 
@@ -28,6 +29,10 @@ termineTab = {
                 $("#pagecontent").css("min-height", visible?top+height:"");
             }
         )
+
+
+        this.termineMarktSelectionWidget = new MultipleSelectionWidget("#termineMarktSelection");
+
 
     },
 

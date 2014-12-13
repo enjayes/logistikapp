@@ -18,6 +18,7 @@ tabsController = {
         this.tabs[1] = termineTab;
         this.tabs[2] = nachrichtenTab;
         this.tabs[3] = lieferantenTab;
+        this.tabs[4] = konfigurationsTab;
 
         //Init Tabs
         for (var i = 0; i < tabsController.tabs.length ; i++) {
@@ -69,7 +70,8 @@ tabsController = {
         //Init Controllers
         setTimeout(function(){
             for (var i = 0; i < tabsController.tabs.length; i++) {
-                tabsController.tabs[i].controller.ready();
+                if(tabsController.tabs[i].controller)
+                 tabsController.tabs[i].controller.ready();
             }
         },0)
 

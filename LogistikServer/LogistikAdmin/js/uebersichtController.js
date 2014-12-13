@@ -10,12 +10,16 @@
 
 uebersichtController = {
     statistics: null,
+    maerkte:null,
     init: function () {
 
 
 
         serverController.maerkte.getAll(function(maerkte){
-            console.dir(maerkte);
+            uebersichtController.maerkte = maerkte;
+            termineTab.termineMarktSelectionWidget.setData(uebersichtController.maerkte,true);
+            nachrichtenTab.nachrichtenMarktSelectionWidget.setData(uebersichtController.maerkte,true);
+
 
         })
 
