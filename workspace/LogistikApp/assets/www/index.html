@@ -329,7 +329,7 @@
                         <td><label>
                             <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
                         </label>
-                        <textarea id="t_vk_euro_abgabe" rows="1" cols="5">VK-Euro</textarea>
+                        <input id="t_vk_euro_abgabe" rows="1" cols="5">VK-Euro</textarea>
                     </tr>
                     <td><label>
                         <input name="checkbox-0 " type="checkbox" id="cb_verkostung">Verkostung
@@ -360,15 +360,14 @@
 
             </form>
             <br>
-            <a id="weiter_lieferantenschein2" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+            <a id="checkout_lieferantenschein2" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Checkout</a>
 
             <a id="zurueck_lieferantenschein2" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
 
         <div id="logout" style="display:none">
-            <a id="checkout_lieferantenschein2" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Checkout</a>
-            <a id="zurueck_logout" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
         </div>
         <br>
         <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');window.open('skype:00498941150015?call', '_system');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
