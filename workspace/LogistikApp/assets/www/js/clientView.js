@@ -13,6 +13,18 @@ var clientView = {
     },
     check_input: function(job) {
         //check input Aufgabenwahl
+
+        if ($('#fixtermin').is(":checked"))
+        {
+            job.fixtermin = true;
+        }
+        else
+        {
+            job.fixtermin = false;
+        }
+
+
+
         if ($('#cb_besuch').is(":checked"))
         {
             job.besuch = true;
@@ -231,11 +243,53 @@ var clientView = {
         var that = this;
 
 
-        $("#job_zurueck_start").click(function()
+        $("#job_zurueck_kontakt").click(function()
         {
-            $('#startScreen').show();
+            $('#contact_daten_menu').show();
             $('#jobSelector').hide();
 
+
+        });
+
+
+        $("#zurueck_start").click(function()
+        {
+            $('#startScreen').show();
+            $('#contact_daten_menu').hide();
+
+
+        });
+
+        $("#zurueck_kontakt").click(function()
+        {
+            $('#contact_daten_menu').show();
+            $('#termine_menu').hide();
+
+
+        });
+
+        $("#b_kalender").click(function()
+        {
+            $('#termine_menu').show();
+            $('#contact_daten_menu').hide();
+
+        });
+
+        $("#b_kalender").click(function()
+        {
+            $('#termine_menu').show();
+            $('#contact_daten_menu').hide();
+
+        });
+
+
+        $("#weiter_jobSelector").click(function()
+        {
+            //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
+
+            contactController.store();
+            $("#jobSelector").show();
+            $("#contact_daten_menu").hide();
 
         });
 
@@ -276,6 +330,14 @@ var clientView = {
         });
 
 
+        $("#weiter_lieferantenschein2").click(function()
+        {
+            $("#logout").show();
+            $("#lieferantenschein2").hide();
+
+        });
+
+
         $("#checkout_lieferantenschein2").click(function()
         {
             job = that.check_input(job);
@@ -284,6 +346,24 @@ var clientView = {
             serverController.job.create(job);
 
         });
+
+        $("#checkout_logout").click(function()
+        {
+            job = that.check_input(job);
+            job = that.check_out(job);
+
+            serverController.job.create(job);
+
+        });
+
+        $("#zurueck_logout").click(function()
+        {
+            $("#logout").hide();
+            $("#lieferantenschein2").show();
+
+        });
+
+
 
 
     }
