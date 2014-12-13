@@ -13,6 +13,18 @@ var clientView = {
     },
     check_input: function(job) {
         //check input Aufgabenwahl
+
+        if ($('#fixtermin').is(":checked"))
+        {
+            job.fixtermin = true;
+        }
+        else
+        {
+            job.fixtermin = false;
+        }
+
+
+
         if ($('#cb_besuch').is(":checked"))
         {
             job.besuch = true;
