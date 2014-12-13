@@ -33,9 +33,10 @@ loginController = {
 
 
                 $('#lieferantenLogin').hide();
-                $('#jobSelector').show();
+                $('#contact_daten_menu').show();
                 clientView.lieferant = lieferant;
                 console.dir(lieferant)
+                contactController.set(lieferant.id,lieferant);
                 $(".greetingLieferant").html(clientView.getLieferantFullName())
 
             }
