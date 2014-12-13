@@ -295,6 +295,14 @@ var clientView = {
         });
 
 
+        $("#weiter_lieferantenschein2").click(function()
+        {
+            $("#logout").show();
+            $("#lieferantenschein2").hide();
+
+        });
+
+
         $("#checkout_lieferantenschein2").click(function()
         {
             job = that.check_input(job);
@@ -303,6 +311,24 @@ var clientView = {
             serverController.job.create(job);
 
         });
+
+        $("#checkout_logout").click(function()
+        {
+            job = that.check_input(job);
+            job = that.check_out(job);
+
+            serverController.job.create(job);
+
+        });
+
+        $("#zurueck_logout").click(function()
+        {
+            $("#logout").hide();
+            $("#lieferantenschein2").show();
+
+        });
+
+
 
 
     }
