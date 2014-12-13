@@ -92,6 +92,13 @@ var configView = {
         });
 
 
+        $("#open_admin").click(function()
+        {
+            url = localStorage.servername + ":" + localStorage.server_port;
+            misc.openLink(url);
+
+        });
+
     }
 
 }

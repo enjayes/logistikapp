@@ -162,6 +162,18 @@ var clientView = {
         else{
             job.cb_verlosung=false;
         }
+
+
+        //logout
+        if($("#t_notizen").val()!="")
+        {
+            alert("full");
+        }
+        else
+        {
+            alert("empty");
+        }
+
         //console.dir(job);
         return job;
 

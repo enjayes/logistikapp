@@ -37,5 +37,15 @@ misc = {
         else{
             windowOpen('skype:' + number + '?call','_blank');
         }
+    },
+
+
+    openLink: function(url) {
+        if (this.isMobileApp()) {
+            window.open(url, '_system')
+        }
+        else{
+            windowOpen(url,'_blank');
+        }
     }
 }
