@@ -12,6 +12,14 @@ uebersichtController = {
     statistics: null,
     init: function () {
 
+
+
+        serverController.maerkte.getAll(function(maerkte){
+            console.dir(maerkte);
+
+        })
+
+
         serverController.statistics.get(function (statistics) {
             if (statistics) {
                 uebersichtController.statistics = statistics;

@@ -120,10 +120,10 @@ tabsController = {
 
         $("#tabs").tabs( "option", "active", tabsController.openTabAttempt );
 
-        $("#tabs .ui-btn-active").removeClass("ui-btn-active")
+        $("#maintabs .ui-btn-active").removeClass("ui-btn-active")
 
 
-        $("#tabs #"+tabsController.tabs[index].anchorName).addClass("ui-btn-active")
+        $("#maintabs #"+tabsController.tabs[index].anchorName).addClass("ui-btn-active")
 
 
 
