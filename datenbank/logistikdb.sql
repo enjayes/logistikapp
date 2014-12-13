@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `termine` (
 
 CREATE TABLE IF NOT EXISTS `jobs` (
   `id` varchar(36) NOT NULL,
-  `client_id` varchar(36) NOT NULL,
+  `lieferanten_id` varchar(36) NOT NULL,
   `markt_id` text NOT NULL,
   `timestamp_start` bigint(22) NOT NULL,
   `timestamp_end` bigint(22) NOT NULL,
