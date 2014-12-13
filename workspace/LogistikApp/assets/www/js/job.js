@@ -5,7 +5,7 @@
 
 function Job (id) {
     this.id = id;
-    this.client_id = 1; //TODO:
+    this.lieferant_id = 1; //TODO:
     markt_id="leonberg"; //TODO configure
     this.timestamp_start =  new Date();
     this.timestamp_end;
