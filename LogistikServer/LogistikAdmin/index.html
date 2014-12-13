@@ -37,7 +37,7 @@
 <div id="pagecontent" data-demo-html="true">
     <div data-role="tabs" id="tabs">
         <div data-role="navbar" style="opacity:0">
-            <ul>
+            <ul id="maintabs">
                 <li><a id="uebersichtTab" href="#uebersicht" data-ajax="false" onclick="tabsController.clickedTab(0)">Übersicht</a></li>
                 <li><a id="termineTab" href="#termine" data-ajax="false" onclick="tabsController.clickedTab(1)">Termine</a></li>
                 <li><a id="nachrichtenTab" href="#nachrichten" data-ajax="false" onclick="tabsController.clickedTab(2)">Nachrichten</a></li>
@@ -71,6 +71,16 @@
         </div>
         <div id="termine" class="ui-body-d ui-content">
             <div class="tabinhalt">
+                <div style="margin-bottom:15px">
+
+                <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal" style="margin:0px">
+                        <input type="checkbox" name="" id="checkbox-2-market-1">
+                        <label for="checkbox-2-market-1">Leonberg</label>
+                        <input type="checkbox"  name="checkbox-h-2b" id="checkbox-2-market-2">
+                        <label for="checkbox-2-market-2">Sindelfingen</label>
+                    </fieldset>
+                </div>
+
                 <div id='calendar'></div>
             </div>
         </div>
@@ -86,6 +96,16 @@
 
                     </div>
                     <div id="searchMessageLieferanten"></div>
+
+
+                        <div style="margin-top:15px">
+                        <fieldset data-role="controlgroup" data-mini="true" data-type="horizontal" >
+                            <input type="checkbox" name="" id="checkbox-market-1">
+                            <label for="checkbox-market-1">Leonberg</label>
+                            <input type="checkbox"  name="checkbox-h-2b" id="checkbox-market-2">
+                            <label for="checkbox-market-2">Sindelfingen</label>
+                        </fieldset>
+                        </div>
 
                     <div id="messageLieferantenEditor">
                         <textarea id="messageLieferantenCKEditor"></textarea>
@@ -117,12 +137,12 @@
 
 
                     <!--div id="suchelieferantenwidget">
-                        <form class="ui-filterable">
-                            <input id="filterBasic-input" data-type="search">
-                        </form>
-                        <ul id="suchelieferantenliste" data-role="listview" data-inset="true" data-filter="true" data-input="#filterBasic-input">
-                        </ul>
-                        <div id="lieferanthinzufuegen"  class="greenbutton ui-btn ui-input-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-plus ui-btn-icon-left" onclick="lieferantenController.lieferantenHinzufuegen()" >Hinzufügen</div>
+<form class="ui-filterable">
+<input id="filterBasic-input" data-type="search">
+</form>
+<ul id="suchelieferantenliste" data-role="listview" data-inset="true" data-filter="true" data-input="#filterBasic-input">
+</ul>
+<div id="lieferanthinzufuegen"  class="greenbutton ui-btn ui-input-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-plus ui-btn-icon-left" onclick="lieferantenController.lieferantenHinzufuegen()" >Hinzufügen</div>
                     </div-->
 
                     <div id="lieferantenInformationen" style="display:none">

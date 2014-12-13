@@ -36,7 +36,7 @@ serverController = {
     },
     callbackHandler: {
         register: function (callback) {
-            var callBackName = "cb" + Date.now()  + "x"+((Math.random() * 1000000.0) + "").replace(".", "");
+            var callBackName = "cb" + Date.now() + "x" + ((Math.random() * 1000000.0) + "").replace(".", "");
             this[callBackName] = callback;
             return callBackName;
         }
@@ -120,14 +120,14 @@ serverController = {
             }
         },
         getAllCallback: null,
-        getNewPin: function(lieferant,callback){
+        getNewPin: function (lieferant, callback) {
             var newCallback = function () {
-                if(arguments[0]){
+                if (arguments[0]) {
                     var lieferant = serverController.lieferant.parseDTO(arguments[0]);
                     callback(lieferant);
                 }
             }
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getNewPin,l: this.buildDTO(lieferant), callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getNewPin, l: this.buildDTO(lieferant), callback: serverController.callbackHandler.register(newCallback)}));
 
         },
         getAll: function (callback) {
@@ -137,13 +137,13 @@ serverController = {
                     list[i] = serverController.lieferant.parseDTO(list[i]);
                 }
                 return callback(list);
-            }
+            };
 
             var newCallback = function () {
                 serverController.lieferant.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
-            }
+            };
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (lieferant) {
@@ -176,7 +176,7 @@ serverController = {
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant
-            }
+            };
 
             if (termin.end)
                 newTermin.End = termin.end.format();
@@ -185,8 +185,8 @@ serverController = {
 
             return newTermin;
         },
-        parseDTO:function(termin){
-             var newTermin = {
+        parseDTO: function (termin) {
+            var newTermin = {
                 id: termin.id,
                 title: termin.Title,
                 start: termin.Start,
@@ -205,13 +205,13 @@ serverController = {
         },
         getAllCallback: null,
         getAll: function (callback) {
-            serverController.termin.getAllCallback =  function (list) {
+            serverController.termin.getAllCallback = function (list) {
 
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.termin.parseDTO(list[i]);
                 }
                 return callback(list);
-            }
+            };
 
             var newCallback = function () {
 
@@ -219,7 +219,7 @@ serverController = {
 
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
-            }
+            };
 
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
@@ -249,16 +249,16 @@ serverController = {
                 lieferanten: nachricht.lieferanten
             }
         },
-        parseDTO:function(nachricht){
+        parseDTO: function (nachricht) {
             return {
                 id: nachricht.id,
                 datum: parseInt(nachricht.datum),
                 nachricht: nachricht.nachricht,
-                lieferanten:nachricht.lieferanten
+                lieferanten: nachricht.lieferanten
             }
         },
         getAll: function (callback) {
-            serverController.nachricht.getAllCallback =   function (list) {
+            serverController.nachricht.getAllCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.nachricht.parseDTO(list[i]);
                 }
@@ -269,7 +269,7 @@ serverController = {
                 serverController.nachricht.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
-            }
+            };
 
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
@@ -295,15 +295,15 @@ serverController = {
                 read: nachricht.read == true ? 1 : 0,
                 datum: nachricht.datum,
                 nachricht: nachricht.nachricht
-            }
+            };
 
             return newNachricht;
         },
-        parseDTO:function(nachricht){
+        parseDTO: function (nachricht) {
             return  {
                 id: nachricht.id,
                 lieferantid: nachricht.lieferantid,
-                read: nachricht.read==1?true:false,
+                read: nachricht.read == 1 ? true : false,
                 datum: parseInt(nachricht.datum),
                 nachricht: nachricht.nachricht
             };
@@ -317,10 +317,10 @@ serverController = {
             };
 
             var newCallback = function () {
-                serverController.antwortNachricht.getAllCallback (arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.antwortNachricht.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
-            }
+            };
 
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
@@ -347,12 +347,12 @@ serverController = {
         buildDTO: function (job) {
             return job;//TODO
         },
-        parseDTO:function(job){
+        parseDTO: function (job) {
             return job;
         },
         getAllCallback: null,
         getAll: function (callback) {
-            serverController.job.getAllCallback =  function (list) {
+            serverController.job.getAllCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.job.parseDTO(list[i]);
                 }
@@ -362,7 +362,7 @@ serverController = {
                 serverController.job.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
-            }
+            };
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (job) {
@@ -374,32 +374,45 @@ serverController = {
         delete: function (job) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: this.buildDTO(job)}));
         },
-        get: function (jobId,callback) {
+        get: function (jobId, callback) {
             var newCallback = function () {
-                if(arguments[0]){
+                if (arguments[0]) {
                     var job = serverController.job.parseDTO(arguments[0]);
                     callback(job);
                 }
-            }
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.get, j: jobId , callback: serverController.callbackHandler.register(newCallback)}));
+            };
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.get, j: jobId, callback: serverController.callbackHandler.register(newCallback)}));
         }
 
+    }, maerkte: {
+        messageType: {
+            getAll: "mga"
+        },
+        getAll: function (callback) {
+            var newCallback = function () {
+                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            };
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+
+        }
     }, statistics: {
         messageType: {
             get: "sg"
         },
-        get:function(callback){
+        get: function (callback) {
             var newCallback = function () {
-                if(arguments[0])
-                    callback( arguments[0]);
+                if (arguments[0])
+                    callback(arguments[0]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
-            }
+            };
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.get, callback: serverController.callbackHandler.register(newCallback)}));
         }
     },
     getAllOnStartupCounter: 0,
-    getAllOnStartupMax: 5,
+    getAllOnStartupMax: 6,
     onLoadedGetAllOnStartup: function () {
         if (serverController.getAllOnStartupCounter == serverController.getAllOnStartupMax) {
             crossroads.parse(location.hash);
