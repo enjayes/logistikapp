@@ -65,7 +65,9 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
                     var selected = that.domObjectInner.find("label.ui-btn-active");
                     if (selected.length == 1) {
                         if (selected.filter("[for=" + checkboxRadio[0].id + "]").length == 1) {
-
+                            setTimeout(function(){
+                                checkboxRadio.prop("checked", true).checkboxradio("refresh");
+                            },0);
                             reselected = true;
                             event.stopPropagation();
                         }
