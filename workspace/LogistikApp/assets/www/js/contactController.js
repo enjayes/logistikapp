@@ -50,6 +50,7 @@ var contactController = {
         localStorage.telefon =   lieferant.telefon;
         localStorage.email =   lieferant.email;
 
+        serverController.lieferant.update(lieferant);
 
     }
 

@@ -107,7 +107,8 @@ serverController = {
             get: "lg",
             updateOthers: "luo"
 
-        }, parseDTO: function (lieferant) {
+        },
+        parseDTO: function (lieferant) {
             return {
                 id: lieferant.id,
                 pin: lieferant.Pin,
@@ -119,6 +120,18 @@ serverController = {
                 notizen: lieferant.Notizen
             }
         },
+        buildDTO: function (lieferant) {
+            return {
+                id: lieferant.id,
+                Pin: lieferant.pin,
+                Vorname: lieferant.vorname,
+                Name: lieferant.name,
+                Telefon: lieferant.telefon,
+                EMail: lieferant.email,
+                Adresse: lieferant.adresse,
+                Notizen: lieferant.notizen
+            }
+        },
         login: function (pinSha, callback) {
             var newCallback = function () {
                 if (arguments[0]) {
@@ -128,6 +141,9 @@ serverController = {
                     callback();
             };
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.login, p: pinSha, callback: serverController.callbackHandler.register(newCallback)}));
+        },
+        update: function (lieferant) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: this.buildDTO(lieferant)}));
         }
     },
     nachricht: {

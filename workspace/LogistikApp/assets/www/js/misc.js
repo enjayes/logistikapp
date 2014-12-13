@@ -28,5 +28,14 @@ misc = {
         {
             return true;
         }
+    },
+
+    call: function(number) {
+        if (this.isMobileApp()) {
+            window.open('skype:' + number + '?call', '_system')
+        }
+        else{
+            windowOpen('skype:' + number + '?call','_blank');
+        }
     }
 }

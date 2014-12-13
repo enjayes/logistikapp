@@ -44,6 +44,8 @@
             console.log("ERROR! : " + url + "(" + lineNumber + ") : " + JSON.stringify(e));
         };
 
+        windowOpen = window.open;
+
         //Overwrite alert and prompt if in browser
         if (misc.isMobileApp()==false){
             window.prompt = function (msg) {
@@ -176,7 +178,7 @@
                             <label>
                                 Vorname:
                             </label></td>
-                        <td><input id="vorname">
+                        <td><input id="vorname" readonly>
                         </td>
                     </tr>
 
@@ -185,7 +187,7 @@
                             <label>
                                 Nachnname:
                             </label></td>
-                        <td><input id="familienname">
+                        <td><input id="familienname" readonly>
                         </td>
                     </tr>
 
@@ -196,7 +198,7 @@
                             <label>
                                 Firma:
                             </label></td>
-                        <td><input id="firma">
+                        <td><input id="firma" readonly>
                         </td>
                     </tr>
 
@@ -269,26 +271,21 @@
                     <label>
                         Ziel
                     </label>
-                <td><textarea id="t_ziel" rows="1" cols="50">
-                </textarea></td>
+                <td><textarea id="t_ziel" rows="1" cols="50"></textarea></td>
             </tr>
             <tr>
                 <td>
                     <label>
                         Grund
                     </label>
-                <td><textarea id="t_grund" rows="1" cols="50">
-
-                </textarea></td>
+                <td><textarea id="t_grund" rows="1" cols="50"></textarea></td>
             </tr>
             <tr>
                 <td>
                     <label>
                         Thematik
                     </label>
-                <td><textarea id="t_thematik"rows="1" cols="50">
-
-                </textarea></td>
+                <td><textarea id="t_thematik"rows="1" cols="50"></textarea></td>
             </tr>
             <br>
             <a id="weiter_lieferantenschein1" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
@@ -381,7 +378,7 @@
 
         </div>
         <br>
-        <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');window.open('skype:00498941150015?call', '_system');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
+        <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
     </div>
 
 

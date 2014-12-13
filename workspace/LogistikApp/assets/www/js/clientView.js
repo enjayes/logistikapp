@@ -252,7 +252,7 @@ var clientView = {
         {
             //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
 
-
+            contactController.store();
             $("#jobSelector").show();
             $("#contact_daten_menu").hide();
 
