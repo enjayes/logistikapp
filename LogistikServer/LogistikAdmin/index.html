@@ -44,7 +44,7 @@
                 <li><a id="termineTab" href="#termine" data-ajax="false" onclick="tabsController.clickedTab(1)">Termine</a></li>
                 <li><a id="nachrichtenTab" href="#nachrichten" data-ajax="false" onclick="tabsController.clickedTab(2)">Nachrichten</a></li>
                 <li><a id="lieferantenTab" href="#lieferanten" data-ajax="false" onclick="tabsController.clickedTab(3)">Lieferanten</a></li>
-                <li id="konfigurationTabParent" style="width:40px"><a id="konfigurationsTab"  data-icon="gear" href="#konfiguration" data-ajax="false" onclick="tabsController.clickedTab(4)"></a></li>
+                <li id="konfigurationTabParent" style="width:40px"><a id="konfigurationsTab" data-icon="gear" href="#konfiguration" data-ajax="false" onclick="tabsController.clickedTab(4)"></a></li>
 
             </ul>
 
@@ -92,7 +92,7 @@
                     <div id="searchMessageLieferanten"></div>
 
 
-                    <div  id="nachrichtenMarktSelection" style="margin-top:15px"></div>
+                    <div id="nachrichtenMarktSelection" style="margin-top:15px"></div>
 
                     <div id="messageLieferantenEditor">
                         <textarea id="messageLieferantenCKEditor"></textarea>
@@ -145,7 +145,7 @@
                            class="greenbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a"
                            data-transition="pop">Speichern</a>
                         <a href="" id="rueckgaengigLieferant" onclick="lieferantenController.abbrechenBearbeitungAktuellerLieferant()" style="opacity:0"
-                           class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
+                           class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
                            data-transition="pop">Abbrechen</a>
                         <a href="" id="lieferantLoeschen" onclick="lieferantenController.loescheAktuellenLieferant()"
                            class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
@@ -160,6 +160,21 @@
         </div>
         <div id="konfiguration">
             <div class="tabinhalt ">
+                <h2>Standorte</h2>
+                <div id="konfigurationMarktSelection" style="margin-bottom:15px"></div>
+                <div id="marktInformationen" style="padding-top: 5px;width:40%">
+                    <label for="markttelefon" class="">Telefon:</label>
+                    <input type="text" name="user" id="markttelefon" value="" placeholder="" data-theme="a">
+
+                    <br>
+
+                    <a href="" id="speichereMarkt" onclick="konfigurationsController.speichereAktuellenMarkt()" style="opacity:0"
+                       class="greenbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow  ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a"
+                       data-transition="pop">Speichern</a>
+                    <a href="" id="rueckgaengigMarkt" onclick="konfigurationsController.abbrechenBearbeitungAktuellerMarkt()" style="opacity:0"
+                       class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
+                       data-transition="pop">Abbrechen</a>
+                </div>
             </div>
         </div>
     </div>
@@ -335,6 +350,8 @@
 <script src='js/nachrichtenController.js'></script>
 <script src='js/lieferantenController.js'></script>
 <script src='js/jobsController.js'></script>
+<script src='js/konfigurationsController.js'></script>
+
 
 <script src='js/uebersichtTab.js'></script>
 <script src='js/termineTab.js'></script>

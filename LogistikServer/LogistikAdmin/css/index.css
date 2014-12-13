@@ -532,6 +532,17 @@ Navbar
     margin: 0 !important;
 }
 
+
+
+/*Konfiguration*/
+
+
+
+#marktInformationen .ui-btn.ui-btn-b {
+    -webkit-transition: opacity 0.8s;
+    transition: opacity 0.8s;
+}
+
 #popupTermin #searchTerminLieferanten {
     position: absolute;
     left: 20px;

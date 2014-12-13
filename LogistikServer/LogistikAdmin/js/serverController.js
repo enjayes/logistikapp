@@ -384,9 +384,10 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.get, j: jobId, callback: serverController.callbackHandler.register(newCallback)}));
         }
 
-    }, maerkte: {
+    }, markt: {
         messageType: {
-            getAll: "mga"
+            getAll: "mga",
+            update:"mu"
         },
         getAll: function (callback) {
             var newCallback = function () {
@@ -396,6 +397,9 @@ serverController = {
             };
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
 
+        },
+        update: function (markt) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, m: markt}));
         }
     }, statistics: {
         messageType: {

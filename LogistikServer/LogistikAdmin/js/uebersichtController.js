@@ -15,12 +15,12 @@ uebersichtController = {
 
 
 
-        serverController.maerkte.getAll(function(maerkte){
+        serverController.markt.getAll(function(maerkte){
             uebersichtController.maerkte = maerkte;
             termineTab.termineMarktSelectionWidget.setData(uebersichtController.maerkte,true);
             nachrichtenTab.nachrichtenMarktSelectionWidget.setData(uebersichtController.maerkte,true);
 
-
+            konfigurationsController.setMaerkte(uebersichtController.maerkte);
         })
 
 

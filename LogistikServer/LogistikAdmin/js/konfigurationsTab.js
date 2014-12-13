@@ -12,12 +12,12 @@
 
 konfigurationsTab = {
     anchorName: "konfigurationsTab",
-   // controller: null,
-
+    controller: konfigurationsController,
+    konfigurationsMarktSelectionWidget:null,
     init: function () {
 
-
-
+        //Markt auswahl
+        this.konfigurationsMarktSelectionWidget = new MultipleSelectionWidget("#konfigurationMarktSelection",true);
 
 
     },

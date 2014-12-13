@@ -22,6 +22,7 @@ var initAfterServerConnection = function () {
         lieferantenController.init();
         termineController.init();
         jobsController.init();
+        konfigurationsController.init();
 
         $(document).ready(function () {
 
