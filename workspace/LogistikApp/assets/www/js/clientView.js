@@ -167,11 +167,10 @@ var clientView = {
         //logout
         if($("#t_notizen").val()!="")
         {
-            alert("full");
+            //TODO
         }
         else
         {
-            alert("empty");
         }
 
         //console.dir(job);
