@@ -231,11 +231,30 @@ var clientView = {
         var that = this;
 
 
-        $("#job_zurueck_start").click(function()
+        $("#job_zurueck_kontakt").click(function()
         {
-            $('#startScreen').show();
+            $('#contact_daten_menu').show();
             $('#jobSelector').hide();
 
+
+        });
+
+
+        $("#zurueck_start").click(function()
+        {
+            $('#startScreen').show();
+            $('#contact_daten_menu').hide();
+
+
+        });
+
+        $("#weiter_jobSelector").click(function()
+        {
+            //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
+
+
+            $("#jobSelector").show();
+            $("#contact_daten_menu").hide();
 
         });
 

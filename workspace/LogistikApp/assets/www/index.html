@@ -97,7 +97,7 @@
             <br>
 
 
-            <a onclick="$('#startScreen').hide();$('#jobSelector').show();" class="ui-btn ui-shadow ui-corner-all">Job</a>
+            <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="ui-btn ui-shadow ui-corner-all">Job</a>
             <br>
 
 
@@ -115,6 +115,7 @@
 
             <h2>Konfigurationsmenü</h2>
             <h3 id="server_status"></h3>
+
             <form>
                 <table style="width:100%;border: none">
                     <tr>
@@ -131,11 +132,9 @@
                             <label>
                                 Server
                             </label></td>
-                            <td><input id="t_server">
+                        <td><input id="t_server">
                         </td>
                     </tr>
-
-
 
                     <tr>
                         <td>
@@ -145,13 +144,9 @@
                         <td><input id="t_port">
                         </td>
                     </tr>
-
-
-
-
-
                 </table>
             </form>
+
 
             <br>
             <a id="save_config" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
@@ -159,6 +154,7 @@
 
 
         </div>
+
 
         <div id="lieferantenLogin" class="fadein"  style="display:none" >
             <h2>Anmelden</h2>
@@ -169,6 +165,61 @@
             <a id="login_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
+
+        <div id="contact_daten_menu" class="fadein"  style="display:none">
+            <h3>Kontakdaten</h3>
+            <br>
+            <form>
+                <table style="width:100%;border: none">
+                    <tr>
+                        <td>
+                            <label>
+                                Vorname:
+                            </label></td>
+                        <td><input id="vorname">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>
+                                Nachnname:
+                            </label></td>
+                        <td><input id="familienname">
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>
+                            <label>
+                                Firma:
+                            </label></td>
+                        <td><input id="firma">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>
+                                Telefon-Nr:
+                            </label></td>
+                        <td><input id="telefon">
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+
+            <br>
+
+            <a id="weiter_jobSelector" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+            <a id="zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
+        </div>
+        
+
 
 
         <div id="jobSelector" class="fadein"  style="display:none">
@@ -197,7 +248,7 @@
             <br>
 
             <a id="weiter_Aufgaben" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-            <a id="job_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+            <a id="job_zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
 
