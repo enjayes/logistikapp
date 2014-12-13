@@ -37,20 +37,22 @@ var contactController = {
 
 
     store:  function() {
-        lieferant.vorname = $("#vorname").val();
-        lieferant.name = $("#familienname").val();
-        lieferant.firma =  $("#firma").val();
-        lieferant.telefon =  $("#telefon").val();
-        lieferant.email = $("#email").val();
+        if(lieferant!=null) {
+            lieferant.vorname = $("#vorname").val();
+            lieferant.name = $("#familienname").val();
+            lieferant.firma = $("#firma").val();
+            lieferant.telefon = $("#telefon").val();
+            lieferant.email = $("#email").val();
 
 
-        localStorage.vorname =    lieferant.vorname;
-        localStorage.name =   lieferant.name;
-        localStorage.firma =    lieferant.firma;
-        localStorage.telefon =   lieferant.telefon;
-        localStorage.email =   lieferant.email;
+            localStorage.vorname = lieferant.vorname;
+            localStorage.name = lieferant.name;
+            localStorage.firma = lieferant.firma;
+            localStorage.telefon = lieferant.telefon;
+            localStorage.email = lieferant.email;
 
-        serverController.lieferant.update(lieferant);
+            serverController.lieferant.update(lieferant);
+        }
 
     }
 

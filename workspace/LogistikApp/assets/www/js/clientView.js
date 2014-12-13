@@ -260,6 +260,29 @@ var clientView = {
 
         });
 
+        $("#zurueck_kontakt").click(function()
+        {
+            $('#contact_daten_menu').show();
+            $('#termine_menu').hide();
+
+
+        });
+
+        $("#b_kalender").click(function()
+        {
+            $('#termine_menu').show();
+            $('#contact_daten_menu').hide();
+
+        });
+
+        $("#b_kalender").click(function()
+        {
+            $('#termine_menu').show();
+            $('#contact_daten_menu').hide();
+
+        });
+
+
         $("#weiter_jobSelector").click(function()
         {
             //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");

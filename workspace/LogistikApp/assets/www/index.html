@@ -222,14 +222,36 @@
                 </table>
             </form>
 
+            <a id="b_kalender"  style="width:100px;height:15px;float:right;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
             <br>
-
+            <br>
+            <br>
             <a id="weiter_jobSelector" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
             <a id="zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
-        
 
+        <div id="termine_menu" class="fadein"  style="display:none">
+            <h3>Termine</h3>
+            <br>
+            <ul data-role="listview">
+                <li>Termin 1a</li>
+                <li>Termin 2a</li>
+                <li>Termin 3a</li>
+            </ul>
+            <br>
+            <ul data-role="listview">
+                <li><a onClick = "alert('Termin');" href="#"> Termin 1b</a></li>
+                <li>Termin 2b</li>
+                <li>Termin 3b</li>
+            </ul>
+            <br>
+            <a id="cb_neuer_termin"  onclick="alert('Termin');" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Termin anlegen</a>
+            <br>
+
+            <a id="zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
+        </div>
 
 
         <div id="jobSelector" class="fadein"  style="display:none">
@@ -237,7 +259,6 @@
             <h3>Aufgabenwahl</h3>
             <br>
             <form>
-                <br>
                 <label>
                     <input name="checkbox-0 " type="checkbox" id="fixtermin">Fixtermin
                 </label>
