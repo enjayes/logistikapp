@@ -10,11 +10,7 @@
 
 var contactController = {
 
-
     lieferant: null,
-
-
-
 
     set: function(id,l) {
         lieferant = l;
@@ -37,21 +33,23 @@ var contactController = {
 
 
     store:  function() {
-        if(lieferant!=null) {
-            lieferant.vorname = $("#vorname").val();
-            lieferant.name = $("#familienname").val();
-            lieferant.firma = $("#firma").val();
-            lieferant.telefon = $("#telefon").val();
-            lieferant.email = $("#email").val();
+        if(this.lieferant!=undefined) {
+            if(this.lieferant!=null) {
+                this.lieferant.vorname = $("#vorname").val();
+                this.lieferant.name = $("#familienname").val();
+                this.lieferant.firma = $("#firma").val();
+                this.lieferant.telefon = $("#telefon").val();
+                this.lieferant.email = $("#email").val();
 
 
-            localStorage.vorname = lieferant.vorname;
-            localStorage.name = lieferant.name;
-            localStorage.firma = lieferant.firma;
-            localStorage.telefon = lieferant.telefon;
-            localStorage.email = lieferant.email;
+                localStorage.vorname = this.lieferant.vorname;
+                localStorage.name = this.lieferant.name;
+                localStorage.firma = this.lieferant.firma;
+                localStorage.telefon = this.lieferant.telefon;
+                localStorage.email = this.lieferant.email;
 
-            serverController.lieferant.update(lieferant);
+                serverController.lieferant.update(this.lieferant);
+            }
         }
 
     }
