@@ -29,7 +29,7 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
     that.domObjectInner = $(domObject + " #" + that.internalName + " .ui-controlgroup-controls");
 
 
-    this.setData = function (data, selectAll, clickedItemCallback) {
+    this.setData = function (data, clickedItemCallback, selectAll, minimumOneSelected) {
 
         if (!data)
             data = [];
@@ -52,17 +52,35 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
         var checkboxradios = that.domObjectInner.find('input').checkboxradio();
 
         if (checkboxradios.length) {
-            checkboxradios.parent("div").click(function () {
+            checkboxradios.parent("div").click(function (event) {
                 var checkboxRadio = $(this).find("input");
                 if (checkboxRadio.length == 0)
                     return;
-                if (that.clickedItemCallback) {
-                    var index = checkboxRadio.data("objindex")
-                    var obj = that.data[index];
-                    if (obj) {
-                        that.clickedItemCallback(obj);
+
+
+                var reselected = false;
+                //Keiner ausgewählt
+                if (minimumOneSelected) {
+
+                    var selected = that.domObjectInner.find("label.ui-btn-active");
+                    if (selected.length == 1) {
+                        if (selected.filter("[for=" + checkboxRadio[0].id + "]").length == 1) {
+
+                            reselected = true;
+                            event.stopPropagation();
+                        }
                     }
                 }
+
+
+                if (!reselected)
+                    if (that.clickedItemCallback) {
+                        var index = checkboxRadio.data("objindex")
+                        var obj = that.data[index];
+                        if (obj) {
+                            that.clickedItemCallback(obj);
+                        }
+                    }
 
 
             })

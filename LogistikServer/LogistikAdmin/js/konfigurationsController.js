@@ -30,7 +30,7 @@ konfigurationsController = {
     },
     setMaerkte:function(maerkte){
 
-        konfigurationsTab.konfigurationsMarktSelectionWidget.setData(uebersichtController.maerkte,true,konfigurationsController.zeigeMarkt);
+        konfigurationsTab.konfigurationsMarktSelectionWidget.setData(uebersichtController.maerkte,konfigurationsController.zeigeMarkt,true);
 
     },
     zeigeMarkt:function(markt){
