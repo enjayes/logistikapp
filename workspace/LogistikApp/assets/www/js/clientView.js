@@ -209,6 +209,7 @@ var clientView = {
         $("#t_grund").val(job.t_grund);
         $("#t_thematik").val(job.t_thematik);
 
+        $("#gespraechspartner").val( job.gespraechspartner );
 
         $('#cb_auftrag_getaetigt').prop('checked',job.cb_auftrag_getaetigt);
 
@@ -233,6 +234,8 @@ var clientView = {
 
         $('#cb_nr_abgabe').prop('checked',job.cb_nr_abgabe);
 
+        $("#t_vk_euro_abgabe").val(job.t_vk_euro_abgabe);
+        $("#t_warengruppe").val(job.t_warengruppe);
 
 
         $('#cb_verkostung').prop('checked',job.cb_verkostung);
