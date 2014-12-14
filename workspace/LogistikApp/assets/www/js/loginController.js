@@ -12,7 +12,6 @@
 loginController = {
 
 
-
     login:function(pin){
 
         var loginCallback =function(lieferant){
@@ -37,7 +36,8 @@ loginController = {
                 clientView.lieferant = lieferant;
                 console.dir(lieferant)
                 contactController.set(lieferant.id,lieferant);
-                $(".greetingLieferant").html(clientView.getLieferantFullName())
+                serverController.job.getTemplates(lieferant.id,templateController.set);
+                $(".greetingLieferant").html(clientView.getLieferantFullName());
 
             }
 
@@ -50,7 +50,13 @@ loginController = {
 
         var pinSha = ""+CryptoJS.SHA3("dfjo58443pggd9gudf9"+pin, { outputLength: 512 });
         serverController.lieferant.login(pinSha,loginCallback);
+    },
 
+
+
+    logout:function(){
+        clientView.lieferant = null;
+        contactController.set(null,null);
     }
 
 }

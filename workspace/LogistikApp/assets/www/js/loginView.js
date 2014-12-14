@@ -16,6 +16,7 @@ var loginView = {
 
         loginView.pinPad= new PinPad("#PINcode",function(code){
             loginController.login(code);
+
         })
 
         $("#start_anmelden").click(function()

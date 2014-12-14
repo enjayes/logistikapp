@@ -22,6 +22,7 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `logistikdb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `logistikdb`;
 
+
 -- --------------------------------------------------------
 
 --
@@ -69,14 +70,16 @@ INSERT INTO `adminnachrichtgesendet` (`id`, `datum`, `nachricht`) VALUES
 
 CREATE TABLE IF NOT EXISTS `jobs` (
   `id` varchar(36) NOT NULL,
-  `client_id` varchar(36) NOT NULL,
+  `lieferanten_id` varchar(36) NOT NULL,
   `markt_id` text NOT NULL,
   `timestamp_start` bigint(22) NOT NULL,
   `timestamp_end` bigint(22) NOT NULL,
   `fixtermin` tinyint(1) NOT NULL,
+  `gespraechspartner` text NOT NULL,
   `pending` tinyint(1) NOT NULL,
   `finished` tinyint(1) NOT NULL,
   `checked_out` tinyint(1) NOT NULL,
+  `template_name` text NOT NULL,
   `besuch` tinyint(1) NOT NULL,
   `cb_auftrag_getaetigt` tinyint(1) NOT NULL,
   `bestellung` tinyint(1) NOT NULL,
@@ -107,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 -- Daten für Tabelle `jobs`
 --
 
-INSERT INTO `jobs` (`id`, `client_id`, `markt_id`, `timestamp_start`, `timestamp_end`, `fixtermin`, `pending`, `finished`, `checked_out`, `besuch`, `cb_auftrag_getaetigt`, `bestellung`, `verraeumung`, `austausch`, `t_ziel`, `t_grund`, `t_thematik`, `cb_mhd`, `cb_ruecknahme`, `cb_reklamation`, `cb_warenaufbau`, `cb_umbau`, `cb_info_gespraech`, `cb_nr_abgabe`, `t_vk_euro_abgabe`, `t_warengruppe`, `cb_verkostung`, `cb_sortimentsinfo`, `cb_aktionsabsprache`, `cb_bemusterung`, `cb_verlosung`, `t_notizen`) VALUES
+INSERT INTO `jobs` (`id`, `lieferanten_id`, `markt_id`, `timestamp_start`, `timestamp_end`, `fixtermin`, `pending`, `finished`, `checked_out`, `besuch`, `cb_auftrag_getaetigt`, `bestellung`, `verraeumung`, `austausch`, `t_ziel`, `t_grund`, `t_thematik`, `cb_mhd`, `cb_ruecknahme`, `cb_reklamation`, `cb_warenaufbau`, `cb_umbau`, `cb_info_gespraech`, `cb_nr_abgabe`, `t_vk_euro_abgabe`, `t_warengruppe`, `cb_verkostung`, `cb_sortimentsinfo`, `cb_aktionsabsprache`, `cb_bemusterung`, `cb_verlosung`, `t_notizen`) VALUES
 ('27ab9eca-40fd-43b6-94dd-133a36245635', '1', '', 1418332790285, 1418332933373, 0, 0, 1, 1, 1, 0, 0, 0, 0, '                ', '\n                ', '\n                ', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, ''),
 ('9ef58605-9549-469d-bca4-cd739ed98c95', '1', '', 1418333107991, 1418333114778, 0, 0, 1, 1, 0, 0, 1, 0, 0, '                ', '\n                ', '\n                ', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, ''),
 ('aa188824-e44d-42a5-9945-f1b5a03aeda0', '1', '', 1418333141408, 1418333148595, 0, 0, 1, 1, 0, 0, 1, 0, 0, '                ', '\n                ', '\n                ', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, ''),
@@ -203,6 +206,41 @@ CREATE TABLE IF NOT EXISTS `termine` (
   `AllDay` tinyint(1) NOT NULL,
   `Notizen` text NOT NULL,
   `Lieferant` varchar(36) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Tabellenstruktur für Tabelle `Vorlagen`
+--
+
+CREATE TABLE IF NOT EXISTS `vorlagen` (
+  `id` varchar(36) NOT NULL,
+  `lieferanten_id` varchar(36) NOT NULL,
+  `markt_id` text NOT NULL,
+  `fixtermin` tinyint(1) NOT NULL,
+  `besuch` tinyint(1) NOT NULL,
+  `cb_auftrag_getaetigt` tinyint(1) NOT NULL,
+  `bestellung` tinyint(1) NOT NULL,
+  `verraeumung` tinyint(1) NOT NULL,
+  `austausch` tinyint(1) NOT NULL,
+  `t_ziel` text NOT NULL,
+  `t_grund` text NOT NULL,
+  `t_thematik` text NOT NULL,
+  `cb_mhd` tinyint(1) NOT NULL,
+  `cb_ruecknahme` tinyint(1) NOT NULL,
+  `cb_reklamation` tinyint(1) NOT NULL,
+  `cb_warenaufbau` tinyint(1) NOT NULL,
+  `cb_umbau` tinyint(1) NOT NULL,
+  `cb_info_gespraech` tinyint(1) NOT NULL,
+  `cb_nr_abgabe` tinyint(1) NOT NULL,
+  `t_vk_euro_abgabe` int NOT NULL,
+  `t_warengruppe` text NOT NULL,
+  `cb_verkostung` tinyint(1) NOT NULL,
+  `cb_sortimentsinfo` tinyint(1) NOT NULL,
+  `cb_aktionsabsprache` tinyint(1) NOT NULL,
+  `cb_bemusterung` tinyint(1) NOT NULL,
+  `cb_verlosung` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

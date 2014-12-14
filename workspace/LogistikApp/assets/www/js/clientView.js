@@ -63,6 +63,7 @@ var clientView = {
         job.t_ziel = $("#t_ziel").val();
         job.t_grund = $("#t_grund").val();
         job.t_thematik = $("#t_thematik").val();
+        job.gespraechspartner = $("#gespraechspartner").val();
 
         //input lieferantenschein2
 
@@ -167,11 +168,10 @@ var clientView = {
         //logout
         if($("#t_notizen").val()!="")
         {
-            alert("full");
+            //TODO
         }
         else
         {
-            alert("empty");
         }
 
         //console.dir(job);
@@ -189,16 +189,15 @@ var clientView = {
     },
 
 
-
     setJob: function(job){
         $('#cb_besuch').prop('checked', job.besuch);
 
-        $('#cb_cb_bestellung').prop('checked',job.bestellung);
+        $('#cb_bestellung').prop('checked',job.bestellung);
 
 
         $('#cb_verraeumung').prop('checked', job.verraeumung);
 
-        $('#cb_cb_austausch').prop('checked', job.austausch);
+        $('#cb_austausch').prop('checked', job.austausch);
 
         $("#t_ziel").val(job.t_ziel);
         $("#t_grund").val(job.t_grund);
@@ -254,6 +253,8 @@ var clientView = {
         var job = new Job(id);
         var that = this;
 
+
+        $("#popupVorlagen").show();
 
         $("#job_zurueck_kontakt").click(function()
         {
@@ -350,21 +351,59 @@ var clientView = {
         });
 
 
-        $("#checkout_lieferantenschein2").click(function()
-        {
-            job = that.check_input(job);
-            job = that.check_out(job);
 
-            serverController.job.create(job);
-
-        });
 
         $("#checkout_logout").click(function()
         {
             job = that.check_input(job);
             job = that.check_out(job);
 
+            if(contactController.lieferant) {
+                job.lieferanten_id = contactController.lieferant.id;
+            }
+            else{
+                alert("Kein Lieferant eingelogged!");
+            }
             serverController.job.create(job);
+
+            $("#goodbye").show();
+            $("#logout").hide();
+
+            loginController.logout();
+
+            setTimeout(function(){
+
+                //TODO ausloggen
+                $("#goodbye").hide();
+                $("#startScreen").show();
+
+            }, 10000);
+
+        });
+
+
+        $("#vorlage_logout").click(function()
+        {
+            $("#vorlage_benennen").show();
+
+        });
+
+        $("#speichern_vorlage").click(function()
+        {
+            if($("#vorlagen_name").val()=="")
+            {
+                $("#vorlage_leer").show();
+            }
+            else
+            {
+                job.template_name = $("#vorlagen_name").val();
+                $("#vorlage_benennen").hide();
+                $("#vorlage_logout").hide();
+                $("#vorlage_leer").hide();
+            }
+
+
+
 
         });
 

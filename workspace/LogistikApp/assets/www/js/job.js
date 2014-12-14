@@ -5,16 +5,18 @@
 
 function Job (id) {
     this.id = id;
-    this.lieferant_id = 1; //TODO:
+    this.lieferanten_id = 1; //TODO:
     this.markt_id = localStorage.markt_id;
     this.timestamp_start =  new Date();
     this.timestamp_end;
     this.fixtermin;
+    this.gespraechspartner;
 
     //status
     this.pending = true;
     this.finished = false;
     this.checked_out = false; //lieferant hat den job explicit abgeschlossen, d.h. sich ausgeloggt
+    this.template_name;
 
     //job_selector
     this.besuch = false;

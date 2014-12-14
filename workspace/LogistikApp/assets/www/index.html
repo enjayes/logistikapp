@@ -52,11 +52,14 @@
                // console.log("PROMPT: " + msg)
             }
         }
-
     </script>
 
 </head>
 <body>
+
+
+
+
 
 <div class="centerapp" style="display:none" class="fadein" >
 
@@ -285,7 +288,7 @@
 
             </form>
             <br>
-            <a id="cb_vorlagen"  onclick="alert('Aufgaben');" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left">Gespeicherte Vorlagen</a>
+            <a id="b_vorlagen"  onClick='$( "#popupVorlagen" ).popup("open") ;' class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left">Gespeicherte Vorlagen</a>
 
             <br>
 
@@ -318,6 +321,13 @@
                         Thematik
                     </label>
                 <td><textarea id="t_thematik"rows="1" cols="50"></textarea></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        Gesprächspartner
+                    </label>
+                <td><input id="gespraechspartner"></input></td>
             </tr>
             <br>
             <a id="weiter_lieferantenschein1" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
@@ -406,19 +416,50 @@
 
         <div id="logout" style="display:none">
             <td><textarea id="t_notizen" rows="1" cols="50"></textarea></td>
+            <a id="vorlage_logout" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">als Vorlage speichern...</a>
+
+            <div id="vorlage_benennen" class="fadein"  style="display:none">
+                <h3>Vorlagenname</h3>
+
+                <input id="vorlagen_name">
+
+                <div id="vorlage_leer" style="display:none"><font color="red">Vorlagename darf nicht leer sein.</font></div>
+
+                <a id="speichern_vorlage" class="ui-btn ui-shadow ui-corner-all ui-icon-disk ui-btn-icon-left">Speichern</a>
+            </div>
+
+
             <a id="checkout_logout" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Checkout</a>
             <a id="zurueck_logout" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
+
+        <div id="goodbye" style="display:none">
+            <h3>Auf Wiedersehen</h3>
+
+        </div>
+
         <br>
         <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
+
     </div>
+
 
 
 </div>
 
 
+</div>
 
+<div data-role="popup" id="popupVorlagen" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p>Vorlage auswählen: <p>
+    <br>
+    <div id = "templateList">
+
+    </div>
+    <br>
+</div>
 
 <!--Own Libraries ------------------------------------------------->
 
@@ -441,6 +482,7 @@
 <script type="text/javascript" src="js/startView.js"></script>
 <script type="text/javascript" src="js/configView.js"></script>
 <script type="text/javascript" src="js/contactController.js"></script>
+<script type="text/javascript" src="js/templateController.js"></script>
 
 <script type="text/javascript" src="js/loginView.js"></script>
 
