@@ -32,9 +32,6 @@ uebersichtController = {
 
             }
 
-            console.dir("------------------")
-            console.dir(statistics)
-
             var pieData = [
                 {
                     value: statistics.besuche,

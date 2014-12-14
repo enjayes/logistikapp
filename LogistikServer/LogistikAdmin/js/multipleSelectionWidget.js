@@ -92,7 +92,6 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
 
                 $(checkboxradios[0]).prop("checked", true).checkboxradio("refresh");
 
-                console.dir(checkboxradios[0])
 
                 if (that.data.length > 0)
                     that.clickedItemCallback(that.data[0]);
