@@ -21,7 +21,8 @@ var notifications = {
             text : message+"<button>Prost!</button>",
             stack: 50,
             hideAfter: 6000000,
-            showHideTransition : 'fade'
+            showHideTransition : 'fade',
+            afterHidden: callback
 
         })
 
