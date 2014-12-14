@@ -192,12 +192,12 @@ var clientView = {
     setJob: function(job){
         $('#cb_besuch').prop('checked', job.besuch);
 
-        $('#cb_cb_bestellung').prop('checked',job.bestellung);
+        $('#cb_bestellung').prop('checked',job.bestellung);
 
 
         $('#cb_verraeumung').prop('checked', job.verraeumung);
 
-        $('#cb_cb_austausch').prop('checked', job.austausch);
+        $('#cb_austausch').prop('checked', job.austausch);
 
         $("#t_ziel").val(job.t_ziel);
         $("#t_grund").val(job.t_grund);
@@ -254,7 +254,7 @@ var clientView = {
         var that = this;
 
 
-        $( "#popupVorlagen" ).popup();
+        $("#popupVorlagen").show();
 
         $("#job_zurueck_kontakt").click(function()
         {

@@ -52,22 +52,13 @@
                // console.log("PROMPT: " + msg)
             }
         }
-
     </script>
 
 </head>
 <body>
 
 
-<div data-role="popup" id="popupVorlagen" data-transition="fade" data-rel="popup" class="ui-content">
-    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-    <p>Vorlage auswählen: <p>
-    <br>
-    <div id = "templateList">
 
-    </div>
-    <br>
-</div>
 
 
 <div class="centerapp" style="display:none" class="fadein" >
@@ -460,7 +451,15 @@
 
 </div>
 
+<div data-role="popup" id="popupVorlagen" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <p>Vorlage auswählen: <p>
+    <br>
+    <div id = "templateList">
 
+    </div>
+    <br>
+</div>
 
 <!--Own Libraries ------------------------------------------------->
 

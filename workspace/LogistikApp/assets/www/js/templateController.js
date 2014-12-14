@@ -22,14 +22,14 @@ var templateController = {
         console.dir("TEMPLATE LISTE:");
         console.dir(list);
         console.dir(list[0].markt_id);
-        var html = '<ul data-role="listview">';
+        var html = '<ul data-role="listview" id = "templateListview">';
 
 
         html = html+ '<li><a href="#">Zuletzt verwendetes Formular</a></li>';
 
 
         for (index = 1; index < list.length; ++index) {
-            html = html+ '<li><a href="#">'+list[0].template_name+'</a></li>';
+            html = html+ '<li><a href="#">'+list[index].template_name+'</a></li>';
         }
 
 
@@ -37,8 +37,9 @@ var templateController = {
 
         $("#templateList").html(html);
 
+        $("#templateListview").listview();
 
-    },
+    }
 
 
 

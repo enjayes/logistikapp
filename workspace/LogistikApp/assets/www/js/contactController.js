@@ -14,12 +14,14 @@ var contactController = {
 
     set: function(id,l) {
         this.lieferant = l;
-        if (this.lieferant == null && id == localStorage.lieferanten_id) {
-            $("#vorname").val(localStorage.vorname);
-            $("#familienname").val(localStorage.name);
-            $("#firma").val(localStorage.firma);
-            $("#telefon").val(localStorage.telefon);
-            $("#email").val(localStorage.email);
+        if (this.lieferant == null){
+            if(id == localStorage.lieferanten_id) {
+                $("#vorname").val(localStorage.vorname);
+                $("#familienname").val(localStorage.name);
+                $("#firma").val(localStorage.firma);
+                $("#telefon").val(localStorage.telefon);
+                $("#email").val(localStorage.email);
+            }
         }
         else {
             $("#vorname").val(this.lieferant.vorname);
