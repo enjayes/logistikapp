@@ -18,12 +18,20 @@ var notifications = {
 
         $.toast({
             heading: title,
-            text : message,
+            text : message+"<button>Prost!</button>",
             stack: 50,
-            hideAfter: 6000000
+            hideAfter: 6000000,
+            showHideTransition : 'fade'
 
         })
 
+    },
+
+    showMessages: function(nachrichten) {
+        for (var i = 0; i < nachrichten.length; i++) {
+            notifications.show("Nachricht", nachrichten[i].nachricht, function () {
+            });
+        }
     }
 
 

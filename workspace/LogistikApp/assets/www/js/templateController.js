@@ -17,19 +17,21 @@
 
 var templateController = {
 
-    set: function(list) {
+    templateList: null,
 
+    set: function(list) {
+        this.templateList = list;
         console.dir("TEMPLATE LISTE:");
         console.dir(list);
         console.dir(list[0].markt_id);
         var html = '<ul data-role="listview" id = "templateListview">';
 
 
-        html = html+ '<li><a href="#">Zuletzt verwendetes Formular</a></li>';
+        html = html+ '<li><a onClick="templateController.load(0)"  href="#">Zuletzt verwendetes Formular</a></li>';
 
 
         for (index = 1; index < list.length; ++index) {
-            html = html+ '<li><a href="#">'+list[index].template_name+'</a></li>';
+            html = html+ '<li><a onClick="templateController.load('+index+')" href="#">'+list[index].template_name+'</a></li>';
         }
 
 
@@ -39,6 +41,12 @@ var templateController = {
 
         $("#templateListview").listview();
 
+    },
+
+    load: function(index){
+        clientView.setJob(templateList[index]);
+        $("#weiter_Aufgaben").click();
+        $( "#popupVorlagen" ).popup("close") ;
     }
 
 

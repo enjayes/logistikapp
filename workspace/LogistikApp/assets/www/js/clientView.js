@@ -199,6 +199,7 @@ var clientView = {
 
         $('#cb_austausch').prop('checked', job.austausch);
 
+
         $("#t_ziel").val(job.t_ziel);
         $("#t_grund").val(job.t_grund);
         $("#t_thematik").val(job.t_thematik);
@@ -244,6 +245,7 @@ var clientView = {
         $('#cb_verlosung').prop('checked', job.cb_verlosung);
 
         $("#t_notizen").val(job.t_notizen);
+        $('[type=checkbox]').checkboxradio("refresh");
 
         console.dir(job);
     },
