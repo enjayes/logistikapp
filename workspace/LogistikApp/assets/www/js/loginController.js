@@ -36,7 +36,7 @@ loginController = {
                 clientView.lieferant = lieferant;
                 console.dir(lieferant)
                 contactController.set(lieferant.id,lieferant);
-                serverController.job.getTemplates(lieferant.id,this.templateCallback);
+                serverController.job.getTemplates(lieferant.id,templateController.set);
                 $(".greetingLieferant").html(clientView.getLieferantFullName());
 
             }
@@ -51,10 +51,6 @@ loginController = {
         var pinSha = ""+CryptoJS.SHA3("dfjo58443pggd9gudf9"+pin, { outputLength: 512 });
         serverController.lieferant.login(pinSha,loginCallback);
 
-    },
-    templateCallback:function(list){
-        console.dir("TEMPLATES:");
-        console.dir(list);
     }
 
 }
