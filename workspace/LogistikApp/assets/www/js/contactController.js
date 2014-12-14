@@ -13,8 +13,8 @@ var contactController = {
     lieferant: null,
 
     set: function(id,l) {
-        lieferant = l;
-        if (lieferant == null && id == localStorage.lieferanted_id) {
+        this.lieferant = l;
+        if (this.lieferant == null && id == localStorage.lieferanten_id) {
             $("#vorname").val(localStorage.vorname);
             $("#familienname").val(localStorage.name);
             $("#firma").val(localStorage.firma);
@@ -22,11 +22,11 @@ var contactController = {
             $("#email").val(localStorage.email);
         }
         else {
-            $("#vorname").val(lieferant.vorname);
-            $("#familienname").val(lieferant.name);
-            $("#firma").val(lieferant.firma);
-            $("#telefon").val(lieferant.telefon);
-            $("#email").val(lieferant.email);
+            $("#vorname").val(this.lieferant.vorname);
+            $("#familienname").val(this.lieferant.name);
+            $("#firma").val(this.lieferant.firma);
+            $("#telefon").val(this.lieferant.telefon);
+            $("#email").val(this.lieferant.email);
 
         }
     },
@@ -41,7 +41,7 @@ var contactController = {
                 this.lieferant.telefon = $("#telefon").val();
                 this.lieferant.email = $("#email").val();
 
-
+                localStorage.lieferanten_id = this.lieferant.id;
                 localStorage.vorname = this.lieferant.vorname;
                 localStorage.name = this.lieferant.name;
                 localStorage.firma = this.lieferant.firma;

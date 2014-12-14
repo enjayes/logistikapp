@@ -192,6 +192,7 @@ serverController = {
         messageType: {
 
             getAll: "jga",
+            getTemplates:"jt",
             create: "jc",
             update: "ju",
             delete: "jd",
@@ -229,6 +230,21 @@ serverController = {
             };
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
+        getTemplatesCallback: null,
+        getTemplates: function (lieferanten_id,callback) {
+            serverController.job.getTemplatesCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.job.parseDTO(list[i]);
+                }
+                return callback(list);
+            };
+            var newCallback = function () {
+                serverController.job.getTemplatesCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getTemplatesOnLoginCounter++;
+                serverController.onLoadedGetTemplatesOnLogin();
+            };
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getTemplates, lid: lieferanten_id ,callback: serverController.callbackHandler.register(newCallback)}));
+        },
         create: function (job) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, j: this.buildDTO(job)}));
         },
@@ -241,11 +257,19 @@ serverController = {
 
     },
 
+
+    getTemplatesOnLoginCounter: 0,
     getAllOnStartupCounter: 0,
     getAllOnStartupMax: 1,
     onLoadedGetAllOnStartup: function () {
         if (serverController.getAllOnStartupCounter == serverController.getAllOnStartupMax) {
             console.log("Get All complete")
+        }
+
+    },
+    onLoadedGetTemplatesOnLogin: function () {
+        if (serverController.getTemplatesOnLoginCounter == serverController.getAllOnStartupMax) {
+            console.log("Get Templates complete")
         }
 
     }

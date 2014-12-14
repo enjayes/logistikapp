@@ -189,7 +189,6 @@ var clientView = {
     },
 
 
-
     setJob: function(job){
         $('#cb_besuch').prop('checked', job.besuch);
 
@@ -254,6 +253,8 @@ var clientView = {
         var job = new Job(id);
         var that = this;
 
+
+        $( "#popupVorlagen" ).popup();
 
         $("#job_zurueck_kontakt").click(function()
         {
@@ -350,20 +351,19 @@ var clientView = {
         });
 
 
-        $("#checkout_lieferantenschein2").click(function()
-        {
-            job = that.check_input(job);
-            job = that.check_out(job);
 
-            serverController.job.create(job);
-
-        });
 
         $("#checkout_logout").click(function()
         {
             job = that.check_input(job);
             job = that.check_out(job);
 
+            if(contactController.lieferant) {
+                job.lieferant_id = contactController.lieferant.id;
+            }
+            else{
+                alert("Kein Lieferant eingelogged!");
+            }
             serverController.job.create(job);
 
         });
