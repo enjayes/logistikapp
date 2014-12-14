@@ -63,6 +63,7 @@ var clientView = {
         job.t_ziel = $("#t_ziel").val();
         job.t_grund = $("#t_grund").val();
         job.t_thematik = $("#t_thematik").val();
+        job.gespraechspartner = $("#gespraechspartner").val();
 
         //input lieferantenschein2
 
