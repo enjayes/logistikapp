@@ -26,7 +26,13 @@ var templateController = {
 
 
         html = html+ '<li><a href="#">Zuletzt verwendetes Formular</a></li>';
-        html = html+ '<li><a href="#">'+list[0].markt_id+'</a></li>';
+
+
+        for (index = 1; index < list.length; ++index) {
+            html = html+ '<li><a href="#">'+list[0].template_name+'</a></li>';
+        }
+
+
         html = html+ '</ul>';
 
         $("#templateList").html(html);
