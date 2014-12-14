@@ -10,11 +10,13 @@ function Job (id) {
     this.timestamp_start =  new Date();
     this.timestamp_end;
     this.fixtermin;
+    this.gespraechspartner;
 
     //status
     this.pending = true;
     this.finished = false;
     this.checked_out = false; //lieferant hat den job explicit abgeschlossen, d.h. sich ausgeloggt
+    this.template_name;
 
     //job_selector
     this.besuch = false;
