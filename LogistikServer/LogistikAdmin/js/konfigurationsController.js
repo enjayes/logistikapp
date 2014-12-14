@@ -34,7 +34,6 @@ konfigurationsController = {
 
     },
     zeigeMarkt:function(markt){
-        console.log(markt);
 
         if(markt&&markt.id!=undefined){
 

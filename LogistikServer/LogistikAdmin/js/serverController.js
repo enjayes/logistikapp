@@ -73,7 +73,7 @@ serverController = {
                     serverController.lieferant.getAllCallback(msg.l);
             } else if (msg.t == serverController.termin.messageType.updateOthers) {
                 if (msg.e)
-                    serverController.termin.getAllCallback(msg.e);
+                    serverController.termin.getRangeCallback(msg.e);
             } else if (msg.t == serverController.nachricht.messageType.updateOthers) {
                 if (msg.n)
                     serverController.nachricht.getAllCallback(msg.n);
@@ -161,6 +161,7 @@ serverController = {
     termin: {
         messageType: {
             getAll: "tga",
+            getRange: "tgr",
             create: "tc",
             update: "tu",
             delete: "td",
@@ -173,15 +174,20 @@ serverController = {
                 id: termin.id,
                 Title: termin.title,
                 Start: termin.start.format(),
+                StartMilli: termin.start.toDate().getTime(),
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant
             };
 
-            if (termin.end)
+            if (termin.end){
                 newTermin.End = termin.end.format();
-            else
+                newTermin.EndMilli = termin.end.toDate().getTime();
+            }
+            else{
                 newTermin.End = "";
+                newTermin.EndMilli = 0;
+            }
 
             return newTermin;
         },
@@ -205,7 +211,7 @@ serverController = {
         },
         getAllCallback: null,
         getAll: function (callback) {
-            serverController.termin.getAllCallback = function (list) {
+            serverController.termin.getRangeCallback = function (list) {
 
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.termin.parseDTO(list[i]);
@@ -215,13 +221,31 @@ serverController = {
 
             var newCallback = function () {
 
-                serverController.termin.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.termin.getRangeCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
 
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
 
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+        }, getRange: function (start,end,callback) {
+            serverController.termin.getRangeCallback = function (list) {
+
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                }
+                return callback(list);
+            };
+
+            var newCallback = function () {
+
+                serverController.termin.getRangeCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            };
+
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,start:start.toDate().getTime(), end:end.toDate().getTime(), callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (termin) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: this.buildDTO(termin)}));
@@ -416,7 +440,7 @@ serverController = {
         }
     },
     getAllOnStartupCounter: 0,
-    getAllOnStartupMax: 6,
+    getAllOnStartupMax: 5,
     onLoadedGetAllOnStartup: function () {
         if (serverController.getAllOnStartupCounter == serverController.getAllOnStartupMax) {
             crossroads.parse(location.hash);

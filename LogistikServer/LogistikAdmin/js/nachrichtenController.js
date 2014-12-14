@@ -41,10 +41,9 @@ nachrichtenController = {
                 nachricht.datum = new Date(nachricht.datum);
             }
             nachrichtenController.renderEmpfangeneNachrichten();
-        }
+        };
 
         serverController.antwortNachricht.getAll(getAntwortNachrichtenFromServer);
-
 
     },
     ungeleseneNachrichten: 0,
@@ -61,7 +60,6 @@ nachrichtenController = {
         for(var j =0;j<openedCollapsiblesDom.length;j++){
             openedCollapsibles.push(openedCollapsiblesDom[j].id)
         }
-
 
         for (var i = 0; i < this.nachrichtenRecieved.length; i++) {
             var nachricht = this.nachrichtenRecieved[i];
@@ -95,12 +93,10 @@ nachrichtenController = {
                         tabsController.openTabWithoutClick(3);
                         lieferantenController.zeigeAktuellenLieferanten();
                     })
-                }
+                };
                 clickLieferant(lieferanten,lieferant);
 
             }
-
-
 
             var append = function (nachricht) {
 
@@ -122,7 +118,7 @@ nachrichtenController = {
 
                     }
 
-                })
+                });
 
                 nachrichtDom.find("p").prepend(lieferanten);
                 nachrichtDom.find(".deleteMessageButton").click(function () {
@@ -169,16 +165,15 @@ nachrichtenController = {
 
         container.html("");
         for (var i = 0; i < nachrichtenController.nachrichtenSent.length; i++) {
-            var nachricht = nachrichtenController.nachrichtenSent[i];
+            var nachricht = nachrichtenController.nachrichtenSent[i%2];
 
 
             var lieferanten = $("<span>An:</span>");
 
             var countGelesen = 0;
-            for (var j = 0; j < nachrichtenController.nachrichtenSent[i].lieferanten.length; j++) {
+            for (var j = 0; j < nachricht.lieferanten.length; j++) {
 
-
-                var lieferant = lieferantenController.getLieferantByID(nachrichtenController.nachrichtenSent[i].lieferanten[j].lieferantid);
+                var lieferant = lieferantenController.getLieferantByID(nachricht.lieferanten[j].lieferantid);
 
                 if (lieferant) {
                     var lieferantDom = $("<a title ='" + lieferantenController.getLieferantFullName(lieferant) + "' class='lieferantMsgButton ui-btn ui-btn-inline ui-mini' >" + lieferant.name + "</a> ");
@@ -194,7 +189,7 @@ nachrichtenController = {
                     }
                     clickLieferant(lieferantDom,lieferant);
 
-                    if(nachrichtenController.nachrichtenSent[i].lieferanten[j].read){
+                    if(nachricht.lieferanten[j].read){
                         countGelesen++;
                         lieferantDom.attr('title',lieferantDom.attr('title')+" - Gelesen");
 
@@ -218,7 +213,7 @@ nachrichtenController = {
             lieferanten.append("<br/><br />");
 
 
-            if( countGelesen ==nachrichtenController.nachrichtenSent[i].lieferanten.length)
+            if( countGelesen ==nachricht.lieferanten.length)
              var read = "read";
             else
              read = "unread";

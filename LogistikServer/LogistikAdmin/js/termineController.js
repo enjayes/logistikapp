@@ -13,54 +13,13 @@
 termineController = {
     init: function () {
 
-        this.calendarData.events = termineController.events;
-
-
-
+        //Set Event Source
+        this.calendarData.events = this.getCalendarEvents;
+        this.calendarData.initialized = false;
     },
-    ready:function(){
-        //Get Lieferanten From Server
-
-        var getTermineFromServer = function (termine) {
-            if (termine) {
+    ready: function () {
 
 
-                termine.forEach(function (termin) {
-                    if (termin.start)
-                        termin.start = termineTab.calenderFactory.moment(termin.start);
-                    if (termin.end)
-                        termin.end = termineTab.calenderFactory.moment(termin.end);
-                })
-
-
-                termineController.events = termine;
-                termineController.calendarData.events = termineController.events;
-                if (termineTab.calender) {
-
-                    if (tabsController.tab() == termineTab) {
-
-                        if (termineController.aktuellesEvent) {
-                            var termin = termineController.getTerminByID(termineController.aktuellesEvent.id);
-
-                            console.log(termin + "   " + termineController.aktuellerTerminGespeichert)
-                            console.dir(termin)
-                            if (!termin)
-                                $("#popupTermin").popup("close");
-                            else if (termineController.aktuellerTerminGespeichert) {
-                                termineController.zeigeEvent(termin, termineController.aktuellesEventIstNeu);
-                            }
-
-                        }
-                    }
-
-                    termineTab.calender.fullCalendar('removeEvents');
-                    termineTab.calender.fullCalendar('addEventSource', termine);
-                }
-
-            }
-        }
-
-        serverController.termin.getAll(getTermineFromServer);
 
 
     },
@@ -112,7 +71,75 @@ termineController = {
         timeFormat: 'H(:mm)'
 
     },
+    handleNewTermineFromServer:function (termine,callback) {
+        // console.dir(termine)
 
+        if (termine) {
+
+            termine.forEach(function (termin) {
+                if (termin.start)
+                    termin.start = termineTab.calenderFactory.moment(termin.start);
+                if (termin.end)
+                    termin.end = termineTab.calenderFactory.moment(termin.end);
+            })
+
+
+            termineController.events = termine;
+
+
+            if (termineTab.calender) {
+
+                if (tabsController.tab() == termineTab) {
+
+                    if (termineController.aktuellesEvent) {
+                        var termin = termineController.getTerminByID(termineController.aktuellesEvent.id);
+
+                        console.log(termin + "   " + termineController.aktuellerTerminGespeichert)
+                        console.dir(termin)
+                        if (!termin)
+                            $("#popupTermin").popup("close");
+                        else if (termineController.aktuellerTerminGespeichert) {
+                            termineController.zeigeEvent(termin, termineController.aktuellesEventIstNeu);
+                        }
+
+                    }
+                }
+
+                if(callback)
+                callback();
+
+
+            }
+
+        }
+    },
+    getCalendarEvents: function (start, end, timezone, callback) {
+
+
+        console.log("get events");
+        console.dir(start);
+        console.dir(end);
+        console.dir(callback)
+
+
+        var handleNewTermineFromServerAfterCalenderFetch = function (termine) {
+            termineController.handleNewTermineFromServer(termine,function(){
+
+                $(".fc-widget-content").addClass("fade");
+                setTimeout(function(){
+                    $(".fc-widget-content").removeClass("fade");
+                },300)
+                callback(termineController.events)
+
+            })
+        }
+
+        serverController.termin.getRange(start,end,handleNewTermineFromServerAfterCalenderFetch);
+
+
+
+
+    },
     waehleLieferant: function (lieferant) {
 
         termineController.aktuellerTerminLieferant = lieferant;
@@ -168,7 +195,7 @@ termineController = {
 
 
         if (tabsController.tab() == termineTab)
-            var lieferantenInput =  termineTab.searchWidget.getInput();
+            var lieferantenInput = termineTab.searchWidget.getInput();
         else
             lieferantenInput = $("#lieferantenTerminReadyOnly");
 
@@ -217,7 +244,7 @@ termineController = {
         })
 
 
-        if(! tabsController.terminePopupOpen){
+        if (!tabsController.terminePopupOpen) {
             $("#popupTermin .redborder").removeClass("redborder");
             termineController.aktuellerTerminGespeichert = !neuesEvent;
             termineController.zeigeSpeicherButton();
@@ -235,7 +262,6 @@ termineController = {
                     termineController.zeigeSpeicherButton()
                 }
         })
-
 
 
         //Validate Lieferant in Popup
@@ -268,7 +294,7 @@ termineController = {
         termineTab.searchWidget.getInput().on("input", checkValidLieferant);
 
         //Check if time is right
-        $('#popupTermin .clockpicker input').on("change",function () {
+        $('#popupTermin .clockpicker input').on("change", function () {
             var value = (($(this).val() || '') + '').split(':');
             var hours = parseInt(value[0]) || 0;
             var minutes = parseInt(value[1]) || 0;
@@ -278,10 +304,6 @@ termineController = {
                 minutes = "0" + minutes;
             $(this).val(hours + ":" + minutes)
         });
-
-
-
-
 
 
     },
@@ -444,8 +466,6 @@ termineController = {
         termineController.aktuellesEvent = null;
         termineController.aktuellerTerminLieferant = null;
         $("#deleteTerminPopup").popup("close");
-
-
 
 
     },
