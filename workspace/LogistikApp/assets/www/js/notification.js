@@ -40,7 +40,6 @@ var notifications = {
                 });
             }
             showMessage(i);
-
         }
     },
     mark_read: function (nachricht) {
