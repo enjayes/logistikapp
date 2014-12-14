@@ -141,6 +141,9 @@ if ( typeof Object.create !== 'function' ) {
 						that._toastEl.trigger('afterHidden');
 					});
 				}
+
+				serverController.
+
 			});
 
 			if ( typeof this.options.beforeShow == 'function' ) {

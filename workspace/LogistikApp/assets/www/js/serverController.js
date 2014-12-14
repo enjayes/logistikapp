@@ -151,7 +151,8 @@ serverController = {
             getAll: "nga",
             create: "nc",
             delete: "nd",
-            updateOthers: "nuo"
+            updateOthers: "nuo",
+            markRead: "nm"
         },
         buildDTO: function (nachricht) {
             return {
@@ -184,6 +185,10 @@ serverController = {
             };
 
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+        },
+
+        markRead: function (nachricht) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, nid: nachricht.id}));
         }
 
     }

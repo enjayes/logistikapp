@@ -24,6 +24,11 @@ var notifications = {
 
         })
 
+    },
+
+    mark_read: function(nachricht)
+    {
+        serverController.nachricht.markRead(nachricht);
     }
 
 
