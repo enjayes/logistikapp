@@ -368,6 +368,21 @@ var clientView = {
 
         });
 
+
+        $("#vorlage_logout").click(function()
+        {
+            $("#vorlage_benennen").show();
+
+        });
+
+        $("#speichern_vorlage").click(function()
+        {
+            job.template_name = $("#vorlagen_name").val();
+            $("#vorlage_benennen").hide();
+            $("#vorlage_logout").hide();
+
+        });
+
         $("#zurueck_logout").click(function()
         {
             $("#logout").hide();
