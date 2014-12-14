@@ -188,7 +188,7 @@ serverController = {
         },
 
         markRead: function (nachricht) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, nid: nachricht.id}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update,lid: clientView.lieferant , nid: nachricht.id}));
         }
 
     }
