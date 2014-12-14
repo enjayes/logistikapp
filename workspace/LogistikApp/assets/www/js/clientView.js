@@ -377,7 +377,7 @@ var clientView = {
                 $("#goodbye").hide();
                 $("#startScreen").show();
 
-            }, 15000);
+            }, 10000);
 
         });
 
