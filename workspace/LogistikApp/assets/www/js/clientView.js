@@ -359,7 +359,7 @@ var clientView = {
             job = that.check_out(job);
 
             if(contactController.lieferant) {
-                job.lieferant_id = contactController.lieferant.id;
+                job.lieferanten_id = contactController.lieferant.id;
             }
             else{
                 alert("Kein Lieferant eingelogged!");
