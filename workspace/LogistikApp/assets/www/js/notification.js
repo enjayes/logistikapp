@@ -34,7 +34,7 @@ var notifications = {
                 notifications.show("Nachricht", nachrichten[index].nachricht, function () {
 
                     mark_read(nachrichten[index]);
-                    alert("Callback");
+                    //alert("Callback");
 
 
                 });
