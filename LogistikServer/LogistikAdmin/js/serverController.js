@@ -177,7 +177,8 @@ serverController = {
                 StartMilli: termin.start.toDate().getTime(),
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
-                Lieferant: termin.lieferant
+                Lieferant: termin.lieferant,
+                RepeatDays: 7//termin.repeatDays
             };
 
             if (termin.end) {
@@ -198,7 +199,9 @@ serverController = {
                 start: termin.Start,
                 allDay: termin.AllDay,
                 notizen: termin.Notizen,
-                lieferant: termin.Lieferant
+                lieferant: termin.Lieferant,
+                repeatDays: termin.RepeatDays
+
 
             };
 

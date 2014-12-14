@@ -68,9 +68,7 @@ button {
     margin-right: auto !important;
 }
 
-#popupTermin label{
-    margin-top: 16px !important;
-}
+
 
 /**
 Datebox
@@ -104,17 +102,62 @@ Datebox
     float: right !important;
 }
 
-#popupTermin .ui-checkbox.lieferantAlldayTerminparent {
+#popupTermin .ui-checkbox.lieferantAlldayTerminparent{
     display: inline-block;
     vertical-align: middle;
     margin: -10px;
 }
 
-#popupTermin .ui-checkbox.lieferantAlldayTerminparent .ui-btn {
+#popupTermin .ui-checkbox.lieferantAlldayTerminparent .ui-btn,#lieferantRepeatTerminParent .ui-checkbox .ui-btn {
     border: none !important;
     font-weight: normal !important;
     background-color: #fff !important;
 }
+
+#lieferantRepeatTerminParent{
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    position: relative;
+}
+
+#lieferantRepeatTerminParent .ui-input-text{
+    display: inline-block;
+    position: absolute;
+    top: -16px;
+    left: 160px;
+    width: 60px;
+}
+
+#lieferantRepeatTerminParent #repeatDaysText{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 228px;
+    width: 60px;
+}
+
+#lieferantRepeatTerminParent .ui-checkbox .ui-btn{
+    padding-right:0px;
+
+}
+
+
+
+#lieferantRepeatTerminParent .ui-btn{
+    display: inline-block;
+    vertical-align: middle;}
+
+
+
+#popupTermin #lieferantRepeatTerminParent .ui-checkbox  {
+    margin: -10px;
+}
+
+#popupTermin .topMarginCheckbox{
+    margin-top: 16px !important;
+}
+
 
 .clockpicker-popover {
     z-index: 2010 !important;
@@ -568,6 +611,15 @@ Navbar
 #popupTermin #lieferantTermin {
     float: left
 }
+
+#popupTermin #lieferantTerminLabel {
+    margin-top: 15px;
+}
+
+#popupTermin #terminnotizenLabel {
+    margin-top: 7px;
+}
+
 
 #popupTermin #lieferantTermin .ui-input-text {
     border: none !important;

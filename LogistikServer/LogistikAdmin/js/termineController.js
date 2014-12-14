@@ -122,12 +122,6 @@ termineController = {
     },
     getCalendarEvents: function (start, end, timezone, callback) {
 
-
-        console.log("get events");
-        console.dir(start);
-        console.dir(end);
-        console.dir(callback)
-
         if(termineController.calendarData.nextLocal){
             termineController.calendarData.nextLocal = false;
             callback(termineController.events);
@@ -227,7 +221,6 @@ termineController = {
         if (calenderEvent.allDay) {
             $("#lieferantAlldayTermin").prop("checked", true).checkboxradio("refresh");
             $("#popupTermin .clockpicker").addClass("ui-disabled");
-
         }
         else {
             $("#lieferantAlldayTermin").removeProp("checked", true).checkboxradio("refresh");
@@ -240,6 +233,45 @@ termineController = {
                     $("#popupTermin .clockpicker").addClass("ui-disabled");
                 else
                     $("#popupTermin .clockpicker").removeClass("ui-disabled");
+                if (termineController.aktuellerTerminGespeichert) {
+                    termineController.aktuellerTerminGespeichert = false;
+                    termineController.zeigeSpeicherButton()
+                }
+
+            }, 0)
+
+        })
+
+
+        if (calenderEvent.repeatDays>0) {
+            $("#lieferantRepeatTermin").prop("checked", true).checkboxradio("refresh");
+            $("#repeatDaysText, #lieferantRepeatTerminInput").val(termineController.aktuellesEvent.repeatDays);
+            $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").show();
+            $("#lieferantRepeatTerminParent label").text("Wiederholen alle");
+
+
+        }
+        else {
+            $("#lieferantRepeatTermin").removeProp("checked", true).checkboxradio("refresh");
+            $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").hide();
+            $("#lieferantRepeatTerminParent label").text("Wiederholen");
+
+        }
+        $("#popupTermin #lieferantRepeatTerminParent label").click(function () {
+            setTimeout(function () {
+                if ($("#lieferantRepeatTermin").prop("checked")){
+
+                    $("#repeatDaysText, #lieferantRepeatTerminInput").val(termineController.aktuellesEvent.repeatDays);
+                    $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").show();
+                    $("#lieferantRepeatTerminParent label").text("Wiederholen alle");
+
+
+                }
+                else{
+                    $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").hide();
+                    $("#lieferantRepeatTerminParent label").text("Wiederholen");
+                }
+
                 if (termineController.aktuellerTerminGespeichert) {
                     termineController.aktuellerTerminGespeichert = false;
                     termineController.zeigeSpeicherButton()
@@ -363,7 +395,18 @@ termineController = {
             termineController.aktuellesEvent.title = $("#termintitel").val();
             termineController.aktuellesEvent.notizen = $("#terminnotizen").val();
 
+
+
             termineController.aktuellesEvent.allDay = $("#lieferantAlldayTermin").prop("checked");
+
+            if($("#lieferantRepeatTermin").prop("checked"))
+                termineController.aktuellesEvent.repeatDays =  parseInt($("#repeatDaysText, #lieferantRepeatTerminInput").val());
+            else
+                termineController.aktuellesEvent.repeatDays = 0;
+
+             if(termineController.aktuellesEvent.repeatDays<0)
+                 termineController.aktuellesEvent.repeatDays=0;
+
 
             if (termineController.aktuellesEvent.allDay) {
                 start.stripTime();

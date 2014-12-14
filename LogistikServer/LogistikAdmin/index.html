@@ -160,6 +160,7 @@
         <div id="konfiguration">
             <div class="tabinhalt ">
                 <h2 style="margin-top: 5px;">Standorte</h2>
+
                 <div id="konfigurationMarktSelection" style="margin-bottom:15px"></div>
                 <div id="marktInformationen" style="padding-top: 5px;width:40%">
                     <label for="markttelefon" class="">Telefon:</label>
@@ -199,9 +200,19 @@
                 </span>
         </div>
 
-        <label>
+        <div id="lieferantRepeatTerminParent" class="topMarginCheckbox">
+
+            <label>
+                <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen alle
+            </label>
+            <input id="lieferantRepeatTerminInput" type="text">
+            <div id="repeatDaysText">Tage</div>
+        </div>
+        <label class="topMarginCheckbox">
             <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
         </label>
+
+
 
         <label id="lieferantTerminLabel" for="lieferantTermin" class="">Lieferant:</label>
 
@@ -215,7 +226,7 @@
                 </button>
             </div>
         </div>
-        <label for="terminnotizen" class="">Notizen:</label>
+        <label id="terminnotizenLabel" for="terminnotizen" class="">Notizen:</label>
         <textarea id="terminnotizen" rows="7"></textarea>
 
         <div class="bottombuttons saved">
