@@ -190,6 +190,11 @@ var clientView = {
 
 
     setJob: function(job){
+
+
+        $('#fixtermin').prop('checked', job.fixtermin);
+
+
         $('#cb_besuch').prop('checked', job.besuch);
 
         $('#cb_bestellung').prop('checked',job.bestellung);
