@@ -20,6 +20,14 @@ termineController = {
     ready: function () {
 
 
+        serverController.termin.setUpdateCallblack(function (termine) {
+            termineController.handleNewTermineFromServer(termine, function () {
+                termineController.calendarData.nextLocal = true;
+                termineTab.calender.fullCalendar('refetchEvents');
+
+
+            })
+        })
 
 
     },
@@ -71,8 +79,7 @@ termineController = {
         timeFormat: 'H(:mm)'
 
     },
-    handleNewTermineFromServer:function (termine,callback) {
-        // console.dir(termine)
+    handleNewTermineFromServer: function (termine, callback) {
 
         if (termine) {
 
@@ -105,8 +112,8 @@ termineController = {
                     }
                 }
 
-                if(callback)
-                callback();
+                if (callback)
+                    callback();
 
 
             }
@@ -121,30 +128,29 @@ termineController = {
         console.dir(end);
         console.dir(callback)
 
+        if(termineController.calendarData.nextLocal){
+            termineController.calendarData.nextLocal = false;
+            callback(termineController.events);
+        }
+        else{
+            serverController.termin.getRange(start, end, function (termine) {
+                termineController.handleNewTermineFromServer(termine, function () {
 
-        var handleNewTermineFromServerAfterCalenderFetch = function (termine) {
-            termineController.handleNewTermineFromServer(termine,function(){
+                    $(".fc-widget-content").addClass("fade");
+                    setTimeout(function () {
+                        $(".fc-widget-content").removeClass("fade");
+                    }, 300);
+                    callback(termineController.events);
 
-                $(".fc-widget-content").addClass("fade");
-                setTimeout(function(){
-                    $(".fc-widget-content").removeClass("fade");
-                },300)
-                callback(termineController.events)
-
-            })
+                })
+            });
         }
 
-        serverController.termin.getRange(start,end,handleNewTermineFromServerAfterCalenderFetch);
-
-
-
-
     },
-    waehleLieferant: function (lieferant) {
 
+    waehleLieferant: function (lieferant) {
         termineController.aktuellerTerminLieferant = lieferant;
         termineTab.searchWidget.setInputText(lieferantenController.getLieferantFullName(lieferant));
-
     },
 
     erzeugeEvent: function (date, lieferant) {

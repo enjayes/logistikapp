@@ -70,16 +70,16 @@ serverController = {
                 //Lieferanten wurde in anderem Fenster geändert
             } else if (msg.t == serverController.lieferant.messageType.updateOthers) {
                 if (msg.l)
-                    serverController.lieferant.getAllCallback(msg.l);
+                    serverController.lieferant.getUpdateCallback(msg.l);
             } else if (msg.t == serverController.termin.messageType.updateOthers) {
                 if (msg.e)
-                    serverController.termin.getRangeCallback(msg.e);
+                    serverController.termin.getUpdateCallback(msg.e);
             } else if (msg.t == serverController.nachricht.messageType.updateOthers) {
                 if (msg.n)
-                    serverController.nachricht.getAllCallback(msg.n);
+                    serverController.nachricht.getUpdateCallback(msg.n);
             } else if (msg.t == serverController.antwortNachricht.messageType.updateOthers) {
                 if (msg.a)
-                    serverController.antwortNachricht.getAllCallback(msg.a);
+                    serverController.antwortNachricht.getUpdateCallback(msg.a);
             }
 
         });
@@ -119,7 +119,7 @@ serverController = {
                 notizen: lieferant.Notizen
             }
         },
-        getAllCallback: null,
+        getUpdateCallback: null,
         getNewPin: function (lieferant, callback) {
             var newCallback = function () {
                 if (arguments[0]) {
@@ -132,7 +132,7 @@ serverController = {
         },
         getAll: function (callback) {
 
-            serverController.lieferant.getAllCallback = function (list) {
+            serverController.lieferant.getUpdateCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.lieferant.parseDTO(list[i]);
                 }
@@ -140,7 +140,7 @@ serverController = {
             };
 
             var newCallback = function () {
-                serverController.lieferant.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.lieferant.getUpdateCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
@@ -180,11 +180,11 @@ serverController = {
                 Lieferant: termin.lieferant
             };
 
-            if (termin.end){
+            if (termin.end) {
                 newTermin.End = termin.end.format();
                 newTermin.EndMilli = termin.end.toDate().getTime();
             }
-            else{
+            else {
                 newTermin.End = "";
                 newTermin.EndMilli = 0;
             }
@@ -209,43 +209,37 @@ serverController = {
 
             return newTermin;
         },
-        getAllCallback: null,
+        getUpdateCallback: null,
+        setUpdateCallblack: function (callback) {
+            serverController.termin.getUpdateCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                }
+                return callback(list);
+            }
+        },
         getAll: function (callback) {
-            serverController.termin.getRangeCallback = function (list) {
-
+            var newCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.termin.parseDTO(list[i]);
                 }
-                return callback(list);
-            };
-
-            var newCallback = function () {
-
-                serverController.termin.getRangeCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
-
+                callback(list);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
-        }, getRange: function (start,end,callback) {
-            serverController.termin.getRangeCallback = function (list) {
 
+        }, getRange: function (start, end, callback) {
+
+            var newCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.termin.parseDTO(list[i]);
                 }
-                return callback(list);
-            };
-
-            var newCallback = function () {
-
-                serverController.termin.getRangeCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
-
+                callback(list);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,start:start.toDate().getTime(), end:end.toDate().getTime(), callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange, start: start.toDate().getTime(), end: end.toDate().getTime(), callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (termin) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: this.buildDTO(termin)}));
@@ -282,7 +276,7 @@ serverController = {
             }
         },
         getAll: function (callback) {
-            serverController.nachricht.getAllCallback = function (list) {
+            serverController.nachricht.getUpdateCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.nachricht.parseDTO(list[i]);
                 }
@@ -290,7 +284,7 @@ serverController = {
             };
             var newCallback = function () {
 
-                serverController.nachricht.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.nachricht.getUpdateCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
@@ -333,7 +327,7 @@ serverController = {
             };
         },
         getAll: function (callback) {
-            serverController.antwortNachricht.getAllCallback = function (list) {
+            serverController.antwortNachricht.getUpdateCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.antwortNachricht.parseDTO(list[i]);
                 }
@@ -341,7 +335,7 @@ serverController = {
             };
 
             var newCallback = function () {
-                serverController.antwortNachricht.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.antwortNachricht.getUpdateCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
@@ -374,16 +368,16 @@ serverController = {
         parseDTO: function (job) {
             return job;
         },
-        getAllCallback: null,
+        getUpdateCallback: null,
         getAll: function (callback) {
-            serverController.job.getAllCallback = function (list) {
+            serverController.job.getUpdateCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.job.parseDTO(list[i]);
                 }
                 return callback(list);
             };
             var newCallback = function () {
-                serverController.job.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.job.getUpdateCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
@@ -411,7 +405,7 @@ serverController = {
     }, markt: {
         messageType: {
             getAll: "mga",
-            update:"mu"
+            update: "mu"
         },
         getAll: function (callback) {
             var newCallback = function () {
