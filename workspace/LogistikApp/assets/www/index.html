@@ -433,6 +433,8 @@
 
                 <input id="vorlagen_name">
 
+                <div id="vorlage_leer" style="display:none"><font color="red">Vorlagename darf nicht leer sein.</font></div>
+
                 <a id="speichern_vorlage" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">speichern</a>
             </div>
 
@@ -441,9 +443,20 @@
             <a id="zurueck_logout" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
+
+        <div id="goodbye" style="display:none">
+            <h3>Auf Wiedersehen</h3>
+
+        </div>
+
         <br>
         <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
+
     </div>
+
+
+
+</div>
 
 
 </div>

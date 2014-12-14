@@ -366,6 +366,19 @@ var clientView = {
             }
             serverController.job.create(job);
 
+            $("#goodbye").show();
+            $("#logout").hide();
+
+            loginController.logout();
+
+            setTimeout(function(){
+
+                //TODO ausloggen
+                $("#goodbye").hide();
+                $("#startScreen").show();
+
+            }, 15000);
+
         });
 
 
@@ -377,9 +390,20 @@ var clientView = {
 
         $("#speichern_vorlage").click(function()
         {
-            job.template_name = $("#vorlagen_name").val();
-            $("#vorlage_benennen").hide();
-            $("#vorlage_logout").hide();
+            if($("#vorlagen_name").val()=="")
+            {
+                $("#vorlage_leer").show();
+            }
+            else
+            {
+                job.template_name = $("#vorlagen_name").val();
+                $("#vorlage_benennen").hide();
+                $("#vorlage_logout").hide();
+                $("#vorlage_leer").hide();
+            }
+
+
+
 
         });
 

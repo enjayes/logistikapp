@@ -55,6 +55,12 @@ loginController = {
     templateCallback:function(list){
         console.dir("TEMPLATES:");
         console.dir(list);
+    },
+
+    logout:function(){
+        clientView.lieferant = null;
+        contactController.set(null,null);
+
     }
 
 }
