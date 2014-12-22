@@ -22,11 +22,8 @@ loginController = {
                 serverController.nachricht.getAll(function(nachrichten){
                     //Nachrichten
                     console.dir(nachrichten);
+                    notifications.showMessages(nachrichten);
 
-                    for(var i= 0;i<nachrichten.length;i++){
-                        notifications.show("Nachricht",nachrichten[i].nachricht, function(){})
-
-                    }
                 })
 
 

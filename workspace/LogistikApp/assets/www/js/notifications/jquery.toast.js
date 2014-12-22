@@ -68,10 +68,11 @@ if ( typeof Object.create !== 'function' ) {
 					_toastContent +='<h2 class="jq-toast-heading">' + this.options.heading + '</h2>';
 				};
 				_toastContent += this.options.text;
-                _toastContent +='<br><button>Prost</button>';
 			}
 
 			this._toastEl.html( _toastContent );
+
+
 
 			if ( this.options.bgColor ) {
 				this._toastEl.css("background-color", this.options.bgColor);
@@ -120,6 +121,31 @@ if ( typeof Object.create !== 'function' ) {
 		bindToast: function () {
 
 			var that = this;
+
+
+			this._toastEl.on( "swipe", function ( e ) {
+
+				e.preventDefault();
+
+				if( that.options.showHideTransition === 'fade') {
+					that._toastEl.trigger('beforeHide');
+					that._toastEl.fadeOut(function () {
+						that._toastEl.trigger('afterHidden');
+					});
+				} else if ( that.options.showHideTransition === 'slide' ) {
+					that._toastEl.trigger('beforeHide');
+					that._toastEl.slideUp(function () {
+						that._toastEl.trigger('afterHidden');
+					});
+				} else {
+					that._toastEl.trigger('beforeHide');
+					that._toastEl.hide(function () {
+						that._toastEl.trigger('afterHidden');
+					});
+				}
+
+			});
+
 
 			this._toastEl.find('.close-jq-toast-single').on('click', function ( e ) {
 
