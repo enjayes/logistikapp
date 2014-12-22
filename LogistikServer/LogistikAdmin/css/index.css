@@ -310,6 +310,10 @@ input-group-addon {
     margin-top: 85px
 }
 
+#maintabs li a {
+    height:36px!important;
+}
+
 #maintabs #konfigurationTabParent{
     width: 40px;
     position: absolute;
@@ -317,8 +321,10 @@ input-group-addon {
     z-index: 1000;
 }
 
+
+
 #maintabs #konfigurationTabParent a{
-    padding-bottom: 3px;
+    padding-bottom: 0;
 }
 
 #maintabs #konfigurationTabParent a:after{
