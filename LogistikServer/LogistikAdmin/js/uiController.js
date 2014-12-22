@@ -79,6 +79,8 @@ uiController = {
 
       })
 
+        $("#infoProgrammer").css("bottom",-($(window).height()-415))
+
     },
     toast: function (msg, time, touchFunc) {
         $("#toastId").remove();
