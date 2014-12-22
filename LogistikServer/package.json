@@ -10,6 +10,7 @@
     "express": "^4.10.5",
     "http": "*",
     "mysql": "~2.5.3",
-    "socket.io": "~1.2.0"
+    "socket.io": "~1.2.0",
+    "moment": "~2.8.4"
   }
 }
