@@ -790,9 +790,9 @@ Navbar
     -ms-animation-fill-mode: forwards; /*IE 10+*/
     animation-fill-mode: forwards; /*when the spec is finished*/
 
-    -webkit-animation-duration: 200ms;
-    -moz-animation-duration: 200ms;
-    animation-duration: 200ms;
+    -webkit-animation-duration: 300ms;
+    -moz-animation-duration: 300ms;
+    animation-duration: 300ms;
 }
 
 

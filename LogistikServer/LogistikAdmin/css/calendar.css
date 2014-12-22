@@ -39,6 +39,7 @@
 .fc-time, .fc-title{
     color:#fff!important ;
     font-weight: normal!important ;
+    text-shadow: 1px 1px 1px #000000;
 }
 
 

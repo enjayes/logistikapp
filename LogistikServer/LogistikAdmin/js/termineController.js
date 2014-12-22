@@ -20,13 +20,15 @@ termineController = {
     ready: function () {
 
 
-        serverController.termin.setUpdateCallblack(function (termine) {
-            termineController.handleNewTermineFromServer(termine, function () {
-                termineController.calendarData.nextLocal = true;
-                termineTab.calender.fullCalendar('refetchEvents');
+        serverController.termin.setUpdateCallblack(function () {
+
+            termineController.calendarData.nextLocal = true;
 
 
-            })
+            termineTab.calender.fullCalendar('removeEvents');
+            termineTab.calender.fullCalendar('refetchEvents');
+
+
         })
 
 
@@ -42,6 +44,17 @@ termineController = {
         lang: "de",
         editable: true,
         eventLimit: true, // allow "more" link when too many events
+        loading:function(loading){
+
+            if(loading)
+                $.mobile.loading("show");
+            else
+                setTimeout(function () {
+                        $.mobile.loading("hide");
+                },200);
+
+
+        },
         dayClick: function (date, jsEvent, view) {
 
             console.log(date)
@@ -69,6 +82,9 @@ termineController = {
 
         },
         eventDrop: function (event, delta, revertFunc) {
+
+
+            $("<style id='fc-event-container-hide' type='text/css'> .fc-event-container{ display:none!important} </style>").appendTo("head");
             serverController.termin.update(event);
         },
 
@@ -83,16 +99,7 @@ termineController = {
 
         if (termine) {
 
-            termine.forEach(function (termin) {
-                if (termin.start)
-                    termin.start = termineTab.calenderFactory.moment(termin.start);
-                if (termin.end)
-                    termin.end = termineTab.calenderFactory.moment(termin.end);
-            })
-
-
             termineController.events = termine;
-
 
             if (termineTab.calender) {
 
@@ -122,23 +129,44 @@ termineController = {
     },
     getCalendarEvents: function (start, end, timezone, callback) {
 
-        if(termineController.calendarData.nextLocal){
-            termineController.calendarData.nextLocal = false;
-            callback(termineController.events);
-        }
-        else{
-            serverController.termin.getRange(start, end, function (termine) {
-                termineController.handleNewTermineFromServer(termine, function () {
 
-                    $(".fc-widget-content").addClass("fade");
-                    setTimeout(function () {
-                        $(".fc-widget-content").removeClass("fade");
-                    }, 300);
-                    callback(termineController.events);
+        serverController.termin.getRange(start, end, function (termine) {
+            termineController.handleNewTermineFromServer(termine, function () {
 
-                })
-            });
-        }
+                $(".fc-widget-content").addClass("fade");
+                $("#fc-event-container-hide").remove();
+
+                setTimeout(function () {
+                    $(".fc-widget-content").removeClass("fade");
+                }, 300);
+
+
+                //Create Colors for events
+                for (var i = 0; i < termineController.events.length; ++i) {
+                   var colorStr=  termineController.events[i].id.replace(/-/g,"");
+                    var colorInt = 0;
+                    for (var j = 0; j < 2; ++j) {
+                       var hexString = colorStr.slice(j*16,j*16+16)
+                        colorInt = colorInt + parseInt(hexString,16);
+                    }
+
+                    var pad = "000000";
+
+                    var str = "" + (colorInt%16776215).toString(16);
+                    str = pad.substring(0, pad.length - str.length) + str;
+
+                    termineController.events[i].color = "#"+str;
+
+
+                    termineController.events[i].textColor = "#"+misc.invertRGB(str);
+                }
+
+
+                callback(termineController.events);
+
+            })
+        });
+
 
     },
 
@@ -243,7 +271,7 @@ termineController = {
         })
 
 
-        if (calenderEvent.repeatDays>0) {
+        if (calenderEvent.repeatDays > 0) {
             $("#lieferantRepeatTermin").prop("checked", true).checkboxradio("refresh");
             $("#repeatDaysText, #lieferantRepeatTerminInput").val(termineController.aktuellesEvent.repeatDays);
             $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").show();
@@ -259,7 +287,7 @@ termineController = {
         }
         $("#popupTermin #lieferantRepeatTerminParent label").click(function () {
             setTimeout(function () {
-                if ($("#lieferantRepeatTermin").prop("checked")){
+                if ($("#lieferantRepeatTermin").prop("checked")) {
 
                     $("#repeatDaysText, #lieferantRepeatTerminInput").val(termineController.aktuellesEvent.repeatDays);
                     $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").show();
@@ -267,7 +295,7 @@ termineController = {
 
 
                 }
-                else{
+                else {
                     $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").hide();
                     $("#lieferantRepeatTerminParent label").text("Wiederholen");
                 }
@@ -396,16 +424,15 @@ termineController = {
             termineController.aktuellesEvent.notizen = $("#terminnotizen").val();
 
 
-
             termineController.aktuellesEvent.allDay = $("#lieferantAlldayTermin").prop("checked");
 
-            if($("#lieferantRepeatTermin").prop("checked"))
-                termineController.aktuellesEvent.repeatDays =  parseInt($("#repeatDaysText, #lieferantRepeatTerminInput").val());
+            if ($("#lieferantRepeatTermin").prop("checked"))
+                termineController.aktuellesEvent.repeatDays = parseInt($("#repeatDaysText, #lieferantRepeatTerminInput").val());
             else
                 termineController.aktuellesEvent.repeatDays = 0;
 
-             if(termineController.aktuellesEvent.repeatDays<0)
-                 termineController.aktuellesEvent.repeatDays=0;
+            if (termineController.aktuellesEvent.repeatDays < 0)
+                termineController.aktuellesEvent.repeatDays = 0;
 
 
             if (termineController.aktuellesEvent.allDay) {

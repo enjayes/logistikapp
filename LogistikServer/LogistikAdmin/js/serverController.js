@@ -72,8 +72,8 @@ serverController = {
                 if (msg.l)
                     serverController.lieferant.getUpdateCallback(msg.l);
             } else if (msg.t == serverController.termin.messageType.updateOthers) {
-                if (msg.e)
-                    serverController.termin.getUpdateCallback(msg.e);
+
+                    serverController.termin.getUpdateCallback();
             } else if (msg.t == serverController.nachricht.messageType.updateOthers) {
                 if (msg.n)
                     serverController.nachricht.getUpdateCallback(msg.n);
@@ -178,7 +178,7 @@ serverController = {
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant,
-                RepeatDays: 7//termin.repeatDays
+                RepeatDays: termin.repeatDays
             };
 
             if (termin.end) {
@@ -210,16 +210,17 @@ serverController = {
             else
                 newTermin.end = undefined;
 
+            if (newTermin.start)
+                newTermin.start = termineTab.calenderFactory.moment(newTermin.start);
+            if (newTermin.end)
+                newTermin.end = termineTab.calenderFactory.moment(newTermin.end);
+
+
             return newTermin;
         },
         getUpdateCallback: null,
         setUpdateCallblack: function (callback) {
-            serverController.termin.getUpdateCallback = function (list) {
-                for (var i = 0; i < list.length; i++) {
-                    list[i] = serverController.termin.parseDTO(list[i]);
-                }
-                return callback(list);
-            }
+            serverController.termin.getUpdateCallback =  callback;
         },
         getAll: function (callback) {
             var newCallback = function (list) {
@@ -238,6 +239,9 @@ serverController = {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.termin.parseDTO(list[i]);
                 }
+                console.log(list)
+                console.log(start)
+                console.log(end)
                 callback(list);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
