@@ -813,7 +813,9 @@ function Calendar(element, instanceOptions) {
 
 
 	function refetchEvents() { // can be called as an API method
-		destroyEvents(); // so that events are cleared before user starts waiting for AJAX
+
+		//destroyEvents(); // so that events are cleared before user starts waiting for AJAX
+        //CHANGED!!!!!!!!!
 		fetchAndRenderEvents();
 	}
 
@@ -855,7 +857,10 @@ function Calendar(element, instanceOptions) {
 	// called when event data arrives
 	function reportEvents(_events) {
 		events = _events;
-		renderEvents();
+        if(!termineTab.calender.removeNoRedraw)
+		 renderEvents();
+        else
+            termineTab.calender.removeNoRedraw = false;
 	}
 
 

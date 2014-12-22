@@ -22,9 +22,8 @@ termineController = {
 
         serverController.termin.setUpdateCallblack(function () {
 
-            termineController.calendarData.nextLocal = true;
 
-
+            termineTab.calender.removeNoRedraw = true;
             termineTab.calender.fullCalendar('removeEvents');
             termineTab.calender.fullCalendar('refetchEvents');
 
@@ -44,14 +43,7 @@ termineController = {
         lang: "de",
         editable: true,
         eventLimit: true, // allow "more" link when too many events
-        loading:function(loading){
-
-            if(loading)
-                $.mobile.loading("show");
-            else
-                setTimeout(function () {
-                        $.mobile.loading("hide");
-                },200);
+        loading: function (loading) {
 
 
         },
@@ -59,6 +51,7 @@ termineController = {
 
             console.log(date)
 
+            termineController.dontFadeEvents = true;
 
             termineController.erzeugeEvent(date)
 
@@ -83,13 +76,14 @@ termineController = {
         },
         eventDrop: function (event, delta, revertFunc) {
 
-
-            $("<style id='fc-event-container-hide' type='text/css'> .fc-event-container{ display:none!important} </style>").appendTo("head");
+            termineController.dontFadeEvents = true;
             serverController.termin.update(event);
         },
 
         eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
+            termineController.dontFadeEvents = true;
             serverController.termin.update(event);
+
         },
         events: [],
         timeFormat: 'H(:mm)'
@@ -133,32 +127,37 @@ termineController = {
         serverController.termin.getRange(start, end, function (termine) {
             termineController.handleNewTermineFromServer(termine, function () {
 
-                $(".fc-widget-content").addClass("fade");
-                $("#fc-event-container-hide").remove();
+                if (!termineController.dontFadeEvents) {
 
-                setTimeout(function () {
-                    $(".fc-widget-content").removeClass("fade");
-                }, 300);
+
+                    $(".fc-widget-content").addClass("fade");
+
+                    setTimeout(function () {
+                        $(".fc-widget-content").removeClass("fade");
+                    }, 300);
+                }
+                else
+                    termineController.dontFadeEvents = false;
 
 
                 //Create Colors for events
                 for (var i = 0; i < termineController.events.length; ++i) {
-                   var colorStr=  termineController.events[i].id.replace(/-/g,"");
+                    var colorStr = termineController.events[i].id.replace(/-/g, "");
                     var colorInt = 0;
                     for (var j = 0; j < 2; ++j) {
-                       var hexString = colorStr.slice(j*16,j*16+16)
-                        colorInt = colorInt + parseInt(hexString,16);
+                        var hexString = colorStr.slice(j * 16, j * 16 + 16)
+                        colorInt = colorInt + parseInt(hexString, 16);
                     }
 
                     var pad = "000000";
 
-                    var str = "" + (colorInt%16776215).toString(16);
+                    var str = "" + (colorInt % 16776215).toString(16);
                     str = pad.substring(0, pad.length - str.length) + str;
 
-                    termineController.events[i].color = "#"+str;
+                    termineController.events[i].color = "#" + str;
 
 
-                    termineController.events[i].textColor = "#"+misc.invertRGB(str);
+                    termineController.events[i].textColor = "#" + misc.invertRGB(str);
                 }
 
 
@@ -465,12 +464,6 @@ termineController = {
             else
                 termineController.aktuellesEvent.lieferant = termineController.aktuellerTerminLieferant.id;
 
-
-            termineTab.calender.fullCalendar('removeEvents', termineController.aktuellesEvent.id);
-
-            termineTab.calender.fullCalendar('addEventSource', [termineController.aktuellesEvent]);
-
-            termineController.events = termineTab.calender.fullCalendar('clientEvents')
 
             if (this.aktuellesEventIstNeu)
                 serverController.termin.create(termineController.aktuellesEvent);
