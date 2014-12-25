@@ -183,7 +183,9 @@ serverController = {
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant,
                 RepeatDays: termin.repeatDays,
-                jobId: termin.jobId
+                jobId: termin.jobId,
+                marktId: termin.marktId
+
             };
 
             if (termin.end) {
@@ -206,7 +208,8 @@ serverController = {
                 notizen: termin.Notizen,
                 lieferant: termin.Lieferant,
                 repeatDays: termin.RepeatDays,
-                jobId: termin.jobId
+                jobId: termin.jobId,
+                marktId: termin.marktId
             };
 
             if (termin.end != "")
@@ -275,16 +278,24 @@ serverController = {
                 id: nachricht.id,
                 datum: nachricht.datum.getTime(),
                 nachricht: nachricht.nachricht,
-                lieferanten: nachricht.lieferanten
+                lieferanten: nachricht.lieferanten ,
+                maerkte:JSON.stringify(nachricht.maerkte)
             }
+
         },
         parseDTO: function (nachricht) {
-            return {
+            var newNachricht =
+             {
                 id: nachricht.id,
                 datum: parseInt(nachricht.datum),
                 nachricht: nachricht.nachricht,
-                lieferanten: nachricht.lieferanten
-            }
+                lieferanten: nachricht.lieferanten,
+                 maerkte:[]
+            };
+
+            if(nachricht.maerkte&&nachricht.maerkte!="")
+             newNachricht. maerkte = JSON.parse(nachricht.maerkte);
+            return  newNachricht;
         },
         getAll: function (callback) {
             serverController.nachricht.getUpdateCallback = function (list) {
@@ -303,6 +314,7 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (nachricht) {
+
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, n: this.buildDTO(nachricht)}));
         },
         delete: function (nachricht) {

@@ -93,6 +93,18 @@ termineController = {
 
         if (termine) {
 
+            var showMaerkte = termineTab.termineMarktSelectionWidget.getSelectedItems();
+
+            termine = termine.filter(function (termin) {
+
+                for (var i = 0; i < showMaerkte.length; ++i) {
+                    console.log(termin.marktId + " == " + showMaerkte[i].id)
+                    if (termin.marktId == showMaerkte[i].id)
+                        return true;
+                }
+                return false;
+            })
+
             termineController.events = termine;
 
             if (termineTab.calender) {
@@ -102,8 +114,6 @@ termineController = {
                     if (termineController.aktuellesEvent) {
                         var termin = termineController.getTerminByID(termineController.aktuellesEvent.id);
 
-                        console.log(termin + "   " + termineController.aktuellerTerminGespeichert)
-                        console.dir(termin)
                         if (!termin)
                             $("#popupTermin").popup("close");
                         else if (termineController.aktuellerTerminGespeichert) {
@@ -126,6 +136,7 @@ termineController = {
 
         serverController.termin.getRange(start, end, function (termine) {
             termineController.handleNewTermineFromServer(termine, function () {
+
                 if (!termineController.dontFadeEvents) {
 
 
@@ -142,10 +153,10 @@ termineController = {
                 //Create Colors for events
                 for (var i = 0; i < termineController.events.length; ++i) {
 
-                    if(termineController.events[i].lieferant)
+                    if (termineController.events[i].lieferant)
                         var colorId = termineController.events[i].lieferant;
                     else
-                         colorId = termineController.events[i].id;
+                        colorId = termineController.events[i].id;
 
                     var str = misc.getColorFromUniqueID(colorId);
 
@@ -190,6 +201,7 @@ termineController = {
         termineController.aktuellesEvent = $.extend({}, calenderEvent);
         termineController.aktuellesEventIstNeu = neuesEvent;
 
+
         var date = termineController.aktuellesEvent.start.format('DD.MM.YYYY');
         var time = termineController.aktuellesEvent.start.format('HH:mm');
 
@@ -210,6 +222,11 @@ termineController = {
         }
 
         $("#termintitel").val(calenderEvent.title);
+
+        console.dir(termineController.aktuellesEvent)
+
+        termineTab.terminMarktSelectionWidget.selectedSingleItem(termineController.aktuellesEvent.marktId || uebersichtController.defaultMarktId);
+
 
         $("#terminnotizen").val(calenderEvent.notizen);
 
@@ -407,14 +424,23 @@ termineController = {
             $("#eventDate").parent(".ui-input-text").addClass("redborder");
         }
 
+
+        var markt = termineTab.terminMarktSelectionWidget.getSelectedItems();
+        if (markt.length != 1) {
+            validated = false;
+            $("#terminMarktSelection.ui-controlgroup-controls").addClass("redborder");
+        }
+
         //Alle Daten in Ordnung
         if (validated) {
             termineController.aktuellerTerminGespeichert = true;
 
             //Eintragen
             termineController.aktuellesEvent.title = $("#termintitel").val();
-            termineController.aktuellesEvent.notizen = $("#terminnotizen").val();
 
+            termineController.aktuellesEvent.marktId = markt[0].id;
+
+            termineController.aktuellesEvent.notizen = $("#terminnotizen").val();
 
             termineController.aktuellesEvent.allDay = $("#lieferantAlldayTermin").prop("checked");
 

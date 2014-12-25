@@ -11,20 +11,23 @@
 uebersichtController = {
     statistics: null,
     maerkte:null,
+    defaultMarktId:null,
     init: function () {
-
-
 
         serverController.markt.getAll(function(maerkte){
             uebersichtController.maerkte = maerkte;
 
-            //TODO move to Controllers
-            termineTab.termineMarktSelectionWidget.setData(uebersichtController.maerkte,null,true,true);
-            termineTab.terminMarktSelectionWidget.setData(uebersichtController.maerkte,null,true,true);
+            uebersichtController.defaultMarktId =  uebersichtController.maerkte[0].id;
 
+             console.log(".................................................ydsfsdf")
+
+            //TODO move to Controllers
+            termineTab.termineMarktSelectionWidget.setData(uebersichtController.maerkte,null,true,false);
+            termineTab.terminMarktSelectionWidget.setData(uebersichtController.maerkte,null,false,true);
             nachrichtenTab.nachrichtenMarktSelectionWidget.setData(uebersichtController.maerkte,null,true,true);
 
             konfigurationsController.setMaerkte(uebersichtController.maerkte);
+
         })
 
 
@@ -32,7 +35,19 @@ uebersichtController = {
             if (statistics) {
                 uebersichtController.statistics = statistics;
 
-            }
+                var dataSet = [["Sindelfingen","Max Huber","12.12.2014"]] ;
+
+                $('#auftragsHistorie').DataTable( {
+                    "data": dataSet,
+                    "columns": [
+                        { "title": "Markt" },
+                        { "title": "Lieferant" },
+                        { "title": "Datum" }
+
+                    ]
+                } );
+
+
 
             var pieData = [
                 {
@@ -56,6 +71,9 @@ uebersichtController = {
 
             uebersichtTab.pieAufteilung.setData(pieData);
 
+
+
+            }
 
         });
 

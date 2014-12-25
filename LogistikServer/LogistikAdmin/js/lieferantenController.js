@@ -159,8 +159,6 @@ lieferantenController = {
                 $("#lieferantName").parent(".ui-input-text").addClass("redborder");
             }
 
-
-
             if (validated) {
 
 

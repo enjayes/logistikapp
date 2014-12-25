@@ -29,7 +29,7 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
     that.domObjectInner = $(domObject + " #" + that.internalName + " .ui-controlgroup-controls");
 
 
-    this.setData = function (data, clickedItemCallback, selectAll, minimumOneSelected) {
+    this.setData = function (data, clickedItemCallback, selectAll, minimumOneSelected, onlyOneSelected) {
 
         if (!data)
             data = [];
@@ -43,10 +43,15 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
 
         for (var i = 0; i < data.length; i++) {
             var name = that.internalName + 'x' + i;
-            html += '<input type="' + that.type + '" name="' + that.internalName + '" data-objindex="' + i + '" id="' + name + '">' +
+
+            if (!this.radio)
+                var groupName = "";
+            else
+                groupName = 'name="' + that.internalName+'"';
+
+            html += '<input type="' + that.type + '" '+groupName+' data-objindex="' + i + '" id="' + name + '">' +
                 '<label for="' + name + '">' + data[i].name + '</label>'
         }
-
         $(that.domObjectInner).append(html);
 
         var checkboxradios = that.domObjectInner.find('input').checkboxradio();
@@ -59,18 +64,33 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
 
 
                 var reselected = false;
+
                 //Keiner ausgewählt
                 if (minimumOneSelected) {
 
                     var selected = that.domObjectInner.find("label.ui-btn-active");
                     if (selected.length == 1) {
                         if (selected.filter("[for=" + checkboxRadio[0].id + "]").length == 1) {
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 checkboxRadio.prop("checked", true).checkboxradio("refresh");
-                            },0);
+                            }, 0);
                             reselected = true;
                             event.stopPropagation();
                         }
+                    }
+                }
+                if (!reselected && onlyOneSelected) {
+
+                    var selected = that.domObjectInner.find("label.ui-btn-active");
+                    if (selected.length > 0) {
+                        setTimeout(function () {
+
+                            selected.each(function () {
+                                var selectedItem = that.domObjectInner.find("#" + $(this).attr("for"));
+                                selectedItem.prop("checked", false).checkboxradio("refresh");
+
+                            })
+                        }, 0);
                     }
                 }
 
@@ -93,17 +113,70 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
                 $(checkboxradios[0]).prop("checked", true).checkboxradio("refresh");
 
 
-                if (that.data.length > 0)
+                if (that.data.length > 0&&that.clickedItemCallback)
                     that.clickedItemCallback(that.data[0]);
             } else if (selectAll) {
                 checkboxradios.prop("checked", true).checkboxradio("refresh");
+
             }
 
             $(that.domObject + " #" + this.internalName).controlgroup("refresh");
 
         }
 
+
+        if (minimumOneSelected && onlyOneSelected) {
+            $(that.domObjectInner.find('input')[0]).prop("checked", true).checkboxradio("refresh");
+
+        }
+
     };
+
+
+    this.selectedSingleItem = function (dataId) {
+        console.log(dataId);
+        if(!dataId)
+          return;
+
+        var items =  that.domObjectInner.find("input");
+        if (items.length > 0) {
+
+            for (var i = 0; i < items.length; i++) {
+                console.log(that.data[i].id+" == "+dataId)
+                var selectedItem = $(items[i]);
+                if(that.data[i].id==dataId){
+                    selectedItem.prop("checked", true);
+                }else
+                    selectedItem.prop("checked", false);
+
+                selectedItem.checkboxradio("refresh");
+            }
+        }
+
+
+    }
+
+
+
+    this.getSelectedItems = function () {
+        var selectedItems = [];
+        var items =  that.domObjectInner.find("input");
+        if (items.length > 0) {
+
+            for (var i = 0; i < items.length; i++) {
+
+                var selectedItem = $(items[i]);
+                console.log(i+"   "+selectedItem.prop("checked"))
+                if(selectedItem.prop("checked")){
+                    selectedItems.push(that.data[i])
+                }
+            }
+
+            selectedItems = $.extend(true, [], selectedItems);
+        }
+        return selectedItems;
+
+    }
 
 }
 

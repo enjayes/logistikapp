@@ -10,6 +10,7 @@
 
 
 CalenderEvent = function () {
+    this.marktid=null;
     this.id = misc.getUniqueID();
     this.title = "";
     this.start = "";
