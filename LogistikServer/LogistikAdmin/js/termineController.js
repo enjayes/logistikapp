@@ -126,7 +126,6 @@ termineController = {
 
         serverController.termin.getRange(start, end, function (termine) {
             termineController.handleNewTermineFromServer(termine, function () {
-
                 if (!termineController.dontFadeEvents) {
 
 
@@ -142,21 +141,15 @@ termineController = {
 
                 //Create Colors for events
                 for (var i = 0; i < termineController.events.length; ++i) {
-                    var colorStr = termineController.events[i].id.replace(/-/g, "");
-                    var colorInt = 0;
-                    for (var j = 0; j < 2; ++j) {
-                        var hexString = colorStr.slice(j * 16, j * 16 + 16)
-                        colorInt = colorInt + parseInt(hexString, 16);
-                    }
 
-                    var pad = "000000";
+                    if(termineController.events[i].lieferant)
+                        var colorId = termineController.events[i].lieferant;
+                    else
+                         colorId = termineController.events[i].id;
 
-                    var str = "" + (colorInt % 16776215).toString(16);
-                    str = pad.substring(0, pad.length - str.length) + str;
+                    var str = misc.getColorFromUniqueID(colorId);
 
                     termineController.events[i].color = "#" + str;
-
-
                     termineController.events[i].textColor = "#" + misc.invertRGB(str);
                 }
 

@@ -123,9 +123,15 @@ lieferantenController = {
             $("#lieferantVorname").val(lieferantenController.aktuellerLieferant.vorname);
             $("#lieferantName").val(lieferantenController.aktuellerLieferant.name);
 
-            $("#lieferantPin").val(lieferantenController.aktuellerLieferant.pin);
+            $("#lieferantBearbeitenFirma").val(lieferantenController.aktuellerLieferant.firma);
 
+            $("#lieferantBearbeitenEMail").val(lieferantenController.aktuellerLieferant.email);
+            $("#lieferantBearbeitenAdresse").val(lieferantenController.aktuellerLieferant.adresse);
+            $("#lieferantBearbeitenNotizen").val(lieferantenController.aktuellerLieferant.notizen);
+            $("#lieferantBearbeitenTelefon").val(lieferantenController.aktuellerLieferant.telefon);
+            $("#lieferantBearbeitenPin").val(lieferantenController.aktuellerLieferant.pin);
 
+            $("#lieferantBearbeitenColor").css("color","#"+misc.getColorFromUniqueID(lieferantenController.aktuellerLieferant.id));
 
             $("#lieferantenInformationen").show();
             $("#lieferantenInformationen .redborder").removeClass("redborder");
@@ -154,11 +160,19 @@ lieferantenController = {
             }
 
 
+
             if (validated) {
 
 
                 this.aktuellerLieferant.vorname = $("#lieferantVorname").val();
                 this.aktuellerLieferant.name = name;
+
+                this.aktuellerLieferant.firma = $("#lieferantBearbeitenFirma").val();;
+                this.aktuellerLieferant.telefon = $("#lieferantBearbeitenTelefon").val();
+
+                this.aktuellerLieferant.email = $("#lieferantBearbeitenEMail").val();
+                this.aktuellerLieferant.adresse = $("#lieferantBearbeitenAdresse").val();
+                this.aktuellerLieferant.notizen= $("#lieferantBearbeitenNotizen").val();
 
                 this.aktuellerLieferantGespeichert = true;
                 $("#speichereLieferant").css("opacity", 0).addClass("ui-disabled");

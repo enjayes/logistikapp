@@ -105,7 +105,9 @@ serverController = {
                 Telefon: lieferant.telefon,
                 EMail: lieferant.email,
                 Adresse: lieferant.adresse,
-                Notizen: lieferant.notizen
+                Notizen: lieferant.notizen,
+                Firma: lieferant.firma
+
             }
         }, parseDTO: function (lieferant) {
             return {
@@ -114,9 +116,11 @@ serverController = {
                 vorname: lieferant.Vorname,
                 name: lieferant.Name,
                 telefon: lieferant.Telefon,
-                email: lieferant.EMail,
+                email: lieferant.Email,
                 adresse: lieferant.Adresse,
-                notizen: lieferant.Notizen
+                notizen: lieferant.Notizen,
+                firma: lieferant.Firma
+
             }
         },
         getUpdateCallback: null,
@@ -178,7 +182,8 @@ serverController = {
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant,
-                RepeatDays: termin.repeatDays
+                RepeatDays: termin.repeatDays,
+                jobId: termin.jobId
             };
 
             if (termin.end) {
@@ -200,9 +205,8 @@ serverController = {
                 allDay: termin.AllDay,
                 notizen: termin.Notizen,
                 lieferant: termin.Lieferant,
-                repeatDays: termin.RepeatDays
-
-
+                repeatDays: termin.RepeatDays,
+                jobId: termin.jobId
             };
 
             if (termin.end != "")

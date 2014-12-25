@@ -121,37 +121,81 @@
                         Neuer Lieferant
                     </div>
 
-                    <div id="lieferantenInformationen" style="display:none">
+                </div>
+                <div id="lieferantenInformationen" style="display:none">
 
-                        <h2 id="lieferantBearbeitenTitle">Lieferant</h2>
-                        <label for="lieferantVorname" class="">Vorname:</label>
+                    <h2 id="lieferantBearbeitenTitle">Lieferant </h2>
+                    <table>
+                        <tr>
+                            <th>
+                                <label for="lieferantVorname" class="">Vorname:</label>
+                                <input type="text" name="user" id="lieferantVorname" value="" placeholder="" data-theme="a">
+                            </th>
+                            <th>
+                                <label for="lieferantName" class="">Name:</label>
+                                <input type="text" name="user" id="lieferantName" value="" placeholder="" data-theme="a">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="lieferantBearbeitenColor" class="">Farbe:</label>
+                                <div id="lieferantBearbeitenColor" style="font-size: 26px;margin-bottom:10px;margin-top:10px;">&block;</div>
 
-                        <input type="text" name="user" id="lieferantVorname" value="" placeholder="" data-theme="a">
+                            </th>
+                            <th>
+                                 <label for="lieferantBearbeitenPin" class="">Pin:</label>
+                                <input type="text" name="user" id="lieferantBearbeitenPin" value="" placeholder="" data-theme="a" readonly>
 
-                        <label for="lieferantName" class="">Name:</label>
-                        <input type="text" name="user" id="lieferantName" value="" placeholder="" data-theme="a">
+                            </th>
 
-                        <label for="lieferantPin" class="">Pin:</label>
-                        <input type="text" name="user" id="lieferantPin" value="" placeholder="" data-theme="a" readonly>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="lieferantBearbeitenFirma" class="">Firma:</label>
+                                <input type="text" name="user" id="lieferantBearbeitenFirma" value="" placeholder="" data-theme="a">
 
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
+                            </th>
+                            <th>
 
-                        <a href="" id="speichereLieferant" onclick="lieferantenController.speichereAktuellenLieferant()" style="opacity:0"
-                           class="greenbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a"
-                           data-transition="pop">Speichern</a>
-                        <a href="" id="rueckgaengigLieferant" onclick="lieferantenController.abbrechenBearbeitungAktuellerLieferant()" style="opacity:0"
-                           class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
-                           data-transition="pop">Abbrechen</a>
-                        <a href="" id="lieferantLoeschen" onclick="lieferantenController.loescheAktuellenLieferant()"
-                           class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
-                           data-transition="pop">Löschen</a>
-                        <a href="" id="lieferantErzeugeEvent" onclick="termineController.erzeugeEvent(termineTab.calenderFactory.moment().stripTime(),lieferantenController.aktuellerLieferant)"
-                           class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>
-                    </div>
+                                <label for="lieferantBearbeitenTelefon" class="">Telefon:</label>
+                                <input type="text" name="user" id="lieferantBearbeitenTelefon" value="" placeholder="" data-theme="a" >
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label for="lieferantBearbeitenEMail" class="">E-Mail:</label>
+                                <input type="text" name="user" id="lieferantBearbeitenEMail" value="" placeholder="" data-theme="a" >
+                            </th>
+                            <th>
+
+                                <label for="lieferantBearbeitenAdresse" class="">Adresse:</label>
+                                <textarea rows="3" type="text" name="user" id="lieferantBearbeitenAdresse" value="" placeholder="" data-theme="a" ></textarea>
+
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">
+
+                                <label for="lieferantBearbeitenNotizen" class="">Notizen:</label>
+                                <textarea  rows="4" type="text" name="user" id="lieferantBearbeitenNotizen" value="" placeholder="" data-theme="a" ></textarea>
+
+                            </th>
+                        </tr>
+                    </table>
+
+                    <br>
+                    <br>
+                    <a href="" id="speichereLieferant" onclick="lieferantenController.speichereAktuellenLieferant()" style="opacity:0"
+                       class="greenbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a"
+                       data-transition="pop">Speichern</a>
+                    <a href="" id="rueckgaengigLieferant" onclick="lieferantenController.abbrechenBearbeitungAktuellerLieferant()" style="opacity:0"
+                       class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
+                       data-transition="pop">Abbrechen</a>
+                    <a href="" id="lieferantLoeschen" onclick="lieferantenController.loescheAktuellenLieferant()"
+                       class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
+                       data-transition="pop">Löschen</a>
+                    <a href="" id="lieferantErzeugeEvent" onclick="termineController.erzeugeEvent(termineTab.calenderFactory.moment().stripTime(),lieferantenController.aktuellerLieferant)"
+                       class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>
                 </div>
                 <!--/demo-html -->
             </div>
@@ -190,6 +234,9 @@
 
         <label for="termintitel" class="">Titel:</label>
         <input type="text" name="user" id="termintitel" value="" placeholder="" data-theme="a">
+        <label for="terminMarktSelection" class="">Markt:</label>
+
+        <div id="terminMarktSelection" style="margin-bottom:15px"></div>
 
         <label for="eventDate" class="">Datum:</label>
 
@@ -208,12 +255,12 @@
                 <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen alle
             </label>
             <input id="lieferantRepeatTerminInput" type="text">
+
             <div id="repeatDaysText">Tage</div>
         </div>
         <label class="topMarginCheckbox">
             <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
         </label>
-
 
 
         <label id="lieferantTerminLabel" for="lieferantTermin" class="">Lieferant:</label>

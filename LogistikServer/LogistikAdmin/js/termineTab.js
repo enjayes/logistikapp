@@ -18,6 +18,8 @@ termineTab = {
     allowOpening: false,
     searchWidget:null,
     termineMarktSelectionWidget:null,
+    terminMarktSelectionWidget:null,
+
     init: function () {
 
 
@@ -32,6 +34,8 @@ termineTab = {
 
 
         this.termineMarktSelectionWidget = new MultipleSelectionWidget("#termineMarktSelection");
+
+        this.terminMarktSelectionWidget = new MultipleSelectionWidget("#terminMarktSelection");
 
 
     },

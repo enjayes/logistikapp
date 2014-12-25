@@ -19,4 +19,5 @@ lieferant = function(vorname,name){
     this.email="";
     this.adresse="";
     this.notizen="";
+    this.firma="";
 }

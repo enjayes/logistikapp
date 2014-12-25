@@ -20,6 +20,8 @@ uebersichtController = {
 
             //TODO move to Controllers
             termineTab.termineMarktSelectionWidget.setData(uebersichtController.maerkte,null,true,true);
+            termineTab.terminMarktSelectionWidget.setData(uebersichtController.maerkte,null,true,true);
+
             nachrichtenTab.nachrichtenMarktSelectionWidget.setData(uebersichtController.maerkte,null,true,true);
 
             konfigurationsController.setMaerkte(uebersichtController.maerkte);

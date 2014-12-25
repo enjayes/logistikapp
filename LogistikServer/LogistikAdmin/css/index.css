@@ -540,6 +540,7 @@ Navbar
 #lieferanthinzufuegen{
     margin-top: 10px;
 
+
 }
 
 #lieferantenInformationen {
@@ -557,6 +558,13 @@ Navbar
     transition: opacity 0.8s;
 }
 
+
+#lieferantenInformationen label{
+    margin-bottom:0;
+    margin-top: 7px;
+}
+
+
 #lieferantErzeugeEvent {
     position: absolute;
     right: 125px;
@@ -570,12 +578,22 @@ Navbar
 #lieferantenInformationen  .ui-input-text {
     display: inline-block;
     vertical-align: middle;
-    width: 300px;
+    width: 80%;
 }
 
 #lieferantBearbeitenTitle {
     padding-top: 15px;
 }
+
+#lieferantenInformationen table{
+    width: 100%;
+
+}
+#lieferantenInformationen table th{
+    text-align: left;
+    vertical-align: top;
+}
+
 
 #suchelieferanten .ui-input-text {
     margin: 0 !important;
@@ -614,9 +632,6 @@ Navbar
     height: 40px;
 }
 
-#popupTermin #lieferantTermin {
-    float: left
-}
 
 #popupTermin #lieferantTerminLabel {
     margin-top: 15px;

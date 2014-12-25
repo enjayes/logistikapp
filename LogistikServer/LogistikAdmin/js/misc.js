@@ -18,6 +18,25 @@ misc = {
             return v.toString(16);
         });
     },
+    getColorFromUniqueID: function(colorId){
+        var colorStr =   colorId.replace(/-/g, "");
+
+
+        var colorInt = 0;
+        for (var j = 0; j < 2; ++j) {
+            var hexString = colorStr.slice(j * 16, j * 16 + 16)
+            colorInt = colorInt + parseInt(hexString, 16);
+        }
+
+        var pad = "000000";
+
+        var str = "" + (colorInt % 16776215).toString(16);
+        str = pad.substring(0, pad.length - str.length) + str;
+
+
+       return str;
+
+    },
     formatDate: function (dateIn) {
 
         if (typeof dateIn == Number)
