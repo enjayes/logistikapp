@@ -72,8 +72,8 @@ serverController = {
                 if (msg.l)
                     serverController.lieferant.getUpdateCallback(msg.l);
             } else if (msg.t == serverController.termin.messageType.updateOthers) {
-                if (msg.e)
-                    serverController.termin.getUpdateCallback(msg.e);
+
+                    serverController.termin.getUpdateCallback();
             } else if (msg.t == serverController.nachricht.messageType.updateOthers) {
                 if (msg.n)
                     serverController.nachricht.getUpdateCallback(msg.n);
@@ -105,7 +105,9 @@ serverController = {
                 Telefon: lieferant.telefon,
                 EMail: lieferant.email,
                 Adresse: lieferant.adresse,
-                Notizen: lieferant.notizen
+                Notizen: lieferant.notizen,
+                Firma: lieferant.firma
+
             }
         }, parseDTO: function (lieferant) {
             return {
@@ -114,9 +116,11 @@ serverController = {
                 vorname: lieferant.Vorname,
                 name: lieferant.Name,
                 telefon: lieferant.Telefon,
-                email: lieferant.EMail,
+                email: lieferant.Email,
                 adresse: lieferant.Adresse,
-                notizen: lieferant.Notizen
+                notizen: lieferant.Notizen,
+                firma: lieferant.Firma
+
             }
         },
         getUpdateCallback: null,
@@ -177,7 +181,11 @@ serverController = {
                 StartMilli: termin.start.toDate().getTime(),
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
-                Lieferant: termin.lieferant
+                Lieferant: termin.lieferant,
+                RepeatDays: termin.repeatDays,
+                jobId: termin.jobId,
+                marktId: termin.marktId
+
             };
 
             if (termin.end) {
@@ -198,8 +206,10 @@ serverController = {
                 start: termin.Start,
                 allDay: termin.AllDay,
                 notizen: termin.Notizen,
-                lieferant: termin.Lieferant
-
+                lieferant: termin.Lieferant,
+                repeatDays: termin.RepeatDays,
+                jobId: termin.jobId,
+                marktId: termin.marktId
             };
 
             if (termin.end != "")
@@ -207,16 +217,17 @@ serverController = {
             else
                 newTermin.end = undefined;
 
+            if (newTermin.start)
+                newTermin.start = termineTab.calenderFactory.moment(newTermin.start);
+            if (newTermin.end)
+                newTermin.end = termineTab.calenderFactory.moment(newTermin.end);
+
+
             return newTermin;
         },
         getUpdateCallback: null,
         setUpdateCallblack: function (callback) {
-            serverController.termin.getUpdateCallback = function (list) {
-                for (var i = 0; i < list.length; i++) {
-                    list[i] = serverController.termin.parseDTO(list[i]);
-                }
-                return callback(list);
-            }
+            serverController.termin.getUpdateCallback =  callback;
         },
         getAll: function (callback) {
             var newCallback = function (list) {
@@ -235,6 +246,9 @@ serverController = {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.termin.parseDTO(list[i]);
                 }
+                console.log(list)
+                console.log(start)
+                console.log(end)
                 callback(list);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
@@ -264,16 +278,24 @@ serverController = {
                 id: nachricht.id,
                 datum: nachricht.datum.getTime(),
                 nachricht: nachricht.nachricht,
-                lieferanten: nachricht.lieferanten
+                lieferanten: nachricht.lieferanten ,
+                maerkte:JSON.stringify(nachricht.maerkte)
             }
+
         },
         parseDTO: function (nachricht) {
-            return {
+            var newNachricht =
+             {
                 id: nachricht.id,
                 datum: parseInt(nachricht.datum),
                 nachricht: nachricht.nachricht,
-                lieferanten: nachricht.lieferanten
-            }
+                lieferanten: nachricht.lieferanten,
+                 maerkte:[]
+            };
+
+            if(nachricht.maerkte&&nachricht.maerkte!="")
+             newNachricht. maerkte = JSON.parse(nachricht.maerkte);
+            return  newNachricht;
         },
         getAll: function (callback) {
             serverController.nachricht.getUpdateCallback = function (list) {
@@ -292,6 +314,7 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (nachricht) {
+
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, n: this.buildDTO(nachricht)}));
         },
         delete: function (nachricht) {

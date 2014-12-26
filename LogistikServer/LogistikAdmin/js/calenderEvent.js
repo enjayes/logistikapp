@@ -10,6 +10,7 @@
 
 
 CalenderEvent = function () {
+    this.marktid=null;
     this.id = misc.getUniqueID();
     this.title = "";
     this.start = "";
@@ -17,6 +18,7 @@ CalenderEvent = function () {
     this.allDay = false;
     this.notizen = "";
     this.lieferant = "";
+    this.repeatDays = 0;
 
 }
 

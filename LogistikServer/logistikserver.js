@@ -32,6 +32,9 @@ var io = require('socket.io')(http);
 //CryptoJS
 var CryptoJS = require("crypto-js");
 
+//momentJS
+var momentJS = require("moment");
+
 
 //Load Controllers
 var connectionController = require('connectionController');
@@ -41,7 +44,7 @@ var dataController = require('dataController.js');
 
 
 //Init Controllers
-dataController.init(preferences,CryptoJS);
+dataController.init(preferences,CryptoJS,momentJS);
 connectionController.init(preferences,io,http,adminController,appController);
 adminController.init(preferences,dataController,io,app,express);
 appController.init(preferences,dataController,io,app,express);

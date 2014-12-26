@@ -12,7 +12,9 @@
 
 var PieChart = function (selector, data) {
 
+
     var that = this;
+
     var ctx = $(selector).find(".chart-area")[0].getContext("2d");
 
     that.pie = new Chart(ctx).Pie(data, {

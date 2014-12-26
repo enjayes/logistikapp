@@ -18,6 +18,8 @@ termineTab = {
     allowOpening: false,
     searchWidget:null,
     termineMarktSelectionWidget:null,
+    terminMarktSelectionWidget:null,
+
     init: function () {
 
 
@@ -31,7 +33,16 @@ termineTab = {
         )
 
 
-        this.termineMarktSelectionWidget = new MultipleSelectionWidget("#termineMarktSelection");
+        this.termineMarktSelectionWidget = new MultipleSelectionWidget("#termineMarktSelection",false,function(){
+            termineTab.calender.removeNoRedraw = true;
+            termineController.dontFadeEvents = true;
+            termineTab.calender.fullCalendar('removeEvents');
+            termineTab.calender.fullCalendar('refetchEvents');
+        });
+
+        this.terminMarktSelectionWidget = new MultipleSelectionWidget("#terminMarktSelection",true,function(){
+
+        });
 
 
     },

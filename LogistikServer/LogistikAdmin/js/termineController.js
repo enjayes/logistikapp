@@ -20,13 +20,14 @@ termineController = {
     ready: function () {
 
 
-        serverController.termin.setUpdateCallblack(function (termine) {
-            termineController.handleNewTermineFromServer(termine, function () {
-                termineController.calendarData.nextLocal = true;
-                termineTab.calender.fullCalendar('refetchEvents');
+        serverController.termin.setUpdateCallblack(function () {
 
 
-            })
+            termineTab.calender.removeNoRedraw = true;
+            termineTab.calender.fullCalendar('removeEvents');
+            termineTab.calender.fullCalendar('refetchEvents');
+
+
         })
 
 
@@ -42,10 +43,15 @@ termineController = {
         lang: "de",
         editable: true,
         eventLimit: true, // allow "more" link when too many events
+        loading: function (loading) {
+
+
+        },
         dayClick: function (date, jsEvent, view) {
 
             console.log(date)
 
+            termineController.dontFadeEvents = true;
 
             termineController.erzeugeEvent(date)
 
@@ -69,11 +75,15 @@ termineController = {
 
         },
         eventDrop: function (event, delta, revertFunc) {
+
+            termineController.dontFadeEvents = true;
             serverController.termin.update(event);
         },
 
         eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
+            termineController.dontFadeEvents = true;
             serverController.termin.update(event);
+
         },
         events: [],
         timeFormat: 'H(:mm)'
@@ -83,16 +93,19 @@ termineController = {
 
         if (termine) {
 
-            termine.forEach(function (termin) {
-                if (termin.start)
-                    termin.start = termineTab.calenderFactory.moment(termin.start);
-                if (termin.end)
-                    termin.end = termineTab.calenderFactory.moment(termin.end);
+            var showMaerkte = termineTab.termineMarktSelectionWidget.getSelectedItems();
+
+            termine = termine.filter(function (termin) {
+
+                for (var i = 0; i < showMaerkte.length; ++i) {
+                    console.log(termin.marktId + " == " + showMaerkte[i].id)
+                    if (termin.marktId == showMaerkte[i].id)
+                        return true;
+                }
+                return false;
             })
 
-
             termineController.events = termine;
-
 
             if (termineTab.calender) {
 
@@ -101,8 +114,6 @@ termineController = {
                     if (termineController.aktuellesEvent) {
                         var termin = termineController.getTerminByID(termineController.aktuellesEvent.id);
 
-                        console.log(termin + "   " + termineController.aktuellerTerminGespeichert)
-                        console.dir(termin)
                         if (!termin)
                             $("#popupTermin").popup("close");
                         else if (termineController.aktuellerTerminGespeichert) {
@@ -123,28 +134,42 @@ termineController = {
     getCalendarEvents: function (start, end, timezone, callback) {
 
 
-        console.log("get events");
-        console.dir(start);
-        console.dir(end);
-        console.dir(callback)
+        serverController.termin.getRange(start, end, function (termine) {
+            termineController.handleNewTermineFromServer(termine, function () {
 
-        if(termineController.calendarData.nextLocal){
-            termineController.calendarData.nextLocal = false;
-            callback(termineController.events);
-        }
-        else{
-            serverController.termin.getRange(start, end, function (termine) {
-                termineController.handleNewTermineFromServer(termine, function () {
+                if (!termineController.dontFadeEvents) {
+
 
                     $(".fc-widget-content").addClass("fade");
+
                     setTimeout(function () {
                         $(".fc-widget-content").removeClass("fade");
                     }, 300);
-                    callback(termineController.events);
+                }
+                else
+                    termineController.dontFadeEvents = false;
 
-                })
-            });
-        }
+
+                //Create Colors for events
+                for (var i = 0; i < termineController.events.length; ++i) {
+
+                    if (termineController.events[i].lieferant)
+                        var colorId = termineController.events[i].lieferant;
+                    else
+                        colorId = termineController.events[i].id;
+
+                    var str = misc.getColorFromUniqueID(colorId);
+
+                    termineController.events[i].color = "#" + str;
+                    termineController.events[i].textColor = "#" + misc.invertRGB(str);
+                }
+
+
+                callback(termineController.events);
+
+            })
+        });
+
 
     },
 
@@ -176,6 +201,7 @@ termineController = {
         termineController.aktuellesEvent = $.extend({}, calenderEvent);
         termineController.aktuellesEventIstNeu = neuesEvent;
 
+
         var date = termineController.aktuellesEvent.start.format('DD.MM.YYYY');
         var time = termineController.aktuellesEvent.start.format('HH:mm');
 
@@ -196,6 +222,11 @@ termineController = {
         }
 
         $("#termintitel").val(calenderEvent.title);
+
+        console.dir(termineController.aktuellesEvent)
+
+        termineTab.terminMarktSelectionWidget.selectedSingleItem(termineController.aktuellesEvent.marktId || uebersichtController.defaultMarktId);
+
 
         $("#terminnotizen").val(calenderEvent.notizen);
 
@@ -227,7 +258,6 @@ termineController = {
         if (calenderEvent.allDay) {
             $("#lieferantAlldayTermin").prop("checked", true).checkboxradio("refresh");
             $("#popupTermin .clockpicker").addClass("ui-disabled");
-
         }
         else {
             $("#lieferantAlldayTermin").removeProp("checked", true).checkboxradio("refresh");
@@ -240,6 +270,45 @@ termineController = {
                     $("#popupTermin .clockpicker").addClass("ui-disabled");
                 else
                     $("#popupTermin .clockpicker").removeClass("ui-disabled");
+                if (termineController.aktuellerTerminGespeichert) {
+                    termineController.aktuellerTerminGespeichert = false;
+                    termineController.zeigeSpeicherButton()
+                }
+
+            }, 0)
+
+        })
+
+
+        if (calenderEvent.repeatDays > 0) {
+            $("#lieferantRepeatTermin").prop("checked", true).checkboxradio("refresh");
+            $("#repeatDaysText, #lieferantRepeatTerminInput").val(termineController.aktuellesEvent.repeatDays);
+            $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").show();
+            $("#lieferantRepeatTerminParent label").text("Wiederholen alle");
+
+
+        }
+        else {
+            $("#lieferantRepeatTermin").removeProp("checked", true).checkboxradio("refresh");
+            $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").hide();
+            $("#lieferantRepeatTerminParent label").text("Wiederholen");
+
+        }
+        $("#popupTermin #lieferantRepeatTerminParent label").click(function () {
+            setTimeout(function () {
+                if ($("#lieferantRepeatTermin").prop("checked")) {
+
+                    $("#repeatDaysText, #lieferantRepeatTerminInput").val(termineController.aktuellesEvent.repeatDays);
+                    $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").show();
+                    $("#lieferantRepeatTerminParent label").text("Wiederholen alle");
+
+
+                }
+                else {
+                    $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").hide();
+                    $("#lieferantRepeatTerminParent label").text("Wiederholen");
+                }
+
                 if (termineController.aktuellerTerminGespeichert) {
                     termineController.aktuellerTerminGespeichert = false;
                     termineController.zeigeSpeicherButton()
@@ -355,15 +424,34 @@ termineController = {
             $("#eventDate").parent(".ui-input-text").addClass("redborder");
         }
 
+
+        var markt = termineTab.terminMarktSelectionWidget.getSelectedItems();
+        if (markt.length != 1) {
+            validated = false;
+            $("#terminMarktSelection.ui-controlgroup-controls").addClass("redborder");
+        }
+
         //Alle Daten in Ordnung
         if (validated) {
             termineController.aktuellerTerminGespeichert = true;
 
             //Eintragen
             termineController.aktuellesEvent.title = $("#termintitel").val();
+
+            termineController.aktuellesEvent.marktId = markt[0].id;
+
             termineController.aktuellesEvent.notizen = $("#terminnotizen").val();
 
             termineController.aktuellesEvent.allDay = $("#lieferantAlldayTermin").prop("checked");
+
+            if ($("#lieferantRepeatTermin").prop("checked"))
+                termineController.aktuellesEvent.repeatDays = parseInt($("#repeatDaysText, #lieferantRepeatTerminInput").val());
+            else
+                termineController.aktuellesEvent.repeatDays = 0;
+
+            if (termineController.aktuellesEvent.repeatDays < 0)
+                termineController.aktuellesEvent.repeatDays = 0;
+
 
             if (termineController.aktuellesEvent.allDay) {
                 start.stripTime();
@@ -395,12 +483,6 @@ termineController = {
             else
                 termineController.aktuellesEvent.lieferant = termineController.aktuellerTerminLieferant.id;
 
-
-            termineTab.calender.fullCalendar('removeEvents', termineController.aktuellesEvent.id);
-
-            termineTab.calender.fullCalendar('addEventSource', [termineController.aktuellesEvent]);
-
-            termineController.events = termineTab.calender.fullCalendar('clientEvents')
 
             if (this.aktuellesEventIstNeu)
                 serverController.termin.create(termineController.aktuellesEvent);
