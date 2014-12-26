@@ -57,6 +57,7 @@ var notifications = {
     },
     mark_read: function (nachricht) {
         // nachrichten[index].id
+
         serverController.nachricht.markRead(nachricht);
 
     }

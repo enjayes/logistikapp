@@ -19,7 +19,7 @@ loginController = {
             //Login hat funktioniert
             if(lieferant&&lieferant.id){
 
-                serverController.nachricht.getAll(function(nachrichten){
+                serverController.nachricht.get(lieferant.id,function(nachrichten){
                     //Nachrichten
                     console.dir(nachrichten);
                     notifications.showMessages(nachrichten);

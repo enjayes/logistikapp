@@ -152,7 +152,8 @@ serverController = {
             create: "nc",
             delete: "nd",
             updateOthers: "nuo",
-            markRead: "nm"
+            markRead: "nm",
+            get:"ng"
         },
         buildDTO: function (nachricht) {
             return {
@@ -186,9 +187,25 @@ serverController = {
 
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
         },
+        get: function (lieferanten_id,callback) {
+            serverController.nachricht.getCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.nachricht.parseDTO(list[i]);
+                }
+                return callback(list);
+            };
+            var newCallback = function () {
+                serverController.nachricht.getCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+            };
 
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.get, lid: lieferanten_id ,callback: serverController.callbackHandler.register(newCallback)}));
+        },
         markRead: function (nachricht) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update,lid: clientView.lieferant.id , nid: nachricht.id}));
+
+            var markReadMessage = {t: this.messageType.markRead,lid: clientView.lieferant.id , nid: nachricht.id}
+            console.dir("markRead:");
+            console.dir(markReadMessage);
+            serverController.socket.emit('message', new ServerMessage(markReadMessage));
         }
 
     }
