@@ -31,7 +31,7 @@ var notifications = {
 
         $.toast({
             heading: title,
-            text: message + "<button>Prost!</button>",
+            text: message,
             stack: 50,
             hideAfter: 6000000,
             showHideTransition: 'fade',
