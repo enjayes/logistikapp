@@ -189,6 +189,7 @@ var clientView = {
     },
 
 
+
     setJob: function(job){
 
 
@@ -277,8 +278,10 @@ var clientView = {
 
         $("#zurueck_start").click(function()
         {
+            loginController.logout();
             $('#startScreen').show();
             $('#contact_daten_menu').hide();
+            $('#callButton').hide();
 
 
         });
@@ -375,7 +378,7 @@ var clientView = {
                 alert("Kein Lieferant eingelogged!");
             }
             serverController.job.create(job);
-
+            $("#callButton").hide();
             $("#goodbye").show();
             $("#logout").hide();
 
@@ -383,9 +386,11 @@ var clientView = {
 
             setTimeout(function(){
 
-                //TODO ausloggen
+
+                loginController.logout();
                 $("#goodbye").hide();
                 $("#startScreen").show();
+                $('#callButton').hide();
 
             }, 10000);
 
@@ -427,6 +432,11 @@ var clientView = {
 
 
 
+    },
+    clearJob: function(){
+        var id = misc.getUniqueID();
+        var clearJob = new Job(id);
+        clientView.setJob(clearJob);
     }
 
 

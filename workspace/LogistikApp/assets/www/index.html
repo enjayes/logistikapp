@@ -92,24 +92,25 @@
                     <!--
                     <h2 id="gruppenname_title"></h2>
                     -->
-                    <h3 id="marktname_title"></h3>
+                    <h2 id="marktname_title"></h2>
 
                     <br>
-                    <h3>Anmelden (todo):</h3>
-                    <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">PIN eingeben</a>
+                    <h3>Anmelden:</h3>
+                    <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>PIN eingeben<br><br></a>
 
-                    <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">QR-Code scannen</a>
+                    <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>QR-Code scannen<br><br></a>
 
-                    <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">NFC-Chip</a>
+                    <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>NFC-Chip<br><br></a>
                     <br>
                     <br>
                     <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
                     <br>
-                    <br>
+
                     <br>
 
-
+                    <!--
                     <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="ui-btn ui-shadow ui-corner-all">Job</a>
+                    -->
                     <br>
 
 
@@ -451,13 +452,13 @@
 
                 <br>
                 </div>
-
+                <div id="callButton" style="display:none">
                 <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
                 <br>
                 <br>
                 <br>
                 <br>
-
+                </div>
 
             </div>
         </div>

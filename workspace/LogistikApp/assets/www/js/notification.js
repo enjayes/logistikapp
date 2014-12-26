@@ -13,6 +13,19 @@
 
 var notifications = {
 
+    hideAll: function()
+    {
+
+        var _container = $('.jq-toast-wrap');
+        if(_container) {
+            if (_container.length != 0) {
+                _container.empty();
+            }
+        }
+
+        $.toast._container = _container;
+    },
+
 
     show: function (title, message, callback) {
 
@@ -33,7 +46,7 @@ var notifications = {
 
                 notifications.show("Nachricht", nachrichten[index].nachricht, function () {
 
-                    mark_read(nachrichten[index]);
+                    notifications.mark_read(nachrichten[index]);
                     //alert("Callback");
 
 

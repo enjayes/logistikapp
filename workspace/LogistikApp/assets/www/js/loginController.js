@@ -52,7 +52,9 @@ loginController = {
 
 
     logout:function(){
+        notifications.hideAll();
         clientView.lieferant = null;
+        clientView.clearJob();
         contactController.set(null,null);
     }
 
