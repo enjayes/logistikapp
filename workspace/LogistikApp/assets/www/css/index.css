@@ -180,3 +180,22 @@ animation-duration: 200ms;
         opacity: 1;
     }
 }
+
+
+#banner {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#bannerext {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
