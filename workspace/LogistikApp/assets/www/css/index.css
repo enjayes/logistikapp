@@ -182,6 +182,16 @@ animation-duration: 200ms;
 }
 
 
+#bannerbackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #2e2e2e url("../img/chalk_bg_tafel.jpg") repeat 0 0;
+    opacity: 0.95;
+}
+
 #banner {
     margin-top: 10px;
     margin-bottom: 10px;
