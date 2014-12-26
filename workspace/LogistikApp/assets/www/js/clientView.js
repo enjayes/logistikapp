@@ -263,7 +263,7 @@ var clientView = {
         var id = misc.getUniqueID();
         var job = new Job(id);
         var that = this;
-
+        var goodByeTimeout = null;
 
         $("#popupVorlagen").show();
 
@@ -281,7 +281,7 @@ var clientView = {
             loginController.logout();
             $('#startScreen').show();
             $('#contact_daten_menu').hide();
-            $('#callButton').hide();
+
 
 
         });
@@ -363,6 +363,15 @@ var clientView = {
 
         });
 
+        $("#goodbye_button").click(function(){
+            if(goodByeTimeout!=null) {
+                clearTimeout(goodByeTimeout);
+            }
+            loginController.logout();
+            $("#goodbye").hide();
+            $("#startScreen").show();
+
+        });
 
 
 
@@ -378,19 +387,18 @@ var clientView = {
                 alert("Kein Lieferant eingelogged!");
             }
             serverController.job.create(job);
-            $("#callButton").hide();
+
             $("#goodbye").show();
             $("#logout").hide();
 
             loginController.logout();
 
-            setTimeout(function(){
+            goodByeTimeout = setTimeout(function(){
 
 
                 loginController.logout();
                 $("#goodbye").hide();
                 $("#startScreen").show();
-                $('#callButton').hide();
 
             }, 10000);
 

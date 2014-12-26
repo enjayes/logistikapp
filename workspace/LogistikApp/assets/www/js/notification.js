@@ -27,6 +27,8 @@ var notifications = {
     },
 
 
+
+
     show: function (title, message, callback) {
 
         $.toast({
@@ -40,6 +42,21 @@ var notifications = {
         })
 
     },
+    showError: function (message) {
+
+        $.toast({
+            heading: "Fehler",
+            text: "<h2>"+message+"</h2>",
+            stack: 50,
+            hideAfter: 3000,
+            showHideTransition: 'fade',
+            allowToastClose: false,
+            bgColor: '#440000'
+
+     })
+
+    },
+
     showMessages: function (nachrichten) {
         for (var i = 0; i < nachrichten.length; i++) {
             var showMessage = function (index) {

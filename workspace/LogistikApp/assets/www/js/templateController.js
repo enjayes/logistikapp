@@ -43,7 +43,7 @@ var templateController = {
     },
 
     load: function(index){
-        if(index < templateList.length()) {
+        if(index < templateList.length) {
             clientView.setJob(templateList[index]);
         }
 

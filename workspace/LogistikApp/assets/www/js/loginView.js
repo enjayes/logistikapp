@@ -27,7 +27,7 @@ var loginView = {
 
             $('#startScreen').hide();
             $('#lieferantenLogin').show();
-            $('#callButton').show();
+
 
 
         });
@@ -37,7 +37,7 @@ var loginView = {
 
             $('#lieferantenLogin').hide();
             $('#startScreen').show();
-            $('#callButton').hide();
+
 
         });
 
