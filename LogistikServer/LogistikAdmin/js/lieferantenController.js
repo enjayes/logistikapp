@@ -77,10 +77,12 @@ lieferantenController = {
                     }
                 }
 
-
+                console.log("**********************")
                //Update Lieferanten Widgets
                 nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
                 lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
+
+                uebersichtTab.searchWidget.setList(lieferantenController.lieferanten);
 
 
                 termineTab.searchWidget.setList(lieferantenController.lieferanten);
