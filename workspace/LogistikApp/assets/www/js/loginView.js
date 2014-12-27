@@ -15,6 +15,7 @@ var loginView = {
 
 
         loginView.pinPad= new PinPad("#PINcode",function(code){
+            loginController.logout();
             loginController.login(code);
 
         })
@@ -28,6 +29,7 @@ var loginView = {
             $('#lieferantenLogin').show();
 
 
+
         });
 
         $("#login_zurueck_start").click(function()
@@ -35,6 +37,7 @@ var loginView = {
 
             $('#lieferantenLogin').hide();
             $('#startScreen').show();
+
 
         });
 

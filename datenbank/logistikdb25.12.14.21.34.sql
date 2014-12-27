@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.0.4.1
 -- http://www.phpmyadmin.net
 --
@@ -80,7 +80,7 @@ INSERT INTO `adminnachrichtgesendet` (`id`, `datum`, `nachricht`, `maerkte`) VAL
 
 CREATE TABLE IF NOT EXISTS `jobs` (
   `id` varchar(36) NOT NULL,
-  `client_id` varchar(36) NOT NULL,
+  `lieferanten_id` varchar(36) NOT NULL,
   `markt_id` text NOT NULL,
   `timestamp_start` bigint(22) NOT NULL,
   `timestamp_end` bigint(22) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 -- Daten für Tabelle `jobs`
 --
 
-INSERT INTO `jobs` (`id`, `client_id`, `markt_id`, `timestamp_start`, `timestamp_end`, `fixtermin`, `pending`, `finished`, `checked_out`, `besuch`, `cb_auftrag_getaetigt`, `bestellung`, `verraeumung`, `austausch`, `t_ziel`, `t_grund`, `t_thematik`, `cb_mhd`, `cb_ruecknahme`, `cb_reklamation`, `cb_warenaufbau`, `cb_umbau`, `cb_info_gespraech`, `cb_nr_abgabe`, `t_vk_euro_abgabe`, `t_warengruppe`, `cb_verkostung`, `cb_sortimentsinfo`, `cb_aktionsabsprache`, `cb_bemusterung`, `cb_verlosung`, `t_notizen`) VALUES
+INSERT INTO `jobs` (`id`, `lieferanten_id`, `markt_id`, `timestamp_start`, `timestamp_end`, `fixtermin`, `pending`, `finished`, `checked_out`, `besuch`, `cb_auftrag_getaetigt`, `bestellung`, `verraeumung`, `austausch`, `t_ziel`, `t_grund`, `t_thematik`, `cb_mhd`, `cb_ruecknahme`, `cb_reklamation`, `cb_warenaufbau`, `cb_umbau`, `cb_info_gespraech`, `cb_nr_abgabe`, `t_vk_euro_abgabe`, `t_warengruppe`, `cb_verkostung`, `cb_sortimentsinfo`, `cb_aktionsabsprache`, `cb_bemusterung`, `cb_verlosung`, `t_notizen`) VALUES
 ('27ab9eca-40fd-43b6-94dd-133a36245635', '1', '', 1418332790285, 1418332933373, 0, 0, 1, 1, 1, 0, 0, 0, 0, '                ', '\n                ', '\n                ', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, ''),
 ('9ef58605-9549-469d-bca4-cd739ed98c95', '1', '', 1418333107991, 1418333114778, 0, 0, 1, 1, 0, 0, 1, 0, 0, '                ', '\n                ', '\n                ', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, ''),
 ('aa188824-e44d-42a5-9945-f1b5a03aeda0', '1', '', 1418333141408, 1418333148595, 0, 0, 1, 1, 0, 0, 1, 0, 0, '                ', '\n                ', '\n                ', 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, ''),

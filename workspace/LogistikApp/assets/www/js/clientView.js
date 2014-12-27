@@ -189,6 +189,7 @@ var clientView = {
     },
 
 
+
     setJob: function(job){
 
 
@@ -209,6 +210,7 @@ var clientView = {
         $("#t_grund").val(job.t_grund);
         $("#t_thematik").val(job.t_thematik);
 
+        $("#gespraechspartner").val( job.gespraechspartner );
 
         $('#cb_auftrag_getaetigt').prop('checked',job.cb_auftrag_getaetigt);
 
@@ -233,6 +235,8 @@ var clientView = {
 
         $('#cb_nr_abgabe').prop('checked',job.cb_nr_abgabe);
 
+        $("#t_vk_euro_abgabe").val(job.t_vk_euro_abgabe);
+        $("#t_warengruppe").val(job.t_warengruppe);
 
 
         $('#cb_verkostung').prop('checked',job.cb_verkostung);
@@ -259,7 +263,7 @@ var clientView = {
         var id = misc.getUniqueID();
         var job = new Job(id);
         var that = this;
-
+        var goodByeTimeout = null;
 
         $("#popupVorlagen").show();
 
@@ -274,8 +278,10 @@ var clientView = {
 
         $("#zurueck_start").click(function()
         {
+            loginController.logout();
             $('#startScreen').show();
             $('#contact_daten_menu').hide();
+
 
 
         });
@@ -357,6 +363,15 @@ var clientView = {
 
         });
 
+        $("#goodbye_button").click(function(){
+            if(goodByeTimeout!=null) {
+                clearTimeout(goodByeTimeout);
+            }
+            loginController.logout();
+            $("#goodbye").hide();
+            $("#startScreen").show();
+
+        });
 
 
 
@@ -378,9 +393,10 @@ var clientView = {
 
             loginController.logout();
 
-            setTimeout(function(){
+            goodByeTimeout = setTimeout(function(){
 
-                //TODO ausloggen
+
+                loginController.logout();
                 $("#goodbye").hide();
                 $("#startScreen").show();
 
@@ -424,6 +440,11 @@ var clientView = {
 
 
 
+    },
+    clearJob: function(){
+        var id = misc.getUniqueID();
+        var clearJob = new Job(id);
+        clientView.setJob(clearJob);
     }
 
 

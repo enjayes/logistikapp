@@ -168,7 +168,6 @@ if ( typeof Object.create !== 'function' ) {
 					});
 				}
 
-				serverController.
 
 			});
 

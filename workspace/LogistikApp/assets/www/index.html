@@ -1,521 +1,565 @@
-<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+    <!DOCTYPE html>
+    <!--
+        Licensed to the Apache Software Foundation (ASF) under one
+        or more contributor license agreements.  See the NOTICE file
+        distributed with this work for additional information
+        regarding copyright ownership.  The ASF licenses this file
+        to you under the Apache License, Version 2.0 (the
+        "License"); you may not use this file except in compliance
+        with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="msapplication-tap-highlight" content="no"/>
-    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=460, height=device-height, target-densitydpi=device-dpi"/>
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
-    <link rel="stylesheet" type="text/css" href="css/PINpad.css"  />
-    <title>LogistikApp</title>
-    <!--Install Console-->
+        Unless required by applicable law or agreed to in writing,
+        software distributed under the License is distributed on an
+        "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+         KIND, either express or implied.  See the License for the
+        specific language governing permissions and limitations
+        under the License.
+    -->
+    <html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="msapplication-tap-highlight" content="no"/>
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=460, height=device-height, target-densitydpi=device-dpi"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
+        <link rel="stylesheet" type="text/css" href="css/PINpad.css"  />
+        <title>LogistikApp</title>
+        <!--Install Console-->
 
-    <script type="text/javascript" src="js/misc.js"></script>
-    <script type="text/javascript">
+        <script type="text/javascript" src="js/misc.js"></script>
+        <script type="text/javascript">
 
-        if (typeof window.console == "undefined") {
-            window.console = {
-                log: function (str) {
-                    window.external.Notify(str);
-                }
-            };
-        }
-        window.onerror = function (e, url, lineNumber) {
-            console.log("ERROR! : " + url + "(" + lineNumber + ") : " + JSON.stringify(e));
-        };
-
-        windowOpen = window.open;
-
-        //Overwrite alert and prompt if in browser
-        if (misc.isMobileApp()==false){
-            window.prompt = function (msg) {
-               // console.log("PROMPT: " + msg)
+            if (typeof window.console == "undefined") {
+                window.console = {
+                    log: function (str) {
+                        window.external.Notify(str);
+                    }
+                };
             }
-        }
-    </script>
+            window.onerror = function (e, url, lineNumber) {
+                console.log("ERROR! : " + url + "(" + lineNumber + ") : " + JSON.stringify(e));
+            };
 
-</head>
-<body>
+            windowOpen = window.open;
 
+            //Overwrite alert and prompt if in browser
+            if (misc.isMobileApp()==false){
+                window.prompt = function (msg) {
+                   // console.log("PROMPT: " + msg)
+                }
+            }
+        </script>
 
-
-
-
-<div class="centerapp" style="display:none" class="fadein" >
-
-    <div class="app">
-
-
-        <!--<a href="skype:004908941150015?call">Call the Skype Echo / Sound Test Service</a>
-
-        -->
-
-        <!--script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
-        <div id="SkypeButton" >
-            <script type="text/javascript">
-                Skype.ui({
-                    name: "call",
-                    element: "SkypeButton",
-                    participants: ["00498941150015"],
-                    imageSize: 32,
-                    imageColor: "black"
-                });
-            </script>
-        </div-->
-
-        <div id="startScreen" class="fadein" >
-            <h2 id="gruppenname_title"></h2>
-            <h3 id="marktname_title"></h3>
-
-            <br>
-            <h3>Anmelden (todo):</h3>
-            <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">PIN eingeben</a>
-
-            <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">QR-Code scannen</a>
-
-            <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left">NFC-Chip</a>
-            <br>
-            <br>
-            <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
-            <br>
-            <br>
-            <br>
-
-
-            <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="ui-btn ui-shadow ui-corner-all">Job</a>
-            <br>
+    </head>
+    <body>
 
 
 
-        </div>
-        <div id="konfi_login_menue" class="fadein" style="display:none" >
-            <h2>Konfiguration</h2>
-            <h3>Bitte PIN eingeben... TODO RMV 1234</h3>
-            <div id="PINcodeConfig" data-enhance="false"></div>
-            <br>
-            <a id="konfi_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-        </div>
 
-        <div id="konfi_menue"  class="fadein"  style="display:none" >
+    <div id="bannerbackground"></div>
+    <div class="centerapp" class="fadein" >
 
-            <h2>Konfigurationsmenü</h2>
-            <h3 id="server_status"></h3>
+        <div class="app">
 
-            <form>
-                <table style="width:100%;border: none">
-                    <tr>
-                        <td>
-                            <label>
-                                Marktname
-                            </label></td>
-                        <td><input id="markt_id">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>
-                                Server
-                            </label></td>
-                        <td><input id="t_server">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>
-                                Port
-                            </label></td>
-                        <td><input id="t_port">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a id="open_admin" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-
-
-            <br>
-            <a id="save_config" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
-            <a id="config_zurueck" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-
-        </div>
-
-
-        <div id="lieferantenLogin" class="fadein"  style="display:none" >
-            <h2>Anmelden</h2>
-            <h3>Bitte PIN eingeben...</h3>
-
-            <div id="PINcode" data-enhance="false"></div>
-            <br>
-            <a id="login_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-        </div>
-
-        <div id="contact_daten_menu" class="fadein"  style="display:none">
-            <h3>Kontaktdaten</h3>
-            <br>
-            <form>
-                <table style="width:100%;border: none">
-                    <tr>
-                        <td>
-                            <label>
-                                Vorname:
-                            </label></td>
-                        <td><input id="vorname" readonly>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>
-                                Nachnname:
-                            </label></td>
-                        <td><input id="familienname" readonly>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-                        <td>
-                            <label>
-                                Firma:
-                            </label></td>
-                        <td><input id="firma" readonly>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>
-                                Telefon-Nr:
-                            </label></td>
-                        <td><input id="telefon">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>
-                                E-Mail:
-                            </label></td>
-                        <td><input id="email">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-
-            <a id="b_kalender"  style="width:100px;height:15px;float:right;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
-            <br>
-            <br>
-            <br>
-            <a id="weiter_jobSelector" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-            <a id="zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-        </div>
-
-        <div id="termine_menu" class="fadein"  style="display:none">
-            <h3>Termine</h3>
-            <br>
-            <ul data-role="listview">
-                <li>Termin 1a</li>
-                <li>Termin 2a</li>
-                <li>Termin 3a</li>
-            </ul>
-            <br>
-            <ul data-role="listview">
-                <li><a onClick = "alert('Termin');" href="#"> Termin 1b</a></li>
-                <li>Termin 2b</li>
-                <li>Termin 3b</li>
-            </ul>
-            <br>
-            <a id="cb_neuer_termin"  onclick="alert('Termin');" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Termin anlegen</a>
-            <br>
-
-            <a id="zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-        </div>
-
-
-        <div id="jobSelector" class="fadein"  style="display:none">
-            <h2 class="greetingLieferant"></h2>
-            <h3>Aufgabenwahl</h3>
-            <br>
-            <form>
-                <label>
-                    <input name="checkbox-0 " type="checkbox" id="fixtermin">Fixtermin
-                </label>
+            <div class="divbackground" style="width:460px; height:100%;border:inset; background-color:#ffffff;opacity:0.9999;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
+                <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
+                <img id="banner" height="60px" src="img/bannerlogo.png">
                 <br>
 
-                <label>
-                    <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch
-                </label>
-                <label>
-                    <input name="checkbox-0 " type="checkbox" id="cb_bestellung">Bestellung
-                </label>
-                <label>
-                    <input name="checkbox-0 " type="checkbox" id="cb_verraeumung">Verräumung
-                </label>
-                <label>
-                    <input name="checkbox-0 " type="checkbox" id="cb_austausch">Austausch von Bruch und Verderb
-                </label>
+
+                <!--<a href="skype:004908941150015?call">Call the Skype Echo / Sound Test Service</a>
+
+                -->
+
+                <!--script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
+                <div id="SkypeButton" >
+                    <script type="text/javascript">
+                        Skype.ui({
+                            name: "call",
+                            element: "SkypeButton",
+                            participants: ["00498941150015"],
+                            imageSize: 32,
+                            imageColor: "black"
+                        });
+                    </script>
+                </div-->
+
+                <div id="startScreen" class="fadein" >
+                    <!--
+                    <h2 id="gruppenname_title"></h2>
+                    -->
+                    <h2 id="marktname_title"></h2>
+
+                    <br>
+                    <h3>Anmelden:</h3>
+                    <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>PIN eingeben<br><br></a>
+
+                    <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>QR-Code scannen<br><br></a>
+
+                    <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>NFC-Chip<br><br></a>
+                    <br>
+                    <br>
+                    <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
+                    <br>
+
+                    <br>
+
+                    <!--
+                    <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="ui-btn ui-shadow ui-corner-all">Job</a>
+                    -->
+                    <br>
+                    <br>
+
+                </div>
+
+                <div id="konfi_login_menue" class="fadein" style="display:none" >
+                    <h2>Konfiguration</h2>
+                    <h3>Bitte PIN eingeben... TODO RMV 1234</h3>
+                    <div id="PINcodeConfig" data-enhance="false"></div>
+                    <br>
+                    <a id="konfi_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                    <br>
+                </div>
+
+                <div id="konfi_menue"  class="fadein"  style="display:none" >
+
+                    <h2>Konfigurationsmenü</h2>
+                    <h3 id="server_status"></h3>
+
+                    <form>
+                        <table style="width:100%;border: none">
+                            <tr>
+                                <td>
+                                    <label>
+                                        Marktname
+                                    </label></td>
+                                <td><input id="markt_id">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>
+                                        Server
+                                    </label></td>
+                                <td><input id="t_server">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>
+                                        Port
+                                    </label></td>
+                                <td><input id="t_port">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a id="open_admin" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
 
 
-            </form>
-            <br>
-            <a id="b_vorlagen"  onClick='$( "#popupVorlagen" ).popup("open") ;' class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left">Gespeicherte Vorlagen</a>
-
-            <br>
-
-            <a id="weiter_Aufgaben" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-            <a id="job_zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-        </div>
-
-        <div id="lieferantenschein1" class="fadein"  style="display:none">
-            <h2 class="greetingLieferant"></h2>
-
-            <br>
-            <tr>
-                <td>
-                    <label>
-                        Ziel
-                    </label>
-                <td><textarea id="t_ziel" rows="1" cols="50"></textarea></td>
-            </tr>
-            <tr>
-                <td>
-                    <label>
-                        Grund
-                    </label>
-                <td><textarea id="t_grund" rows="1" cols="50"></textarea></td>
-            </tr>
-            <tr>
-                <td>
-                    <label>
-                        Thematik
-                    </label>
-                <td><textarea id="t_thematik"rows="1" cols="50"></textarea></td>
-            </tr>
-            <tr>
-                <td>
-                    <label>
-                        Gesprächspartner
-                    </label>
-                <td><input id="gespraechspartner"></td>
-            </tr>
-            <br>
-            <a id="weiter_lieferantenschein1" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-            <a id="zurueck_lieferantenschein1" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-        </div>
+                    <br>
+                    <a id="save_config" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
+                    <a id="config_zurueck" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
 
-        <div id="lieferantenschein2" class="fadein"  style="display:none">
-            <h2 class="greetingLieferant"></h2>
+                </div>
 
-            <br>
 
-            <form>
-                <table style="width:100%;border: none">
-                    <tr>
-                        <td>
-                            <label>
-                                <input name="checkbox-0 " type="checkbox" id="cb_auftrag_getaetigt">Auftrag getätigt
-                            </label></td>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_mhd">MHD-Kontrolle
-                        </label></td>
-                    </tr>
-                    <tr>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_ruecknahme">Rücknahme
-                        </label></td>
+                <div id="lieferantenLogin" class="fadein"  style="display:none" >
+                    <h2>Anmelden</h2>
+                    <h3>Bitte PIN eingeben...</h3>
 
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_reklamation">Reklamationsbearbeitung
-                        </label></td>
-                    </tr>
-                    <tr>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_warenaufbau">Warenaufbau
-                        </label></td>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_umbau">Umbau
-                        </label></td>
-                    </tr>
-                    <tr>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_info_gespraech">Info-Gespräch
-                        </label></td>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
+                    <div id="PINcode" data-enhance="false"></div>
+                    <br>
+                    <a id="login_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                    <br>
+                </div>
+
+                <div id="contact_daten_menu" class="fadein"  style="display:none">
+                    <h3>Kontaktdaten</h3>
+                    <br>
+                    <form>
+                        <table style="width:100%;border: none">
+                            <tr>
+                                <td>
+                                    <label>
+                                        Vorname:
+                                    </label></td>
+                                <td><input id="vorname" readonly>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>
+                                        Nachnname:
+                                    </label></td>
+                                <td><input id="familienname" readonly>
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td>
+                                    <label>
+                                        Firma:
+                                    </label></td>
+                                <td><input id="firma" readonly>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>
+                                        Telefon-Nr:
+                                    </label></td>
+                                <td><input id="telefon">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label>
+                                        E-Mail:
+                                    </label></td>
+                                <td><input id="email">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+                    <a id="b_kalender"  style="width:100px;height:15px;float:right;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
+                    <br>
+                    <br>
+                    <br>
+                    <a id="weiter_jobSelector" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+                    <a id="zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
+                </div>
+
+                <div id="termine_menu" class="fadein"  style="display:none">
+                    <h3>Termine</h3>
+                    <br>
+                    <ul data-role="listview">
+                        <li>Termin 1a</li>
+                        <li>Termin 2a</li>
+                        <li>Termin 3a</li>
+                    </ul>
+                    <br>
+                    <ul data-role="listview">
+                        <li><a onClick = "alert('Termin');" href="#"> Termin 1b</a></li>
+                        <li>Termin 2b</li>
+                        <li>Termin 3b</li>
+                    </ul>
+                    <br>
+                    <a id="cb_neuer_termin"  onclick="alert('Termin');" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Termin anlegen</a>
+                    <br>
+
+                    <a id="zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
+                </div>
+
+
+                <div id="jobSelector" class="fadein"  style="display:none">
+                    <h2 class="greetingLieferant"></h2>
+                    <h3>Aufgabenwahl</h3>
+                    <br>
+                    <form>
+                        <label>
+                            <input name="checkbox-0 " type="checkbox" id="fixtermin">Fixtermin
                         </label>
-                        <input id="t_vk_euro_abgabe" cols="5" placeholder="Wert in Euro">
-                            <input id="t_warengruppe" cols="5" placeholder="Warengruppe">
-                    </tr>
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_verkostung">Verkostung
-                    </label></td>
-                    <td><label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_sortimentsinfo">Sortimentsinfo
-                    </label></td>
+                        <br>
 
-                    <tr>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_aktionsabsprache">Aktionsabsprache
-                        </label></td>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_bemusterung">Bemusterung
-                        </label></td>
-                    </tr>
+                        <label>
+                            <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch
+                        </label>
+                        <label>
+                            <input name="checkbox-0 " type="checkbox" id="cb_bestellung">Bestellung
+                        </label>
+                        <label>
+                            <input name="checkbox-0 " type="checkbox" id="cb_verraeumung">Verräumung
+                        </label>
+                        <label>
+                            <input name="checkbox-0 " type="checkbox" id="cb_austausch">Austausch von Bruch und Verderb
+                        </label>
 
+
+                    </form>
+                    <br>
+                    <a id="b_vorlagen"  onClick='$( "#popupVorlagen" ).popup("open") ;' class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left">Gespeicherte Vorlagen</a>
+
+                    <br>
+
+                    <a id="weiter_Aufgaben" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+                    <a id="job_zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
+                </div>
+
+                <div id="lieferantenschein1" class="fadein"  style="display:none">
+                    <h2 class="greetingLieferant"></h2>
+
+                    <br>
                     <tr>
                         <td>
                             <label>
-                                <input name="checkbox-0 " type="checkbox" id="cb_verlosung">Verlosung
+                                Ziel
                             </label>
-                        </td>
-
-
+                        <td><textarea id="t_ziel" rows="1" cols="50"></textarea></td>
                     </tr>
-                </table>
+                    <tr>
+                        <td>
+                            <label>
+                                Grund
+                            </label>
+                        <td><textarea id="t_grund" rows="1" cols="50"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                Thematik
+                            </label>
+                        <td><textarea id="t_thematik"rows="1" cols="50"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                Gesprächspartner
+                            </label>
+                        <td><input id="gespraechspartner"></td>
+                    </tr>
+                    <br>
+                    <a id="weiter_lieferantenschein1" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+                    <a id="zurueck_lieferantenschein1" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
-            </form>
-            <br>
-            <a id="weiter_lieferantenschein2" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+                </div>
 
-            <a id="zurueck_lieferantenschein2" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
-        </div>
+                <div id="lieferantenschein2" class="fadein"  style="display:none">
+                    <h2 class="greetingLieferant"></h2>
 
-        <div id="logout" style="display:none">
-            <td><textarea id="t_notizen" rows="1" cols="50"></textarea></td>
-            <a id="vorlage_logout" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">als Vorlage speichern...</a>
+                    <br>
 
-            <div id="vorlage_benennen" class="fadein"  style="display:none">
-                <h3>Vorlagenname</h3>
+                    <form>
+                        <table style="width:100%;border: none">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input name="checkbox-0 " type="checkbox" id="cb_auftrag_getaetigt">Auftrag getätigt
+                                    </label></td>
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_mhd">MHD-Kontrolle
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_ruecknahme">Rücknahme
+                                </label></td>
 
-                <input id="vorlagen_name">
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_reklamation">Reklamationsbearbeitung
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_warenaufbau">Warenaufbau
+                                </label></td>
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_umbau">Umbau
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_info_gespraech">Info-Gespräch
+                                </label></td>
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
+                                </label>
+                                <input id="t_vk_euro_abgabe" cols="5" placeholder="Wert in Euro">
+                                    <input id="t_warengruppe" cols="5" placeholder="Warengruppe">
+                            </tr>
+                            <td><label>
+                                <input name="checkbox-0 " type="checkbox" id="cb_verkostung">Verkostung
+                            </label></td>
+                            <td><label>
+                                <input name="checkbox-0 " type="checkbox" id="cb_sortimentsinfo">Sortimentsinfo
+                            </label></td>
 
-                <div id="vorlage_leer" style="display:none"><font color="red">Vorlagename darf nicht leer sein.</font></div>
+                            <tr>
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_aktionsabsprache">Aktionsabsprache
+                                </label></td>
+                                <td><label>
+                                    <input name="checkbox-0 " type="checkbox" id="cb_bemusterung">Bemusterung
+                                </label></td>
+                            </tr>
 
-                <a id="speichern_vorlage" class="ui-btn ui-shadow ui-corner-all ui-icon-disk ui-btn-icon-left">Speichern</a>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input name="checkbox-0 " type="checkbox" id="cb_verlosung">Verlosung
+                                    </label>
+                                </td>
+
+
+                            </tr>
+                        </table>
+
+                    </form>
+                    <br>
+                    <a id="weiter_lieferantenschein2" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+
+                    <a id="zurueck_lieferantenschein2" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
+                </div>
+
+                <div id="logout" style="display:none">
+                    <h4>Notizen</h4>
+                    <td><textarea id="t_notizen" rows="1" cols="50"></textarea></td>
+                    <br>
+                    <a id="vorlage_logout" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">als Vorlage speichern...</a>
+
+                    <div id="vorlage_benennen" class="fadein"  style="display:none">
+                        <h3>Vorlagenname</h3>
+
+                        <input id="vorlagen_name">
+
+                        <div id="vorlage_leer" style="display:none"><font color="red">Vorlagename darf nicht leer sein.</font></div>
+
+                        <a id="speichern_vorlage" class="ui-btn ui-shadow ui-corner-all ui-icon-disk ui-btn-icon-left">Speichern</a>
+                    </div>
+
+                    <br>
+                    <a id="checkout_logout" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left"><br>Checkout<br><br></a>
+                    <a id="zurueck_logout" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+
+                </div>
+
+
+
+                <div id="goodbye" style="display:none">
+                    <br>
+
+
+                    <a id="goodbye_button" class="goodbyebutton ui-btn ui-btn-b ui-corner-all">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <h3>
+                        Auf Wiedersehen!
+                        </h3>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+                    </a>
+
+                    <br>
+
+
+
+                <br>
+                </div>
+                <div id="callButton" style="display:none">
+                <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
+                <br>
+                <br>
+                <br>
+                <br>
+                </div>
+
             </div>
-
-
-            <a id="checkout_logout" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Checkout</a>
-            <a id="zurueck_logout" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
         </div>
 
-        <div id="goodbye" style="display:none">
-            <h3>Auf Wiedersehen</h3>
 
-        </div>
 
+    </div>
+
+
+    </div>
+
+    <div data-role="popup" id="popupVorlagen" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
+        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <p>Vorlage auswählen: <p>
         <br>
-        <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
+        <div id = "templateList">
 
+        </div>
+        <br>
     </div>
 
+    <!--Own Libraries ------------------------------------------------->
+
+    <!-- ---->
+    <script type="text/javascript" src="js/sjcl.js"></script>
+    <!-- ---->
 
 
-</div>
+    <script type="text/javascript" src="js/sha3.js"></script>
 
 
-</div>
+    <script type="text/javascript" src="js/fastclick.js"></script>
 
-<div data-role="popup" id="popupVorlagen" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
-    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-    <p>Vorlage auswählen: <p>
-    <br>
-    <div id = "templateList">
+    <script type="text/javascript" src="js/loginController.js"></script>
 
-    </div>
-    <br>
-</div>
+    <script type="text/javascript" src="js/serverController.js"></script>
 
-<!--Own Libraries ------------------------------------------------->
+    <script type="text/javascript" src="js/logistikapp.js"></script>
 
-<!-- ---->
-<script type="text/javascript" src="js/sjcl.js"></script>
-<!-- ---->
+    <script type="text/javascript" src="js/startView.js"></script>
+    <script type="text/javascript" src="js/configView.js"></script>
+    <script type="text/javascript" src="js/contactController.js"></script>
+    <script type="text/javascript" src="js/templateController.js"></script>
 
+    <script type="text/javascript" src="js/loginView.js"></script>
 
-<script type="text/javascript" src="js/sha3.js"></script>
+    <script type="text/javascript" src="js/clientView.js"></script>
+    <script type="text/javascript" src="js/job.js"></script>
+    <script type="text/javascript" src="js/notification.js"></script>
 
-
-<script type="text/javascript" src="js/fastclick.js"></script>
-
-<script type="text/javascript" src="js/loginController.js"></script>
-
-<script type="text/javascript" src="js/serverController.js"></script>
-
-<script type="text/javascript" src="js/logistikapp.js"></script>
-
-<script type="text/javascript" src="js/startView.js"></script>
-<script type="text/javascript" src="js/configView.js"></script>
-<script type="text/javascript" src="js/contactController.js"></script>
-<script type="text/javascript" src="js/templateController.js"></script>
-
-<script type="text/javascript" src="js/loginView.js"></script>
-
-<script type="text/javascript" src="js/clientView.js"></script>
-<script type="text/javascript" src="js/job.js"></script>
-<script type="text/javascript" src="js/notification.js"></script>
-
-<script type="text/javascript" src="js/preferences.js"></script>
+    <script type="text/javascript" src="js/preferences.js"></script>
 
 
-<!--Imported libraries ------------------------------------------------->
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-<script>
-    $(document).on("mobileinit", function(){
-        $.mobile.ignoreContentEnabled = true;
-    });
-</script>
-<script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
-<script type="text/javascript" src="js/socket.io.js"></script>
+    <!--Imported libraries ------------------------------------------------->
+    <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+    <script>
+        $(document).on("mobileinit", function(){
+            $.mobile.ignoreContentEnabled = true;
+        });
+    </script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript" src="js/socket.io.js"></script>
 
-<!--Cordova Libraries ------------------------------------------------->
+    <!--Cordova Libraries ------------------------------------------------->
 
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
-<!--PinPad ------------------------------------------------->
-<script src="js/PINpad.js"></script>
-
-
-<!--Toast------------------------------------------------->
-<link href="js/notifications/jquery.toast.min.css" rel="stylesheet" type="text/css">
-<script src="js/notifications/jquery.toast.js"></script>
+    <!--PinPad ------------------------------------------------->
+    <script src="js/PINpad.js"></script>
 
 
-</body>
-</html>
+    <!--Toast------------------------------------------------->
+    <link href="js/notifications/jquery.toast.min.css" rel="stylesheet" type="text/css">
+    <script src="js/notifications/jquery.toast.js"></script>
+
+
+    </body>
+    </html>

@@ -13,12 +13,27 @@
 
 var notifications = {
 
+    hideAll: function()
+    {
+
+        var _container = $('.jq-toast-wrap');
+        if(_container) {
+            if (_container.length != 0) {
+                _container.empty();
+            }
+        }
+
+        $.toast._container = _container;
+    },
+
+
+
 
     show: function (title, message, callback) {
 
         $.toast({
             heading: title,
-            text: message + "<button>Prost!</button>",
+            text: message,
             stack: 50,
             hideAfter: 6000000,
             showHideTransition: 'fade',
@@ -27,13 +42,28 @@ var notifications = {
         })
 
     },
+    showError: function (message) {
+
+        $.toast({
+            heading: "Fehler",
+            text: "<h2>"+message+"</h2>",
+            stack: 50,
+            hideAfter: 3000,
+            showHideTransition: 'fade',
+            allowToastClose: false,
+            bgColor: '#440000'
+
+     })
+
+    },
+
     showMessages: function (nachrichten) {
         for (var i = 0; i < nachrichten.length; i++) {
             var showMessage = function (index) {
 
                 notifications.show("Nachricht", nachrichten[index].nachricht, function () {
 
-                    mark_read(nachrichten[index]);
+                    notifications.mark_read(nachrichten[index]);
                     //alert("Callback");
 
 
@@ -44,6 +74,7 @@ var notifications = {
     },
     mark_read: function (nachricht) {
         // nachrichten[index].id
+
         serverController.nachricht.markRead(nachricht);
 
     }

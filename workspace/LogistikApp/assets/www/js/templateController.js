@@ -23,7 +23,6 @@ var templateController = {
         this.templateList = list;
         console.dir("TEMPLATE LISTE:");
         console.dir(list);
-        console.dir(list[0].markt_id);
         var html = '<ul data-role="listview" id = "templateListview">';
 
 
@@ -44,8 +43,10 @@ var templateController = {
     },
 
     load: function(index){
-        clientView.setJob(templateList[index]);
-        $("#weiter_Aufgaben").click();
+        if(index < templateList.length) {
+            clientView.setJob(templateList[index]);
+        }
+
         $( "#popupVorlagen" ).popup("close") ;
     }
 
