@@ -311,7 +311,6 @@ var clientView = {
 
         $("#weiter_jobSelector").click(function()
         {
-            //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
 
             contactController.store();
             $("#jobSelector").show();
@@ -321,8 +320,6 @@ var clientView = {
 
         $("#weiter_Aufgaben").click(function()
         {
-            //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
-
 
             $("#lieferantenschein1").show();
             $("#jobSelector").hide();
@@ -331,7 +328,6 @@ var clientView = {
 
         $("#weiter_lieferantenschein1").click(function()
         {
-            //notifications.show("Geschäftsführer","Bring mir mal ne Flasche Bier!");
 
             $("#lieferantenschein2").show();
             $("#lieferantenschein1").hide();

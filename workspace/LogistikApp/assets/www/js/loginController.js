@@ -17,6 +17,13 @@ loginController = {
         notifications.showError("Die Anmeldung war leider nicht erfolgreich!")
     },
 
+    loginQR:function(qrcode){
+        //todo
+        loginController.login(pin);
+
+    },
+
+
     login:function(pin){
 
         var loginCallback =function(lieferant) {

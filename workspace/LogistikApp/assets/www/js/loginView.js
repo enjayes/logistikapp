@@ -20,9 +20,22 @@ var loginView = {
 
         })
 
+
+        $("#start_qr_code_anmelden").click(function()
+        {
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    loginController.loginQR(result.text);
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                }
+            );
+        });
+
+
         $("#start_anmelden").click(function()
         {
-
             loginView.pinPad.clear();
 
             $('#startScreen').hide();
