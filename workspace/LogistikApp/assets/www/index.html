@@ -258,12 +258,65 @@
                 <li>Termin 3b</li>
             </ul>
             <br>
-            <a id="cb_neuer_termin"  onclick="alert('Termin');" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Termin anlegen</a>
+            <a id="cb_neuer_termin"  class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Termin anlegen</a>
             <br>
 
             <a id="zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
         </div>
+
+
+        <div id="terminEintragen" data-dismissible="false" data-theme="a" class="ui-corner-all" style="display:none">
+
+            <div>
+                <h2 id="terminheader"></h2>
+
+                <label for="termintitel" class="">Titel:</label>
+                <input type="text" name="user" id="termintitel" value="" placeholder="" data-theme="a">
+
+                <label for="eventDate" class="">Datum:</label>
+
+                <input id="eventDate" type="text" data-role="date">
+
+                <div class="input-group clockpicker">
+                    <input type="text" class="form-control" value="12:00">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+                </div>
+
+                <div id="lieferantRepeatTerminParent" class="topMarginCheckbox">
+
+                    <label>
+                        <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen alle
+                    </label>
+                    <input id="lieferantRepeatTerminInput" type="text">
+
+                    <div id="repeatDaysText">Tage</div>
+                </div>
+                <label class="topMarginCheckbox">
+                    <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
+                </label>
+
+
+                <label id="terminnotizenLabel" for="terminnotizen" class="">Notizen:</label>
+                <textarea id="terminnotizen" rows="7"></textarea>
+
+                <div class="bottombuttons saved">
+                    <a id="speichereaktuelleseventbutton" onclick="termineController.speichereAktuellesEvent();" class="greenbutton ui-btn ui-corner-all ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check"
+                       style="display:none">Speichern
+                    </a>
+                    <a id="abbrechenbearbeitungaktuelleseventbutton" onclick="termineController.abbrechenBearbeitungAktuellesEvent();"
+                       class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok
+                    </a>
+                </div>
+                <a id="loescheaktuelleseventbutton" onclick="termineController.loescheAktuellenTermin();"
+                   class="redbutton ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-delete">Löschen
+                </a>
+            </div>
+
+        </div>
+
 
 
         <div id="jobSelector" class="fadein"  style="display:none">
@@ -491,6 +544,7 @@
 <script type="text/javascript" src="js/loginView.js"></script>
 
 <script type="text/javascript" src="js/clientView.js"></script>
+<script type="text/javascript" src="js/termin.js"></script>
 <script type="text/javascript" src="js/job.js"></script>
 <script type="text/javascript" src="js/notification.js"></script>
 
@@ -519,6 +573,13 @@
 <!--Toast------------------------------------------------->
 <link href="js/notifications/jquery.toast.min.css" rel="stylesheet" type="text/css">
 <script src="js/notifications/jquery.toast.js"></script>
+
+<!--Datepicker für Termine-->
+<script src="libs/datepicker.js"></script>
+<script src="libs/jquery.mobile.datepicker.js"></script>
+
+<!--Timepicker für Zeit-->
+<script src="libs/timepicker/jquery-clockpicker.js"></script>
 
 
 </body>

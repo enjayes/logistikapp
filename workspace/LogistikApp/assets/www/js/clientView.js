@@ -262,6 +262,7 @@ var clientView = {
         var id = misc.getUniqueID();
         var job = new Job(id);
         var that = this;
+        termin.initialize();
 
 
         $("#popupVorlagen").show();

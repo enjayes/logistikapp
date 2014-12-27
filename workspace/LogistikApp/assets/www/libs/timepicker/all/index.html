@@ -5,31 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ClockPicker</title>
-<link rel="stylesheet" type="text/css" href="dist/jquery-clockpicker.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="dist/bootstrap-clockpicker.min.css">
 <link rel="stylesheet" type="text/css" href="assets/css/github.min.css">
 <style type="text/css">
-body {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 14px;
-}
-table {
-	border-collapse: collapse;
-}
-th, td {
-	border: 1px solid #ccc;
-	padding: 6px 12px;
-}
-code {
-	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-.clearfix:before,
-.clearfix:after {
-	display: table;
-	content: " ";
-}
-.clearfix:after {
-	clear: both;
-}
 .navbar h3 {
 	color: #f5f5f5;
 	margin-top: 14px;
@@ -62,6 +41,11 @@ code {
   }
 }
 </style>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+<![endif]-->
 </head>
 <body>
 
@@ -87,10 +71,6 @@ code {
 		&nbsp; CSS &lt; 6KB, JS &lt; 9KB, after minified.
 	</p>
 
-	<p>
-		This is the non-bootstrap documentation page.
-	</p>
-
 	<h3>Browser support</h3>
 	<p>
 		All major browsers are supported, including IE 9+. It should look and behave well enough in IE 8.
@@ -101,7 +81,6 @@ code {
 		Both desktop and mobile device are supported. It also works great in touch screen device.
 	</p>
 
-
 	<h3>Dependencies</h3>
 	<p>
 		ClockPicker was designed for Bootstrap in the beginning. So Bootstrap (and jQuery) is the only dependency(s).
@@ -111,7 +90,7 @@ code {
 		Feel free to use <code>jquery-*</code> files instead of <code>bootstrap-*</code> , for non-bootstrap project.
 	</p>
 	<p>
-		<a href="">See ClockPicker for Bootstrap</a>.
+		<a href="jquery.html">See ClockPicker for jQuery</a>.
 	</p>
 
 	<h3>Examples</h3>
@@ -177,19 +156,30 @@ $('.clockpicker').clockpicker({
 &lt;/script&gt;</code></pre>
 	</div>
 	<div class="form-group">
-		<h4>Set default value, input without addon:</h4>
+		<h4>Set default value, input without addon, and manual operations:</h4>
 		<div class="clearfix">
-			<div class="pull-center" style="width:80px;margin-bottom:10px;">
-				<input type="text" class="form-control" id="single-input" value="" placeholder="现在">
+			<div class="pull-center clearfix" style="margin-bottom:10px;">
+				<button type="button" class="btn btn-default pull-right" id="check-minutes">Check the minutes</button>
+				<input class="form-control pull-right" id="single-input" value="" placeholder="Now" style="width:80px;margin-right:20px;">
 			</div>
 		</div>
-		<pre class="hljs-pre"><code class="html">&lt;input type="text" class="form-control" id="single-input" value="" placeholder="现在"&gt;
+		<pre class="hljs-pre"><code class="html">&lt;input class="form-control" id="single-input" value="" placeholder="Now"&gt;
+&lt;button type="button" id="check-minutes"&gt;Check the minutes&lt;/button&gt;
+
 &lt;script type="text/javascript"&gt;
-$('#single-input').clockpicker({
+var input = $('#single-input').clockpicker({
 	placement: 'bottom',
-	align: 'right',
+	align: 'left',
 	autoclose: true,
-	'default': '20:48'
+	'default': 'now'
+});
+
+// Manually toggle to the minutes view
+$('#check-minutes').click(function(e){
+	// Have to stop propagation here
+	e.stopPropagation();
+	input.clockpicker('show')
+			.clockpicker('toggleView', 'minutes');
 });
 &lt;/script&gt;</code></pre>
 	</div>
@@ -250,7 +240,6 @@ $('#single-input').clockpicker({
 		</pre>
 	</div>
 
-
 	<h3>Options</h3>
 	<table class="table table-bordered table-striped">
 	<thead><tr>
@@ -262,7 +251,7 @@ $('#single-input').clockpicker({
 	<tr>
 	<td>default</td>
 	<td>''</td>
-	<td>default time, '13:14' e.g.</td>
+	<td>default time, 'now' or '13:14' e.g.</td>
 	</tr>
 	<tr>
 	<td>placement</td>
@@ -288,6 +277,11 @@ $('#single-input').clockpicker({
 	<td>vibrate</td>
 	<td>true</td>
 	<td>vibrate the device when dragging clock hand</td>
+	</tr>
+	<tr>
+	<td>fromnow</td>
+	<td>0</td>
+	<td>set default time to * milliseconds from now (using with default = 'now')</td>
 	</tr>
 	<tr>
 		<td>init</td>
@@ -341,6 +335,37 @@ $('#single-input').clockpicker({
 	</tbody>
 	</table>
 
+	<h3>Operations</h3>
+	<table class="table table-bordered table-striped">
+	<thead><tr>
+	<th>operation</th>
+	<th>Arguments</th>
+	<th>Description</th>
+	</tr></thead>
+	<tbody>
+	<tr>
+	<td>show</td>
+	<td></td>
+	<td>show the clockpicker</td>
+	</tr>
+	<tr>
+	<td>hide</td>
+	<td></td>
+	<td>hide the clockpicker</td>
+	</tr>
+	<tr>
+	<td>remove</td>
+	<td></td>
+	<td>remove the clockpicker (and event listeners)</td>
+	</tr>
+	<tr>
+	<td>toggleView</td>
+	<td>'hours' or 'minutes'</td>
+	<td>toggle to hours or minutes view</td>
+	</tr>
+	</tbody>
+	</table>
+
 	<h3>What's included</h3>
 	<pre class="hljs-pre"><code class="bash">clockpicker/
 ├── dist/
@@ -371,18 +396,20 @@ $('#single-input').clockpicker({
 </div>
 
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="dist/jquery-clockpicker.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="dist/bootstrap-clockpicker.min.js"></script>
 <script type="text/javascript">
 $('.clockpicker').clockpicker()
 	.find('input').change(function(){
 		console.log(this.value);
 	});
-$('#single-input').clockpicker({
+var input = $('#single-input').clockpicker({
 	placement: 'bottom',
-	align: 'right',
+	align: 'left',
 	autoclose: true,
-	'default': '20:48'
+	'default': 'now'
 });
+
 $('.clockpicker-with-callbacks').clockpicker({
 		donetext: 'Done',
 		init: function() { 
@@ -416,7 +443,15 @@ $('.clockpicker-with-callbacks').clockpicker({
 	.find('input').change(function(){
 		console.log(this.value);
 	});
-if (/Mobile/.test(navigator.userAgent)) {
+
+// Manually toggle to the minutes view
+$('#check-minutes').click(function(e){
+	// Have to stop propagation here
+	e.stopPropagation();
+	input.clockpicker('show')
+			.clockpicker('toggleView', 'minutes');
+});
+if (/mobile/i.test(navigator.userAgent)) {
 	$('input').prop('readOnly', true);
 }
 </script>
