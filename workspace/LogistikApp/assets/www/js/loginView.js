@@ -15,17 +15,32 @@ var loginView = {
 
 
         loginView.pinPad= new PinPad("#PINcode",function(code){
+            loginController.logout();
             loginController.login(code);
 
         })
 
+
+        $("#start_qr_code_anmelden").click(function()
+        {
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    loginController.loginQR(result.text);
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                }
+            );
+        });
+
+
         $("#start_anmelden").click(function()
         {
-
             loginView.pinPad.clear();
 
             $('#startScreen').hide();
             $('#lieferantenLogin').show();
+
 
 
         });
@@ -35,6 +50,7 @@ var loginView = {
 
             $('#lieferantenLogin').hide();
             $('#startScreen').show();
+
 
         });
 

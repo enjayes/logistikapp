@@ -1,4 +1,4 @@
-cordova.define("org.apache.cordova.inappbrowser.InAppBrowser", function(require, exports, module) {/*
+cordova.define("org.apache.cordova.inappbrowser.inappbrowser", function(require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,6 +22,7 @@ cordova.define("org.apache.cordova.inappbrowser.InAppBrowser", function(require,
 var exec = require('cordova/exec');
 var channel = require('cordova/channel');
 var modulemapper = require('cordova/modulemapper');
+var urlutil = require('cordova/urlutil');
 
 function InAppBrowser() {
    this.channels = {
@@ -34,7 +35,7 @@ function InAppBrowser() {
 
 InAppBrowser.prototype = {
     _eventHandler: function (event) {
-        if (event.type in this.channels) {
+        if (event && (event.type in this.channels)) {
             this.channels[event.type].fire(event);
         }
     },
@@ -76,20 +77,30 @@ InAppBrowser.prototype = {
     }
 };
 
-module.exports = function(strUrl, strWindowName, strWindowFeatures) {
-    var iab = new InAppBrowser();
-    var cb = function(eventname) {
-       iab._eventHandler(eventname);
-    };
-
+module.exports = function(strUrl, strWindowName, strWindowFeatures, callbacks) {
     // Don't catch calls that write to existing frames (e.g. named iframes).
     if (window.frames && window.frames[strWindowName]) {
         var origOpenFunc = modulemapper.getOriginalSymbol(window, 'open');
         return origOpenFunc.apply(window, arguments);
     }
 
+    strUrl = urlutil.makeAbsolute(strUrl);
+    var iab = new InAppBrowser();
+
+    callbacks = callbacks || {};
+    for (var callbackName in callbacks) {
+        iab.addEventListener(callbackName, callbacks[callbackName]);
+    }
+
+    var cb = function(eventname) {
+       iab._eventHandler(eventname);
+    };
+
+    strWindowFeatures = strWindowFeatures || "";
+
     exec(cb, cb, "InAppBrowser", "open", [strUrl, strWindowName, strWindowFeatures]);
     return iab;
 };
+
 
 });

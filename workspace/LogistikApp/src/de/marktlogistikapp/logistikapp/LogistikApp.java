@@ -24,7 +24,8 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 
 import org.apache.cordova.*;
-
+import android.webkit.WebSettings; 
+import android.webkit.WebSettings.ZoomDensity;
 
 public class LogistikApp extends CordovaActivity
 {
@@ -35,9 +36,14 @@ public class LogistikApp extends CordovaActivity
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl+"#android");
 
-        WebSettings settings = appView.getSettings(); 
+        
+        WebSettings settings = appView.getSettings( ); 
         settings.setUseWideViewPort(true); 
-        settings.setLoadWithOverviewMode(true); 
+        settings.setLoadWithOverviewMode(true);
+        settings.setBuiltInZoomControls(true);
+        
+        settings.setSupportZoom(true);
+        settings.setDefaultZoom(ZoomDensity.MEDIUM); 
     }
     
     

@@ -11,33 +11,54 @@
 
 loginController = {
 
+    loggedIn:false,
+
+    loginError:function(){
+        notifications.showError("Die Anmeldung war leider nicht erfolgreich!")
+    },
+
+    loginQR:function(qrcode){
+        //todo
+        loginController.login(pin);
+
+    },
+
 
     login:function(pin){
 
-        var loginCallback =function(lieferant){
+        var loginCallback =function(lieferant) {
 
             //Login hat funktioniert
-            if(lieferant&&lieferant.id){
+            if (lieferant){
+                if (lieferant.id) {
 
-                serverController.nachricht.getAll(function(nachrichten){
-                    //Nachrichten
-                    console.dir(nachrichten);
-                    notifications.showMessages(nachrichten);
+                    serverController.nachricht.get(lieferant.id, function (nachrichten) {
+                        //Nachrichten
+                        console.dir(nachrichten);
+                        notifications.showMessages(nachrichten);
 
-                })
+                    })
 
 
+                    $('#lieferantenLogin').hide();
+                    $('#contact_daten_menu').show();
+                    clientView.lieferant = lieferant;
+                    console.dir(lieferant)
+                    contactController.set(lieferant.id, lieferant);
+                    serverController.job.getTemplates(lieferant.id, templateController.set);
+                    $(".greetingLieferant").html(clientView.getLieferantFullName());
+                    loggedIn = true;
+                    $('#callButton').show();
 
-                $('#lieferantenLogin').hide();
-                $('#contact_daten_menu').show();
-                clientView.lieferant = lieferant;
-                console.dir(lieferant)
-                contactController.set(lieferant.id,lieferant);
-                serverController.job.getTemplates(lieferant.id,templateController.set);
-                $(".greetingLieferant").html(clientView.getLieferantFullName());
+                }
+                else{
+                    loginController.loginError();
+                }
 
             }
-
+            else{
+                loginController.loginError();
+            }
         };
 
 
@@ -52,7 +73,11 @@ loginController = {
 
 
     logout:function(){
+        $('#callButton').hide();
+        loggedIn = false;
+        notifications.hideAll();
         clientView.lieferant = null;
+        clientView.clearJob();
         contactController.set(null,null);
     }
 

@@ -189,6 +189,7 @@ var clientView = {
     },
 
 
+
     setJob: function(job){
 
 
@@ -262,7 +263,9 @@ var clientView = {
         var id = misc.getUniqueID();
         var job = new Job(id);
         var that = this;
+
         termin.initialize();
+        var goodByeTimeout = null;
 
 
         $("#popupVorlagen").show();
@@ -278,8 +281,10 @@ var clientView = {
 
         $("#zurueck_start").click(function()
         {
+            loginController.logout();
             $('#startScreen').show();
             $('#contact_daten_menu').hide();
+
 
 
         });
@@ -309,7 +314,6 @@ var clientView = {
 
         $("#weiter_jobSelector").click(function()
         {
-            //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
 
             contactController.store();
             $("#jobSelector").show();
@@ -319,8 +323,6 @@ var clientView = {
 
         $("#weiter_Aufgaben").click(function()
         {
-            //notifications.show("Marktleiter","Ich trink nen Sekt vielleicht!");
-
 
             $("#lieferantenschein1").show();
             $("#jobSelector").hide();
@@ -329,7 +331,6 @@ var clientView = {
 
         $("#weiter_lieferantenschein1").click(function()
         {
-            //notifications.show("Geschäftsführer","Bring mir mal ne Flasche Bier!");
 
             $("#lieferantenschein2").show();
             $("#lieferantenschein1").hide();
@@ -361,6 +362,15 @@ var clientView = {
 
         });
 
+        $("#goodbye_button").click(function(){
+            if(goodByeTimeout!=null) {
+                clearTimeout(goodByeTimeout);
+            }
+            loginController.logout();
+            $("#goodbye").hide();
+            $("#startScreen").show();
+
+        });
 
 
 
@@ -382,9 +392,10 @@ var clientView = {
 
             loginController.logout();
 
-            setTimeout(function(){
+            goodByeTimeout = setTimeout(function(){
 
-                //TODO ausloggen
+
+                loginController.logout();
                 $("#goodbye").hide();
                 $("#startScreen").show();
 
@@ -428,6 +439,11 @@ var clientView = {
 
 
 
+    },
+    clearJob: function(){
+        var id = misc.getUniqueID();
+        var clearJob = new Job(id);
+        clientView.setJob(clearJob);
     }
 
 

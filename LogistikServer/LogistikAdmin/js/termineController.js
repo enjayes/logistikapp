@@ -98,7 +98,6 @@ termineController = {
             termine = termine.filter(function (termin) {
 
                 for (var i = 0; i < showMaerkte.length; ++i) {
-                    console.log(termin.marktId + " == " + showMaerkte[i].id)
                     if (termin.marktId == showMaerkte[i].id)
                         return true;
                 }

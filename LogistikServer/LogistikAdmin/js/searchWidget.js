@@ -54,7 +54,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         });
 
     });
-
+    //console.log(domObject+" "+)
     //Build Filterable
     $(domObject).append(
         '<form>' +
@@ -140,6 +140,9 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         });
 
         //Filterable Methods
+        console.log(  $(that.filterableDomObject))
+        console.log(  that.filterableDomObject)
+
         $(that.filterableDomObject).filterable({
             filter: function (event, ui) {
 
