@@ -21,6 +21,9 @@ var loginView = {
         })
 
 
+
+
+
         $("#start_qr_code_anmelden").click(function()
         {
             $.mobile.loading('show')
