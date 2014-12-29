@@ -13,6 +13,8 @@ var configView = {
     initialize: function() {
 
 
+
+
         configView.pinPad = new PinPad("#PINcodeConfig",function(code){
 
             if(code=="1234") {

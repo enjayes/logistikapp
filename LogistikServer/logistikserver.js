@@ -37,6 +37,7 @@ var momentJS = require("moment");
 
 
 //Load Controllers
+
 var connectionController = require('connectionController');
 var adminController = require('admincontroller/adminController.js');
 var appController = require('appcontroller/appController.js');
@@ -44,17 +45,22 @@ var dataController = require('dataController.js');
 
 
 //Init Controllers
+
 dataController.init(preferences,CryptoJS,momentJS);
 connectionController.init(preferences,io,http,adminController,appController);
 adminController.init(preferences,dataController,io,app,express);
 appController.init(preferences,dataController,io,app,express);
+
+
+
+
 /*
 // Load the twilio module
 var twilio = require('twilio');
 
 // Create a new REST API client to make authenticated requests against the
 // twilio back end
-var client = new twilio.RestClient('AC511bde017bd79ae7d6dee54060f89dad', '3b9bc40e6bc9735f91939a5cce50e7da');
+
 
 
 

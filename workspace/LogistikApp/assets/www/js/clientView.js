@@ -14,6 +14,8 @@ var clientView = {
     check_input: function(job) {
         //check input Aufgabenwahl
 
+        job.markt_id = logistikapp.markt_id;
+
         if ($('#fixtermin').is(":checked"))
         {
             job.fixtermin = true;
@@ -270,10 +272,32 @@ var clientView = {
 
         $("#popupVorlagen").show();
 
+
+        $("#waitgoodbye_button").click(function(){
+            if(goodByeTimeout!=null) {
+                clearTimeout(goodByeTimeout);
+                goodByeTimeout = null;
+            }
+            $("#waitgoodbye").hide();
+            $("#startScreen").show();
+
+        });
+
+
         $("#job_zurueck_kontakt").click(function()
         {
-            $('#contact_daten_menu').show();
-            $('#jobSelector').hide();
+            $("#goodbye").show();
+            $("#jobSelector").hide();
+
+            loginController.logout();
+
+            goodByeTimeout = setTimeout(function(){
+
+                $("#goodbye").hide();
+                $("#startScreen").show();
+                goodByeTimeout = null;
+
+            }, 10000);
 
 
         });
@@ -306,20 +330,40 @@ var clientView = {
 
         $("#b_kalender").click(function()
         {
-            $('#termine_menu').show();
+          //  $('#termine_menu').show();
             $('#contact_daten_menu').hide();
+            loginController.waitForLogin();
+
+            $("#startScreen").show();
+
 
         });
+
+
 
 
         $("#weiter_jobSelector").click(function()
         {
 
             contactController.store();
-            $("#jobSelector").show();
+            //$("#jobSelector").show();
+            $("#waitgoodbye").show();
             $("#contact_daten_menu").hide();
 
+            loginController.waitForLogin();
+
+            goodByeTimeout = setTimeout(function(){
+
+                $("#waitgoodbye").hide();
+                $("#startScreen").show();
+                goodByeTimeout = null;
+
+            }, 20000);
+
+
         });
+
+
 
         $("#weiter_Aufgaben").click(function()
         {
@@ -365,6 +409,7 @@ var clientView = {
         $("#goodbye_button").click(function(){
             if(goodByeTimeout!=null) {
                 clearTimeout(goodByeTimeout);
+                goodByeTimeout = null;
             }
             loginController.logout();
             $("#goodbye").hide();
@@ -398,6 +443,7 @@ var clientView = {
                 loginController.logout();
                 $("#goodbye").hide();
                 $("#startScreen").show();
+                goodByeTimeout = null;
 
             }, 10000);
 

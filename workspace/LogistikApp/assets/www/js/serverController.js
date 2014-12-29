@@ -71,13 +71,7 @@ serverController = {
             //Server Connected, send Connection message back
             if (msg.t == serverController.messageType.connection) {
                 serverController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
-
-
-
-
-
-
-
+                serverController.loadConfig();
 
             }
             else if (msg.t == serverController.messageType.callback) {
@@ -96,6 +90,31 @@ serverController = {
         });
 
     },
+    loadConfig: function(){
+        serverController.markt.getAll(function (maerkte) {
+            if(maerkte) {
+                var found = false;
+                configData.maerkte = maerkte;
+                var arrayLength = maerkte.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (logistikapp.markt_id == maerkte[i].name){
+                        configData.markt = maerkte[i];
+                        found = true;
+                        break;
+                    }
+                }
+                if(found==false){
+                    serverController.socket.disconnect();
+                    $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
+                    notifications.showError("Der Marktname wurde nicht gefunden!")
+                }
+
+            }
+            console.log("loadConfig-Märkte:");
+            console.log(configData.maerkte);
+        })
+    }
+    ,
     lieferant: {
         messageType: {
             login: "ll",
@@ -153,7 +172,7 @@ serverController = {
             delete: "nd",
             updateOthers: "nuo",
             markRead: "nm",
-            get:"ng"
+            get: "ng"
         },
         buildDTO: function (nachricht) {
             return {
@@ -185,9 +204,12 @@ serverController = {
                 serverController.onLoadedGetAllOnStartup();
             };
 
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.getAll,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
         },
-        get: function (lieferanten_id,callback) {
+        get: function (lieferanten_id, callback) {
             serverController.nachricht.getCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.nachricht.parseDTO(list[i]);
@@ -198,23 +220,55 @@ serverController = {
                 serverController.nachricht.getCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.get, lid: lieferanten_id ,callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.get,
+                lid: lieferanten_id,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
         },
         markRead: function (nachricht) {
 
-            var markReadMessage = {t: this.messageType.markRead,lid: clientView.lieferant.id , nid: nachricht.id}
+            var markReadMessage = {t: this.messageType.markRead, lid: clientView.lieferant.id, nid: nachricht.id}
             console.dir("markRead:");
             console.dir(markReadMessage);
             serverController.socket.emit('message', new ServerMessage(markReadMessage));
         }
 
-    }
-    ,
+    },
+    phone: {
+        messageType: {
+            callNumber: "pcn",
+            sendMessage: "psm"
+        },
+        callNumber: function (number, text) {
+            serverController.phone.callCallback = function (list) {
+
+            };
+            var newCallback = function () {
+                serverController.phone.callCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+            };
+
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.callNumber, n: number , text:text ,callback: serverController.callbackHandler.register(newCallback)}));
+        },
+        sendMessage: function (number, text) {
+            serverController.phone.sendCallback = function (list) {
+
+            };
+            var newCallback = function () {
+                serverController.phone.sendCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+            };
+
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.sendMessage , n: number , text:text ,callback: serverController.callbackHandler.register(newCallback)}));
+        }
+
+
+    },
+
     job: {
         messageType: {
 
             getAll: "jga",
-            getTemplates:"jt",
+            getTemplates: "jt",
             create: "jc",
             update: "ju",
             delete: "jd",
@@ -250,10 +304,13 @@ serverController = {
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.getAll,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
         },
         getTemplatesCallback: null,
-        getTemplates: function (lieferanten_id,callback) {
+        getTemplates: function (lieferanten_id, callback) {
             serverController.job.getTemplatesCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.job.parseDTO(list[i]);
@@ -265,18 +322,48 @@ serverController = {
                 serverController.getTemplatesOnLoginCounter++;
                 serverController.onLoadedGetTemplatesOnLogin();
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getTemplates, lid: lieferanten_id ,callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.getTemplates,
+                lid: lieferanten_id,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
         },
         create: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, j: this.buildDTO(job)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.create,
+                j: this.buildDTO(job)
+            }));
         },
         update: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, j: this.buildDTO(job)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.update,
+                j: this.buildDTO(job)
+            }));
         },
         delete: function (job) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, j: this.buildDTO(job)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.delete,
+                j: this.buildDTO(job)
+            }));
         }
 
+    }, markt: {
+        messageType: {
+            getAll: "mga",
+                update: "mu"
+        },
+        getAll: function (callback) {
+            var newCallback = function () {
+                callback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+            };
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+
+        },
+        update: function (markt) {
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, m: markt}));
+        }
     },
 
 

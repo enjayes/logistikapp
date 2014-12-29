@@ -12,6 +12,8 @@
 loginController = {
 
     loggedIn:false,
+    lieferant:null,
+
 
     loginError:function(){
         notifications.showError("Die Anmeldung war leider nicht erfolgreich!")
@@ -25,27 +27,45 @@ loginController = {
 
 
     login:function(pin){
+        if( localStorage.waitForLogin==null || localStorage.waitForLogin == undefined){
+            localStorage.waitForLogin = "";
+        }
 
         var loginCallback =function(lieferant) {
-
+            serverController.loadConfig();
             //Login hat funktioniert
             if (lieferant){
                 if (lieferant.id) {
+                    localStorage.lieferantID = lieferant.id;
+                    var resumeLogin = false;
 
+                    if (localStorage.waitForLogin.search(lieferant.id+",") != -1) {
+                        resumeLogin = true;
+                    }
+                    console.log("waitForLogin login: "+localStorage.waitForLogin);
+                    loginController.lieferant = lieferant;
+                    if(resumeLogin==false) {
+
+                        $('#lieferantenLogin').hide();
+                        $('#contact_daten_menu').show();
+                    }
+                    else{
+
+                        serverController.job.getTemplates(lieferant.id, templateController.set);
+                        $('#lieferantenLogin').hide();
+                        $("#jobSelector").show();
+                        loggedIn = true;
+                    }
                     serverController.nachricht.get(lieferant.id, function (nachrichten) {
                         //Nachrichten
                         console.dir(nachrichten);
                         notifications.showMessages(nachrichten);
 
                     })
-
-
-                    $('#lieferantenLogin').hide();
-                    $('#contact_daten_menu').show();
                     clientView.lieferant = lieferant;
                     console.dir(lieferant)
                     contactController.set(lieferant.id, lieferant);
-                    serverController.job.getTemplates(lieferant.id, templateController.set);
+
                     $(".greetingLieferant").html(clientView.getLieferantFullName());
                     loggedIn = true;
                     $('#callButton').show();
@@ -70,15 +90,43 @@ loginController = {
         serverController.lieferant.login(pinSha,loginCallback);
     },
 
+    waitForLogin:function(){
+        if (configData.markt && loginController.lieferant){
+            phoneController.informAboutLogin(configData.markt,loginController.lieferant)
+        }
+        if( localStorage.waitForLogin==null || localStorage.waitForLogin == undefined){
+            localStorage.waitForLogin = "";
+        }
+        localStorage.waitForLogin= localStorage.waitForLogin.replace(localStorage.lieferantID+",","");
+        localStorage.waitForLogin = localStorage.waitForLogin+localStorage.lieferantID+",";
+        console.log("waitForLogin wait: "+localStorage.waitForLogin);
+        $('#callButton').hide();
+        notifications.hideAll();
+        clientView.lieferant = null;
+        clientView.clearJob();
+        contactController.set(null,null);
+    },
 
+    clear:function(){
 
-    logout:function(){
         $('#callButton').hide();
         loggedIn = false;
         notifications.hideAll();
         clientView.lieferant = null;
         clientView.clearJob();
         contactController.set(null,null);
+        console.log("LOGOUT!")
+    },
+
+
+    logout:function(){
+        if( localStorage.waitForLogin==null || localStorage.waitForLogin == undefined){
+            localStorage.waitForLogin = "";
+        }
+        localStorage.waitForLogin= localStorage.waitForLogin.replace(localStorage.lieferantID+",","");
+        loginController.clear();
+
     }
+
 
 }

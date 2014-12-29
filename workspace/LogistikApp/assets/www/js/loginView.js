@@ -15,7 +15,7 @@ var loginView = {
 
 
         loginView.pinPad= new PinPad("#PINcode",function(code){
-            loginController.logout();
+            loginController.clear();
             loginController.login(code);
 
         })

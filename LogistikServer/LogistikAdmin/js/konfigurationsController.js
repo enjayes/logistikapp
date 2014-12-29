@@ -14,11 +14,25 @@ konfigurationsController = {
     aktuellerMarktGespeichert:true,
     init: function () {
 
-        $("#marktInformationen input").on("input", function () {
-
+        var setNotSavedView = function(){
             konfigurationsController.aktuellerMarktGespeichert = false;
             $("#speichereMarkt").css("opacity", 1).removeClass("ui-disabled");
             $("#rueckgaengigMarkt").css("opacity", 1).removeClass("ui-disabled");
+        }
+
+
+
+        $("#marktInformationen input").on("input", function () {
+            setNotSavedView();
+
+        })
+
+        $("#smsinfo").change(function() {
+            setNotSavedView();
+        })
+
+        $("#callinfo").change(function() {
+            setNotSavedView();
         })
 
 
@@ -38,8 +52,15 @@ konfigurationsController = {
         if(markt&&markt.id!=undefined){
 
             konfigurationsController.aktuellerMarkt = markt;
-
+            console.log("zeigeMarkt");
+            console.log(markt);
             $("#markttelefon").val(markt.telefon);
+            $('#smsinfo').prop('checked',markt.sms);
+            $('#callinfo').prop('checked',markt.call);
+            $('#smsinfo').checkboxradio("refresh");
+            $('#callinfo').checkboxradio("refresh");
+
+
 
             this.aktuellerMarktGespeichert=true;
             $("#speichereMarkt").css("opacity", 0).addClass("ui-disabled");
@@ -55,6 +76,23 @@ konfigurationsController = {
             if (validated) {
 
                 this.aktuellerMarkt.telefon = $("#markttelefon").val();
+
+                if ($('#smsinfo').is(":checked")) {
+                    this.aktuellerMarkt.sms =true;
+                }
+                else{
+                    this.aktuellerMarkt.sms =false;
+                }
+                if ($('#callinfo').is(":checked")) {
+                    this.aktuellerMarkt.call =true;
+                }
+                else{
+                    this.aktuellerMarkt.call =false;
+                }
+
+
+                console.log("speichereAktuellenMarkt");
+                console.log( this.aktuellerMarkt);
 
                 this.aktuellerMarktGespeichert = true;
 

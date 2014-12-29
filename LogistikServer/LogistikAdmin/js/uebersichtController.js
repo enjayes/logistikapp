@@ -50,8 +50,8 @@ uebersichtController = {
         });
 
         serverController.markt.getAll(function (maerkte) {
-            uebersichtController.maerkte = maerkte;
 
+            uebersichtController.maerkte = maerkte;
             uebersichtController.defaultMarktId = uebersichtController.maerkte[0].id;
 
             console.log(".................................................ydsfsdf")
