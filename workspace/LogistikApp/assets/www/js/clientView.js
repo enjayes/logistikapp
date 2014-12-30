@@ -14,7 +14,7 @@ var clientView = {
     check_input: function(job) {
         //check input Aufgabenwahl
 
-        this.lieferanten_id = this.lieferant.id;
+        job.lieferanten_id = this.lieferant.id;
 
         job.markt_id = logistikapp.markt_id;
 
