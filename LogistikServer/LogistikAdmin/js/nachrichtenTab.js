@@ -16,6 +16,8 @@ nachrichtenTab = {
     searchWidget: null,
     selectedItemsAnHtml:"",
     nachrichtenMarktSelectionWidget:null,
+    showStep:10,
+    showMax:10,
     init: function () {
         var that = this;
 
@@ -111,6 +113,21 @@ nachrichtenTab = {
     openSubTab: function (index) {
         if (this.aktuellerSubTab != index) {
             this.aktuellerSubTab = index
+            this.showMax = this.showStep;
+
+            //Reset displaced Items to max number
+            nachrichtenController.nachrichtenSent = nachrichtenController.nachrichtenSent.slice(0,this.showMax);
+            if(nachrichtenController.nachrichtenSent.length>=nachrichtenController.nachrichtenSentLength)
+             $("#showMoreSentMessages").hide();
+            else
+              $("#showMoreSentMessages").show();
+
+            nachrichtenController.nachrichtenRecieved = nachrichtenController.nachrichtenRecieved.slice(0,this.showMax);
+            if(nachrichtenController.nachrichtenRecieved.length>=nachrichtenController.nachrichtenRecievedLength)
+                $("#showMoreReceivedMessages").hide();
+            else
+                $("#showMoreReceivedMessages").show();
+
             $("#writeMessageTabs .ui-btn").removeClass("active");
 
             $(".messageTab").hide();
@@ -126,12 +143,16 @@ nachrichtenTab = {
 
                 $("#sentNewLieferantenMessage").addClass("active");
 
+                nachrichtenController.renderEmpfangeneNachrichten();
                 //Gesendet
             } else {
 
                 $("#recievedMessage").show();
 
                 $("#recievedNewLieferantenMessage").addClass("active");
+
+                nachrichtenController.renderGesendeteNachrichten();
+
             }
         }
 

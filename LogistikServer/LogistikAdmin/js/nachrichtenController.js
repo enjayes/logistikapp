@@ -10,7 +10,7 @@
 
 
 nachrichtenController = {
-
+    nachrichtenSentLength: 0,
     nachrichtenSent: [],
 
     nachrichtenRecieved: [],
@@ -20,31 +20,50 @@ nachrichtenController = {
     },
     ready: function () {
 
-        var getNachrichtenFromServer = function (nachrichten) {
-            nachrichtenController.nachrichtenSent = nachrichten;
-            for (var i = 0; i < nachrichtenController.nachrichtenSent.length; i++) {
-                var nachricht = nachrichtenController.nachrichtenSent[i];
-                nachricht.datum = new Date(nachricht.datum);
-            }
-            nachrichtenController.renderGesendeteNachrichten();
+        serverController.nachricht.getAll(nachrichtenController.handleNachrichtenFromServer, 0, nachrichtenTab.showMax);
+
+        serverController.antwortNachricht.getAll(nachrichtenController.handleAntwortNachrichtenFromServer, 0, nachrichtenTab.showMax);
+
+    },
+    handleNachrichtenFromServer: function (nachrichten) {
+
+
+        nachrichtenController.nachrichtenSentLength = nachrichten.l;
+
+        nachrichten = nachrichten.n;
+
+        nachrichtenController.nachrichtenSent = nachrichtenController.nachrichtenSent.concat(nachrichten);
+
+        if (nachrichtenController.nachrichtenSent.length >= nachrichtenController.nachrichtenSentLength)
+            $("#showMoreSentMessages").hide();
+
+        console.log(nachrichtenController.nachrichtenSent)
+        console.log(nachrichtenController.nachrichtenSentLength)
+
+
+        for (var i = 0; i < nachrichtenController.nachrichtenSent.length; i++) {
+            var nachricht = nachrichtenController.nachrichtenSent[i];
+            nachricht.datum = new Date(nachricht.datum);
         }
+        nachrichtenController.renderGesendeteNachrichten();
+    },
+    handleAntwortNachrichtenFromServer: function (nachrichten) {
 
-        serverController.nachricht.getAll(getNachrichtenFromServer);
+
+        nachrichtenController.nachrichtenRecievedLength = nachrichten.l;
+
+        nachrichten = nachrichten.n;
+
+        nachrichtenController.nachrichtenRecieved = nachrichtenController.nachrichtenRecieved.concat(nachrichten);
+        if (nachrichtenController.nachrichtenRecieved.length >= nachrichtenController.nachrichtenRecievedLength)
+            $("#showMoreReceivedMessages").hide();
 
 
-        var getAntwortNachrichtenFromServer = function (nachrichten) {
-
-            nachrichtenController.nachrichtenRecieved = nachrichten;
-
-            for (var i = 0; i < nachrichtenController.nachrichtenRecieved.length; i++) {
-                var nachricht = nachrichtenController.nachrichtenRecieved[i];
-                nachricht.datum = new Date(nachricht.datum);
-            }
-            nachrichtenController.renderEmpfangeneNachrichten();
-        };
-
-        serverController.antwortNachricht.getAll(getAntwortNachrichtenFromServer);
-
+        for (var i = 0; i < nachrichtenController.nachrichtenRecieved.length; i++) {
+            var nachricht = nachrichtenController.nachrichtenRecieved[i];
+            nachricht.datum = new Date(nachricht.datum);
+        }
+        nachrichtenController.renderEmpfangeneNachrichten();
     },
     ungeleseneNachrichten: 0,
     renderEmpfangeneNachrichten: function () {
@@ -57,11 +76,11 @@ nachrichtenController = {
         //Save opened Collapsibles
         var openedCollapsiblesDom = $("#recievedMessageContainer .ui-collapsible:not(.ui-collapsible-collapsed)");
         var openedCollapsibles = [];
-        for(var j =0;j<openedCollapsiblesDom.length;j++){
+        for (var j = 0; j < openedCollapsiblesDom.length; j++) {
             openedCollapsibles.push(openedCollapsiblesDom[j].id)
         }
 
-        for (var i = 0; i < this.nachrichtenRecieved.length; i++) {
+        for (var i = 0; i < Math.min(nachrichtenController.nachrichtenRecieved.length, nachrichtenTab.showMax); i++) {
             var nachricht = this.nachrichtenRecieved[i];
             if (!nachricht.read)
                 nachrichtenController.ungeleseneNachrichten++;
@@ -85,8 +104,8 @@ nachrichtenController = {
 
             lieferanten = $(lieferanten);
 
-            if (lieferant){
-                var clickLieferant = function(lieferanten,lieferant){
+            if (lieferant) {
+                var clickLieferant = function (lieferanten, lieferant) {
                     lieferanten.find("a").click(function (event) {
                         event.stopPropagation();
                         lieferantenController.aktuellerLieferant = $.extend(true, {}, lieferant);
@@ -94,7 +113,7 @@ nachrichtenController = {
                         lieferantenController.zeigeAktuellenLieferanten();
                     })
                 };
-                clickLieferant(lieferanten,lieferant);
+                clickLieferant(lieferanten, lieferant);
 
             }
 
@@ -137,8 +156,8 @@ nachrichtenController = {
 
 
         //Reopen Collapsibles
-        for(var j =0;j<openedCollapsibles.length;j++){
-            $("#"+openedCollapsibles[j]).collapsible( "expand" );
+        for (var j = 0; j < openedCollapsibles.length; j++) {
+            $("#" + openedCollapsibles[j]).collapsible("expand");
         }
 
     },
@@ -158,14 +177,14 @@ nachrichtenController = {
         //Save opened Collapsibles
         var openedCollapsiblesDom = $("#sentMessageContainer .ui-collapsible:not(.ui-collapsible-collapsed)");
         var openedCollapsibles = [];
-        for(var j =0;j<openedCollapsiblesDom.length;j++){
+        for (var j = 0; j < openedCollapsiblesDom.length; j++) {
             openedCollapsibles.push(openedCollapsiblesDom[j].id)
         }
 
 
         container.html("");
-        for (var i = 0; i < nachrichtenController.nachrichtenSent.length; i++) {
-            var nachricht = nachrichtenController.nachrichtenSent[i%2];
+        for (var i = 0; i < Math.min(nachrichtenController.nachrichtenSent.length, nachrichtenTab.showMax); i++) {
+            var nachricht = nachrichtenController.nachrichtenSent[i % 2];
 
 
             var lieferanten = $("<span>An:</span>");
@@ -178,7 +197,7 @@ nachrichtenController = {
                 if (lieferant) {
                     var lieferantDom = $("<a title ='" + lieferantenController.getLieferantFullName(lieferant) + "' class='lieferantMsgButton ui-btn ui-btn-inline ui-mini' >" + lieferant.name + "</a> ");
 
-                    var clickLieferant = function(lieferantDom,lieferant){
+                    var clickLieferant = function (lieferantDom, lieferant) {
                         lieferantDom.click(function (event) {
                             event.stopPropagation();
 
@@ -187,20 +206,19 @@ nachrichtenController = {
                             lieferantenController.zeigeAktuellenLieferanten();
                         })
                     }
-                    clickLieferant(lieferantDom,lieferant);
+                    clickLieferant(lieferantDom, lieferant);
 
-                    if(nachricht.lieferanten[j].read){
+                    if (nachricht.lieferanten[j].read) {
                         countGelesen++;
-                        lieferantDom.attr('title',lieferantDom.attr('title')+" - Gelesen");
+                        lieferantDom.attr('title', lieferantDom.attr('title') + " - Gelesen");
 
-                    }else
-                    {
+                    } else {
                         lieferantDom.addClass("lightgreenbutton")
-                        lieferantDom.attr('title',lieferantDom.attr('title')+" - Ungelesen");
+                        lieferantDom.attr('title', lieferantDom.attr('title') + " - Ungelesen");
                     }
 
                 }
-                else{
+                else {
                     countGelesen++;
                     lieferantDom = "<a class='lieferantMsgButton ui-btn ui-btn-inline ui-mini ui-disabled' >Gelöscht</a>";
 
@@ -213,10 +231,10 @@ nachrichtenController = {
             lieferanten.append("<br/><br />");
 
 
-            if( countGelesen ==nachricht.lieferanten.length)
-             var read = "read";
+            if (countGelesen == nachricht.lieferanten.length)
+                var read = "read";
             else
-             read = "unread";
+                read = "unread";
 
             var append = function (nachricht) {
 
@@ -242,8 +260,8 @@ nachrichtenController = {
         }
 
         //Reopen Collapsibles
-        for(var j =0;j<openedCollapsibles.length;j++){
-            $("#"+openedCollapsibles[j]).collapsible( "expand" );
+        for (var j = 0; j < openedCollapsibles.length; j++) {
+            $("#" + openedCollapsibles[j]).collapsible("expand");
         }
 
 
@@ -255,7 +273,7 @@ nachrichtenController = {
         var lieferantenIds = [];
 
         for (var i = 0; i < lieferanten.length; i++) {
-            lieferantenIds.push({lieferantid: lieferanten[i].id,read:false});
+            lieferantenIds.push({lieferantid: lieferanten[i].id, read: false});
         }
         var nachrichtText = CKEDITOR.instances.messageLieferantenCKEditor.getData();
 
@@ -311,6 +329,14 @@ nachrichtenController = {
 
         $("#msgsent" + nachricht.id).remove();
 
-    }
+    },
+    shoMoreRecieved: function () {
+        serverController.antwortNachricht.getAll(nachrichtenController.handleAntwortNachrichtenFromServer, 0, nachrichtenTab.showMax);
+        nachrichtenTab.showMax = nachrichtenTab.showMax + nachrichtenTab.showStep;
+    },
+    showMoreSent: function () {
+        serverController.nachricht.getAll(nachrichtenController.handleNachrichtenFromServer, nachrichtenTab.showMax, nachrichtenTab.showMax + nachrichtenTab.showStep);
+        nachrichtenTab.showMax = nachrichtenTab.showMax + nachrichtenTab.showStep;
 
+    }
 }

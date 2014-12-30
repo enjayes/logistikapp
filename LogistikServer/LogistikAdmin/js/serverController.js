@@ -77,6 +77,7 @@ serverController = {
             } else if (msg.t == serverController.nachricht.messageType.updateOthers) {
                 if (msg.n)
                     serverController.nachricht.getUpdateCallback(msg.n);
+
             } else if (msg.t == serverController.antwortNachricht.messageType.updateOthers) {
                 if (msg.a)
                     serverController.antwortNachricht.getUpdateCallback(msg.a);
@@ -297,7 +298,7 @@ serverController = {
              newNachricht. maerkte = JSON.parse(nachricht.maerkte);
             return  newNachricht;
         },
-        getAll: function (callback) {
+        getAll: function (callback,start,stop) {
             serverController.nachricht.getUpdateCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.nachricht.parseDTO(list[i]);
@@ -311,7 +312,7 @@ serverController = {
                 serverController.onLoadedGetAllOnStartup();
             };
 
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, st:start,sp:stop, callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (nachricht) {
 
@@ -349,7 +350,7 @@ serverController = {
                 nachricht: nachricht.nachricht
             };
         },
-        getAll: function (callback) {
+        getAll: function (callback,start,stop) {
             serverController.antwortNachricht.getUpdateCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.antwortNachricht.parseDTO(list[i]);
@@ -363,7 +364,7 @@ serverController = {
                 serverController.onLoadedGetAllOnStartup();
             };
 
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll,st:start,sp:stop, callback: serverController.callbackHandler.register(newCallback)}));
         },
         update: function (nachricht) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, a: this.buildDTO(nachricht)}));
