@@ -5,7 +5,7 @@
 
 function Job (id) {
     this.id = id;
-    this.lieferanten_id = 1; //TODO:
+    this.lieferanten_id = ""; //TODO:
     this.markt_id = localStorage.markt_id;
     this.timestamp_start =  new Date();
     this.timestamp_end;
