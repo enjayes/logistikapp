@@ -14,6 +14,9 @@ var clientView = {
     check_input: function(job) {
         //check input Aufgabenwahl
 
+        console.log("Lieferant")
+        console.dir(this.lieferant)
+
         job.lieferanten_id = this.lieferant.id;
 
         job.markt_id = logistikapp.markt_id;
@@ -260,7 +263,7 @@ var clientView = {
         $("#t_notizen").val(job.t_notizen);
         $('[type=checkbox]').checkboxradio("refresh");
 
-        console.dir(job);
+
     },
 
     initialize: function() {
@@ -341,10 +344,14 @@ var clientView = {
 
         });
 
+        $("#weiter_jobSelector").click(function() {
+            contactController.store();
+            $("#contact_daten_menu").hide();
+            $("#jobSelector").show();
+        });
 
 
-
-        $("#weiter_jobSelector").click(function()
+        $("#weiter_waitForLogin").click(function()
         {
 
             contactController.store();
