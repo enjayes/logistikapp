@@ -9,15 +9,15 @@
  */
 
 
-var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelect, clickedItemCallback, renderItemFunction,afterFilteredCallback) {
+var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelect, clickedItemCallback, renderItemFunction, afterFilteredCallback) {
 
-    if($(domObject).length==0){
+    if ($(domObject).length == 0) {
         console.log("ERROR, filterable not found...")
         return;
     }
 
     searchPlaceHolder = !searchPlaceHolder ? "" : searchPlaceHolder;
-    topMargin = !topMargin&&topMargin!=0 ? 55 : 36+topMargin;
+    topMargin = !topMargin && topMargin != 0 ? 55 : 36 + topMargin;
 
     var that = this;
     this.domObject = domObject;
@@ -34,6 +34,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
     this.selectedItems = [];
     this.multiSelect = multiSelect;
 
+    $(this.domObject).css("position","relative");
 
     // Init Filterable
     $.mobile.document.one("filterablecreate", that.filterableDomObject, function () {
@@ -56,7 +57,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
     });
     //console.log(domObject+" "+)
     //Build Filterable
-    $(domObject).append(
+    $(that.domObject).append(
         '<form>' +
             '<input class="searchWidget-filterable" placeholder="' + that.searchPlaceHolder + '" data-type="search">' +
             ' </form>' +
@@ -71,8 +72,8 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         //Zeige alle Lieferanten bei anklicken des Filters
         $(that.domObject + " input").on("focus",function () {
             $(that.filterableDomObject).show();
-            if(afterFilteredCallback)
-                afterFilteredCallback(true,$(that.filterableDomObject).offset().top , $(that.filterableDomObject).height());
+            if (afterFilteredCallback)
+                afterFilteredCallback(true, $(that.filterableDomObject).offset().top, $(that.filterableDomObject).height());
 
             if (!that.showAll)
                 that.toggleShowAllItems();
@@ -117,8 +118,8 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
                 $(that.filterableDomObject).hide();
 
-                if(afterFilteredCallback)
-                    afterFilteredCallback(false,$(that.filterableDomObject).offset().top , $(that.filterableDomObject).height());
+                if (afterFilteredCallback)
+                    afterFilteredCallback(false, $(that.filterableDomObject).offset().top, $(that.filterableDomObject).height());
 
             }
 
@@ -140,8 +141,6 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         });
 
         //Filterable Methods
-        console.log(  $(that.filterableDomObject))
-        console.log(  that.filterableDomObject)
 
         $(that.filterableDomObject).filterable({
             filter: function (event, ui) {
@@ -155,20 +154,20 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
                 if (that.list.length == 0 || (!that.showAll && $(that.filterableDomObject + " li.ui-screen-hidden").length == $(that.filterableDomObject + " li").length)) {
                     $(that.filterableDomObject).hide();
-                    if(afterFilteredCallback)
-                        afterFilteredCallback(false,$(that.filterableDomObject).offset().top ,  $(that.filterableDomObject).height());
+                    if (afterFilteredCallback)
+                        afterFilteredCallback(false, $(that.filterableDomObject).offset().top, $(that.filterableDomObject).height());
 
                 } else if (that.showAll || $(that.domObject + " input").is(":focus")) {
                     $(that.filterableDomObject).show();
 
-                    if(afterFilteredCallback)
-                        afterFilteredCallback(true,$(that.filterableDomObject).offset().top , $(that.filterableDomObject).height());
+                    if (afterFilteredCallback)
+                        afterFilteredCallback(true, $(that.filterableDomObject).offset().top, $(that.filterableDomObject).height());
                 }
-
 
 
             }
         });
+
 
         //Render List
         that.renderList();
@@ -189,7 +188,10 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
             }, 400);
 
         }
+
+
         $(that.filterableDomObject).filterable("refresh");
+
     };
 
 
@@ -203,12 +205,12 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         //Remove from receipients list in nachrichten Tab
         var newSelectedLieferanten = [];
         var selectedLieferanten = that.getSelectedItems();
-        that.list.forEach(function(actEl){
+        that.list.forEach(function (actEl) {
             var lieferant = selectedLieferanten.filter(function (el) {
                 return el.id == actEl.id;
             });
 
-            if(lieferant.length>0){
+            if (lieferant.length > 0) {
                 newSelectedLieferanten.push(actEl)
             }
         });
@@ -217,7 +219,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
 
     this.getInput = function () {
-        return $(that.domObject+" input");
+        return $(that.domObject + " input");
     };
 
     this.getDomList = function () {
@@ -226,7 +228,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
 
     this.setInputText = function (text) {
-       $(that.domObject+" input").val(text);
+        $(that.domObject + " input").val(text);
     };
 
 
@@ -238,7 +240,6 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
         that.selectedItems = selectedItems;
         that.renderList();
     };
-
 
 
     this.itemSelected = function (item) {
@@ -265,81 +266,81 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
     this.renderList = function () {
 
-        var searchListDom = $(domObject + " .searchWidget-resultlist");
-        searchListDom.html("");
+        $(that.filterableDomObject).html("");
 
-        for (var i = 0; i < that.list.length; i++) {
-            var item = that.list[i];
+        if (that.list.length > 0) {
 
-
-            var callbackFactory = function (actItem) {
-                return function () {
-                    if (actItem.addAll) {
-                        if (that.selectedItems.length == that.origList.length) {
-
-                            var oldSelectedItems = $.extend(true, [], that.selectedItems);
-                            that.selectedItems = [];
-                            for (var i = 0; i < oldSelectedItems.length; i++) {
-                                that.clickedItemCallback(oldSelectedItems[i]);
-                            }
-
-                        } else {
-                            that.selectedItems = $.extend(true, [], that.origList)
-                            for (i = 0; i < that.selectedItems.length; i++) {
-                                that.clickedItemCallback();
-                                that.clickedItemCallback(that.selectedItems[i]);
-                            }
-                        }
+            for (var i = 0; i < that.list.length; i++) {
+                var item = that.list[i];
 
 
-                        that.renderList();
-                    } else {
-                        if (that.itemSelected(actItem)) {
-                            if (that.multiSelect) {
-                                that.deselectedItem(actItem)
-                            }
-                        } else {
-                            if (!that.multiSelect) {
+                var callbackFactory = function (actItem) {
+                    return function () {
+                        if (actItem.addAll) {
+                            if (that.selectedItems.length == that.origList.length) {
+
+                                var oldSelectedItems = $.extend(true, [], that.selectedItems);
                                 that.selectedItems = [];
+                                for (var i = 0; i < oldSelectedItems.length; i++) {
+                                    that.clickedItemCallback(oldSelectedItems[i]);
+                                }
+
+                            } else {
+                                that.selectedItems = $.extend(true, [], that.origList)
+                                for (i = 0; i < that.selectedItems.length; i++) {
+                                    that.clickedItemCallback();
+                                    that.clickedItemCallback(that.selectedItems[i]);
+                                }
                             }
-                            that.selectedItems.push(actItem);
+
+
+                            that.renderList();
+                        } else {
+                            if (that.itemSelected(actItem)) {
+                                if (that.multiSelect) {
+                                    that.deselectedItem(actItem)
+                                }
+                            } else {
+                                if (!that.multiSelect) {
+                                    that.selectedItems = [];
+                                }
+                                that.selectedItems.push(actItem);
+                            }
+                            that.renderList();
+                            that.clickedItemCallback(actItem);
                         }
-                        that.renderList();
-                        that.clickedItemCallback(actItem);
+
+
                     }
+                };
+
+                if (that.itemSelected(item))
+                    var selected = "selected";
+                else
+                    selected = "";
+
+                if (item.addAll)
+                    var addAll = "addAll";
+                else
+                    addAll = "";
 
 
-                }
-            };
+                if (renderItemFunction)
+                    var html = renderItemFunction(item, selected + " " + addAll);
+                else
+                    html = "<li class='" + selected + " " + addAll + "'><a>" + item.name + "</a></li>"
 
-            if (that.itemSelected(item))
-                var selected = "selected";
-            else
-                selected = "";
-
-            if (item.addAll)
-                var addAll = "addAll";
-            else
-                addAll = "";
+                $(that.filterableDomObject).append($(html).click(callbackFactory(item)));
 
 
-            if (renderItemFunction)
-                var html = renderItemFunction(item,selected+" "+addAll);
-            else
-                html = "<li class='" + selected + " " + addAll + "'><a>" + item.name + "</a></li>"
-
-            searchListDom.append($(html).click(callbackFactory(item)));
-
-
+            }
+            $(that.filterableDomObject).listview("refresh");
         }
-        searchListDom.listview("refresh");
 
-
-        searchListDom.find("a").removeClass("ui-btn-icon-right ui-icon-carat-r");
+        $(that.filterableDomObject).find("a").removeClass("ui-btn-icon-right ui-icon-carat-r");
 
 
     }
-
 
 
 };

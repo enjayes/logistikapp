@@ -52,8 +52,7 @@ konfigurationsController = {
         if(markt&&markt.id!=undefined){
 
             konfigurationsController.aktuellerMarkt = markt;
-            console.log("zeigeMarkt");
-            console.log(markt);
+
             $("#markttelefon").val(markt.telefon);
             $('#smsinfo').prop('checked',markt.sms);
             $('#callinfo').prop('checked',markt.call);

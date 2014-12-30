@@ -403,6 +403,65 @@ Navbar
 
 }
 
+
+/**
+ Übersicht
+**/
+
+
+#selectedAuftragsHistorieLieferanten {
+    position: relative;
+    min-height: 42px;
+    background-color: #eee;
+    border-color: #ddd;
+    color: #333;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+}
+
+
+#selectedAuftragsHistorieLieferanten .selectedLieferantShow {
+    color: #656565;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+}
+
+#selectedAuftragsHistorieLieferanten .selectedLieferantShowMargin {
+    width: 110px;
+    display: inline-block
+}
+
+
+#selectedAuftragsHistorieLieferanten .selectedLieferantButton  {
+    display: inline-block;
+    margin: 2px 0 -3px 2px !important;
+    padding: 8px 8px 4px 8px;
+    font-weight: normal !important;
+    font-size: 16px;
+}
+
+
+#selectedAuftragsHistorieLieferanten .selectedLieferantButton .selectedLieferantButtonRemove {
+    margin: -4px 0 0 10px !important;
+}
+
+#selectedAuftragsHistorieLieferanten .selectedLieferantButton .selectedLieferantButtonRemove:hover {
+    background-color: #f00;
+}
+
+
+.dataTables_wrapper {
+    padding: 15px 15px 15px 15px;
+    background-color: #E5E5E5;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
+    position: relative;
+}
+
 /**
  Nachrichten
 **/
@@ -468,9 +527,6 @@ Navbar
 }
 
 
-#searchMessageLieferanten {
-    position: relative;
-}
 
 #selectedMessageLieferanten {
     position: relative;
@@ -529,9 +585,7 @@ Navbar
 }
 
 
-#searchInfoLieferanten {
-    position: relative;
-}
+
 
 #searchInfoLieferanten .ui-input-search {
     margin-top: 0;
@@ -611,7 +665,7 @@ Navbar
 }
 
 #popupTermin #searchTerminLieferanten {
-    position: absolute;
+    position: absolute!important;
     left: 20px;
     right: 70px;
     margin-bottom: 0;

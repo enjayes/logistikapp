@@ -77,21 +77,17 @@ lieferantenController = {
                     }
                 }
 
-                console.log("**********************")
                //Update Lieferanten Widgets
+                uebersichtTab.searchWidget.setList(lieferantenController.lieferanten);
+                termineTab.searchWidget.setList(lieferantenController.lieferanten);
                 nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
                 lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
-                if(uebersichtTab.searchWidget) {
-                    uebersichtTab.searchWidget.setList(lieferantenController.lieferanten);
-                }
-
-
-                termineTab.searchWidget.setList(lieferantenController.lieferanten);
+                uebersichtTab.renderSelectedLieferanten();
                 nachrichtenTab.renderSelectedLieferanten();
 
                 nachrichtenController.renderEmpfangeneNachrichten();
                 nachrichtenController.renderGesendeteNachrichten();
-                nachrichtenTab.renderSelectedLieferanten();
+
             }
         }
         serverController.lieferant.getAll(getLieferatenFromServer);
@@ -181,13 +177,15 @@ lieferantenController = {
 
                 lieferantenController.lieferanten.sort(lieferantenController.lieferantenCompare);
 
+                uebersichtTab.searchWidget.setList(lieferantenController.lieferanten);
+                termineTab.searchWidget.setList(lieferantenController.lieferanten);
                 nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
                 lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
-                termineTab.searchWidget.setList(lieferantenController.lieferanten);
+                uebersichtTab.renderSelectedLieferanten();
+                nachrichtenTab.renderSelectedLieferanten();
 
                 nachrichtenController.renderEmpfangeneNachrichten();
                 nachrichtenController.renderGesendeteNachrichten();
-                nachrichtenTab.renderSelectedLieferanten();
 
                 //Update Server DB
                 serverController.lieferant.update(lieferantenController.aktuellerLieferant);
@@ -221,14 +219,15 @@ lieferantenController = {
         });
 
 
-
+        uebersichtTab.searchWidget.setList(lieferantenController.lieferanten);
+        termineTab.searchWidget.setList(lieferantenController.lieferanten);
         nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
         lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
-        termineTab.searchWidget.setList(lieferantenController.lieferanten);
+        uebersichtTab.renderSelectedLieferanten();
+        nachrichtenTab.renderSelectedLieferanten();
 
         nachrichtenController.renderEmpfangeneNachrichten();
         nachrichtenController.renderGesendeteNachrichten();
-        nachrichtenTab.renderSelectedLieferanten();
 
         //Update Server DB
         serverController.lieferant.delete(lieferantenController.aktuellerLieferant);
@@ -297,13 +296,15 @@ lieferantenController = {
             lieferantenController.lieferanten.push(lieferantenController.aktuellerLieferant);
             lieferantenController.lieferanten.sort(lieferantenController.lieferantenCompare);
 
+            uebersichtTab.searchWidget.setList(lieferantenController.lieferanten);
+            termineTab.searchWidget.setList(lieferantenController.lieferanten);
             nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
             lieferantenTab.searchWidget.setList(lieferantenController.lieferanten);
-            termineTab.searchWidget.setList(lieferantenController.lieferanten);
+            uebersichtTab.renderSelectedLieferanten();
+            nachrichtenTab.renderSelectedLieferanten();
 
             nachrichtenController.renderEmpfangeneNachrichten();
             nachrichtenController.renderGesendeteNachrichten();
-            nachrichtenTab.renderSelectedLieferanten();
 
             //Update Server DB
             serverController.lieferant.create(lieferantenController.aktuellerLieferant);
