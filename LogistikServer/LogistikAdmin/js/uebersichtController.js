@@ -18,20 +18,38 @@ uebersichtController = {
 
 
             var dataSet = [
-                ["Sindelfingen", "Max Huber", "12.12.2014"]
+                ["27ab9eca-40fd-43b6-94dd-133a36245635","Sindelfingen", "Max Huber", "12.12.2014"]
             ];
 
             $('#auftragsHistorie').DataTable({
                 "data": dataSet,
                 "searching": false,
                 "columns": [
+                    { "title": "Id" },
                     { "title": "Markt" },
                     { "title": "Lieferant" },
                     { "title": "Datum" }
 
                 ],
+                "columnDefs": [
+                    {
+                        "targets": [ 0 ],
+                        "visible": false,
+                        "searchable": false
+                    }
+                ],
                 "language": {
                     "url": "js/German.json"
+                },
+                "createdRow": function( row, data, dataIndex ) {
+                    $(row).css("cursor","pointer").click(function(){
+                        if(data[0]){
+                            var url = location.protocol + "//" + location.host + "#job="+data[0];
+                            var win = window.open(url, '_blank');
+                            win.focus();
+
+                        }
+                     })
                 }
             });
 

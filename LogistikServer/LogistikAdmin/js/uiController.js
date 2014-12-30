@@ -11,7 +11,7 @@
 
 
 uiController = {
-
+    showLieferschein:false,
     ready: function () {
 
 
@@ -30,6 +30,11 @@ uiController = {
             }
 
             return message;
+        }
+
+        //Show job
+        if(location.hash.slice(0,5).toLowerCase()=="#job="){
+           termineController.showJob(location.hash.slice(5));
         }
 
 
@@ -79,6 +84,11 @@ uiController = {
 
       })
 
+        $("#lieferschein").css({
+            width: width+4,
+            left:($("body").width()-width)/2
+
+        })
         $("#infoProgrammer").css("bottom",-($(window).height()-415));
 
         $("body").css("height",$(window).height());

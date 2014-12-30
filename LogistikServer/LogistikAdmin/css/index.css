@@ -306,6 +306,21 @@ input-group-addon {
     z-index: 0;
 }
 
+
+#lieferschein {
+    padding: 0 25px;
+    position: absolute;
+    top: 94px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #F8F8F8;
+    -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.5);
+    border: 1px solid #F1F1F1;
+}
+
 #tabs {
     margin-top: 85px
 }
@@ -460,6 +475,12 @@ Navbar
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
     position: relative;
+}
+
+
+.dataTables_wrapper table th{
+    text-align: left;
+    padding-left: 10px!important;
 }
 
 /**

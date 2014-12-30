@@ -583,6 +583,24 @@ termineController = {
         }
         return null;
 
+    },
+    showJob:function(jobId){
+        uiController.showLieferschein = true;
+        $("#tabs .ui-tabs-panel").hide();
+        $("#tabs .ui-navbar").css("pointer-events","none");
+
+        $("#mainbackground").css("top","94px");
+
+        $("#lieferschein").show();
+        alert(jobId)
+
+        serverController.job.get(jobId,function (job) {
+            console.log("........")
+            console.log(job)
+
+        } );
+
+
     }
 
 

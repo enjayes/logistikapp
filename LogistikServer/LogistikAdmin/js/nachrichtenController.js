@@ -37,10 +37,6 @@ nachrichtenController = {
         if (nachrichtenController.nachrichtenSent.length >= nachrichtenController.nachrichtenSentLength)
             $("#showMoreSentMessages").hide();
 
-        console.log(nachrichtenController.nachrichtenSent)
-        console.log(nachrichtenController.nachrichtenSentLength)
-
-
         for (var i = 0; i < nachrichtenController.nachrichtenSent.length; i++) {
             var nachricht = nachrichtenController.nachrichtenSent[i];
             nachricht.datum = new Date(nachricht.datum);
