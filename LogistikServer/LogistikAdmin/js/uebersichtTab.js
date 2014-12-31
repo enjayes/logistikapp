@@ -28,6 +28,7 @@ uebersichtTab = {
         this.searchWidget = new SearchWidget("#searchAuftragsHistorieLieferanten", "Suche nach Lieferanten...", 5, true, function () {
                 uebersichtTab.searchWidget.getInput().val("");
                 uebersichtTab.renderSelectedLieferanten();
+                uebersichtController.updateAuftragsHistorie();
             },
             function (lieferant, classes) {
                 return "<li class='" + classes + "'><a>" + lieferantenController.getLieferantFullName(lieferant) + "</a></li>";
@@ -38,7 +39,9 @@ uebersichtTab = {
         );
 
         //Markt auswahl
-        this.auftragsHistorieMarktSelectionWidget = new MultipleSelectionWidget("#auftragsHistorieMarktSelection");
+        this.auftragsHistorieMarktSelectionWidget = new MultipleSelectionWidget("#auftragsHistorieMarktSelection",false,function(){
+            uebersichtController.updateAuftragsHistorie();
+        });
     },
 
     ready: function () {
@@ -82,6 +85,8 @@ uebersichtTab = {
                                 that.searchWidget.deselectedItem(item);
                                 that.searchWidget.renderList();
                                 renderSelectionList();
+                                uebersichtController.updateAuftragsHistorie();
+
                             })));
                     }
                     append(selectedItems[i]);

@@ -33,6 +33,9 @@ lieferantenController = {
             if (lieferanten) {
                 lieferantenController.lieferanten = lieferanten;
 
+
+
+
                 if (lieferantenController.aktuellerLieferant) {
                     var lieferant = lieferantenController.getLieferantByID(lieferantenController.aktuellerLieferant.id);
                     if (!lieferant)
@@ -87,6 +90,8 @@ lieferantenController = {
 
                 nachrichtenController.renderEmpfangeneNachrichten();
                 nachrichtenController.renderGesendeteNachrichten();
+
+                uebersichtController.updateAuftragsHistorie();
 
             }
         }
@@ -357,7 +362,7 @@ lieferantenController = {
 
 
     }, getLieferantByID: function (lieferantenID) {
-
+         console.log(lieferantenController.lieferanten.length)
         for (var i = 0; i < lieferantenController.lieferanten.length; i++) {
             if (lieferantenController.lieferanten[i].id == lieferantenID) {
                 return lieferantenController.lieferanten[i];

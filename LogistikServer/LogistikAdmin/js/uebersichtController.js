@@ -12,52 +12,39 @@ uebersichtController = {
     statistics: null,
     maerkte: null,
     defaultMarktId: null,
+    auftragsHistorieDataTable:null,
     init: function () {
 
-        serverController.job.getAll(function (jobs) {
+        this.auftragsHistorieDataTable = $('#auftragsHistorie').DataTable({
+            "data": [],
+            "searching": false,
+            "columns": [
+                { "title": "Id" },
+                { "title": "Markt" },
+                { "title": "Lieferant" },
+                { "title": "Datum" }
 
-            console.dir(jobs)
-            for (var i = 0; i < jobs.length; i++) {
-
-            }
-
-            var dataSet = [
-                ["27ab9eca-40fd-43b6-94dd-133a36245635", "Sindelfingen", "Max Huber", "12.12.2014"]
-            ];
-
-            $('#auftragsHistorie').DataTable({
-                "data": dataSet,
-                "searching": false,
-                "columns": [
-                    { "title": "Id" },
-                    { "title": "Markt" },
-                    { "title": "Lieferant" },
-                    { "title": "Datum" }
-
-                ],
-                "columnDefs": [
-                    {
-                        "targets": [ 0 ],
-                        "visible": false,
-                        "searchable": false
-                    }
-                ],
-                "language": {
-                    "url": "js/German.json"
-                },
-                "createdRow": function (row, data, dataIndex) {
-                    $(row).css("cursor", "pointer").click(function () {
-                        if (data[0]) {
-                            var url = location.protocol + "//" + location.host + "#job=" + data[0];
-                            var win = window.open(url, '_blank');
-                            win.focus();
-
-                        }
-                    })
+            ],
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
                 }
-            });
+            ],
+            "language": {
+                "url": "js/German.json"
+            },
+            "createdRow": function (row, data, dataIndex) {
+                $(row).css("cursor", "pointer").click(function () {
+                    if (data[0]) {
+                        var url = location.protocol + "//" + location.host + "#job=" + data[0];
+                        var win = window.open(url, '_blank');
+                        win.focus();
 
-
+                    }
+                })
+            }
         });
 
         serverController.markt.getAll(function (maerkte) {
@@ -112,6 +99,57 @@ uebersichtController = {
     },
     ready: function () {
 
+
+    },
+    updateAuftragsHistorie: function () {
+        serverController.job.getAll(function (jobs) {
+
+            console.dir(jobs)
+
+            var maerkteSelected = uebersichtTab.auftragsHistorieMarktSelectionWidget.getSelectedItems();
+            var lieferantenSelected = uebersichtTab.searchWidget.getSelectedItems();
+
+            uebersichtController.auftragsHistorieDataTable .clear();
+
+            for (var i = 0; i < jobs.length; i++) {
+                var job = jobs[i];
+
+                var lieferant = lieferantenController.getLieferantByID(job.lieferanten_id);
+
+                if (lieferant) {
+                    var selected = 0;
+                    for (var j = 0; j < maerkteSelected.length; j++) {
+
+                        if (job.markt_id == maerkteSelected[j].name){
+                            selected++;
+                           break;
+                        }
+                    }
+                    for (j = 0; j < lieferantenSelected.length; j++) {
+
+                        if (lieferant.id == lieferantenSelected[j].id){
+                            selected++;
+                            break;
+                        }
+                    }
+                    if (selected == 2)
+                        uebersichtController.auftragsHistorieDataTable.row.add([job.id, lieferantenController.getLieferantFullName(lieferant), job.markt_id, termineTab.calenderFactory.moment(job.timestamp_start).format('HH:mm DD.MM.YYYY')]);
+
+
+                }
+
+
+
+            }
+
+            console.dir( uebersichtController.auftragsHistorieDataTable.data() )
+
+            uebersichtController.auftragsHistorieDataTable.rows().invalidate().draw();
+
+
+
+
+        });
 
     }
 
