@@ -84,7 +84,7 @@ uiController = {
 
       })
 
-        $("#lieferschein").css({
+        $("#besucherschein").css({
             width: width+4,
             left:($("body").width()-width)/2
 

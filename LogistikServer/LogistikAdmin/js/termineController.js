@@ -590,12 +590,12 @@ termineController = {
         $("#tabs .ui-navbar").css("pointer-events","none");
 
         $("#mainbackground").css("top","94px");
-        $("#lieferschein").show();
+        $("#besucherschein").show();
 
         serverController.job.get(jobId,function (job) {
             console.log("........")
             console.log(job)
-            $("#lieferscheinTitle").html("TODO: format job<br> termineController.showJob()<br><br><br><br><br><br>"+JSON.stringify(job))
+            $("#besucherscheinTitle").html("TODO: format job<br> termineController.showJob()<br><br><br><br><br><br>"+JSON.stringify(job))
 
         } );
 

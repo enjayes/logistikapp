@@ -33,14 +33,14 @@
 <div id="mainbackground"></div>
 
 
-
 <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
 <img id="banner" height="60px" src="img/bannerlogo.png">
 
-<!--Lieferschein ------------>
-<div id="lieferschein" class="fadein" style="display:none">
-    <h1>Lieferschein</h1>
-    <div id="lieferscheinTitle"></div>
+<!--Besucherschein ------------>
+<div id="besucherschein" class="fadein" style="display:none">
+    <h1 style="text-align: center;border: 1px solid #aaa;background: #eee;margin-top: 23px;padding: 5px;">Besucherschein</h1>
+
+    <div id="besucherscheinTitle"></div>
 </div>
 
 <!--Admin page ------------>
@@ -66,26 +66,29 @@
         </div>
         <div id="historieTab" class="uebersichtTab">
 
-        <h3>Auswahl</h3>
-        <div style="padding-left:5px">
+            <h3>Auswahl</h3>
 
-        <h3 style="font-size: 16px;">Lieferanten</h3>
-        <div style="padding-left:5px">
-        <div id="selectedAuftragsHistorieLieferanten"></div>
-        <div id="searchAuftragsHistorieLieferanten"></div>
-        </div>
-        <h3 style="font-size: 16px;">Märkte</h3>
-        <div style="padding-left:5px">
+            <div style="padding-left:5px">
 
-        <div id="auftragsHistorieMarktSelection" style="display:inline-block"></div>
-        </div>
-        </div>
+                <h3 style="font-size: 16px;">Lieferanten</h3>
 
-        <h3>Auftragshistorie</h3>
+                <div style="padding-left:5px">
+                    <div id="selectedAuftragsHistorieLieferanten"></div>
+                    <div id="searchAuftragsHistorieLieferanten"></div>
+                </div>
+                <h3 style="font-size: 16px;">Märkte</h3>
 
-        <table id="auftragsHistorie" class="display" cellspacing="0" width="100%">
+                <div style="padding-left:5px">
 
-        </table>
+                    <div id="auftragsHistorieMarktSelection" style="display:inline-block"></div>
+                </div>
+            </div>
+
+            <h3>Auftragshistorie</h3>
+
+            <table id="auftragsHistorie" class="display" cellspacing="0" width="100%">
+
+            </table>
         </div>
         <div id="statistikTab" class="uebersichtTab" style="display:none">
 
@@ -100,6 +103,7 @@
 
             <div id="zweiterChart" class="labeled-chart-container">
                 <h3>Zweiter Chart</h3>
+
                 <div class="canvas-holder">
                     <canvas class="chart-area" width="150" height="150"/>
                 </div>
@@ -136,10 +140,12 @@
             </div>
         </div>
         <div id="recievedMessage" class="messageTab" style="display:none">
-            <div id="recievedMessageContainer"></div> <div id="showMoreReceivedMessages" class="ui-btn ui-input-btn ui-btn-a ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-carat-d ui-btn-icon-left" onclick="nachrichtenController.shoMoreRecieved()">Ältere anzeigen</div>
+            <div id="recievedMessageContainer"></div>
+            <div id="showMoreReceivedMessages" class="ui-btn ui-input-btn ui-btn-a ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-carat-d ui-btn-icon-left" onclick="nachrichtenController.shoMoreRecieved()">Ältere anzeigen</div>
         </div>
         <div id="sentMessage" class="messageTab" style="display:none">
-            <div id="sentMessageContainer"></div>  <div id="showMoreSentMessages" class="ui-btn ui-input-btn ui-btn-a ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-carat-d ui-btn-icon-left" onclick="nachrichtenController.showMoreSent()">Ältere anzeigen</div>
+            <div id="sentMessageContainer"></div>
+            <div id="showMoreSentMessages" class="ui-btn ui-input-btn ui-btn-a ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-carat-d ui-btn-icon-left" onclick="nachrichtenController.showMoreSent()">Ältere anzeigen</div>
         </div>
     </div>
 </div>
@@ -174,7 +180,9 @@
                     <th>
                         <label for="lieferantBearbeitenColor" class="">Farbe:</label>
 
-                        <div id="lieferantBearbeitenColor" style="font-size: 26px; margin-bottom: 10px; margin-top: 10px; width: 120px; color: rgb(97, 9, 247); border-radius: 3px; background-color: rgb(97, 9, 247);" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset">&nbsp</div>
+                        <div id="lieferantBearbeitenColor" style="font-size: 26px; margin-bottom: 10px; margin-top: 10px; width: 120px; color: rgb(97, 9, 247); border-radius: 3px; background-color: rgb(97, 9, 247);"
+                             class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset">&nbsp
+                        </div>
                     </th>
                     <th>
                         <label for="lieferantBearbeitenPin" class="">Pin:</label>
@@ -244,9 +252,9 @@
             <label for="markttelefon" class="">Telefon:</label>
             <input type="text" name="user" id="markttelefon" value="" placeholder="" data-theme="a">
             <label for="smsinfo" class="">Per SMS informieren</label>
-            <input type="checkbox" name="checkbox-1" id="smsinfo"  />
+            <input type="checkbox" name="checkbox-1" id="smsinfo"/>
             <label for="callinfo" class="">Per Anruf informieren</label>
-            <input type="checkbox" name="checkbox-1" id="callinfo"  />
+            <input type="checkbox" name="checkbox-1" id="callinfo"/>
 
             <br>
 
