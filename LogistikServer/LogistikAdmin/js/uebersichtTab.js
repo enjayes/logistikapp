@@ -53,6 +53,31 @@ uebersichtTab = {
 
 
     },
+    aktuellerSubTab: 0,
+    openSubTab: function (index) {
+        if (this.aktuellerSubTab != index) {
+            this.aktuellerSubTab = index
+
+            $("#uebersichtMessageTabs .ui-btn").removeClass("active");
+
+            $(".uebersichtTab").hide();
+
+            if (index == 0) {
+                $("#historieTab").show();
+                $("#showAuftragsHistorieTab").addClass("active");
+
+                //Empfangen
+            } else if (index == 1) {
+                $("#statistikTab").show();
+                $("#showStatistikTab").addClass("active");
+
+
+            }
+
+
+
+        }
+    } ,
     renderSelectedLieferanten: function () {
 
         var that = this;

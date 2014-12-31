@@ -362,7 +362,6 @@ lieferantenController = {
 
 
     }, getLieferantByID: function (lieferantenID) {
-         console.log(lieferantenController.lieferanten.length)
         for (var i = 0; i < lieferantenController.lieferanten.length; i++) {
             if (lieferantenController.lieferanten[i].id == lieferantenID) {
                 return lieferantenController.lieferanten[i];

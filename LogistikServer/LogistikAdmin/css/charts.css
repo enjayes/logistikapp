@@ -3,8 +3,8 @@
 .pie-legend {
     list-style: none;
     position: absolute;
-    right: 8px;
-    top: 0;
+    right: -10px;
+    top: 55px;
 }
 .pie-legend li {
     display: block;
@@ -36,7 +36,7 @@
 
 .labeled-chart-container {
     display: inline-block;
-    padding-right: 150px;
+    padding-right: 170px;
     min-height: 180px;
     position: relative;
     margin: 0px 10px;

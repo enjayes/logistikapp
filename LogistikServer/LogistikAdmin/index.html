@@ -40,6 +40,7 @@
 <!--Lieferschein ------------>
 <div id="lieferschein" class="fadein" style="display:none">
     <h1>Lieferschein</h1>
+    <div id="lieferscheinTitle"></div>
 </div>
 
 <!--Admin page ------------>
@@ -60,9 +61,11 @@
 <div id="uebersicht" class="ui-body-d ui-content">
     <div class="tabinhalt">
         <div id="uebersichtMessageTabs" class="subTabToggle" data-role="controlgroup" data-type="horizontal" data-mini="true">
-            <a onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-bars active">Auftragshistorie</a>
-            <a onclick="" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user">Statistiken</a>
+            <a id="showAuftragsHistorieTab" onclick="uebersichtTab.openSubTab(0)" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-bars active">Auftragshistorie</a>
+            <a id="showStatistikTab" onclick="uebersichtTab.openSubTab(1)" href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-user">Statistiken</a>
         </div>
+        <div id="historieTab" class="uebersichtTab">
+
         <h3>Auswahl</h3>
         <div style="padding-left:5px">
 
@@ -83,12 +86,12 @@
         <table id="auftragsHistorie" class="display" cellspacing="0" width="100%">
 
         </table>
-
-
-        <div style="display:none">
-            <h3>Aufteilung</h3>
+        </div>
+        <div id="statistikTab" class="uebersichtTab" style="display:none">
 
             <div id="aufteilungChart" class="labeled-chart-container">
+                <h3>Aufteilung</h3>
+
                 <div class="canvas-holder">
                     <canvas class="chart-area" width="150" height="150"/>
                 </div>
@@ -96,6 +99,7 @@
             </div>
 
             <div id="zweiterChart" class="labeled-chart-container">
+                <h3>Zweiter Chart</h3>
                 <div class="canvas-holder">
                     <canvas class="chart-area" width="150" height="150"/>
                 </div>

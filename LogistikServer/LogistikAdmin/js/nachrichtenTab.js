@@ -49,57 +49,6 @@ nachrichtenTab = {
         CKEDITOR.replace('messageLieferantenCKEditor');
         CKEDITOR.instances.messageLieferantenCKEditor.on('change', that.disableSendButton);
 
-    },
-    disableSendButton: function () {
-
-        if (nachrichtenTab.searchWidget.getSelectedItems().length == 0 || CKEDITOR.instances.messageLieferantenCKEditor.getData().trim() == "") {
-            $("#sendMessageLieferant").addClass("ui-disabled")
-        } else {
-            $("#sendMessageLieferant").removeClass("ui-disabled")
-        }
-    },
-    renderSelectedLieferanten: function () {
-
-        var that = this;
-
-        var renderSelectionList = function () {
-
-            var selectedItems = that.searchWidget.getSelectedItems();
-
-            var selectedList = $("#selectedMessageLieferanten");
-            selectedList.html(that.selectedItemsAnHtml);
-
-            if (selectedItems.length > 0)  {
-
-                for (var i = 0; i < selectedItems.length; i++) {   //CHANGE FOR DIFFERENT COMPARISIONS
-
-                    var append = function (item) {
-                        selectedList.append($("<div title='" + lieferantenController.getLieferantFullName(item) + "'class='selectedLieferantButton ui-btn'>" + item.name + "</div>").click(function () {
-                            event.stopPropagation();
-
-
-                            lieferantenController.aktuellerLieferant = $.extend(true, {}, item);
-                            tabsController.openTabWithoutClick(3);
-                            lieferantenController.zeigeAktuellenLieferanten();
-
-
-                        }).append($("<div title='Entfernen' class='selectedLieferantButtonRemove ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all ui-mini'></div>").click(function () {
-                                event.stopPropagation();
-                                that.searchWidget.deselectedItem(item);
-                                that.searchWidget.renderList();
-                                renderSelectionList();
-                            })));
-                    }
-                    append(selectedItems[i]);
-
-
-                }
-            }
-
-            that.disableSendButton();
-        }
-        renderSelectionList();
-
     }, ready: function () {
 
 
@@ -155,6 +104,57 @@ nachrichtenTab = {
 
             }
         }
+
+    } ,
+    disableSendButton: function () {
+
+        if (nachrichtenTab.searchWidget.getSelectedItems().length == 0 || CKEDITOR.instances.messageLieferantenCKEditor.getData().trim() == "") {
+            $("#sendMessageLieferant").addClass("ui-disabled")
+        } else {
+            $("#sendMessageLieferant").removeClass("ui-disabled")
+        }
+    },
+    renderSelectedLieferanten: function () {
+
+        var that = this;
+
+        var renderSelectionList = function () {
+
+            var selectedItems = that.searchWidget.getSelectedItems();
+
+            var selectedList = $("#selectedMessageLieferanten");
+            selectedList.html(that.selectedItemsAnHtml);
+
+            if (selectedItems.length > 0)  {
+
+                for (var i = 0; i < selectedItems.length; i++) {   //CHANGE FOR DIFFERENT COMPARISIONS
+
+                    var append = function (item) {
+                        selectedList.append($("<div title='" + lieferantenController.getLieferantFullName(item) + "'class='selectedLieferantButton ui-btn'>" + item.name + "</div>").click(function () {
+                            event.stopPropagation();
+
+
+                            lieferantenController.aktuellerLieferant = $.extend(true, {}, item);
+                            tabsController.openTabWithoutClick(3);
+                            lieferantenController.zeigeAktuellenLieferanten();
+
+
+                        }).append($("<div title='Entfernen' class='selectedLieferantButtonRemove ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all ui-mini'></div>").click(function () {
+                                event.stopPropagation();
+                                that.searchWidget.deselectedItem(item);
+                                that.searchWidget.renderList();
+                                renderSelectionList();
+                            })));
+                    }
+                    append(selectedItems[i]);
+
+
+                }
+            }
+
+            that.disableSendButton();
+        }
+        renderSelectionList();
 
     }
 

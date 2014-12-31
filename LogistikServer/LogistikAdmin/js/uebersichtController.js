@@ -12,7 +12,7 @@ uebersichtController = {
     statistics: null,
     maerkte: null,
     defaultMarktId: null,
-    auftragsHistorieDataTable:null,
+    auftragsHistorieDataTable: null,
     init: function () {
 
         this.auftragsHistorieDataTable = $('#auftragsHistorie').DataTable({
@@ -56,7 +56,7 @@ uebersichtController = {
             termineTab.termineMarktSelectionWidget.setData(uebersichtController.maerkte, null, true, false);
             termineTab.terminMarktSelectionWidget.setData(uebersichtController.maerkte, null, false, true);
             nachrichtenTab.nachrichtenMarktSelectionWidget.setData(uebersichtController.maerkte, null, true, true);
-            uebersichtTab.auftragsHistorieMarktSelectionWidget.setData(uebersichtController.maerkte, null, true, true);
+            uebersichtTab.auftragsHistorieMarktSelectionWidget.setData(uebersichtController.maerkte, null, true, false);
 
             konfigurationsController.setMaerkte(uebersichtController.maerkte);
 
@@ -67,29 +67,35 @@ uebersichtController = {
             if (statistics) {
                 uebersichtController.statistics = statistics;
 
-
-                var pieData = [
-                    {
-                        value: statistics.besuche,
-                        label: "Besuche"
-                    } ,
-                    {
-                        value: statistics.bestellungen,
-                        label: "Bestellungen"
-                    },
-                    {
-                        value: statistics.verraeumungen,
-                        label: "Verräumungen"
-                    },
-                    {
-                        value: statistics.austausche,
-                        label: "Austausche"
-                    }
-                ];
+                if (statistics.jobs == 0 || (statistics.besuche == 0 && statistics.bestellungen == 0 && statistics.verraeumungen == 0 && statistics.austausche == 0)) {
 
 
-                uebersichtTab.pieAufteilung.setData(pieData);
 
+                } else {
+
+
+                    var pieData = [
+                        {
+                            value: statistics.besuche,
+                            label: "Besuche"
+                        } ,
+                        {
+                            value: statistics.bestellungen,
+                            label: "Bestellungen"
+                        },
+                        {
+                            value: statistics.verraeumungen,
+                            label: "Verräumungen"
+                        },
+                        {
+                            value: statistics.austausche,
+                            label: "Austausche"
+                        }
+                    ];
+
+                    uebersichtTab.pieAufteilung.setData(pieData);
+
+                }
 
             }
 
@@ -109,7 +115,7 @@ uebersichtController = {
             var maerkteSelected = uebersichtTab.auftragsHistorieMarktSelectionWidget.getSelectedItems();
             var lieferantenSelected = uebersichtTab.searchWidget.getSelectedItems();
 
-            uebersichtController.auftragsHistorieDataTable .clear();
+            uebersichtController.auftragsHistorieDataTable.clear();
 
             for (var i = 0; i < jobs.length; i++) {
                 var job = jobs[i];
@@ -120,14 +126,14 @@ uebersichtController = {
                     var selected = 0;
                     for (var j = 0; j < maerkteSelected.length; j++) {
 
-                        if (job.markt_id == maerkteSelected[j].name){
+                        if (job.markt_id == maerkteSelected[j].name) {
                             selected++;
-                           break;
+                            break;
                         }
                     }
                     for (j = 0; j < lieferantenSelected.length; j++) {
 
-                        if (lieferant.id == lieferantenSelected[j].id){
+                        if (lieferant.id == lieferantenSelected[j].id) {
                             selected++;
                             break;
                         }
@@ -135,19 +141,10 @@ uebersichtController = {
                     if (selected == 2)
                         uebersichtController.auftragsHistorieDataTable.row.add([job.id, lieferantenController.getLieferantFullName(lieferant), job.markt_id, termineTab.calenderFactory.moment(job.timestamp_start).format('HH:mm DD.MM.YYYY')]);
 
-
                 }
-
-
-
             }
 
-            console.dir( uebersichtController.auftragsHistorieDataTable.data() )
-
             uebersichtController.auftragsHistorieDataTable.rows().invalidate().draw();
-
-
-
 
         });
 
