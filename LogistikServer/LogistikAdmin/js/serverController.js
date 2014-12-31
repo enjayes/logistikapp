@@ -247,9 +247,7 @@ serverController = {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.termin.parseDTO(list[i]);
                 }
-                console.log(list)
-                console.log(start)
-                console.log(end)
+
                 callback(list);
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();

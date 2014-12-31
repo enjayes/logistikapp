@@ -166,7 +166,6 @@ var MultipleSelectionWidget = function (domObject, radio, clickedItemCallback) {
             for (var i = 0; i < items.length; i++) {
 
                 var selectedItem = $(items[i]);
-                console.log(i+"   "+selectedItem.prop("checked"))
                 if(selectedItem.prop("checked")){
                     selectedItems.push(that.data[i])
                 }
