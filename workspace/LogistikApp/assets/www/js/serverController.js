@@ -329,6 +329,9 @@ serverController = {
             }));
         },
         create: function (job) {
+            console.log("SEND JOB:")
+            console.log(job)
+
             serverController.socket.emit('message', new ServerMessage({
                 t: this.messageType.create,
                 j: this.buildDTO(job)
