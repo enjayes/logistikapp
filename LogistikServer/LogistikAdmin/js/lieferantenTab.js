@@ -16,7 +16,8 @@ lieferantenTab = {
     init: function () {
 
         this.searchWidget = new SearchWidget("#searchInfoLieferanten", "Suche nach Lieferanten...", 5, false, function (lieferant) {
-                lieferantenController.waehleLieferant(lieferant);
+                if(lieferant)
+                 lieferantenController.waehleLieferant(lieferant);
             }, function (lieferant, classes) {
                 return "<li class='" + classes + "'><a>" + lieferantenController.getLieferantFullName(lieferant) + "</a></li>";
             }, function (visible,top,height) {

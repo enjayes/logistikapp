@@ -381,6 +381,8 @@ lieferantenController = {
 
     },
     getLieferantFullName: function (lieferant) {
+        if(!lieferant)
+         return "";
         var name = lieferant.name;
         if (lieferant.vorname && lieferant.vorname.trim() != "")
             name = name + " " + lieferant.vorname.trim();
@@ -405,7 +407,7 @@ lieferantenController = {
         Router.popupClosed = true;
 
         if (this.savePopupCallback)
-            this.savePopupCallback()
+            this.savePopupCallback();
 
         this.savePopupCallback = null;
 
