@@ -11,7 +11,6 @@
 
 loginController = {
 
-    loggedIn:false,
     lieferant:null,
 
 
@@ -25,14 +24,18 @@ loginController = {
 
     },
     loginNFC:function(nfccode){
-        if(loggedIn==false) {
+        console.log("NFC: "+nfccode);
+        console.log("localStorage.loggedIn: "+localStorage.loggedIn);
+        if(localStorage.loggedIn!=true) {
             //todo
+            console.log("-> loginController.login");
             loginController.login(nfccode);
         }
 
     },
 
     login:function(pin){
+        $('#startScreen').hide();
         if( localStorage.waitForLogin==null || localStorage.waitForLogin == undefined){
             localStorage.waitForLogin = "";
         }
@@ -60,7 +63,7 @@ loginController = {
                         serverController.job.getTemplates(lieferant.id, templateController.set);
                         $('#lieferantenLogin').hide();
                         $("#jobSelector").show();
-                        loggedIn = true;
+                        localStorage.loggedIn = true;
                     }
                     serverController.nachricht.get(lieferant.id, function (nachrichten) {
                         //Nachrichten
@@ -73,7 +76,7 @@ loginController = {
                     contactController.set(lieferant.id, lieferant);
 
                     $(".greetingLieferant").html(clientView.getLieferantFullName());
-                    loggedIn = true;
+                    localStorage.loggedIn = true;
                     $('#callButton').show();
 
                 }
@@ -111,13 +114,13 @@ loginController = {
         clientView.lieferant = null;
         clientView.clearJob();
         contactController.set(null,null);
-        loggedIn = false;
+        localStorage.loggedIn = false;
     },
 
     clear:function(){
 
         $('#callButton').hide();
-        loggedIn = false;
+        localStorage.loggedIn = false;
         notifications.hideAll();
         clientView.lieferant = null;
         clientView.clearJob();

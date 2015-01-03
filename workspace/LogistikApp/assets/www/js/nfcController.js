@@ -13,7 +13,7 @@ var nfcController = {
                 var tag = nfcEvent.tag, ndefMessage = tag.ndefMessage;
                 if (ndefMessage) {
                     var nfcPayload = nfc.bytesToString(ndefMessage[0].payload).substring(3);
-                    alert(nfcPayload);
+                  //  alert(nfcPayload);
                     loginController.loginNFC(nfcPayload);
                 }
                 //todo
