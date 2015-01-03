@@ -21,10 +21,16 @@ loginController = {
 
     loginQR:function(qrcode){
         //todo
-        loginController.login(pin);
+        loginController.login(qrcode);
 
     },
+    loginNFC:function(nfccode){
+        if(loggedIn==false) {
+            //todo
+            loginController.login(nfccode);
+        }
 
+    },
 
     login:function(pin){
         if( localStorage.waitForLogin==null || localStorage.waitForLogin == undefined){
@@ -105,6 +111,7 @@ loginController = {
         clientView.lieferant = null;
         clientView.clearJob();
         contactController.set(null,null);
+        loggedIn = false;
     },
 
     clear:function(){

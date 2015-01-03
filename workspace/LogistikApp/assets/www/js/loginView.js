@@ -27,16 +27,7 @@ var loginView = {
         $("#start_qr_code_anmelden").click(function()
         {
             $.mobile.loading('show')
-            cordova.plugins.barcodeScanner.scan(
-                function (result) {
-                    loginController.loginQR(result.text);
-                    $.mobile.loading('hide')
-                },
-                function (error) {
-                    alert("Scanning failed: " + error);
-                    $.mobile.loading('hide')
-                }
-            );
+           qrCodeController.scan();
         });
 
 

@@ -23,7 +23,9 @@
 body {
     -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+
+    -webkit-user-select: text; /*prevent copy paste, to allow, change 'none' to 'text' */
+
     background-color: #E4E4E4;
 
     background-attachment: fixed;
@@ -35,6 +37,8 @@ body {
     padding: 0px;
     width: 100%;
 }
+
+
 
 /*No outline*/
 button {

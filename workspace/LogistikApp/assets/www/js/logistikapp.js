@@ -54,19 +54,7 @@ var logistikapp = {
         console.dir(nfc)
 
 
-        nfc.addNdefListener(
-            function(nfcEvent) {
-            // display the tag as JSON
-              alert(JSON.stringify(nfcEvent.tag));
-                //todo
-            },
-            function() {
-                //alert("Success.");
-            },
-            function() {
-                //alert("Fail.");
-            }
-        );
+        nfcController.init();
 
 
 

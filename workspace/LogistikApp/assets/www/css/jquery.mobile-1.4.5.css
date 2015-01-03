@@ -1523,6 +1523,7 @@ div.ui-mobile-viewport {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+
 }
 .ui-btn-icon-notext,
 .ui-header button.ui-btn.ui-btn-icon-notext,
@@ -4239,6 +4240,7 @@ textarea.ui-input-text.ui-textinput-autogrow {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+
 	cursor: pointer;
 }
 .ui-flipswitch.ui-flipswitch-active {

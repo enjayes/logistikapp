@@ -137,7 +137,9 @@
                                 <label>
                                     Marktname
                                 </label></td>
-                            <td><input id="markt_id">
+                            <td>
+                                <textarea id="markt_id"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
                             </td>
                         </tr>
 
@@ -146,7 +148,9 @@
                                 <label>
                                     Server
                                 </label></td>
-                            <td><input id="t_server">
+                            <td>
+                                <textarea id="t_server"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
                             </td>
                         </tr>
 
@@ -155,7 +159,8 @@
                                 <label>
                                     Port
                                 </label></td>
-                            <td><input id="t_port">
+                            <td>
+                                <textarea id="t_port"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -224,7 +229,8 @@
                                 <label>
                                     Telefon-Nr:
                                 </label></td>
-                            <td><input id="telefon">
+                            <td>
+                                <textarea id="telefon"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
 
@@ -233,7 +239,8 @@
                                 <label>
                                     E-Mail:
                                 </label></td>
-                            <td><input id="email">
+                            <td>
+                                <textarea id="email"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
                     </table>
@@ -307,14 +314,14 @@
                         <label>
                             Thematik
                         </label>
-                    <td><textarea id="t_thematik"rows="1" cols="50"></textarea></td>
+                    <td><textarea id="t_thematik"rows="1" cols="50" ></textarea></td>
                 </tr>
                 <tr>
                     <td>
                         <label>
                             Gesprächspartner
                         </label>
-                    <td><input id="gespraechspartner"></td>
+                    <td><textarea id="gespraechspartner"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea> </td>
                 </tr>
                 <br>
                 <a id="weiter_lieferantenschein1" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
@@ -363,8 +370,9 @@
                             <td><label>
                                 <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
                             </label>
-                                <input id="t_vk_euro_abgabe" cols="5" placeholder="Wert in Euro">
-                                <input id="t_warengruppe" cols="5" placeholder="Warengruppe">
+                                <textarea id="t_vk_euro_abgabe"  placeholder="Wert in Euro"  rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                                <textarea id="t_warengruppe" placeholder="Warengruppe" rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
                         </tr>
                         <td><label>
                             <input name="checkbox-0 " type="checkbox" id="cb_verkostung">Verkostung
@@ -426,11 +434,14 @@
                     <h2 id="terminheader"></h2>
 
                     <label for="termintitel" class="">Titel:</label>
-                    <input type="text" name="user" id="termintitel" value="" placeholder="" data-theme="a">
+
+                    <textarea id="termintitel"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
 
                     <label for="eventDate" class="">Datum:</label>
 
                     <input id="eventDate" type="text" data-role="date">
+
 
                     <div class="input-group clockpicker">
                         <input type="text" class="form-control" value="12:00">
@@ -596,7 +607,8 @@
 
 
 
-
+<script type="text/javascript" src="js/qrCodeController.js"></script>
+<script type="text/javascript" src="js/nfcController.js"></script>
 
 <script type="text/javascript" src="js/configData.js"></script>
 
@@ -666,6 +678,18 @@
 <!--Timepicker für Zeit-->
 <script src="libs/timepicker/jquery-clockpicker.js"></script>
 
+
+<script type="text/javascript">
+
+
+    $('textarea[style="resize:none;height:37px!important;"]').bind('keypress', function(e) {
+        if ((e.keyCode || e.which) == 13) {
+            $(this).blur();
+            return false;
+        }
+    });
+
+</script>
 
 </body>
 </html>

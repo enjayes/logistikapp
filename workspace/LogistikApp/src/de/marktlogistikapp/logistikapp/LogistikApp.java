@@ -23,30 +23,31 @@ package de.marktlogistikapp.logistikapp;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 
-import org.apache.cordova.*;
-import android.webkit.WebSettings; 
+import org.apache.cordova.*; 
 import android.webkit.WebSettings.ZoomDensity;
 
 public class LogistikApp extends CordovaActivity
 {
-    @Override
+    @Override 
+    
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
-        loadUrl(launchUrl+"#android");
+        loadUrl(launchUrl+"#android"  ); 
 
+           
         
         WebSettings settings = appView.getSettings( ); 
-        settings.setUseWideViewPort(true); 
+       
         settings.setLoadWithOverviewMode(true);
-        settings.setBuiltInZoomControls(true);
-        
-        settings.setSupportZoom(true);
+        settings.setUseWideViewPort(true);  
+        settings.setBuiltInZoomControls(true); 
+       
         settings.setDefaultZoom(ZoomDensity.MEDIUM); 
-    }
-    
-    
+        settings.setSupportZoom(true ); 
+            
+    } 
 }
-
+ 
 
