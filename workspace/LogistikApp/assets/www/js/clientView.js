@@ -276,7 +276,7 @@ var clientView = {
 
 
         $("#popupVorlagen").show();
-
+        $("#popupNFCLogin").show();
 
         $("#waitgoodbye_button").click(function(){
             if(goodByeTimeout!=null) {
@@ -332,7 +332,7 @@ var clientView = {
             $('#contact_daten_menu').hide();
 
         });
-        
+
 
         $("#weiter_jobSelector").click(function() {
             contactController.store();

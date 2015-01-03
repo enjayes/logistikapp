@@ -22,7 +22,12 @@ var loginView = {
 
 
 
+        $("#start_nfc_code_anmelden").click(function()
+        {
 
+            $( "#popupNFCLogin" ).popup("open") ;
+
+        });
 
         $("#start_qr_code_anmelden").click(function()
         {
