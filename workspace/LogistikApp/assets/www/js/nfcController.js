@@ -14,7 +14,15 @@ var nfcController = {
                 if (ndefMessage) {
                     var nfcPayload = nfc.bytesToString(ndefMessage[0].payload).substring(3);
                   //  alert(nfcPayload);
-                    loginController.loginNFC(nfcPayload);
+                    if(nfcPayload!="" && nfcPayload != "empty") {
+                        loginController.loginNFC(nfcPayload);
+                    }
+                    else{
+                        alert("empty Tag")
+                        $('#writeNFCTag').show();
+                        $('#startScreen').hide();
+
+                    }
                 }
                 //todo
             },

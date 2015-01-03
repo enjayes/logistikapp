@@ -30,12 +30,13 @@ loginController = {
             //todo
             console.log("-> loginController.login");
             loginController.login(nfccode);
+
         }
 
     },
 
     login:function(pin){
-        $('#startScreen').hide();
+
         if( localStorage.waitForLogin==null || localStorage.waitForLogin == undefined){
             localStorage.waitForLogin = "";
         }
@@ -54,15 +55,18 @@ loginController = {
                     console.log("waitForLogin login: "+localStorage.waitForLogin);
                     loginController.lieferant = lieferant;
                     if(resumeLogin==false) {
-
-                        $('#lieferantenLogin').hide();
                         $('#contact_daten_menu').show();
+                        $('#startScreen').hide();
+                        $('#lieferantenLogin').hide();
+
                     }
                     else{
 
                         serverController.job.getTemplates(lieferant.id, templateController.set);
-                        $('#lieferantenLogin').hide();
                         $("#jobSelector").show();
+                        $('#startScreen').hide();
+                        $('#lieferantenLogin').hide();
+
                         localStorage.loggedIn = true;
                     }
                     serverController.nachricht.get(lieferant.id, function (nachrichten) {

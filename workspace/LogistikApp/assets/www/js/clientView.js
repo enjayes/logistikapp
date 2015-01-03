@@ -332,17 +332,7 @@ var clientView = {
             $('#contact_daten_menu').hide();
 
         });
-
-        $("#b_kalender").click(function()
-        {
-          //  $('#termine_menu').show();
-            $('#contact_daten_menu').hide();
-            loginController.waitForLogin();
-
-            $("#startScreen").show();
-
-
-        });
+        
 
         $("#weiter_jobSelector").click(function() {
             contactController.store();
