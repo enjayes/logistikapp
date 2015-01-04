@@ -277,6 +277,8 @@ var clientView = {
 
         $("#popupVorlagen").show();
         $("#popupNFCLogin").show();
+        $("#popupWriteNFC").show();
+
 
         $("#waitgoodbye_button").click(function(){
             if(goodByeTimeout!=null) {

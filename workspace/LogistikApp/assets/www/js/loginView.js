@@ -29,6 +29,14 @@ var loginView = {
 
         });
 
+        $("#b_write_nfc").click(function()
+        {
+            nfcController.startWriteListener();
+            $( "#popupWriteNFC" ).popup("open") ;
+
+        });
+
+
         $("#start_qr_code_anmelden").click(function()
         {
             $.mobile.loading('show')

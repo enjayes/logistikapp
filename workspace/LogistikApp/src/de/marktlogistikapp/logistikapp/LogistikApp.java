@@ -46,7 +46,7 @@ public class LogistikApp extends CordovaActivity
        
         settings.setDefaultZoom(ZoomDensity.MEDIUM); 
         settings.setSupportZoom(true ); 
-             
+              
     } 
 }
  

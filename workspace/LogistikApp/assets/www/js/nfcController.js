@@ -17,14 +17,33 @@ var nfcController = {
                     if(nfcPayload!="" && nfcPayload != "empty") {
                         loginController.loginNFC(nfcPayload);
                     }
-                    else{
-                        alert("empty Tag")
-                        $('#writeNFCTag').show();
-                        $('#startScreen').hide();
 
-                    }
                 }
                 //todo
+            },
+            function() {
+                //alert("Success.");
+            },
+            function() {
+                //alert("Fail.");
+            }
+        );
+    },
+    startWriteListener: function(){
+        nfc.addTagDiscoveredListener(
+            function(nfcEvent) {
+                var payload = "Das hat die Edeka-App geschrieben!",
+                    record = ndef.mimeMediaRecord("text/html", nfc.stringToBytes(payload));
+                nfc.write(
+                    [record],
+                    function () {
+                       notifications.show();
+                        navigator.notification.vibrate(100);
+                    },
+                    function (reason) {
+                        navigator.notification.alert(reason, function() {}, "There was a problem");
+                    }
+                );
             },
             function() {
                 //alert("Success.");

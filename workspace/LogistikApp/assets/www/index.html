@@ -100,7 +100,7 @@
 
                 <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>QR-Code scannen<br><br></a>
 
-                <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>NFC-Chip<br><br></a>
+                <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>NFC-Karte<br><br></a>
                 <br>
                 <br>
                 <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
@@ -246,7 +246,9 @@
                     </table>
                 </form>
 
-                <a id="b_kalender"  style="width:100px;height:15px;float:right;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
+                <a id="b_kalender"  style="width:100px;height:15px;float:right;margin-left:10px;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
+                <a id="b_write_nfc"  style="width:40px;height:15px;float:left; " class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">NFC</a>
+
                 <br>
                 <br>
                 <br>
@@ -608,11 +610,25 @@
     <h3>Login mit NFC-Karte</h3>
     <br>
     <p style="color:blue">
-    Bitte halten Sie ihre Karte gegen das Lesegerät!
+    Bitte halten Sie Ihre Karte gegen das Lesegeräts!
     </p>
     <br>
 
 </div>
+
+
+<div data-role="popup" id="popupWriteNFC" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <h3>Login-Daten auf NFC-Karte speichern</h3>
+    <br>
+    <p style="color:blue">
+        Bitte halten Sie Ihre Karte gegen das Lesegeräts, um<br>Ihre Login-Daten darauf zu speichern!
+    </p>
+    <br>
+
+</div>
+
+
 
 
 <!--Own Libraries ------------------------------------------------->
