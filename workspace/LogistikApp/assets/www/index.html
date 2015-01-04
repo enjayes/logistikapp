@@ -65,7 +65,7 @@
 
     <div class="app">
         <!--width:460px;-->
-        <div class="divbackground" style="width:430px; height:100%;border:inset; background-color:#ffffff;opacity:0.9999;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
+        <div class="divbackground" style="width:400px; height:100%;border:inset; background-color:#ffffff;opacity:0.9999;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
             <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
             <img id="banner" height="60px" src="img/bannerlogo.png">
             <br>
@@ -95,19 +95,19 @@
                 <h2 id="marktname_title"></h2>
 
                 <br>
-                <h3>Anmelden:</h3>
-                <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>PIN eingeben<br><br></a>
+                <h3>Anmelden:</h3> <!-- ui-icon-user-->
+                <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-grid ui-btn-icon-left"><br>PIN eingeben<br><br></a>
 
-                <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>QR-Code scannen<br><br></a>
+                <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-camera ui-btn-icon-left"><br>Code scannen<br><br></a>
 
-                <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>NFC-Chip<br><br></a>
+                <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-action ui-btn-icon-left"><br>Chipkarte<br><br></a>
                 <br>
                 <br>
                 <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
                 <br>
 
                 <br>
-
+                <br>
 
                 <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="ui-btn ui-shadow ui-corner-all">Job</a>
 
@@ -137,7 +137,9 @@
                                 <label>
                                     Marktname
                                 </label></td>
-                            <td><input id="markt_id">
+                            <td>
+                                <textarea id="markt_id"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
                             </td>
                         </tr>
 
@@ -146,7 +148,9 @@
                                 <label>
                                     Server
                                 </label></td>
-                            <td><input id="t_server">
+                            <td>
+                                <textarea id="t_server"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
                             </td>
                         </tr>
 
@@ -155,7 +159,8 @@
                                 <label>
                                     Port
                                 </label></td>
-                            <td><input id="t_port">
+                            <td>
+                                <textarea id="t_port"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -224,7 +229,8 @@
                                 <label>
                                     Telefon-Nr:
                                 </label></td>
-                            <td><input id="telefon">
+                            <td>
+                                <textarea id="telefon"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
 
@@ -233,17 +239,20 @@
                                 <label>
                                     E-Mail:
                                 </label></td>
-                            <td><input id="email">
+                            <td>
+                                <textarea id="email"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
                     </table>
                 </form>
 
-                <a id="b_kalender"  style="width:100px;height:15px;float:right;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
+                <a id="b_kalender"  style="width:100px;height:15px;float:right;margin-left:10px;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
+                <a id="b_write_nfc"  style="width:50px;height:15px;float:left; " class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Karte</a>
+
                 <br>
                 <br>
                 <br>
-                <a id="weiter_waitForLogin" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Anmelden</a>
+                <a id="weiter_waitForLogin" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
                 <a id="weiter_jobSelector" class="ui-btn ui-shadow ui-corner-all ui-icon-forward ui-btn-icon-left">Besucherschein</a>
                 <a id="zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
             </div>
@@ -307,14 +316,14 @@
                         <label>
                             Thematik
                         </label>
-                    <td><textarea id="t_thematik"rows="1" cols="50"></textarea></td>
+                    <td><textarea id="t_thematik"rows="1" cols="50" ></textarea></td>
                 </tr>
                 <tr>
                     <td>
                         <label>
                             Gesprächspartner
                         </label>
-                    <td><input id="gespraechspartner"></td>
+                    <td><textarea id="gespraechspartner"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea> </td>
                 </tr>
                 <br>
                 <a id="weiter_lieferantenschein1" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
@@ -328,14 +337,15 @@
 
                 <br>
 
-                <form>
-                    <table style="width:100%;border: none">
+                    <div>
+                    <table style="table-layout:fixed">
                         <tr>
-                            <td>
-                                <label>
-                                    <input name="checkbox-0 " type="checkbox" id="cb_auftrag_getaetigt">Auftrag getätigt
+                            <td >
+                                <label > <!--style="width:70%"-->
+                                    <input  name="checkbox-0 " type="checkbox" id="cb_auftrag_getaetigt">Auftrag getätigt
                                 </label></td>
-                            <td><label>
+
+                            <td><label style="width:54%">
                                 <input name="checkbox-0 " type="checkbox" id="cb_mhd">MHD-Kontrolle
                             </label></td>
                         </tr>
@@ -344,7 +354,7 @@
                                 <input name="checkbox-0 " type="checkbox" id="cb_ruecknahme">Rücknahme
                             </label></td>
 
-                            <td><label>
+                            <td><label style="width:54%">
                                 <input name="checkbox-0 " type="checkbox" id="cb_reklamation">Reklamationsbearbeitung
                             </label></td>
                         </tr>
@@ -352,7 +362,7 @@
                             <td><label>
                                 <input name="checkbox-0 " type="checkbox" id="cb_warenaufbau">Warenaufbau
                             </label></td>
-                            <td><label>
+                            <td><label style="width:54%">
                                 <input name="checkbox-0 " type="checkbox" id="cb_umbau">Umbau
                             </label></td>
                         </tr>
@@ -360,24 +370,26 @@
                             <td><label>
                                 <input name="checkbox-0 " type="checkbox" id="cb_info_gespraech">Info-Gespräch
                             </label></td>
-                            <td><label>
+                            <td><label style="width:54%">
                                 <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
                             </label>
-                                <input id="t_vk_euro_abgabe" cols="5" placeholder="Wert in Euro">
-                                <input id="t_warengruppe" cols="5" placeholder="Warengruppe">
+                                <div style="width:77.5%">
+                                <textarea id="t_vk_euro_abgabe"  placeholder="Wert in Euro"  rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                                <textarea id="t_warengruppe" placeholder="Warengruppe" rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                                </div>
                         </tr>
                         <td><label>
                             <input name="checkbox-0 " type="checkbox" id="cb_verkostung">Verkostung
                         </label></td>
-                        <td><label>
+                        <td><label style="width:54%">
                             <input name="checkbox-0 " type="checkbox" id="cb_sortimentsinfo">Sortimentsinfo
                         </label></td>
 
                         <tr>
-                            <td><label>
+                            <td><label >
                                 <input name="checkbox-0 " type="checkbox" id="cb_aktionsabsprache">Aktionsabsprache
                             </label></td>
-                            <td><label>
+                            <td><label style="width:54%">
                                 <input name="checkbox-0 " type="checkbox" id="cb_bemusterung">Bemusterung
                             </label></td>
                         </tr>
@@ -392,7 +404,7 @@
 
                         </tr>
                     </table>
-                </form>
+                    </div>
                 <br>
                 <a id="weiter_lieferantenschein2" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
                 <a id="zurueck_lieferantenschein2" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Zurück</a>
@@ -426,11 +438,14 @@
                     <h2 id="terminheader"></h2>
 
                     <label for="termintitel" class="">Titel:</label>
-                    <input type="text" name="user" id="termintitel" value="" placeholder="" data-theme="a">
+
+                    <textarea id="termintitel"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
 
                     <label for="eventDate" class="">Datum:</label>
 
                     <input id="eventDate" type="text" data-role="date">
+
 
                     <div class="input-group clockpicker">
                         <input type="text" class="form-control" value="12:00">
@@ -504,7 +519,7 @@
                 <br>
 
 
-                <a id="waitgoodbye_button" class="goodbyebutton ui-btn ui-btn-b ui-corner-all">
+                <a id="waitgoodbye_button" class="ui-btn ui-shadow ui-corner-all">
                     <br>
                     <br>
                     <br>
@@ -514,14 +529,14 @@
                     <h4>
                         Die Anmeldung war erfolgreich!<br>
                         <br>
-                        <p style="color:blue">
+                        <p style="color:darkblue">
                         Bitte kehren Sie sich nach Abschluss <br>Ihres Besuches an das Terminal zurück,<br> um den Edeka-Besucherschein auszufüllen. <br><br>
                         </p>
 
 
                     </h4>
                     <h3>
-                        Auf Wiedersehen
+                       Vielen Dank!
                     </h3>
                     <br>
                     <br>
@@ -541,7 +556,7 @@
                 <br>
 
 
-                <a id="goodbye_button" class="goodbyebutton ui-btn ui-btn-b ui-corner-all">
+                <a id="goodbye_button" class="ui-btn ui-shadow ui-corner-all">
                     <br>
                     <br>
                     <br>
@@ -597,11 +612,38 @@
     <br>
 </div>
 
+<div data-role="popup" id="popupNFCLogin" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <h3>Login mit Chipkarte</h3>
+    <br>
+    <p style="color:black">
+    Bitte halten Sie Ihre Chipkarte gegen das Lesegerät!
+    </p>
+    <br>
+
+</div>
+
+
+<div data-role="popup" id="popupWriteNFC" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <h3>Zugangsdaten auf Chipkarte speichern</h3>
+    <br>
+    <p style="color:black">
+        Bitte halten Sie Ihre Chipkarte gegen das Lesegerät, um Ihre Login-Daten darauf zu speichern!
+    </p>
+    <br>
+
+</div>
+
+
+
+
 <!--Own Libraries ------------------------------------------------->
 
 
 
-
+<script type="text/javascript" src="js/qrCodeController.js"></script>
+<script type="text/javascript" src="js/nfcController.js"></script>
 
 <script type="text/javascript" src="js/configData.js"></script>
 
@@ -672,6 +714,18 @@
 <!--Timepicker für Zeit-->
 <script src="libs/timepicker/jquery-clockpicker.js"></script>
 
+
+<script type="text/javascript">
+
+
+    $('textarea[style="resize:none;height:37px!important;"]').bind('keypress', function(e) {
+        if ((e.keyCode || e.which) == 13) {
+            $(this).blur();
+            return false;
+        }
+    });
+
+</script>
 
 </body>
 </html>

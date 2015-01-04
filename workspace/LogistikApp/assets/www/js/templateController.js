@@ -26,11 +26,12 @@ var templateController = {
         var html = '<ul data-role="listview" id = "templateListview">';
 
 
-        html = html+ '<li><a onClick="templateController.load(0)"  href="#">Zuletzt verwendetes Formular</a></li>';
+
+        html = html+ '<li data-icon="false" ><a onClick="templateController.load(0)"  href="#">Zuletzt verwendetes Formular</a></li>';
 
 
         for (index = 1; index < list.length; ++index) {
-            html = html+ '<li><a onClick="templateController.load('+index+')" href="#">'+list[index].template_name+'</a></li>';
+            html = html+ '<li data-icon="false"> <a onClick="templateController.load('+index+')" href="#">'+list[index].template_name+'</a></li>';
         }
 
 

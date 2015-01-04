@@ -52,6 +52,7 @@ serverController = {
 
         serverController.socket = io.connect(address,{"force new connection":true});
 
+        console.log(serverController.socket)
 
         var upDateNoConnection = function () {
             $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");

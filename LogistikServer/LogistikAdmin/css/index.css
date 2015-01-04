@@ -656,6 +656,11 @@ Navbar
 }
 
 
+#lieferantZeigeAuftraege {
+    position: absolute;
+    right: 275px;
+}
+
 #lieferantErzeugeEvent {
     position: absolute;
     right: 125px;

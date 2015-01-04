@@ -15,18 +15,14 @@ var notifications = {
 
     hideAll: function()
     {
-
         var _container = $('.jq-toast-wrap');
         if(_container) {
             if (_container.length != 0) {
                 _container.empty();
             }
         }
-
         $.toast._container = _container;
     },
-
-
 
 
     show: function (title, message, callback) {
@@ -42,6 +38,19 @@ var notifications = {
         })
 
     },
+    showWithTimeout: function (title, message, callback) {
+
+        $.toast({
+            heading: title,
+            text: message,
+            stack: 50,
+            hideAfter: 3000,
+            showHideTransition: 'fade',
+            afterHidden: callback,
+
+        })
+    }
+    ,
     showError: function (message) {
 
         $.toast({

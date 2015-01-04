@@ -49,6 +49,7 @@ var configView = {
 
             //Set Markt title
             $("#marktname_title").text(logistikapp.markt_id);
+            alert("SAVE!");
 
 
         });

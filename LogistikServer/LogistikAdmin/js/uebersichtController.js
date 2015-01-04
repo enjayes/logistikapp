@@ -148,6 +148,17 @@ uebersichtController = {
 
         });
 
+    } ,
+    showJobs:function(lieferant){
+        uebersichtTab.searchWidget.setSelectedItems([lieferant]);
+        uebersichtController.updateAuftragsHistorie();
+        setTimeout(function () {
+
+                    uebersichtTab.openSubTab(0);
+                    tabsController.openTabWithoutClick(0);
+
+
+        }, 0);
     }
 
 }

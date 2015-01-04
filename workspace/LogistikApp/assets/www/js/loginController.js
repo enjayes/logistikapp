@@ -11,7 +11,6 @@
 
 loginController = {
 
-    loggedIn:false,
     lieferant:null,
 
 
@@ -21,12 +20,23 @@ loginController = {
 
     loginQR:function(qrcode){
         //todo
-        loginController.login(pin);
+        loginController.login(qrcode);
+
+    },
+    loginNFC:function(nfccode){
+        console.log("NFC: "+nfccode);
+        console.log("localStorage.loggedIn: "+localStorage.loggedIn);
+        if(localStorage.loggedIn!="true") {
+            //todo
+            console.log("-> loginController.login");
+            loginController.login("",nfccode);
+
+        }
 
     },
 
+    login:function(pin,pinShaCode){
 
-    login:function(pin){
         if( localStorage.waitForLogin==null || localStorage.waitForLogin == undefined){
             localStorage.waitForLogin = "";
         }
@@ -45,16 +55,19 @@ loginController = {
                     console.log("waitForLogin login: "+localStorage.waitForLogin);
                     loginController.lieferant = lieferant;
                     if(resumeLogin==false) {
-
-                        $('#lieferantenLogin').hide();
                         $('#contact_daten_menu').show();
+                        $('#startScreen').hide();
+                        $('#lieferantenLogin').hide();
+
                     }
                     else{
 
                         serverController.job.getTemplates(lieferant.id, templateController.set);
-                        $('#lieferantenLogin').hide();
                         $("#jobSelector").show();
-                        loggedIn = true;
+                        $('#startScreen').hide();
+                        $('#lieferantenLogin').hide();
+
+                        localStorage.loggedIn = "true";
                     }
                     serverController.nachricht.get(lieferant.id, function (nachrichten) {
                         //Nachrichten
@@ -67,7 +80,7 @@ loginController = {
                     contactController.set(lieferant.id, lieferant);
 
                     $(".greetingLieferant").html(clientView.getLieferantFullName());
-                    loggedIn = true;
+                    localStorage.loggedIn = "true";
                     $('#callButton').show();
 
                 }
@@ -83,11 +96,22 @@ loginController = {
 
 
         //Create Pin 4 digits
-        var pad = "0000";
-        pin = pad.substring(0, pad.length - pin.length) + pin;
+        if(pinShaCode){
+            var pad = "0000";
+            pin = pad.substring(0, pad.length - pin.length) + pin;
 
-        var pinSha = ""+CryptoJS.SHA3("dfjo58443pggd9gudf9"+pin, { outputLength: 512 });
-        serverController.lieferant.login(pinSha,loginCallback);
+            var pinSha = pinShaCode;
+            localStorage.pinSha = pinSha;
+            serverController.lieferant.login(pinSha, loginCallback);
+        }
+        else {
+            var pad = "0000";
+            pin = pad.substring(0, pad.length - pin.length) + pin;
+
+            var pinSha = "" + CryptoJS.SHA3("dfjo58443pggd9gudf9" + pin, {outputLength: 512});
+            localStorage.pinSha = pinSha;
+            serverController.lieferant.login(pinSha, loginCallback);
+        }
     },
 
     waitForLogin:function(){
@@ -105,20 +129,17 @@ loginController = {
         clientView.lieferant = null;
         clientView.clearJob();
         contactController.set(null,null);
+        localStorage.loggedIn = "false";
     },
-
     clear:function(){
-
         $('#callButton').hide();
-        loggedIn = false;
+        localStorage.loggedIn = "false";
         notifications.hideAll();
         clientView.lieferant = null;
         clientView.clearJob();
         contactController.set(null,null);
         console.log("LOGOUT!")
     },
-
-
     logout:function(){
         if( localStorage.waitForLogin==null || localStorage.waitForLogin == undefined){
             localStorage.waitForLogin = "";
@@ -127,6 +148,4 @@ loginController = {
         loginController.clear();
 
     }
-
-
 }

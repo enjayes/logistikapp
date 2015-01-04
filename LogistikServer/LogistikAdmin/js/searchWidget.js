@@ -239,6 +239,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
     this.setSelectedItems = function (selectedItems) {
         that.selectedItems = selectedItems;
         that.renderList();
+        that.clickedItemCallback();
     };
 
 

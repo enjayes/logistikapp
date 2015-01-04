@@ -233,11 +233,14 @@
             <a href="" id="rueckgaengigLieferant" onclick="lieferantenController.abbrechenBearbeitungAktuellerLieferant()" style="opacity:0"
                class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
                data-transition="pop">Abbrechen</a>
+            <a href="" id="lieferantZeigeAuftraege" onclick="uebersichtController.showJobs(lieferantenController.aktuellerLieferant)"
+               class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a" data-transition="pop">Aufträge anzeigen</a>
+            <a href="" id="lieferantErzeugeEvent" onclick="termineController.erzeugeEvent(termineTab.calenderFactory.moment().stripTime(),lieferantenController.aktuellerLieferant)"
+               class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>
             <a href="" id="lieferantLoeschen" onclick="lieferantenController.loescheAktuellenLieferant()"
                class="redbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-a"
                data-transition="pop">Löschen</a>
-            <a href="" id="lieferantErzeugeEvent" onclick="termineController.erzeugeEvent(termineTab.calenderFactory.moment().stripTime(),lieferantenController.aktuellerLieferant)"
-               class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-a" data-transition="pop">Termin anlegen</a>
+
         </div>
         <!--/demo-html -->
     </div>

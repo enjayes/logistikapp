@@ -45,7 +45,7 @@ var app = {
 
         //Start Logistik App
         logistikapp.start();
-
+        //$('input').textinput();
 
 	   
     }

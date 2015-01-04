@@ -276,6 +276,8 @@ var clientView = {
 
 
         $("#popupVorlagen").show();
+        $("#popupNFCLogin").show();
+        $("#popupWriteNFC").show();
 
 
         $("#waitgoodbye_button").click(function(){
@@ -333,8 +335,7 @@ var clientView = {
 
         });
 
-
-        /*
+  /*
         $("#b_kalender").click(function()
         {
           //  $('#termine_menu').show();
@@ -347,6 +348,7 @@ var clientView = {
 
         });
         */
+
 
         $("#weiter_jobSelector").click(function() {
             contactController.store();

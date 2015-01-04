@@ -22,21 +22,25 @@ var loginView = {
 
 
 
+        $("#start_nfc_code_anmelden").click(function()
+        {
+
+            $( "#popupNFCLogin" ).popup("open") ;
+
+        });
+
+        $("#b_write_nfc").click(function()
+        {
+            nfcController.startWriteListener();
+            $( "#popupWriteNFC" ).popup("open") ;
+
+        });
 
 
         $("#start_qr_code_anmelden").click(function()
         {
             $.mobile.loading('show')
-            cordova.plugins.barcodeScanner.scan(
-                function (result) {
-                    loginController.loginQR(result.text);
-                    $.mobile.loading('hide')
-                },
-                function (error) {
-                    alert("Scanning failed: " + error);
-                    $.mobile.loading('hide')
-                }
-            );
+           qrCodeController.scan();
         });
 
 
