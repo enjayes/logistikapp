@@ -692,10 +692,22 @@
 <!--Imported libraries ------------------------------------------------->
 <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 <script>
+
+
+
     $(document).on("mobileinit", function(){
         $.mobile.ignoreContentEnabled = true;
         $.mobile.page.prototype.options.degradeInputs.date = true;
     });
+
+
+    $( "#eventDate" ).setDefaults({
+            showOn: "both",
+            buttonImageOnly: true,
+            buttonText: "Calendar"
+    });
+
+
 </script>
 
 <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
