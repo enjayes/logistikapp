@@ -44,7 +44,7 @@ var terminView = {
         termin.marktid = logistikapp.markt_id;
 
 
-        termin.start = $("#eventDate").datepicker('getDate');
+        termin.start = $("#eventDate").datepicker('getDate');//TODO
 
 
         if ($('#lieferantRepeatTermin').is(":checked")) {
