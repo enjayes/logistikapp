@@ -95,19 +95,19 @@
                 <h2 id="marktname_title"></h2>
 
                 <br>
-                <h3>Anmelden:</h3>
-                <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>PIN eingeben<br><br></a>
+                <h3>Anmelden:</h3> <!-- ui-icon-user-->
+                <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-grid ui-btn-icon-left"><br>PIN eingeben<br><br></a>
 
-                <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>QR-Code scannen<br><br></a>
+                <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-camera ui-btn-icon-left"><br>Code scannen<br><br></a>
 
-                <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-user ui-btn-icon-left"><br>NFC-Karte<br><br></a>
+                <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-action ui-btn-icon-left"><br>Chipkarte<br><br></a>
                 <br>
                 <br>
                 <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
                 <br>
 
                 <br>
-
+                <br>
 
                 <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="ui-btn ui-shadow ui-corner-all">Job</a>
 
@@ -247,12 +247,12 @@
                 </form>
 
                 <a id="b_kalender"  style="width:100px;height:15px;float:right;margin-left:10px;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
-                <a id="b_write_nfc"  style="width:40px;height:15px;float:left; " class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">NFC</a>
+                <a id="b_write_nfc"  style="width:50px;height:15px;float:left; " class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Karte</a>
 
                 <br>
                 <br>
                 <br>
-                <a id="weiter_waitForLogin" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Anmelden</a>
+                <a id="weiter_waitForLogin" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
                 <a id="weiter_jobSelector" class="ui-btn ui-shadow ui-corner-all ui-icon-forward ui-btn-icon-left">Besucherschein</a>
                 <a id="zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
             </div>
@@ -607,10 +607,10 @@
 
 <div data-role="popup" id="popupNFCLogin" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-    <h3>Login mit NFC-Karte</h3>
+    <h3>Login mit Chipkarte</h3>
     <br>
     <p style="color:blue">
-    Bitte halten Sie Ihre Karte gegen das Lesegeräts!
+    Bitte halten Sie Ihre Chipkarte gegen das Lesegerät!
     </p>
     <br>
 
@@ -619,10 +619,10 @@
 
 <div data-role="popup" id="popupWriteNFC" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-    <h3>Login-Daten auf NFC-Karte speichern</h3>
+    <h3>Zugangsdaten auf Chipkarte speichern</h3>
     <br>
     <p style="color:blue">
-        Bitte halten Sie Ihre Karte gegen das Lesegeräts, um<br>Ihre Login-Daten darauf zu speichern!
+        Bitte halten Sie Ihre Chipkarte gegen das Lesegerät, um Ihre Login-Daten darauf zu speichern!
     </p>
     <br>
 

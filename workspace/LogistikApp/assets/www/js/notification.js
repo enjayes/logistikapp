@@ -38,6 +38,19 @@ var notifications = {
         })
 
     },
+    showWithTimeout: function (title, message, callback) {
+
+        $.toast({
+            heading: title,
+            text: message,
+            stack: 50,
+            hideAfter: 3000,
+            showHideTransition: 'fade',
+            afterHidden: callback,
+
+        })
+    }
+    ,
     showError: function (message) {
 
         $.toast({

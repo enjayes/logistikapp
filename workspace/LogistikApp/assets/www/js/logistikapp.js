@@ -53,7 +53,8 @@ var logistikapp = {
 
         console.dir(nfc)
 
-        localStorage.loggedIn = false;
+        localStorage.loggedIn = "false";
+
         nfcController.init();
 
 
