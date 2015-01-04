@@ -120,6 +120,8 @@ var terminView = {
 
             serverController.termin.create(termin);
 
+            notifications.showWithTimeout("Hinweis", "Der Termin wurde erfolgreich an den Marktleiter übermittelt");
+
             console.log(termin)
 
             $("#terminEintragen").hide();
