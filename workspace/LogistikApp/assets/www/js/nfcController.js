@@ -28,11 +28,11 @@ var nfcController = {
                         nfc.write(
                             message,
                             function () {
-                                notifications.showWithTimeout("Hinweis", "Die NFC-Karte wurde erfolgreich beschrieben!");
+                                notifications.showWithTimeout("Hinweis", "Die Zugangsdaten wurden auf der Chipkarte gespeichert!");
 
                             },
                             function (reason) {
-                                notifications.showError("Die NFC-Karte konnte nicht beschrieben werden!");
+                                notifications.showError("Die Chipkarte konnte nicht beschrieben werden!");
                             }
                         );
                         localStorage.writeTag = "false";
