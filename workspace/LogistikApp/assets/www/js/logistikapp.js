@@ -57,11 +57,7 @@ var logistikapp = {
 
         nfcController.init();
 
-        /*
-        var termin = {};
-        termin.id = "blabla"
-        alert( termin.id)
-        */
+
 
         //servername etc
         logistikapp.retrievePersistentStorage();
