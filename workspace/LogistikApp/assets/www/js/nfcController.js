@@ -28,7 +28,7 @@ var nfcController = {
                         nfc.write(
                             message,
                             function () {
-                                notifications.showWithTimeout("Hinweis", "Die Zugangsdaten wurden auf der Chipkarte gespeichert!");
+                                notifications.showWithTimeout("Hinweis", "Die Zugangsdaten wurden erfolgreich auf der Chipkarte gespeichert!");
 
                             },
                             function (reason) {
