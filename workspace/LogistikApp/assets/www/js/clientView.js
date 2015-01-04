@@ -271,7 +271,7 @@ var clientView = {
         var job = new Job(id);
         var that = this;
 
-        termin.initialize();
+        terminView.initialize();
         var goodByeTimeout = null;
 
 
@@ -333,6 +333,8 @@ var clientView = {
 
         });
 
+
+        /*
         $("#b_kalender").click(function()
         {
           //  $('#termine_menu').show();
@@ -342,7 +344,9 @@ var clientView = {
             $("#startScreen").show();
 
 
+
         });
+        */
 
         $("#weiter_jobSelector").click(function() {
             contactController.store();

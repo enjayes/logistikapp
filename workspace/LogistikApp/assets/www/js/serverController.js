@@ -368,6 +368,30 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, m: markt}));
         }
     },
+    
+    termin: {
+        messageType: {
+            create: "tc"
+        },
+
+        buildDTO: function (termin) {
+
+            var newTermin = $.extend(true, {}, termin);
+            //newTermin.timestamp_start = termin.timestamp_start.getTime();
+            //newTermin.timestamp_end = termin.timestamp_end.getTime();
+            return newTermin;
+
+        },
+        
+        
+        
+        create: function (termin){
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.create,
+                j: this.buildDTO(termin)
+            }));
+        }
+    },
 
 
     getTemplatesOnLoginCounter: 0,

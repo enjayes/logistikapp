@@ -439,14 +439,22 @@
                 </span>
                     </div>
 
-                    <div id="lieferantRepeatTerminParent" class="topMarginCheckbox">
+
+
+
+                    <div id="lieferantRepeatTerminParent" class="topMarginCheckbox" >
 
                         <label>
-                            <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen alle
+                            <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen
                         </label>
-                        <input id="lieferantRepeatTerminInput" type="text">
+                        <div id="lieferantRepeatTerminChild" class="fadein"  style="display:none">
+                            <div id="repeatDaysText1">alle</div>
 
-                        <div id="repeatDaysText">Tage</div>
+                            <input id="lieferantRepeatTerminInput" type="text">
+
+                            <div id="repeatDaysText">Tage</div>
+                        </div>
+                    </div>
                     </div>
                     <label class="topMarginCheckbox">
                         <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
@@ -457,15 +465,12 @@
                     <textarea id="terminnotizen" rows="7"></textarea>
 
                     <div class="bottombuttons saved">
-                        <a id="speichereaktuelleseventbutton" onclick="termineController.speichereAktuellesEvent();" class="greenbutton ui-btn ui-corner-all ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left 	ui-icon-check"
-                           style="display:none">Speichern
-                        </a>
-                        <a id="abbrechenbearbeitungaktuelleseventbutton" onclick="termineController.abbrechenBearbeitungAktuellesEvent();"
-                           class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Ok
+                        <a id="b_terminabsenden"
+                           class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Absenden
                         </a>
                     </div>
-                    <a id="loescheaktuelleseventbutton" onclick="termineController.loescheAktuellenTermin();"
-                       class="redbutton ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-delete">Löschen
+                    <a id="b_termin_abbrechen"
+                       class="redbutton ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-delete">Abbrechen
                     </a>
                 </div>
 
@@ -627,6 +632,7 @@
 
 
 
+<script type="text/javascript" src="js/terminView.js"></script>
 <script type="text/javascript" src="js/termin.js"></script>
 <script type="text/javascript" src="js/clientView.js"></script>
 <script type="text/javascript" src="js/job.js"></script>
