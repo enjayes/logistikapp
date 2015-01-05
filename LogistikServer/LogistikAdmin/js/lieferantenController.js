@@ -252,9 +252,15 @@ lieferantenController = {
         if (fade) {
             $("#lieferantenInformationen").addClass("geloescht").removeClass("geladen");
             setTimeout(function () {
-                $("#lieferantenInformationen").removeClass("geloescht");
-                if (!lieferantenController.aktuellerLieferant)
+
+
+                if (!lieferantenController.aktuellerLieferant){
+
                     $("#lieferantenInformationen").hide();
+
+                    $("#lieferantenInformationen").removeClass("geloescht");
+
+                }
             }, 1000);
             $("#lieferantenInformationen").addClass("geloescht").removeClass("geladen");
 

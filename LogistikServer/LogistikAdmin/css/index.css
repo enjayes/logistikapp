@@ -1211,9 +1211,11 @@ Colors
     -webkit-animation-name: greyPulse;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
     animation-name: greyPulse;
     animation-duration: 1s;
     animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes greyPulse {

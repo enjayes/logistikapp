@@ -100,9 +100,9 @@ uebersichtTab = {
                             event.stopPropagation();
 
 
-                            lieferantenController.aktuellerLieferant = $.extend(true, {}, item);
-                            tabsController.openTabWithoutClick(3);
-                            lieferantenController.zeigeAktuellenLieferanten();
+                          //  lieferantenController.aktuellerLieferant = $.extend(true, {}, item);
+                         //   tabsController.openTabWithoutClick(3);
+                        //    lieferantenController.zeigeAktuellenLieferanten();
 
 
                         }).append($("<div title='Entfernen' class='selectedLieferantButtonRemove ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all ui-mini'></div>").click(function () {

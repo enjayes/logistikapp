@@ -634,6 +634,8 @@ termineController = {
                             $("#besucherscheinThematik").html(job.t_thematik);
                             $("#besucherscheinZiel").html(job.t_ziel);
                             $("#besucherscheinGrund").html(job.t_grund);
+                            $("#besucherscheinGespraechspartner").html(job.gespraechspartner);
+
 
 
                             job.cb_auftrag_getaetigt?$("#besucherscheinAuftraggetaetigt").html("X"):{};
