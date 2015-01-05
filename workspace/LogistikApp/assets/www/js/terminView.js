@@ -47,12 +47,9 @@ var terminView = {
 
         console.log(termin.start)
 
-
         termin.start = $("#eventDate").datepicker('getDate');//TODO
 
         termin.alarm = 0;
-
-
 
         if ($('#lieferantRepeatTermin').is(":checked")) {
             termin.repeatDays = $("#lieferantRepeatTerminInput").val();
@@ -60,8 +57,6 @@ var terminView = {
         else{
             //TODO: nothing??
         }
-
-
 
         termin.title = $("#termintitel").val();
         termin.notizen = $("#terminnotizen").val();
