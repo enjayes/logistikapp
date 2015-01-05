@@ -41,7 +41,7 @@ var terminView = {
          */
         termin.id=misc.getUniqueID();
         termin.lieferant = clientView.lieferant.id;
-        termin.marktId = 0;// TODO logistikapp.markt_id;   markt ids abfragen/managen    !!!!!!!
+        termin.marktId = configData.markt.id;
 
         termin.start = moment($("#eventDate").datepicker('getDate'));
 
@@ -119,6 +119,10 @@ var terminView = {
         $("#b_terminabsenden").click(function () {
 
             var termin = terminView.readInput();
+
+
+
+
 
             serverController.termin.create(termin);
 
