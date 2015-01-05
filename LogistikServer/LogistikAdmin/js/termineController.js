@@ -584,21 +584,84 @@ termineController = {
         return null;
 
     },
-    showJob:function(jobId){
+    showJob: function (jobId) {
         uiController.showLieferschein = true;
         $("#tabs .ui-tabs-panel").hide();
-        $("#tabs .ui-navbar").css("pointer-events","none");
-
-        $("#mainbackground").css("top","94px");
+        $("#tabs .ui-navbar").css("pointer-events", "none");
+        $("#mainbackground").css("top", "94px");
         $("#besucherschein").show();
 
-        serverController.job.get(jobId,function (job) {
-            console.log("........")
-            console.log(job)
-            $("#besucherscheinTitle").html("TODO: format job<br> termineController.showJob()<br><br><br><br><br><br>"+JSON.stringify(job))
+        $("#page").addClass("besucherschein");
+        serverController.job.get(jobId, function (job) {
 
-        } );
+            var errorLoading = "Dieser Besucherschein wurde entfernt...";
+            if (!job || !job.lieferanten_id)
+                $("#besucherscheinMeldung").html(errorLoading);
+            else {
+                console.log(job.lieferanten_id)
 
+                console.dir(lieferantenController.lieferanten)
+
+                var showJob = function () {
+                    //Lieferanten not loadedyet
+                    if (!lieferantenController.loaded)
+                        setTimeout(function () {
+                            showJob(jobId)
+                        }, 100);
+                    else {
+
+                        var lieferant = lieferantenController.getLieferantByID(job.lieferanten_id);
+                        console.log(lieferant)
+
+                        if (!lieferant)
+                            $("#besucherscheinMeldung").html(errorLoading);
+                        else {
+
+                            console.log("........")
+                            console.log(job)
+                            console.log(lieferant)
+
+                           // $("#besucherscheinContent").html("TODO: format job<br> termineController.showJob()<br><br><br><br><br><br>" + JSON.stringify(job))
+                            $("#besucherscheinMarkt").html(job.markt_id);
+                            $("#besucherscheinFirma").html(lieferant.firma);
+
+                            $("#besucherscheinLieferant").html(lieferantenController.getLieferantFullName(lieferant));
+
+                            $("#besucherscheinDatum").html(termineTab.calenderFactory.moment(job.timestamp_start).format('LL'));
+
+                            $("#besucherscheinUhrzeit").html(termineTab.calenderFactory.moment(job.timestamp_start).format('hh:mm'));
+
+                            $("#besucherscheinThematik").html(job.t_thematik);
+                            $("#besucherscheinZiel").html(job.t_ziel);
+                            $("#besucherscheinGrund").html(job.t_grund);
+
+
+                            job.cb_auftrag_getaetigt?$("#besucherscheinAuftraggetaetigt").html("X"):{};
+                            job.cb_aktionsabsprache?$("#besucherscheinAktionsabsprache").html("X"):{};
+                            job.cb_bemusterung?$("#besucherscheinBemusterung").html("X"):{};
+                            job.cb_info_gespraech?$("#besucherscheinInfoGespraech").html("X"):{};
+                            job.cb_mhd?$("#besucherscheinMHD").html("X"):{};
+                            job.cb_nr_abgabe?$("#besucherscheinNrAbgabe").html("X"):{};
+                            job.cb_reklamation?$("#besucherscheinRelamationsbearbeitung").html("X"):{};
+                            job.cb_ruecknahme?$("#besucherscheinRuecknahme").html("X"):{};
+                            job.cb_sortimentsinfo?$("#besucherscheinSortimentsinfo").html("X"):{};
+                            job.cb_umbau?$("#besucherscheinUmbau").html("X"):{};
+                            job.cb_verkostung?$("#besucherscheinVerkostung").html("X"):{};
+                            job.cb_verlosung?$("#besucherscheinVerlosung").html("X"):{};
+                            job.cb_warenaufbau?$("#besucherscheinWarenaufbau").html("X"):{};
+
+                            $("#besucherscheinNotizen").html(job.t_notizen);
+
+
+                            $("#besucherscheinContent").show();
+
+                        }
+                    }
+                }
+                showJob();
+            }
+
+        })
 
     }
 

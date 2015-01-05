@@ -19,7 +19,7 @@ uebersichtTab = {
         uebersichtTab.pieAufteilung = new PieChart("#aufteilungChart",[]);
 
         var selectedList = $("#selectedAuftragsHistorieLieferanten");
-        this.selectedItemsShowHtml = "<div class='selectedLieferantShow'>Auswahl:</div><div class='selectedLieferantShowMargin'></div>"
+        this.selectedItemsShowHtml = "<div class='selectedLieferantShow'>Kein Lieferant ausgewählt...</div><div class='selectedLieferantShowMargin'></div>"
         selectedList.click(function (event) {
             event.stopPropagation();
             $("#searchAuftragsHistorieLieferanten input").focus();

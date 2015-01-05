@@ -14,6 +14,7 @@ lieferantenController = {
     titleUnbenannt: "Unbenannt",
     defaultPin:"0000",
     lieferanten: [],
+    loaded:false,
 
     init: function () {
 
@@ -32,6 +33,7 @@ lieferantenController = {
 
             if (lieferanten) {
                 lieferantenController.lieferanten = lieferanten;
+                lieferantenController.loaded =true;
 
 
 
