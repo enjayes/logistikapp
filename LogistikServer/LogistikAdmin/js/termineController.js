@@ -418,6 +418,8 @@ termineController = {
 
         var start = termineTab.calenderFactory.moment($("#eventDate").datepicker('getDate'));
 
+        //console.log($("#eventDate").datepicker('getDate')+"   "+start+"  "+start.format('DD.MM.YYYY'))
+
         if (start.format('DD.MM.YYYY') != $("#eventDate").val().trim()) {
             validated = false;
             $("#eventDate").parent(".ui-input-text").addClass("redborder");

@@ -71,6 +71,7 @@ var SearchWidget = function (domObject, searchPlaceHolder, topMargin, multiSelec
 
         //Zeige alle Lieferanten bei anklicken des Filters
         $(that.domObject + " input").on("focus",function () {
+            alert("!")
             $(that.filterableDomObject).show();
             if (afterFilteredCallback)
                 afterFilteredCallback(true, $(that.filterableDomObject).offset().top, $(that.filterableDomObject).height());

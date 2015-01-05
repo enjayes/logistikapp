@@ -165,7 +165,6 @@ serverController = {
 
     termin: {
         messageType: {
-            getAll: "tga",
             getRange: "tgr",
             create: "tc",
             update: "tu",
@@ -229,17 +228,6 @@ serverController = {
         getUpdateCallback: null,
         setUpdateCallblack: function (callback) {
             serverController.termin.getUpdateCallback =  callback;
-        },
-        getAll: function (callback) {
-            var newCallback = function (list) {
-                for (var i = 0; i < list.length; i++) {
-                    list[i] = serverController.termin.parseDTO(list[i]);
-                }
-                callback(list);
-                serverController.getAllOnStartupCounter++;
-                serverController.onLoadedGetAllOnStartup();
-            };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
 
         }, getRange: function (start, end, callback) {
 
@@ -252,7 +240,7 @@ serverController = {
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange, start: start.toDate().getTime(), end: end.toDate().getTime(), callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.toDate().getTime(), end: end.toDate().getTime(), callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (termin) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: this.buildDTO(termin)}));
