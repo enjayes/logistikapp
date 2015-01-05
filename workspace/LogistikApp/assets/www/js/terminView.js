@@ -136,6 +136,8 @@ var terminView = {
 
         $("#b_termin_abbrechen").click(function () {
 
+            notifications.showWithTimeout("Hinweis", "Der Termin wurde <p style='color:#ff2723'>nicht</p> gespeichert!");
+
             $("#terminEintragen").hide();
             $("#termine_menu").show();
 
