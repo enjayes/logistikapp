@@ -184,7 +184,8 @@ serverController = {
                 Lieferant: termin.lieferant,
                 RepeatDays: termin.repeatDays,
                 jobId: termin.jobId,
-                marktId: termin.marktId
+                marktId: termin.marktId,
+                alarm:termin.alarm
 
             };
 
@@ -209,7 +210,8 @@ serverController = {
                 lieferant: termin.Lieferant,
                 repeatDays: termin.RepeatDays,
                 jobId: termin.jobId,
-                marktId: termin.marktId
+                marktId: termin.marktId,
+                alarm:termin.alarm
             };
 
             if (termin.end != "")
@@ -243,13 +245,13 @@ serverController = {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.toDate().getTime(), end: end.toDate().getTime(), callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (termin) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: this.buildDTO(termin)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, e: this.buildDTO(termin)}));
         },
         update: function (termin) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: this.buildDTO(termin)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, e: this.buildDTO(termin)}));
         },
         delete: function (termin) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, l: this.buildDTO(termin)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, e: this.buildDTO(termin)}));
         }
 
     },

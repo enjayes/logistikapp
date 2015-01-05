@@ -39,12 +39,15 @@ var terminView = {
          `End` text NOT NULL,
          `EndMilli` bigint(20) NOT NULL,
          */
-
+        termin.id=misc.getUniqueID();
         termin.lieferant = clientView.lieferant.id;
-        termin.marktid = logistikapp.markt_id;
+        termin.marktId = 0;// TODO logistikapp.markt_id;   markt ids abfragen/managen    !!!!!!!
 
+        termin.start = moment($("#eventDate").datepicker('getDate'));
 
-        termin.start = $("#eventDate").datepicker('getDate');
+        console.log(termin.start)
+
+        termin.alarm = 0;
 
 
         if ($('#lieferantRepeatTermin').is(":checked")) {

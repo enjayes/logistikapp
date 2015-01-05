@@ -28,8 +28,8 @@
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
     <link rel="stylesheet" type="text/css" href="css/PINpad.css"  />
     <link rel="stylesheet" type="text/css" href="css/jquery-clockpicker.css"  />
-    <link rel="stylesheet" type="text/css" href="css/jquery.ui.datepicker.mobile.css"  />
-
+    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.css"/>
+    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.theme.css"/>
 
     <title>LogistikApp</title>
     <!--Install Console-->
@@ -450,7 +450,7 @@
 
                     <!--<input id="eventDate" type="data" >  data-role="date">-->
 
-                    <input type="date" name="date" id="eventDate" value=""  />
+                    <input data-role="date" name="date" id="eventDate" value=""  />
 
                     <div class="form-group">
                         <div class="input-group clockpicker">
@@ -735,6 +735,8 @@
 
 <!--Timepicker für Zeit-->
 <script src="libs/timepicker/jquery-clockpicker.js"></script>
+
+<script src="libs/moment.min.js"></script>
 
 
 <script type="text/javascript">

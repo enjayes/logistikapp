@@ -12,7 +12,6 @@
 nachrichtenController = {
     nachrichtenSentLength: 0,
     nachrichtenSent: [],
-
     nachrichtenRecieved: [],
 
     init: function () {
