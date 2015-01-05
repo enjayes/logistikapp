@@ -19,6 +19,7 @@ CalenderEvent = function () {
     this.notizen = "";
     this.lieferant = "";
     this.repeatDays = 0;
+    this.alarm = 0;
 
 }
 

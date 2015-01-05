@@ -377,9 +377,28 @@ serverController = {
 
         buildDTO: function (termin) {
 
-            var newTermin = $.extend(true, {}, termin);
+            var termin = $.extend(true, {}, termin);
             //newTermin.timestamp_start = termin.timestamp_start.getTime();
             //newTermin.timestamp_end = termin.timestamp_end.getTime();
+
+
+
+            var newTermin = {
+                id: termin.id,
+                Title: termin.title,
+                Start: termin.start.format(),
+                StartMilli: termin.start.toDate().getTime(),
+                AllDay: termin.allDay,
+                Notizen: termin.notizen,
+                Lieferant: termin.lieferant,
+                RepeatDays: termin.repeatDays,
+                jobId: termin.jobId,
+                marktId: termin.marktId,
+                alarm:termin.alarm
+            };
+
+
+
             return newTermin;
 
         },
@@ -389,7 +408,7 @@ serverController = {
         create: function (termin){
             serverController.socket.emit('message', new ServerMessage({
                 t: this.messageType.create,
-                j: this.buildDTO(termin)
+                e: this.buildDTO(termin)
             }));
         }
     },

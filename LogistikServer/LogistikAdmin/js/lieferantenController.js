@@ -14,6 +14,7 @@ lieferantenController = {
     titleUnbenannt: "Unbenannt",
     defaultPin:"0000",
     lieferanten: [],
+    loaded:false,
 
     init: function () {
 
@@ -32,6 +33,7 @@ lieferantenController = {
 
             if (lieferanten) {
                 lieferantenController.lieferanten = lieferanten;
+                lieferantenController.loaded =true;
 
 
 
@@ -250,9 +252,15 @@ lieferantenController = {
         if (fade) {
             $("#lieferantenInformationen").addClass("geloescht").removeClass("geladen");
             setTimeout(function () {
-                $("#lieferantenInformationen").removeClass("geloescht");
-                if (!lieferantenController.aktuellerLieferant)
+
+
+                if (!lieferantenController.aktuellerLieferant){
+
                     $("#lieferantenInformationen").hide();
+
+                    $("#lieferantenInformationen").removeClass("geloescht");
+
+                }
             }, 1000);
             $("#lieferantenInformationen").addClass("geloescht").removeClass("geladen");
 

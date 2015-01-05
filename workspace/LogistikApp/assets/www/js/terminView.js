@@ -39,12 +39,19 @@ var terminView = {
          `End` text NOT NULL,
          `EndMilli` bigint(20) NOT NULL,
          */
-
+        termin.id=misc.getUniqueID();
         termin.lieferant = clientView.lieferant.id;
-        termin.marktid = logistikapp.markt_id;
+        termin.marktId = 0;// TODO logistikapp.markt_id;   markt ids abfragen/managen    !!!!!!!
+
+        termin.start = moment($("#eventDate").datepicker('getDate'));
+
+        console.log(termin.start)
 
 
         termin.start = $("#eventDate").datepicker('getDate');//TODO
+
+        termin.alarm = 0;
+
 
 
         if ($('#lieferantRepeatTermin').is(":checked")) {
@@ -132,6 +139,8 @@ var terminView = {
 
 
         $("#b_termin_abbrechen").click(function () {
+
+            notifications.showWithTimeout("Hinweis", "Der Termin wurde <p style='color:#ff2723'>nicht</p> gespeichert!");
 
             $("#terminEintragen").hide();
             $("#termine_menu").show();

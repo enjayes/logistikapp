@@ -40,9 +40,110 @@
 
 <!--Besucherschein ------------>
 <div id="besucherschein" class="fadein" style="display:none">
-    <h1 style="text-align: center;border: 1px solid #aaa;background: #eee;margin-top: 23px;padding: 5px;">Besucherschein</h1>
+    <h1  id="besucherscheinTitle" style="text-align: center;border: 1px solid #aaa;background: #eee;margin-top: 23px;padding: 5px;">Besucherschein</h1>
+    <div id="besucherscheinMeldung"></div>
+    <div id="besucherscheinContent" class="fadein" style="display:none">
+        <br>
+        <div style="text-align: center">
+        <span class="titledatafield"> Markt: </span><span class="contentdatafield" id="besucherscheinMarkt"></span>
+        </div>
+        <br>
+        <table style="width:100%">
 
-    <div id="besucherscheinTitle"></div>
+            <tr>
+                <td class="titledatafield">Firma:</td>
+                <td class="contentdatafield"  id="besucherscheinFirma"></td>
+                <td class="titledatafield">Datum:</td>
+                <td class="contentdatafield"  id="besucherscheinDatum"></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Herr/Frau:</td>
+                <td class="contentdatafield"  id="besucherscheinLieferant"></td>
+                <td class="titledatafield">Uhrzeit:</td>
+                <td class="contentdatafield"  id="besucherscheinUhrzeit"></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Thematik:</td>
+                <td class="contentdatafield"  id="besucherscheinThematik" colspan="3"></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Ziel:</td>
+                <td class="contentdatafield"  id="besucherscheinZiel" colspan="3"></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Grund:</td>
+                <td class="contentdatafield"  id="besucherscheinGrund" colspan="3"></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Gespächspartner:</td>
+                <td class="contentdatafield"  id="besucherscheinGespraechspartner" colspan="3"></td>
+            </tr>
+        </table>
+        <br>
+        <table style="width:100%">
+            <tr>
+                <td class="titledatafield">Bearbeitet:</td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Auftrag getätigt:</td>
+                <td><div class="selectiondatafield" id="besucherscheinAuftraggetaetigt" >&nbsp</div></td>
+
+                <td class="titledatafield">Verkostung:</td>
+                <td><div class="selectiondatafield" id="besucherscheinVerkostung" >&nbsp</div></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">MHD - Kontrolle:</td>
+                <td><div class="selectiondatafield" id="besucherscheinMHD" >&nbsp</div></td>
+
+                <td class="titledatafield">Sortimentsinfo:</td>
+                <td><div class="selectiondatafield" id="besucherscheinSortimentsinfo" >&nbsp</div></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Rückname:</td>
+                <td><div class="selectiondatafield" id="besucherscheinRuecknahme" >&nbsp</div></td>
+                <td class="titledatafield">Aktionsabsprache:</td>
+                <td><div class="selectiondatafield" id="besucherscheinAktionsabsprache" >&nbsp</div></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Relamationsbearbeitung:</td>
+                <td><div class="selectiondatafield" id="besucherscheinRelamationsbearbeitung" >&nbsp</div></td>
+                <td class="titledatafield">Absprache:</td>
+                <td><div class="selectiondatafield" id="besucherscheinAbsprache" >&nbsp</div></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Warenaufbau/Plazierung:</td>
+                <td><div class="selectiondatafield" id="besucherscheinWarenaufbau" >&nbsp</div></td>
+                <td class="titledatafield">Bemusterung:</td>
+                <td><div class="selectiondatafield" id="besucherscheinBemusterung" >&nbsp</div></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Umbau:</td>
+                <td><div class="selectiondatafield" id="besucherscheinUmbau" >&nbsp</div></td>
+                <td class="titledatafield">Verlosung:</td>
+                <td><div class="selectiondatafield" id="besucherscheinVerlosung" >&nbsp</div></td>
+            </tr>
+            <tr>
+                <td class="titledatafield">Info.-Gerpsäch:</td>
+                <td><div class="selectiondatafield" id="besucherscheinInfoGespraech" >&nbsp</div></td>
+                <td class="titledatafield">NR - Abgabe:</td>
+                <td><div class="selectiondatafield" id="besucherscheinNrAbgabe" >&nbsp</div></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table style="width:100%">
+            <tr>
+                <td class="titledatafield">Notizen:</td>
+                <td class="contentdatafield"  id="besucherscheinNotizen" colspan="3"></td>
+            </tr>
+
+        </table>
+
+
+    </div>
+
+
+
 </div>
 
 <!--Admin page ------------>
@@ -103,7 +204,7 @@
                 <div class="legend"></div>
             </div>
 
-            <div id="zweiterChart" class="labeled-chart-container">
+            <div id="zweiterChart" class="labeled-chart-container" style="display: none;">
                 <h3>Zweiter Chart</h3>
 
                 <div class="canvas-holder">
@@ -293,8 +394,9 @@
         <label for="eventDate" class="">Datum:</label>
         <input id="eventDate" type="text" data-role="date">
         -->
-        <label for="eventDate">Date Input:</label>
+        <label for="eventDate">Datum:</label>
         <input type="text" data-role="date" name="date" id="eventDate" value=""  />
+
 
         <div class="input-group clockpicker">
             <input type="text" class="form-control" value="12:00">
@@ -418,7 +520,12 @@
 
 
 <script src="libs/jQuery.ui.datepicker.js"></script>
-<script src="libs/jquery.ui.datepicker.mobile.js"></script>
+
+<script src="libs/jquery.mobile.datepicker.js"></script>
+
+
+
+
 
 <script src="libs/timepicker/jquery-clockpicker.js"></script>
 

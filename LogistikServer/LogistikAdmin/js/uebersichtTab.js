@@ -19,7 +19,7 @@ uebersichtTab = {
         uebersichtTab.pieAufteilung = new PieChart("#aufteilungChart",[]);
 
         var selectedList = $("#selectedAuftragsHistorieLieferanten");
-        this.selectedItemsShowHtml = "<div class='selectedLieferantShow'>Auswahl:</div><div class='selectedLieferantShowMargin'></div>"
+        this.selectedItemsShowHtml = "<div class='selectedLieferantShow'>Kein Lieferant ausgewählt...</div><div class='selectedLieferantShowMargin'></div>"
         selectedList.click(function (event) {
             event.stopPropagation();
             $("#searchAuftragsHistorieLieferanten input").focus();
@@ -100,9 +100,9 @@ uebersichtTab = {
                             event.stopPropagation();
 
 
-                            lieferantenController.aktuellerLieferant = $.extend(true, {}, item);
-                            tabsController.openTabWithoutClick(3);
-                            lieferantenController.zeigeAktuellenLieferanten();
+                          //  lieferantenController.aktuellerLieferant = $.extend(true, {}, item);
+                         //   tabsController.openTabWithoutClick(3);
+                        //    lieferantenController.zeigeAktuellenLieferanten();
 
 
                         }).append($("<div title='Entfernen' class='selectedLieferantButtonRemove ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all ui-mini'></div>").click(function () {

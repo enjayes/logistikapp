@@ -44,9 +44,9 @@ var notifications = {
             heading: title,
             text: message,
             stack: 50,
-            hideAfter: 3000,
+            hideAfter: 5000,
             showHideTransition: 'fade',
-            afterHidden: callback,
+            afterHidden: callback
 
         })
     }

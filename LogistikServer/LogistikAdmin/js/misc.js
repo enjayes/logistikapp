@@ -18,6 +18,7 @@ misc = {
             return v.toString(16);
         });
     },
+
     getColorFromUniqueID: function(colorId){
         var colorStr =   colorId.replace(/-/g, "");
 
@@ -42,11 +43,18 @@ misc = {
         if (typeof dateIn == Number)
             dateIn = new Date(dateIn)
 
-        var yy = (dateIn.getFullYear() + "").slice(2, 4);
+        var yy = dateIn.getFullYear();
+
         var mm = dateIn.getMonth() + 1; // getMonth() is zero-based
         var dd = dateIn.getDate();
         var hours = dateIn.getHours();
         var mins = dateIn.getMinutes();
+
+        (mm+"").length==1?mm="0"+mm:{};
+        (dd+"").length==1?dd="0"+dd:{};
+        (hours+"").length==1?hours="0"+hours:{};
+        (mins+"").length==1?mins="0"+mins:{};
+
 
         return String(dd + "." + mm + "." + yy + "  " + hours + ":" + mins); // Leading zeros for mm and dd
 

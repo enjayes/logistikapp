@@ -165,7 +165,6 @@ serverController = {
 
     termin: {
         messageType: {
-            getAll: "tga",
             getRange: "tgr",
             create: "tc",
             update: "tu",
@@ -185,7 +184,8 @@ serverController = {
                 Lieferant: termin.lieferant,
                 RepeatDays: termin.repeatDays,
                 jobId: termin.jobId,
-                marktId: termin.marktId
+                marktId: termin.marktId,
+                alarm:termin.alarm
 
             };
 
@@ -210,7 +210,8 @@ serverController = {
                 lieferant: termin.Lieferant,
                 repeatDays: termin.RepeatDays,
                 jobId: termin.jobId,
-                marktId: termin.marktId
+                marktId: termin.marktId,
+                alarm:termin.alarm
             };
 
             if (termin.end != "")
@@ -229,17 +230,6 @@ serverController = {
         getUpdateCallback: null,
         setUpdateCallblack: function (callback) {
             serverController.termin.getUpdateCallback =  callback;
-        },
-        getAll: function (callback) {
-            var newCallback = function (list) {
-                for (var i = 0; i < list.length; i++) {
-                    list[i] = serverController.termin.parseDTO(list[i]);
-                }
-                callback(list);
-                serverController.getAllOnStartupCounter++;
-                serverController.onLoadedGetAllOnStartup();
-            };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
 
         }, getRange: function (start, end, callback) {
 
@@ -252,16 +242,16 @@ serverController = {
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange, start: start.toDate().getTime(), end: end.toDate().getTime(), callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.toDate().getTime(), end: end.toDate().getTime(), callback: serverController.callbackHandler.register(newCallback)}));
         },
         create: function (termin) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, l: this.buildDTO(termin)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, e: this.buildDTO(termin)}));
         },
         update: function (termin) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: this.buildDTO(termin)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, e: this.buildDTO(termin)}));
         },
         delete: function (termin) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, l: this.buildDTO(termin)}));
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.delete, e: this.buildDTO(termin)}));
         }
 
     },
