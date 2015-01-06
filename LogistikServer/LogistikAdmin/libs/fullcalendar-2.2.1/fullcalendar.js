@@ -816,7 +816,9 @@ function Calendar(element, instanceOptions) {
 
 		//destroyEvents(); // so that events are cleared before user starts waiting for AJAX
         //CHANGED!!!!!!!!!
-		fetchAndRenderEvents();
+		 fetchAndRenderEvents();
+
+
 	}
 
 
@@ -848,6 +850,7 @@ function Calendar(element, instanceOptions) {
 
 
 	function fetchAndRenderEvents() {
+
 		fetchEvents(currentView.start, currentView.end);
 			// ... will call reportEvents
 			// ... which will call renderEvents
@@ -857,6 +860,7 @@ function Calendar(element, instanceOptions) {
 	// called when event data arrives
 	function reportEvents(_events) {
 		events = _events;
+        //CHANGED
         if(!termineTab.calender.removeNoRedraw)
 		 renderEvents();
         else
@@ -866,7 +870,11 @@ function Calendar(element, instanceOptions) {
 
 	// called when a single event's data has been changed
 	function reportEventChange() {
-		renderEvents();
+        //CHANGED
+        if(!termineTab.calender.removeNoRedraw)
+            renderEvents();
+        else
+            termineTab.calender.removeNoRedraw = false;
 	}
 
 
@@ -5135,11 +5143,15 @@ $.extend(Grid.prototype, {
 				// do revert animation if hasn't changed. calls a callback when finished (whether animation or not)
 				mouseFollower.stop(!hasChanged, function() {
 					_this.isDraggingSeg = false;
-					view.destroyDrag();
-					view.showEvent(event);
-					view.trigger('eventDragStop', el[0], event, ev, {}); // last argument is jqui dummy
 
-					if (hasChanged) {
+					view.destroyDrag();
+
+                    //CHANGED
+                    //view.showEvent(event);
+
+                    view.trigger('eventDragStop', el[0], event, ev, {}); // last argument is jqui dummy
+
+                    if (hasChanged) {
 						view.eventDrop(el[0], event, newStart, ev); // will rerender all events...
 					}
 				});
@@ -7695,7 +7707,8 @@ View.prototype = {
 						_this.trigger('drop', el[0], eventStart, ev, ui);
 
 						// create an event from the given properties and the latest dates
-						if (eventProps) {
+
+                        if (eventProps) {
 							renderedEvents = calendar.renderEvent(eventProps, meta.stick);
 							_this.trigger('eventReceive', null, renderedEvents[0]); // signal an external event landed
 						}
@@ -7888,16 +7901,16 @@ function View(calendar) {
 
 	
 	function eventDrop(el, event, newStart, ev) {
-		var mutateResult = calendar.mutateEvent(event, newStart, null);
+        var mutateResult = calendar.mutateEvent(event, newStart, null);
 
-		trigger(
+        trigger(
 			'eventDrop',
 			el,
 			event,
 			mutateResult.dateDelta,
 			function() {
 				mutateResult.undo();
-				reportEventChange();
+                reportEventChange();
 			},
 			ev,
 			{} // jqui dummy

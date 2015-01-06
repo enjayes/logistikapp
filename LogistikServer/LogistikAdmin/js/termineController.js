@@ -77,6 +77,7 @@ termineController = {
         eventDrop: function (event, delta, revertFunc) {
 
             termineController.dontFadeEvents = true;
+            termineTab.calender.removeNoRedraw = true;
             serverController.termin.update(event);
         },
 
