@@ -598,7 +598,7 @@ termineController = {
 
             var errorLoading = "Dieser Besucherschein wurde entfernt...";
             if (!job || !job.lieferanten_id)
-                $("#besucherscheinMeldung").html(errorLoading);
+                $("#besucherscheinMeldung").html(errorLoading).show();
             else {
                 console.log(job.lieferanten_id)
 
@@ -616,7 +616,7 @@ termineController = {
                         console.log(lieferant)
 
                         if (!lieferant)
-                            $("#besucherscheinMeldung").html(errorLoading);
+                            $("#besucherscheinMeldung").html(errorLoading).show();
                         else {
 
                             console.log("........")

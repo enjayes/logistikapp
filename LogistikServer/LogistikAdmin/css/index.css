@@ -40,15 +40,57 @@ body {
     overflow-y: hidden
 }
 
-#page.besucherschein{
+#page.besucherschein {
     min-height: 1500px !important;
 }
 
+#page.besucherschein #mainbackground {
+    display:none!important;
+}
+
+/**
+ Printing Besucherschein
+**/
+@media print {
+    #page.besucherschein{
+        width:100%!important;
+    }
+    #page.besucherschein #bannerbackground {
+        background: #fff !important;
+    }
+
+    #besucherscheinPrint{
+      display:none!important;
+    }
+    #page.besucherschein #besucherschein {
+        top:74px!important;
+        width:110%!important;
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+
+        transform-origin: 0 0;
+        transform: scale(0.9);
+
+
+        left:0!important;
+        background: #fff !important;
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: none !important;
+
+    }
+
+    #page.besucherschein #besucherscheinNotizen{
+        border-bottom: none!important;
+    }
+
+
+}
 
 button {
     outline: none !important;
 }
-
 
 #servererror {
     position: absolute;
@@ -72,8 +114,6 @@ button {
     margin-left: auto !important;
     margin-right: auto !important;
 }
-
-
 
 /**
 Datebox
@@ -107,26 +147,26 @@ Datebox
     float: right !important;
 }
 
-#popupTermin .ui-checkbox.lieferantAlldayTerminparent{
+#popupTermin .ui-checkbox.lieferantAlldayTerminparent {
     display: inline-block;
     vertical-align: middle;
     margin: -10px;
 }
 
-#popupTermin .ui-checkbox.lieferantAlldayTerminparent .ui-btn,#lieferantRepeatTerminParent .ui-checkbox .ui-btn {
+#popupTermin .ui-checkbox.lieferantAlldayTerminparent .ui-btn, #lieferantRepeatTerminParent .ui-checkbox .ui-btn {
     border: none !important;
     font-weight: normal !important;
     background-color: #fff !important;
 }
 
-#lieferantRepeatTerminParent{
+#lieferantRepeatTerminParent {
     display: inline-block;
     vertical-align: middle;
     width: 100%;
     position: relative;
 }
 
-#lieferantRepeatTerminParent .ui-input-text{
+#lieferantRepeatTerminParent .ui-input-text {
     display: inline-block;
     position: absolute;
     top: -16px;
@@ -134,7 +174,7 @@ Datebox
     width: 60px;
 }
 
-#lieferantRepeatTerminParent #repeatDaysText{
+#lieferantRepeatTerminParent #repeatDaysText {
     display: inline-block;
     position: absolute;
     top: 0;
@@ -142,27 +182,23 @@ Datebox
     width: 60px;
 }
 
-#lieferantRepeatTerminParent .ui-checkbox .ui-btn{
-    padding-right:0px;
+#lieferantRepeatTerminParent .ui-checkbox .ui-btn {
+    padding-right: 0px;
 
 }
 
-
-
-#lieferantRepeatTerminParent .ui-btn{
+#lieferantRepeatTerminParent .ui-btn {
     display: inline-block;
-    vertical-align: middle;}
+    vertical-align: middle;
+}
 
-
-
-#popupTermin #lieferantRepeatTerminParent .ui-checkbox  {
+#popupTermin #lieferantRepeatTerminParent .ui-checkbox {
     margin: -10px;
 }
 
-#popupTermin .topMarginCheckbox{
+#popupTermin .topMarginCheckbox {
     margin-top: 16px !important;
 }
-
 
 .clockpicker-popover {
     z-index: 2010 !important;
@@ -311,7 +347,6 @@ input-group-addon {
     z-index: 0;
 }
 
-
 #besucherschein {
     padding: 0 25px;
     position: absolute;
@@ -331,44 +366,39 @@ input-group-addon {
 }
 
 #maintabs li a {
-    height:36px!important;
+    height: 36px !important;
 }
 
-#maintabs #konfigurationTabParent{
+#maintabs #konfigurationTabParent {
     width: 40px;
     position: absolute;
     right: 0;
     z-index: 1000;
 }
 
-
-
-#maintabs #konfigurationTabParent a{
+#maintabs #konfigurationTabParent a {
     padding-bottom: 0;
 }
 
-#maintabs #konfigurationTabParent a:after{
+#maintabs #konfigurationTabParent a:after {
     top: .4525em;
 }
 
-
-#maintabs li{
+#maintabs li {
     width: 23.9%;
 }
 
 @media (max-width: 600px) {
-    #maintabs li{
+    #maintabs li {
         width: 23.3%;
     }
 }
 
 @media (max-width: 450px) {
-    #maintabs li{
+    #maintabs li {
         width: 22.7%;
     }
 }
-
-
 
 /**
 background-color: #FFFFFF;
@@ -406,28 +436,25 @@ Navbar
     overflow: visible !important;
 }
 
-
 .subTabToggle {
-    margin-top: 0!important;
-    margin-left: 0!important;
-    margin-bottom: 16px!important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 16px !important;
 }
 
 .subTabToggle .ui-btn.active, .subTabToggle  .ui-btn:active {
     background-color: #38c !important;
     background-image: none;
-    color: #fff!important;
+    color: #fff !important;
 }
 
 .subTabToggle .ui-btn {
 
 }
 
-
 /**
  Übersicht
 **/
-
 
 #selectedAuftragsHistorieLieferanten {
     position: relative;
@@ -441,7 +468,6 @@ Navbar
     border-radius: 5px;
 }
 
-
 #selectedAuftragsHistorieLieferanten .selectedLieferantShow {
     color: #656565;
     position: absolute;
@@ -454,15 +480,13 @@ Navbar
     display: inline-block
 }
 
-
-#selectedAuftragsHistorieLieferanten .selectedLieferantButton  {
+#selectedAuftragsHistorieLieferanten .selectedLieferantButton {
     display: inline-block;
     margin: 2px 0 -3px 2px !important;
     padding: 8px 8px 4px 8px;
     font-weight: normal !important;
     font-size: 16px;
 }
-
 
 #selectedAuftragsHistorieLieferanten .selectedLieferantButton .selectedLieferantButtonRemove {
     margin: -4px 0 0 10px !important;
@@ -471,7 +495,6 @@ Navbar
 #selectedAuftragsHistorieLieferanten .selectedLieferantButton .selectedLieferantButtonRemove:hover {
     background-color: #f00;
 }
-
 
 .dataTables_wrapper {
     padding: 15px 15px 15px 15px;
@@ -482,14 +505,12 @@ Navbar
     position: relative;
 }
 
-
-.dataTables_wrapper table th{
+.dataTables_wrapper table th {
     text-align: left;
-    padding-left: 10px!important;
+    padding-left: 10px !important;
 }
 
-
-#statistikTab .labeled-chart-container{
+#statistikTab .labeled-chart-container {
     padding-left: 15px;
     background-color: #E5E5E5;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
@@ -498,13 +519,9 @@ Navbar
     position: relative;
 }
 
-
 #statistikTab .labeled-chart-container .canvas-holder {
     margin-bottom: 10px;
 }
-
-
-
 
 /**
  Nachrichten
@@ -570,8 +587,6 @@ Navbar
     bottom: -55px;
 }
 
-
-
 #selectedMessageLieferanten {
     position: relative;
     min-height: 42px;
@@ -616,10 +631,6 @@ Navbar
     background-color: #f00;
 }
 
-
-
-
-
 /**
  Lieferanten
 **/
@@ -628,16 +639,12 @@ Navbar
     margin-bottom: 15px;
 }
 
-
-
-
 #searchInfoLieferanten .ui-input-search {
     margin-top: 0;
 }
 
-#lieferanthinzufuegen{
+#lieferanthinzufuegen {
     margin-top: 10px;
-
 
 }
 
@@ -656,12 +663,10 @@ Navbar
     transition: opacity 0.8s;
 }
 
-
-#lieferantenInformationen label{
-    margin-bottom:0;
+#lieferantenInformationen label {
+    margin-bottom: 0;
     margin-top: 7px;
 }
-
 
 #lieferantZeigeAuftraege {
     position: absolute;
@@ -688,25 +693,21 @@ Navbar
     padding-top: 15px;
 }
 
-#lieferantenInformationen table{
+#lieferantenInformationen table {
     width: 100%;
 
 }
-#lieferantenInformationen table th{
+
+#lieferantenInformationen table th {
     text-align: left;
     vertical-align: top;
 }
-
 
 #suchelieferanten .ui-input-text {
     margin: 0 !important;
 }
 
-
-
 /*Konfiguration*/
-
-
 
 #marktInformationen .ui-btn.ui-btn-b {
     -webkit-transition: opacity 0.8s;
@@ -714,13 +715,11 @@ Navbar
 }
 
 #popupTermin #searchTerminLieferanten {
-    position: absolute!important;
+    position: absolute !important;
     left: 20px;
     right: 70px;
     margin-bottom: 0;
 }
-
-
 
 #popupTermin #searchTerminLieferanten .ui-input-search {
     margin: 0 !important;
@@ -735,7 +734,6 @@ Navbar
     height: 40px;
 }
 
-
 #popupTermin #lieferantTerminLabel {
     margin-top: 15px;
 }
@@ -743,7 +741,6 @@ Navbar
 #popupTermin #terminnotizenLabel {
     margin-top: 7px;
 }
-
 
 #popupTermin #lieferantTermin .ui-input-text {
     border: none !important;
@@ -899,10 +896,9 @@ Navbar
     display: none !important;
 }
 
-
 /*Calender Event fade in*/
 
-.fc-widget-content.fade .fc-event-container{
+.fc-widget-content.fade .fc-event-container {
     opacity: 0; /* make things invisible upon start */
     -webkit-animation: fadeincomplete ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
     -moz-animation: fadeincomplete ease-in 1;
@@ -918,7 +914,6 @@ Navbar
     -moz-animation-duration: 300ms;
     animation-duration: 300ms;
 }
-
 
 .fadein {
     opacity: 0; /* make things invisible upon start */
@@ -937,11 +932,6 @@ Navbar
     animation-duration: 400ms;
 
 }
-
-
-
-
-
 
 /* make keyframes that tell the start state and the end state of our object */
 @-webkit-keyframes fadeincomplete {
@@ -1039,7 +1029,6 @@ Allgemein
     -moz-animation-duration: 350ms;
     animation-duration: 350ms;
 }
-
 
 /**
 Colors
@@ -1250,21 +1239,18 @@ Colors
     }
 }
 
-
-#marktauswahl{
+#marktauswahl {
     max-width: 900px !important;
     margin-left: auto !important;
     margin-right: auto !important;
     position: relative !important;
 }
 
-
-
 /**
    Besucherschein
 **/
 
-#besucherscheinContent{
+#besucherscheinContent {
     font-size: 20px;
 }
 
@@ -1272,29 +1258,27 @@ Colors
     border-spacing: 15px;
 }
 
-#besucherscheinDatum{
+#besucherscheinDatum {
     width: 210px;
 }
 
-#besucherscheinUhrzeit{
+#besucherscheinUhrzeit {
     width: 130px;
 }
 
-.titledatafield{
-    font-weight: bold ;
-    width:100px;
+.titledatafield {
+    font-weight: bold;
+    width: 100px;
 }
 
-
-
-.contentdatafield{
+.contentdatafield {
     background: #FFF;
     border-bottom: 1px dashed #000;
     padding: 5px;
 
 }
 
-.selectiondatafield{
+.selectiondatafield {
     width: 35px;
     background: #fff;
     padding: 3px 0px 3px 10px;
