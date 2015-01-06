@@ -1,5 +1,3 @@
-
-
 var terminView = {
 
 
@@ -30,7 +28,7 @@ var terminView = {
     },
 
 
-    readInput: function (){
+    readInput: function () {
         var termin = {};
 
         /*
@@ -39,7 +37,7 @@ var terminView = {
          `End` text NOT NULL,
          `EndMilli` bigint(20) NOT NULL,
          */
-        termin.id=misc.getUniqueID();
+        termin.id = misc.getUniqueID();
         termin.lieferant = clientView.lieferant.id;
         termin.marktId = configData.markt.id;
 
@@ -54,7 +52,7 @@ var terminView = {
         if ($('#lieferantRepeatTermin').is(":checked")) {
             termin.repeatDays = $("#lieferantRepeatTerminInput").val();
         }
-        else{
+        else {
             //TODO: nothing??
         }
 
@@ -63,17 +61,17 @@ var terminView = {
 
 
         if ($('#lieferantAlldayTermin').is(":checked")) {
-            termin.allDay=true;
+            termin.allDay = true;
         }
-        else{
-            termin.allDay=false;
+        else {
+            termin.allDay = false;
         }
 
 
         return termin;
     },
 
-    initialize: function() {
+    initialize: function () {
 
 
         $('#termine_menu .clockpicker').clockpicker();
@@ -81,7 +79,7 @@ var terminView = {
         terminView.clockPickerHelper();
 
         $('.clockpicker').clockpicker()
-            .find('input').change(function(){
+            .find('input').change(function () {
                 console.log(this.value);
             });
         var input = $('#single-input').clockpicker({
@@ -92,9 +90,8 @@ var terminView = {
         });
 
 
-
         // Manually toggle to the minutes view
-        $('#check-minutes').click(function(e){
+        $('#check-minutes').click(function (e) {
             // Have to stop propagation here
             e.stopPropagation();
             input.clockpicker('show')
@@ -121,9 +118,6 @@ var terminView = {
             var termin = terminView.readInput();
 
 
-
-
-
             serverController.termin.create(termin);
 
             notifications.showWithTimeout("Hinweis", "Der Termin wurde erfolgreich an den Marktleiter übermittelt");
@@ -147,20 +141,17 @@ var terminView = {
 
         });
 
-        $("#lieferantRepeatTermin").click(function() {
-            if ($('#lieferantRepeatTermin').is(":checked"))
-            {
+        $("#lieferantRepeatTermin").click(function () {
+            if ($('#lieferantRepeatTermin').is(":checked")) {
                 $("#lieferantRepeatTerminChild").show();
             }
-            else
-            {
+            else {
                 $("#lieferantRepeatTerminChild").hide();
             }
         });
 
 
-        $("#lieferantAlldayTermin").click(function ()
-        {
+        $("#lieferantAlldayTermin").click(function () {
 
             if ($("#lieferantAlldayTermin").prop("checked")) {
                 $("#termine_menu .clockpicker").addClass("ui-disabled");

@@ -1,332 +1,347 @@
 ;
 // jQuery toast plugin created by Kamran Ahmed copyright MIT license 2014
 // v0.1
-if ( typeof Object.create !== 'function' ) {
-	Object.create = function( obj ) {
-		function F() {}
-		F.prototype = obj;
-		return new F();
-	};
+if (typeof Object.create !== 'function') {
+    Object.create = function (obj) {
+        function F() {
+        }
+
+        F.prototype = obj;
+        return new F();
+    };
 }
-(function( $, window, document, undefined ) {
+(function ($, window, document, undefined) {
 
-	"use strict";
-	
-	var Toast = {
+    "use strict";
 
-		_positionClasses : ['bottom-left', 'bottom-right', 'top-right', 'top-left', 'bottom-center', 'top-center', 'mid-center'],
+    var Toast = {
 
-		init: function (options, elem) {
-			this.prepareOptions(options, $.toast.options);
-			this.process();
-		},
+        _positionClasses: ['bottom-left', 'bottom-right', 'top-right', 'top-left', 'bottom-center', 'top-center', 'mid-center'],
 
-		prepareOptions: function(options, options_to_extend) {
-			var _options = {};
-			if ( ( typeof options === 'string' ) || ( options instanceof Array ) ) {
-				_options.text = options;
-			} else {
-				_options = options;
-			}
-			this.options = $.extend( {}, options_to_extend, _options );
-		},
+        init: function (options, elem) {
+            this.prepareOptions(options, $.toast.options);
+            this.process();
+        },
 
-		process: function () {
-			this.setup();
-			this.addToDom();
-			this.position();
-			this.bindToast();
-			this.animate();
-		},
+        prepareOptions: function (options, options_to_extend) {
+            var _options = {};
+            if (( typeof options === 'string' ) || ( options instanceof Array )) {
+                _options.text = options;
+            } else {
+                _options = options;
+            }
+            this.options = $.extend({}, options_to_extend, _options);
+        },
 
-		setup: function () {
-			
-			var _toastContent = '';
-			
-			this._toastEl = this._toastEl || $('<div></div>', {
-				class : 'jq-toast-single'
-			});
+        process: function () {
+            this.setup();
+            this.addToDom();
+            this.position();
+            this.bindToast();
+            this.animate();
+        },
 
-			if ( this.options.allowToastClose ) {
-				_toastContent += '<span class="close-jq-toast-single">&times;</span>';
-			};
+        setup: function () {
 
-			if ( this.options.text instanceof Array ) {
+            var _toastContent = '';
 
-				if ( this.options.heading ) {
-					_toastContent +='<h2 class="jq-toast-heading">' + this.options.heading + '</h2>';
-				};
+            this._toastEl = this._toastEl || $('<div></div>', {
+                class: 'jq-toast-single'
+            });
 
-				_toastContent += '<ul class="jq-toast-ul">';
-				for (var i = 0; i < this.options.text.length; i++) {
-					_toastContent += '<li class="jq-toast-li" id="jq-toast-item-' + i + '">' + this.options.text[i] + '</li>';
-				}
-				_toastContent += '</ul>';
+            if (this.options.allowToastClose) {
+                _toastContent += '<span class="close-jq-toast-single">&times;</span>';
+            }
+            ;
 
-			} else {
-				if ( this.options.heading ) {
-					_toastContent +='<h2 class="jq-toast-heading">' + this.options.heading + '</h2>';
-				};
-				_toastContent += this.options.text;
-			}
+            if (this.options.text instanceof Array) {
 
-			this._toastEl.html( _toastContent );
+                if (this.options.heading) {
+                    _toastContent += '<h2 class="jq-toast-heading">' + this.options.heading + '</h2>';
+                }
+                ;
 
+                _toastContent += '<ul class="jq-toast-ul">';
+                for (var i = 0; i < this.options.text.length; i++) {
+                    _toastContent += '<li class="jq-toast-li" id="jq-toast-item-' + i + '">' + this.options.text[i] + '</li>';
+                }
+                _toastContent += '</ul>';
 
+            } else {
+                if (this.options.heading) {
+                    _toastContent += '<h2 class="jq-toast-heading">' + this.options.heading + '</h2>';
+                }
+                ;
+                _toastContent += this.options.text;
+            }
 
-			if ( this.options.bgColor ) {
-				this._toastEl.css("background-color", this.options.bgColor);
-				this._toastEl.css("color", this.options.textColor);
-			};
-
-			if ( this.options.textAlign ) {
-				this._toastEl.css('text-align', this.options.textAlign);
-			}
-		},
-
-		position: function () {
-			if ( ( typeof this.options.position === 'string' ) && ( $.inArray( this.options.position, this._positionClasses) !== -1 ) ) {
-
-				if ( this.options.position === 'bottom-center' ) {
-					this._container.css({
-					    left: ( $(window).outerWidth() / 2 ) - this._container.outerWidth()/2,
-					    bottom: 20
-					});
-				} else if ( this.options.position === 'top-center' ) {
-					this._container.css({
-					    left: ( $(window).outerWidth() / 2 ) - this._container.outerWidth()/2,
-					    top: 20
-					});
-				} else if ( this.options.position === 'mid-center' ) {
-					this._container.css({
-					    left: ( $(window).outerWidth() / 2 ) - this._container.outerWidth()/2,
-					    top: ( $(window).outerHeight() / 2 ) - this._container.outerHeight()/2
-					});
-				} else {
-					this._container.addClass( this.options.position );
-				}
-
-			} else if ( typeof this.options.position === 'object' ) {
-				this._container.css({
-					top : this.options.position.top ? this.options.position.top : 'auto',
-					bottom : this.options.position.bottom ? this.options.position.bottom : 'auto',
-					left : this.options.position.left ? this.options.position.left : 'auto',
-					right : this.options.position.right ? this.options.position.right : 'auto'
-				});
-			} else {
-				this._container.addClass( 'bottom-left' );
-			}
-		},
-
-		bindToast: function () {
-
-			var that = this;
+            this._toastEl.html(_toastContent);
 
 
-			this._toastEl.on( "swipe", function ( e ) {
+            if (this.options.bgColor) {
+                this._toastEl.css("background-color", this.options.bgColor);
+                this._toastEl.css("color", this.options.textColor);
+            }
+            ;
 
-				e.preventDefault();
+            if (this.options.textAlign) {
+                this._toastEl.css('text-align', this.options.textAlign);
+            }
+        },
 
-				if( that.options.showHideTransition === 'fade') {
-					that._toastEl.trigger('beforeHide');
-					that._toastEl.fadeOut(function () {
-						that._toastEl.trigger('afterHidden');
-					});
-				} else if ( that.options.showHideTransition === 'slide' ) {
-					that._toastEl.trigger('beforeHide');
-					that._toastEl.slideUp(function () {
-						that._toastEl.trigger('afterHidden');
-					});
-				} else {
-					that._toastEl.trigger('beforeHide');
-					that._toastEl.hide(function () {
-						that._toastEl.trigger('afterHidden');
-					});
-				}
+        position: function () {
+            if (( typeof this.options.position === 'string' ) && ( $.inArray(this.options.position, this._positionClasses) !== -1 )) {
 
-			});
+                if (this.options.position === 'bottom-center') {
+                    this._container.css({
+                        left: ( $(window).outerWidth() / 2 ) - this._container.outerWidth() / 2,
+                        bottom: 20
+                    });
+                } else if (this.options.position === 'top-center') {
+                    this._container.css({
+                        left: ( $(window).outerWidth() / 2 ) - this._container.outerWidth() / 2,
+                        top: 20
+                    });
+                } else if (this.options.position === 'mid-center') {
+                    this._container.css({
+                        left: ( $(window).outerWidth() / 2 ) - this._container.outerWidth() / 2,
+                        top: ( $(window).outerHeight() / 2 ) - this._container.outerHeight() / 2
+                    });
+                } else {
+                    this._container.addClass(this.options.position);
+                }
 
+            } else if (typeof this.options.position === 'object') {
+                this._container.css({
+                    top: this.options.position.top ? this.options.position.top : 'auto',
+                    bottom: this.options.position.bottom ? this.options.position.bottom : 'auto',
+                    left: this.options.position.left ? this.options.position.left : 'auto',
+                    right: this.options.position.right ? this.options.position.right : 'auto'
+                });
+            } else {
+                this._container.addClass('bottom-left');
+            }
+        },
 
-			this._toastEl.find('.close-jq-toast-single').on('click', function ( e ) {
+        bindToast: function () {
 
-				e.preventDefault();
-
-				if( that.options.showHideTransition === 'fade') {
-					that._toastEl.trigger('beforeHide');
-					that._toastEl.fadeOut(function () {
-						that._toastEl.trigger('afterHidden');
-					});
-				} else if ( that.options.showHideTransition === 'slide' ) {
-					that._toastEl.trigger('beforeHide');
-					that._toastEl.slideUp(function () {
-						that._toastEl.trigger('afterHidden');
-					});
-				} else {
-					that._toastEl.trigger('beforeHide');
-					that._toastEl.hide(function () {
-						that._toastEl.trigger('afterHidden');
-					});
-				}
+            var that = this;
 
 
-			});
+            this._toastEl.on("swipe", function (e) {
 
-			if ( typeof this.options.beforeShow == 'function' ) {
-				this._toastEl.on('beforeShow', function () {
-					that.options.beforeShow();
-				});
-			};
+                e.preventDefault();
 
-			if ( typeof this.options.afterShown == 'function' ) {
-				this._toastEl.on('afterShown', function () {
-					that.options.afterShown();
-				});
-			};
+                if (that.options.showHideTransition === 'fade') {
+                    that._toastEl.trigger('beforeHide');
+                    that._toastEl.fadeOut(function () {
+                        that._toastEl.trigger('afterHidden');
+                    });
+                } else if (that.options.showHideTransition === 'slide') {
+                    that._toastEl.trigger('beforeHide');
+                    that._toastEl.slideUp(function () {
+                        that._toastEl.trigger('afterHidden');
+                    });
+                } else {
+                    that._toastEl.trigger('beforeHide');
+                    that._toastEl.hide(function () {
+                        that._toastEl.trigger('afterHidden');
+                    });
+                }
 
-			if ( typeof this.options.beforeHide == 'function' ) {
-				this._toastEl.on('beforeHide', function () {
-					that.options.beforeHide();
-				});
-			};
+            });
 
-			if ( typeof this.options.afterHidden == 'function' ) {
-				this._toastEl.on('afterHidden', function () {
-					that.options.afterHidden();
-				});
-			};			
-		},
 
-		addToDom: function () {
+            this._toastEl.find('.close-jq-toast-single').on('click', function (e) {
 
-			 var _container = $('.jq-toast-wrap');
-			 
-			 if ( _container.length === 0 ) {
-			 	
-			 	_container = $('<div></div>',{
-			 		class: "jq-toast-wrap"
-			 	});
+                e.preventDefault();
 
-			 	$('body').append( _container );
+                if (that.options.showHideTransition === 'fade') {
+                    that._toastEl.trigger('beforeHide');
+                    that._toastEl.fadeOut(function () {
+                        that._toastEl.trigger('afterHidden');
+                    });
+                } else if (that.options.showHideTransition === 'slide') {
+                    that._toastEl.trigger('beforeHide');
+                    that._toastEl.slideUp(function () {
+                        that._toastEl.trigger('afterHidden');
+                    });
+                } else {
+                    that._toastEl.trigger('beforeHide');
+                    that._toastEl.hide(function () {
+                        that._toastEl.trigger('afterHidden');
+                    });
+                }
 
-			 } else if ( !this.options.stack || isNaN( parseInt(this.options.stack, 10) ) ) {
-			 	_container.empty();
-			 }
 
-			 _container.find('.jq-toast-single:hidden').remove();
+            });
 
-			 _container.append( this._toastEl );
+            if (typeof this.options.beforeShow == 'function') {
+                this._toastEl.on('beforeShow', function () {
+                    that.options.beforeShow();
+                });
+            }
+            ;
 
-		  	if ( this.options.stack && !isNaN( parseInt( this.options.stack ), 10 ) ) {
-		 	 	
-		 	 	var _prevToastCount = _container.find('.jq-toast-single').length,
-		 	 		_extToastCount = _prevToastCount - this.options.stack;
+            if (typeof this.options.afterShown == 'function') {
+                this._toastEl.on('afterShown', function () {
+                    that.options.afterShown();
+                });
+            }
+            ;
 
-		 	 	if ( _extToastCount > 0 ) {
-		  			$('.jq-toast-wrap').find('.jq-toast-single').slice(0, _extToastCount).remove();
-		 	 	};
+            if (typeof this.options.beforeHide == 'function') {
+                this._toastEl.on('beforeHide', function () {
+                    that.options.beforeHide();
+                });
+            }
+            ;
 
-		  	}
+            if (typeof this.options.afterHidden == 'function') {
+                this._toastEl.on('afterHidden', function () {
+                    that.options.afterHidden();
+                });
+            }
+            ;
+        },
 
-		  	this._container = _container;
-		},
+        addToDom: function () {
 
-		animate: function () {
+            var _container = $('.jq-toast-wrap');
 
-			var that = this;
+            if (_container.length === 0) {
 
-			this._toastEl.hide();
+                _container = $('<div></div>', {
+                    class: "jq-toast-wrap"
+                });
 
-			this._toastEl.trigger('beforeShow');
+                $('body').append(_container);
 
-			if ( this.options.showHideTransition.toLowerCase() === 'fade' ) {
-				this._toastEl.fadeIn(function ( ){
-					that._toastEl.trigger('afterShown');
-				});
-			} else if ( this.options.showHideTransition.toLowerCase() === 'slide' ) {
-				this._toastEl.slideDown(function ( ){
-					that._toastEl.trigger('afterShown');
-				});
-			} else {
-				this._toastEl.show(function ( ){
-					that._toastEl.trigger('afterShown');
-				});
-			}
+            } else if (!this.options.stack || isNaN(parseInt(this.options.stack, 10))) {
+                _container.empty();
+            }
 
-			if ( ( this.options.hideAfter !== false ) && !isNaN( parseInt( this.options.hideAfter, 10 ) ) ) {
+            _container.find('.jq-toast-single:hidden').remove();
 
-				var that = this;
+            _container.append(this._toastEl);
 
-				window.setTimeout(function(){
-					
-					if ( that.options.showHideTransition.toLowerCase() === 'fade' ) {
-						that._toastEl.trigger('beforeHide');
-						that._toastEl.fadeOut(function () {
-							that._toastEl.trigger('afterHidden');
-						});
-					} else if ( that.options.showHideTransition.toLowerCase() === 'slide' ) {
-						that._toastEl.trigger('beforeHide');
-						that._toastEl.slideUp(function () {
-							that._toastEl.trigger('afterHidden');
-						});
-					} else {
-						that._toastEl.trigger('beforeHide');
-						that._toastEl.hide(function () {
-							that._toastEl.trigger('afterHidden');
-						});
-					}
+            if (this.options.stack && !isNaN(parseInt(this.options.stack), 10)) {
 
-				}, this.options.hideAfter);
-			};
-		},
+                var _prevToastCount = _container.find('.jq-toast-single').length,
+                    _extToastCount = _prevToastCount - this.options.stack;
 
-		reset: function ( resetWhat ) {
+                if (_extToastCount > 0) {
+                    $('.jq-toast-wrap').find('.jq-toast-single').slice(0, _extToastCount).remove();
+                }
+                ;
 
-			if ( resetWhat === 'all' ) {
-				$('.jq-toast-wrap').remove();
-			} else {
-				this._toastEl.remove();
-			}
+            }
 
-		},
+            this._container = _container;
+        },
 
-		update: function(options) {
-			this.prepareOptions(options, this.options);
-			this.setup();
-			this.bindToast();
-		}
-	};
-	
-	$.toast = function(options) {
-		var toast = Object.create(Toast);
-		toast.init(options, this);
+        animate: function () {
 
-		return {
-			
-			reset: function ( what ) {
-				toast.reset( what );
-			},
+            var that = this;
 
-			update: function( options ) {
-				toast.update( options );
-			}
-		}
-	};
+            this._toastEl.hide();
 
-	$.toast.options = {
-		text: '',
-		heading: '',
-		showHideTransition: 'fade',
-		allowToastClose: true,
-		hideAfter: 5000,
-		stack: 5,
-		position: 'bottom-left',
-		bgColor: '#444',
-		textColor: '#eee',
-		textAlign: 'left',
-		beforeShow: function () {},
-		afterShown: function () {},
-		beforeHide: function () {},
-		afterHidden: function () {}
-	};
+            this._toastEl.trigger('beforeShow');
 
-})( jQuery, window, document );
+            if (this.options.showHideTransition.toLowerCase() === 'fade') {
+                this._toastEl.fadeIn(function () {
+                    that._toastEl.trigger('afterShown');
+                });
+            } else if (this.options.showHideTransition.toLowerCase() === 'slide') {
+                this._toastEl.slideDown(function () {
+                    that._toastEl.trigger('afterShown');
+                });
+            } else {
+                this._toastEl.show(function () {
+                    that._toastEl.trigger('afterShown');
+                });
+            }
+
+            if (( this.options.hideAfter !== false ) && !isNaN(parseInt(this.options.hideAfter, 10))) {
+
+                var that = this;
+
+                window.setTimeout(function () {
+
+                    if (that.options.showHideTransition.toLowerCase() === 'fade') {
+                        that._toastEl.trigger('beforeHide');
+                        that._toastEl.fadeOut(function () {
+                            that._toastEl.trigger('afterHidden');
+                        });
+                    } else if (that.options.showHideTransition.toLowerCase() === 'slide') {
+                        that._toastEl.trigger('beforeHide');
+                        that._toastEl.slideUp(function () {
+                            that._toastEl.trigger('afterHidden');
+                        });
+                    } else {
+                        that._toastEl.trigger('beforeHide');
+                        that._toastEl.hide(function () {
+                            that._toastEl.trigger('afterHidden');
+                        });
+                    }
+
+                }, this.options.hideAfter);
+            }
+            ;
+        },
+
+        reset: function (resetWhat) {
+
+            if (resetWhat === 'all') {
+                $('.jq-toast-wrap').remove();
+            } else {
+                this._toastEl.remove();
+            }
+
+        },
+
+        update: function (options) {
+            this.prepareOptions(options, this.options);
+            this.setup();
+            this.bindToast();
+        }
+    };
+
+    $.toast = function (options) {
+        var toast = Object.create(Toast);
+        toast.init(options, this);
+
+        return {
+
+            reset: function (what) {
+                toast.reset(what);
+            },
+
+            update: function (options) {
+                toast.update(options);
+            }
+        }
+    };
+
+    $.toast.options = {
+        text: '',
+        heading: '',
+        showHideTransition: 'fade',
+        allowToastClose: true,
+        hideAfter: 5000,
+        stack: 5,
+        position: 'bottom-left',
+        bgColor: '#444',
+        textColor: '#eee',
+        textAlign: 'left',
+        beforeShow: function () {
+        },
+        afterShown: function () {
+        },
+        beforeHide: function () {
+        },
+        afterHidden: function () {
+        }
+    };
+
+})(jQuery, window, document);

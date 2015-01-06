@@ -1,21 +1,13 @@
-/**
- * configView
- *
- *
- * @author
- * @date 11.12.14 - 17:39
- * @copyright
- */
 
 
 var contactController = {
 
     lieferant: null,
 
-    set: function(id,l) {
+    set: function (id, l) {
         this.lieferant = l;
-        if (this.lieferant == null){
-            if(id == localStorage.lieferanten_id) {
+        if (this.lieferant == null) {
+            if (id == localStorage.lieferanten_id) {
                 $("#vorname").val(localStorage.vorname);
                 $("#familienname").val(localStorage.name);
                 $("#firma").val(localStorage.firma);
@@ -34,9 +26,9 @@ var contactController = {
     },
 
 
-    store:  function() {
-        if(this.lieferant!=undefined) {
-            if(this.lieferant!=null) {
+    store: function () {
+        if (this.lieferant != undefined) {
+            if (this.lieferant != null) {
                 this.lieferant.vorname = $("#vorname").val();
                 this.lieferant.name = $("#familienname").val();
                 this.lieferant.firma = $("#firma").val();

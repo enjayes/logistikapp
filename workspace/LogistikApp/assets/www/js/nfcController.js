@@ -5,16 +5,16 @@
 
 
 var nfcController = {
-    init:function(){
+    init: function () {
 
-        $( "#popupWriteNFC" ).bind({
-            popupafterclose: function(event, ui) {
+        $("#popupWriteNFC").bind({
+            popupafterclose: function (event, ui) {
                 nfcController.stopWriteListener();
             }
         });
 
         localStorage.writeTag = "false";
-        if(misc.isMobileApp()) {
+        if (misc.isMobileApp()) {
             nfc.addNdefListener(
                 function (nfcEvent) {
                     // display the tag as JSON
@@ -61,10 +61,10 @@ var nfcController = {
             );
         }
     },
-    startWriteListener: function(){
+    startWriteListener: function () {
         localStorage.writeTag = "true";
     },
-    stopWriteListener: function(){
+    stopWriteListener: function () {
         localStorage.writeTag = "false";
     }
 }

@@ -1,13 +1,8 @@
-/**
- * Created by Norbert on 03.01.2015.
- */
-
-
 
 var qrCodeController = {
 
-    scan:function(){
-        if(misc.isMobileApp()) {
+    scan: function () {
+        if (misc.isMobileApp()) {
             cordova.plugins.barcodeScanner.scan(
                 function (result) {
                     loginController.loginQR(result.text);
@@ -19,7 +14,7 @@ var qrCodeController = {
                 }
             );
         }
-        else{
+        else {
             $.mobile.loading('hide')
         }
     }

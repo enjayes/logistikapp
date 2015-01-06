@@ -1,51 +1,38 @@
-/**
- * misc.
- *
-
- *
- *
- *
- * @date 20.11.14 - 15:29
- * @copyright
- */
-
-
 
 misc = {
-    getUniqueID:function(){
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+    getUniqueID: function () {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
     },
 
 
-    isMobileApp: function() {
-        if(window.location.hash != "#android"){
+    isMobileApp: function () {
+        if (window.location.hash != "#android") {
             return false;
         }
-        else
-        {
+        else {
             return true;
         }
     },
 
-    call: function(number) {
+    call: function (number) {
         if (this.isMobileApp()) {
             window.open('skype:' + number + '?call', '_system')
         }
-        else{
-            windowOpen('skype:' + number + '?call','_blank');
+        else {
+            windowOpen('skype:' + number + '?call', '_blank');
         }
     },
 
 
-    openLink: function(url) {
+    openLink: function (url) {
         if (this.isMobileApp()) {
             window.open(url, '_system')
         }
-        else{
-            windowOpen(url,'_blank');
+        else {
+            windowOpen(url, '_blank');
         }
     }
 }
