@@ -49,7 +49,8 @@ var configView = {
 
             //Set Markt title
             $("#marktname_title").text(logistikapp.markt_id);
-            alert("SAVE!");
+
+            notifications.showWithTimeout("Gespeichert!");
 
 
         });
@@ -98,6 +99,7 @@ var configView = {
         $("#open_admin").click(function()
         {
             url = "http://" + localStorage.servername + ":" + localStorage.server_port;
+            alert(url);
             misc.openLink(url);
 
         });
