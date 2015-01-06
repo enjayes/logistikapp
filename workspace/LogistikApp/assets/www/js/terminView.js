@@ -47,8 +47,9 @@ var terminView = {
 
         console.log(termin.start)
 
-        termin.alarm = 0;
+        termin.start = $("#eventDate").datepicker('getDate');//TODO
 
+        termin.alarm = 0;
 
         if ($('#lieferantRepeatTermin').is(":checked")) {
             termin.repeatDays = $("#lieferantRepeatTerminInput").val();
@@ -56,8 +57,6 @@ var terminView = {
         else{
             //TODO: nothing??
         }
-
-
 
         termin.title = $("#termintitel").val();
         termin.notizen = $("#terminnotizen").val();
@@ -135,6 +134,8 @@ var terminView = {
 
 
         $("#b_termin_abbrechen").click(function () {
+
+            notifications.showWithTimeout("Hinweis", "Der Termin wurde <p style='color:#ff2723'>nicht</p> gespeichert!");
 
             $("#terminEintragen").hide();
             $("#termine_menu").show();

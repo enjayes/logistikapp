@@ -90,13 +90,10 @@ button {
 }
 
 
-
-
 .greenbutton{
     background-color:rgb(0, 113, 23)!important;
     text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #008814 /*{a-bup-shadow-color}*/!important;
     color: #fff!important;
-
 }
 
 
@@ -106,6 +103,52 @@ button {
 
 }
 .greenbutton:active{
+    background-color:rgb(0, 93, 3)!important;;
+
+}
+
+
+.standardbutton{
+    border-radius:  15px!important;
+}
+
+
+
+
+
+
+.colorbutton{
+    background-color:rgb(0, 113, 23)!important;
+    text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #008814 /*{a-bup-shadow-color}*/!important;
+    color: #fff!important;
+    border-radius:  33px!important;
+}
+
+
+
+.colorbutton:hover{
+    background-color:rgb(0, 113, 23)!important;;
+
+}
+.colorbutton:active{
+    background-color:rgb(0, 93, 3)!important;;
+
+}
+
+.colorbutton2{
+    background-color:rgb(0, 113, 23)!important;
+    text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #008814 /*{a-bup-shadow-color}*/!important;
+    color: #fff!important;
+    border-radius:  15px!important;
+}
+
+
+
+.colorbutton2:hover{
+    background-color:rgb(0, 113, 23)!important;;
+
+}
+.colorbutton2:active{
     background-color:rgb(0, 93, 3)!important;;
 
 }

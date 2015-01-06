@@ -69,7 +69,7 @@
 
     <div class="app">
         <!--width:460px;-->
-        <div class="divbackground" style="width:400px; height:100%;border:inset; background-color:#ffffff;opacity:0.9999;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
+        <div class="divbackground" style="width:400px; height:100%;border:nonce; background-color:#ffffff;opacity:1;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
             <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
             <img id="banner" height="60px" src="img/bannerlogo.png">
             <br>
@@ -100,20 +100,20 @@
 
                 <br>
                 <h3>Anmelden:</h3> <!-- ui-icon-user-->
-                <a id="start_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-grid ui-btn-icon-left"><br>PIN eingeben<br><br></a>
+                <a id="start_anmelden"  class="colorbutton ui-btn ui-shadow ui-corner-all ui-icon-grid ui-btn-icon-left"><br>PIN eingeben<br><br></a>
 
-                <a id="start_qr_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-camera ui-btn-icon-left"><br>Code scannen<br><br></a>
+                <a id="start_qr_code_anmelden"  class="colorbutton ui-btn ui-shadow ui-corner-all ui-icon-camera ui-btn-icon-left"><br>Code scannen<br><br></a>
 
-                <a id="start_nfc_code_anmelden"  class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-action ui-btn-icon-left"><br>Chipkarte<br><br></a>
+                <a id="start_nfc_code_anmelden"  class="colorbutton ui-btn ui-shadow ui-corner-all ui-icon-action ui-btn-icon-left"><br>Chipkarte<br><br></a>
                 <br>
                 <br>
-                <a id="b_konfig" class="ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
-                <br>
-
-                <br>
+                <a id="b_konfig" class="standardbutton ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
                 <br>
 
-                <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="ui-btn ui-shadow ui-corner-all">Job</a>
+                <br>
+                <br>
+
+                <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="standardbutton ui-btn ui-shadow ui-corner-all">Job</a>
 
                 <br>
                 <br>
@@ -125,7 +125,7 @@
                 <h3>Bitte PIN eingeben... TODO RMV 1234</h3>
                 <div id="PINcodeConfig" data-enhance="false"></div>
                 <br>
-                <a id="konfi_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                <a id="konfi_zurueck_start" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
                 <br>
             </div>
 
@@ -169,7 +169,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a id="open_admin" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
+                                <a id="open_admin" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
                             </td>
                         </tr>
                     </table>
@@ -177,8 +177,8 @@
 
 
                 <br>
-                <a id="save_config" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
-                <a id="config_zurueck" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                <a id="save_config" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
+                <a id="config_zurueck" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
 
             </div>
@@ -190,7 +190,7 @@
 
                 <div id="PINcode" data-enhance="false"></div>
                 <br>
-                <a id="login_zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                <a id="login_zurueck_start" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
                 <br>
             </div>
 
@@ -250,15 +250,15 @@
                     </table>
                 </form>
 
-                <a id="b_kalender"  style="width:100px;height:15px;float:right;margin-left:10px;" class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
-                <a id="b_write_nfc"  style="width:50px;height:15px;float:left; " class="ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Karte</a>
+                <a id="b_kalender"  style="width:100px;height:15px;float:right;margin-left:10px;" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
+                <a id="b_write_nfc"  style="width:50px;height:15px;float:left; " class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Karte</a>
 
                 <br>
                 <br>
                 <br>
-                <a id="weiter_waitForLogin" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-                <a id="weiter_jobSelector" class="ui-btn ui-shadow ui-corner-all ui-icon-forward ui-btn-icon-left">Besucherschein</a>
-                <a id="zurueck_start" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                <a id="weiter_waitForLogin" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+                <a id="weiter_jobSelector" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-forward ui-btn-icon-left">Besucherschein</a>
+                <a id="zurueck_start" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
             </div>
 
 
@@ -268,32 +268,32 @@
                 <br>
                 <form>
                     <label>
-                        <input name="checkbox-0 " type="checkbox" id="fixtermin">Fixtermin
+                        <input name="checkbox-0 " type="checkbox" id="fixtermin" class="standardbutton" >Fixtermin
                     </label>
                     <br>
 
                     <label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_besuch">Besuch
+                        <input name="checkbox-0 " type="checkbox" id="cb_besuch" class="standardbutton">Besuch
                     </label>
                     <label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_bestellung">Bestellung
+                        <input name="checkbox-0 " type="checkbox" id="cb_bestellung" class="standardbutton">Bestellung
                     </label>
                     <label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_verraeumung">Verräumung
+                        <input name="checkbox-0 " type="checkbox" id="cb_verraeumung" class="standardbutton">Verräumung
                     </label>
                     <label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_austausch">Austausch von Bruch und Verderb
+                        <input name="checkbox-0 " type="checkbox" id="cb_austausch" class="standardbutton">Austausch von Bruch und Verderb
                     </label>
 
 
                 </form>
                 <br>
-                <a id="b_vorlagen"  onClick='$( "#popupVorlagen" ).popup("open") ;' class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left">Gespeicherte Vorlagen</a>
+                <a id="b_vorlagen"  onClick='$( "#popupVorlagen" ).popup("open") ;' class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left">Gespeicherte Vorlagen</a>
 
                 <br>
 
-                <a id="weiter_Aufgaben" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-                <a id="job_zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Abmelden</a>
+                <a id="weiter_Aufgaben" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+                <a id="job_zurueck_kontakt" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Abmelden</a>
 
             </div>
 
@@ -330,8 +330,8 @@
                     <td><textarea id="gespraechspartner"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea> </td>
                 </tr>
                 <br>
-                <a id="weiter_lieferantenschein1" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-                <a id="zurueck_lieferantenschein1" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                <a id="weiter_lieferantenschein1" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+                <a id="zurueck_lieferantenschein1" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
             </div>
 
@@ -410,8 +410,8 @@
                     </table>
                     </div>
                 <br>
-                <a id="weiter_lieferantenschein2" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-                <a id="zurueck_lieferantenschein2" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Zurück</a>
+                <a id="weiter_lieferantenschein2" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
+                <a id="zurueck_lieferantenschein2" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Zurück</a>
             </div>
 
 
@@ -430,10 +430,10 @@
                     <li>Termin 3b</li>
                 </ul>
                 <br>
-                <a id="cb_neuer_termin"  class="ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Termin anlegen</a>
+                <a id="cb_neuer_termin"  class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Termin anlegen</a>
                 <br>
 
-                <a id="zurueck_kontakt" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                <a id="zurueck_kontakt" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
             </div>
 
             <div id="terminEintragen" data-dismissible="false" data-theme="a" class="ui-corner-all" style="display:none">
@@ -486,7 +486,7 @@
 
                     <div class="bottombuttons saved">
                         <a id="b_terminabsenden"
-                           class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Absenden
+                           class="standardbutton  ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Absenden
                         </a>
                     </div>
                     <a id="b_termin_abbrechen"
@@ -501,7 +501,7 @@
                 <h4>Notizen</h4>
                 <td><textarea id="t_notizen" rows="1" cols="50"></textarea></td>
                 <br>
-                <a id="vorlage_logout" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">als Vorlage speichern...</a>
+                <a id="vorlage_logout" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">als Vorlage speichern...</a>
 
 
                 <div id="vorlage_benennen" class="fadein"  style="display:none">
@@ -511,12 +511,12 @@
 
                     <div id="vorlage_leer" style="display:none"><font color="red">Vorlagename darf nicht leer sein.</font></div>
 
-                    <a id="speichern_vorlage" class="ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Speichern</a>
+                    <a id="speichern_vorlage" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Speichern</a>
                 </div>
 
                 <br>
-                <a id="checkout_logout" class="greenbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left"><br>Checkout<br><br></a>
-                <a id="zurueck_logout" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
+                <a id="checkout_logout" class="colorbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left"><br>Checkout<br><br></a>
+                <a id="zurueck_logout" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
 
             </div>
 
@@ -524,7 +524,7 @@
                 <br>
 
 
-                <a id="waitgoodbye_button" class="ui-btn ui-shadow ui-corner-all">
+                <a id="waitgoodbye_button" class="standardbutton ui-btn ui-shadow ui-corner-all">
                     <br>
                     <br>
                     <br>
@@ -561,7 +561,7 @@
                 <br>
 
 
-                <a id="goodbye_button" class="ui-btn ui-shadow ui-corner-all">
+                <a id="goodbye_button" class="standardbutton ui-btn ui-shadow ui-corner-all">
                     <br>
                     <br>
                     <br>
