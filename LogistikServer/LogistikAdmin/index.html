@@ -434,7 +434,9 @@
         </div>
         <label id="terminnotizenLabel" for="terminnotizen" class="">Notizen:</label>
         <textarea id="terminnotizen" rows="7"></textarea>
-
+        <a id="zeigeauftragvonterminbutton" onclick="termineController.showJobInNewWindow(termineController.aktuellesEvent.jobId);"
+           class=" ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-edit">Auftrag anzeigen
+        </a>
         <div class="bottombuttons saved">
             <a id="speichereaktuelleseventbutton" onclick="termineController.speichereAktuellesEvent();" class="greenbutton ui-btn ui-corner-all ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check"
                style="display:none">Speichern

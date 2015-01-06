@@ -176,7 +176,7 @@ serverController = {
         buildDTO: function (termin) {
             var newTermin = {
                 id: termin.id,
-                Title: termin.title,
+                Title: termin.title.replace("✔ ","").replace("✘ ",""),
                 Start: termin.start.format(),
                 StartMilli: termin.start.toDate().getTime(),
                 AllDay: termin.allDay,

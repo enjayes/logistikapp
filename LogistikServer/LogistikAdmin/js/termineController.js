@@ -161,6 +161,13 @@ termineController = {
 
                     termineController.events[i].color = "#" + str;
                     termineController.events[i].textColor = "#" + misc.invertRGB(str);
+
+                    if (termineController.events[i].jobId)
+                        termineController.events[i].title = "✔ " + termineController.events[i].title;
+                    else if (termineController.events[i].alarm == 1)
+                        termineController.events[i].title = "✘ " + termineController.events[i].title;
+
+
                 }
 
 
@@ -220,9 +227,13 @@ termineController = {
 
         }
 
-        $("#termintitel").val(calenderEvent.title);
+        $("#termintitel").val(calenderEvent.title.replace("✔ ", "").replace("✘ ", ""));
 
-        console.dir(termineController.aktuellesEvent)
+        if(termineController.aktuellesEvent.jobId)
+         $("#zeigeauftragvonterminbutton").show();
+        else
+         $("#zeigeauftragvonterminbutton").hide();
+
 
         termineTab.terminMarktSelectionWidget.selectedSingleItem(termineController.aktuellesEvent.marktId || uebersichtController.defaultMarktId);
 
@@ -439,6 +450,12 @@ termineController = {
             //Eintragen
             termineController.aktuellesEvent.title = $("#termintitel").val();
 
+            if (termineController.aktuellesEvent.jobId)
+                termineController.aktuellesEvent.title = "✔ " + termineController.aktuellesEvent.title;
+            else if (termineController.aktuellesEvent.alarm == 1)
+                termineController.aktuellesEvent.title = "✘ " + termineController.aktuellesEvent.title;
+
+
             termineController.aktuellesEvent.marktId = markt[0].id;
 
             termineController.aktuellesEvent.notizen = $("#terminnotizen").val();
@@ -586,12 +603,21 @@ termineController = {
         return null;
 
     },
+    showJobInNewWindow: function (jobId) {
+        var url = location.protocol + "//" + location.host + "#job=" + jobId;
+        var win = window.open(url, '_blank');
+        win.focus();
+    },
+
     showJob: function (jobId) {
+
         uiController.showLieferschein = true;
         $("#tabs .ui-tabs-panel").hide();
         $("#tabs .ui-navbar").css("pointer-events", "none");
         $("#mainbackground").css("top", "94px");
         $("#besucherschein").show();
+
+        $("#tabs").css("opacity","0");
 
         $("#page").addClass("besucherschein");
         serverController.job.get(jobId, function (job) {
@@ -623,7 +649,7 @@ termineController = {
                             console.log(job)
                             console.log(lieferant)
 
-                           // $("#besucherscheinContent").html("TODO: format job<br> termineController.showJob()<br><br><br><br><br><br>" + JSON.stringify(job))
+                            // $("#besucherscheinContent").html("TODO: format job<br> termineController.showJob()<br><br><br><br><br><br>" + JSON.stringify(job))
                             $("#besucherscheinMarkt").html(job.markt_id);
                             $("#besucherscheinFirma").html(lieferant.firma);
 
@@ -639,20 +665,19 @@ termineController = {
                             $("#besucherscheinGespraechspartner").html(job.gespraechspartner);
 
 
-
-                            job.cb_auftrag_getaetigt?$("#besucherscheinAuftraggetaetigt").html("X"):{};
-                            job.cb_aktionsabsprache?$("#besucherscheinAktionsabsprache").html("X"):{};
-                            job.cb_bemusterung?$("#besucherscheinBemusterung").html("X"):{};
-                            job.cb_info_gespraech?$("#besucherscheinInfoGespraech").html("X"):{};
-                            job.cb_mhd?$("#besucherscheinMHD").html("X"):{};
-                            job.cb_nr_abgabe?$("#besucherscheinNrAbgabe").html("X"):{};
-                            job.cb_reklamation?$("#besucherscheinRelamationsbearbeitung").html("X"):{};
-                            job.cb_ruecknahme?$("#besucherscheinRuecknahme").html("X"):{};
-                            job.cb_sortimentsinfo?$("#besucherscheinSortimentsinfo").html("X"):{};
-                            job.cb_umbau?$("#besucherscheinUmbau").html("X"):{};
-                            job.cb_verkostung?$("#besucherscheinVerkostung").html("X"):{};
-                            job.cb_verlosung?$("#besucherscheinVerlosung").html("X"):{};
-                            job.cb_warenaufbau?$("#besucherscheinWarenaufbau").html("X"):{};
+                            job.cb_auftrag_getaetigt ? $("#besucherscheinAuftraggetaetigt").html("X") : {};
+                            job.cb_aktionsabsprache ? $("#besucherscheinAktionsabsprache").html("X") : {};
+                            job.cb_bemusterung ? $("#besucherscheinBemusterung").html("X") : {};
+                            job.cb_info_gespraech ? $("#besucherscheinInfoGespraech").html("X") : {};
+                            job.cb_mhd ? $("#besucherscheinMHD").html("X") : {};
+                            job.cb_nr_abgabe ? $("#besucherscheinNrAbgabe").html("X") : {};
+                            job.cb_reklamation ? $("#besucherscheinRelamationsbearbeitung").html("X") : {};
+                            job.cb_ruecknahme ? $("#besucherscheinRuecknahme").html("X") : {};
+                            job.cb_sortimentsinfo ? $("#besucherscheinSortimentsinfo").html("X") : {};
+                            job.cb_umbau ? $("#besucherscheinUmbau").html("X") : {};
+                            job.cb_verkostung ? $("#besucherscheinVerkostung").html("X") : {};
+                            job.cb_verlosung ? $("#besucherscheinVerlosung").html("X") : {};
+                            job.cb_warenaufbau ? $("#besucherscheinWarenaufbau").html("X") : {};
 
                             $("#besucherscheinNotizen").html(job.t_notizen);
 

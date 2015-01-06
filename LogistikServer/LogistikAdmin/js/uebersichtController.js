@@ -38,9 +38,7 @@ uebersichtController = {
             "createdRow": function (row, data, dataIndex) {
                 $(row).css("cursor", "pointer").click(function () {
                     if (data[0]) {
-                        var url = location.protocol + "//" + location.host + "#job=" + data[0];
-                        var win = window.open(url, '_blank');
-                        win.focus();
+                      termineController.showJobInNewWindow(data[0]);
 
                     }
                 })
