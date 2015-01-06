@@ -113,9 +113,9 @@
                 <br>
                 <br>
 
-                <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="standardbutton ui-btn ui-shadow ui-corner-all">Job</a>
+                <!--<a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="standardbutton ui-btn ui-shadow ui-corner-all">Job</a>
 
-                <br>
+                <br>-->
                 <br>
 
             </div>
@@ -167,12 +167,23 @@
                                 <textarea id="t_port"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
+
                         <tr>
                             <td>
-                                <a id="open_admin" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
+                                <label>
+                                    Passwort
+                                </label></td>
+                            <td>
+                                <textarea type = "password" id="t_port"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
                     </table>
+                    <br>
+
+                    <a id="b_write_nfc" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Lieferantenausweis beschreiben</a>
+                    <br>
+                    <a id="open_admin" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
+
                 </form>
 
 
@@ -251,7 +262,6 @@
                 </form>
 
                 <a id="b_kalender"  style="width:100px;height:15px;float:right;margin-left:10px;" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
-                <a id="b_write_nfc"  style="width:50px;height:15px;float:left; " class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Karte</a>
 
                 <br>
                 <br>
