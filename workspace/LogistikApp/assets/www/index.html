@@ -113,9 +113,9 @@
                 <br>
                 <br>
 
-                <!--<a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="standardbutton ui-btn ui-shadow ui-corner-all">Job</a>
+                <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="standardbutton ui-btn ui-shadow ui-corner-all">Job</a>
 
-                <br>-->
+                <br>
                 <br>
 
             </div>
@@ -359,7 +359,7 @@
                                     <input  name="checkbox-0 " type="checkbox" id="cb_auftrag_getaetigt">Auftrag getätigt
                                 </label></td>
 
-                            <td><label style="width:54%">
+                            <td><label style="width:54%;">
                                 <input name="checkbox-0 " type="checkbox" id="cb_mhd">MHD-Kontrolle
                             </label></td>
                         </tr>
@@ -384,13 +384,11 @@
                             <td><label>
                                 <input name="checkbox-0 " type="checkbox" id="cb_info_gespraech">Info-Gespräch
                             </label></td>
-                            <td><label style="width:54%">
-                                <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
-                            </label>
-                                <div style="width:77.5%">
-                                <textarea id="t_vk_euro_abgabe"  placeholder="Wert in Euro"  rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                                <textarea id="t_warengruppe" placeholder="Warengruppe" rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                                </div>
+                            <td>
+                                <label style="width:54%">
+                                    <input name="checkbox-0 " type="checkbox" id="cb_verlosung">Verlosung
+                                </label>
+                            </td>
                         </tr>
                         <td><label>
                             <input name="checkbox-0 " type="checkbox" id="cb_verkostung">Verkostung
@@ -409,10 +407,20 @@
                         </tr>
 
                         <tr>
+
                             <td>
+                                <br>
                                 <label>
-                                    <input name="checkbox-0 " type="checkbox" id="cb_verlosung">Verlosung
+                                    <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
                                 </label>
+                            </td>
+                            <td>
+                                <br>
+                                <div style="width:77.5%">
+                                    <textarea id="t_vk_euro_abgabe"  placeholder="Wert in Euro"  rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                                    <textarea id="t_warengruppe" placeholder="Warengruppe" rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                                </div>
+
                             </td>
 
 
