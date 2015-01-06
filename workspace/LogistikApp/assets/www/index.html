@@ -69,7 +69,7 @@
 
     <div class="app">
         <!--width:460px;-->
-        <div class="divbackground" style="width:400px; height:100%;border:nonce; background-color:#ffffff;opacity:1;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
+        <div class="divbackground" style="width:400px; height:100%;border:none; background-color:#ffffff;opacity:1;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
             <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
             <img id="banner" height="60px" src="img/bannerlogo.png">
             <br>
@@ -174,7 +174,7 @@
                                     Passwort
                                 </label></td>
                             <td>
-                                <textarea type = "password" id="t_port"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                                <textarea type = "password" id="t_password"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
                     </table>
@@ -516,6 +516,7 @@
 
 
             <div id="logout" style="display:none">
+                <h2 class="greetingLieferant"></h2>
                 <h4>Notizen</h4>
                 <td><textarea id="t_notizen" rows="1" cols="50"></textarea></td>
                 <br>
@@ -602,8 +603,7 @@
                 </a>
 
                 <br>
-
-
+                
 
                 <br>
             </div>
@@ -688,7 +688,6 @@
 
 <script type="text/javascript" src="js/logistikapp.js"></script>
 
-
 <script type="text/javascript" src="js/configView.js"></script>
 <script type="text/javascript" src="js/contactController.js"></script>
 <script type="text/javascript" src="js/templateController.js"></script>
@@ -705,7 +704,6 @@
 
 
 
-
 <!--Imported libraries ------------------------------------------------->
 <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 <script>
@@ -718,11 +716,13 @@
     });
 
 
+    /*
     $( "#eventDate" ).setDefaults({
             showOn: "both",
             buttonImageOnly: true,
             buttonText: "Calendar"
     });
+    */
 
 
 </script>

@@ -68,7 +68,6 @@ var logistikapp = {
         });
 
         //Initialize Views
-        startView.initialize();
         configView.initialize();
         loginView.initialize();
         clientView.initialize();
