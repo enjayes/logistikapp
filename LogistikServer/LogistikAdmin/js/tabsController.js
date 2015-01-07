@@ -28,6 +28,7 @@ tabsController = {
         //Save Action
         $( "#tabs" ).on( "tabsbeforeactivate", function( event, ui ) {
 
+
             if(tabsController.tab()==lieferantenTab&&!lieferantenController.aktuellerLieferantGespeichert){
 
                 console.dir(event)
@@ -35,8 +36,9 @@ tabsController = {
                     lieferantenController.checkSaved(function(){
                         lieferantenController.zeigeAktuellenLieferanten();
                         setTimeout(function(){
+                            console.dir(ui.newTab)
                             $(ui.newTab.context).click();
-                        },150)
+                        },500)
 
                     })
                 },0)

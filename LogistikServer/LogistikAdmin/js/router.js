@@ -47,7 +47,11 @@ Router = {
 
 
                 };
-                if (tabsController.tabs[tab] == lieferantenTab) {
+
+                console.log("!!!!!")
+                console.log(tabsController.tabs[tabsController.aktuellerTab] == lieferantenTab)
+
+                if (tabsController.tabs[tabsController.aktuellerTab] == lieferantenTab) {
                     setTimeout(function () {
                         var changeActTab = function (destTab) {
                             lieferantenController.checkSaved(function () {

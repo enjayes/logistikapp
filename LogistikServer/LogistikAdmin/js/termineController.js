@@ -231,9 +231,9 @@ termineController = {
         $("#termintitel").val(calenderEvent.title.replace("✔ ", "").replace("✘ ", ""));
 
         if(termineController.aktuellesEvent.jobId)
-         $("#zeigeauftragvonterminbutton").show();
+         $("#zeigeauftragvonterminbutton").removeClass("ui-disabled");
         else
-         $("#zeigeauftragvonterminbutton").hide();
+         $("#zeigeauftragvonterminbutton").addClass("ui-disabled");
 
 
         termineTab.terminMarktSelectionWidget.selectedSingleItem(termineController.aktuellesEvent.marktId || uebersichtController.defaultMarktId);
