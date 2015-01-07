@@ -1,3 +1,5 @@
+
+//hält die Daten zu einem Termin
 var Termin = function () {
     this.marktid = null;
     this.id = misc.getUniqueID();

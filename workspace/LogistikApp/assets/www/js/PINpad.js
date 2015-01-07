@@ -1,3 +1,5 @@
+
+//Logik hinter dem Eingabeformular für die PIN
 var PinPad = function (selector, callback) {
 
     var that = this;

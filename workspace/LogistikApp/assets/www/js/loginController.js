@@ -1,8 +1,8 @@
 
+//ist für doie Logik hinter dem Anmeldevorgang zuständig
 loginController = {
 
     lieferant: null,
-
 
     loginError: function () {
         notifications.showError("Die Anmeldung war leider nicht erfolgreich!")

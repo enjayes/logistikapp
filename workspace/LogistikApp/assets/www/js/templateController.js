@@ -1,14 +1,13 @@
 
+//für die Anzeige und die Verwaltung von Besucherschein.Vorlagen zuständig
 var templateController = {
 
     templateList: null,
 
     set: function (list) {
         this.templateList = list;
-        console.dir("TEMPLATE LISTE:");
-        console.dir(list);
-        var html = '<ul data-role="listview" id = "templateListview">';
 
+        var html = '<ul data-role="listview" id = "templateListview">';
 
         html = html + '<li data-icon="false" ><a onClick="templateController.load(0)"  href="#">Zuletzt verwendetes Formular</a></li>';
 

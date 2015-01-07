@@ -1,5 +1,5 @@
 
-
+//Logik hinter den Schaltflächen der Login-Screens
 var loginView = {
     pinPad: null,
     initialize: function () {

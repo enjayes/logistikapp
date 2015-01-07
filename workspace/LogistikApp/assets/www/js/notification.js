@@ -1,6 +1,7 @@
 
+//Anzeige von Nachrichten und Meldungen
 var notifications = {
-
+    //versteckt alle Nachrichten und Meldungen
     hideAll: function () {
         var _container = $('.jq-toast-wrap');
         if (_container) {
@@ -11,7 +12,7 @@ var notifications = {
         $.toast._container = _container;
     },
 
-
+    //zeigt eine Nachricht an, kein Timeout
     show: function (title, message, callback) {
 
         $.toast({
@@ -25,6 +26,8 @@ var notifications = {
         })
 
     },
+
+    //zeigt eine Nachricht an, mit Timeout (5000ms)
     showWithTimeout: function (title, message, callback) {
 
         $.toast({
@@ -38,6 +41,7 @@ var notifications = {
         })
     }
     ,
+    //zeigt einen Fehler an
     showError: function (message) {
 
         $.toast({
@@ -53,6 +57,7 @@ var notifications = {
 
     },
 
+    //zeigt Nachrichten der Marktleiter an
     showMessages: function (nachrichten) {
         for (var i = 0; i < nachrichten.length; i++) {
             var showMessage = function (index) {
@@ -68,6 +73,8 @@ var notifications = {
             showMessage(i);
         }
     },
+
+    //markiert eine Nachricht als gelesen
     mark_read: function (nachricht) {
         // nachrichten[index].id
 

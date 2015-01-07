@@ -1,4 +1,5 @@
 
+//hält die Besucherschein-Daten
 function Job(id) {
     this.id = id;
     this.lieferanten_id = ""; //TODO:

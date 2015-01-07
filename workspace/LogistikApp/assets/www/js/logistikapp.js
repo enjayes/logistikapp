@@ -1,4 +1,6 @@
 
+
+//hält Konfigurationsdaten der Lieferanten-App, und ist für die Initialisierung der Komponenten zuständig
 var logistikapp = {
 
     servername: "",
@@ -6,8 +8,8 @@ var logistikapp = {
     markt_id: "",
     gruppe_id: "Edeka Baisch",
 
+    //lädt persistente Konfigurationsdaten aus dem localStorage
     retrievePersistentStorage: function () {
-
 
         var alert_string = "";
         if (typeof(Storage) !== "undefined") {
@@ -37,7 +39,7 @@ var logistikapp = {
 
     },
 
-
+    //wird beim Start der App aufgerufen, für die Initialisierung zuständig
     start: function () {
 
         console.dir(nfc)
@@ -47,15 +49,12 @@ var logistikapp = {
         nfcController.init();
 
 
-        //servername etc
         logistikapp.retrievePersistentStorage();
-
 
         $("#gruppenname_title").text(logistikapp.gruppe_id);
         $("#marktname_title").text(logistikapp.markt_id);
 
-
-        //Use Fastclick
+        //Fastclick nur auf mobilen Geräten
         if (misc.isMobileApp()) {
             FastClick.attach(document.body);
 
@@ -63,7 +62,6 @@ var logistikapp = {
 
         //Establish Socket Connection
         serverController.initialize(function () {
-
 
         });
 
@@ -74,7 +72,6 @@ var logistikapp = {
 
         //Show App
         $(".centerapp").show();
-
 
     }
 }

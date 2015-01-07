@@ -1,10 +1,8 @@
-/**
- * Created by Norbert on 03.01.2015.
- */
 
-
-
+//ist für das Auslesen und Beschreiben von NFC-Tags zuständig
 var nfcController = {
+
+    //Initialisierung
     init: function () {
 
         $("#popupWriteNFC").bind({

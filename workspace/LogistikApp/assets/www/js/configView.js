@@ -1,9 +1,10 @@
 
-
+//Logik hinter dem Kofigurations-Menü
 var configView = {
     pinPad: null,
-    initialize: function () {
 
+    //Initialisiert das Objekt
+    initialize: function () {
 
         configView.pinPad = new PinPad("#PINcodeConfig", function (code) {
 
@@ -13,8 +14,6 @@ var configView = {
             }
         })
 
-
-        //config_menue
         $("#save_config").click(function () {
             logistikapp.servername = $("#t_server").val();
             logistikapp.server_port = $("#t_port").val();
@@ -42,7 +41,7 @@ var configView = {
 
         });
 
-        //open konfig
+        //Öffnet die Konfigurations-Ansicht
         $("#b_konfig").click(function () {
 
             if (typeof(localStorage) !== "undefined") {
@@ -65,7 +64,7 @@ var configView = {
 
         });
 
-        //close konfig
+        //Schließt die  Konfigurations-Ansicht
         $("#config_zurueck").click(function () {
             $('#konfi_menue').hide();
             $('#startScreen').show();

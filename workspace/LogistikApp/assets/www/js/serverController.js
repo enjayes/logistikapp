@@ -1,5 +1,5 @@
 
-
+//Nachricht an den Server
 var ServerMessage = function (data, type) {
     //It is an app message  0 = App
     this.c = 0;
@@ -15,7 +15,7 @@ var ServerMessage = function (data, type) {
 
 }
 
-
+//für die CLient-Server-Kommunikation zuständig
 serverController = {
 
     socket: null,

@@ -1,9 +1,10 @@
 
-
+//Logik hinter der Kontaktdaten-Eingabemaske
 var contactController = {
 
     lieferant: null,
 
+    //Daten werden aus dem localStorage oder dem lieferant-Objekt in das GUI geladen
     set: function (id, l) {
         this.lieferant = l;
         if (this.lieferant == null) {
@@ -25,7 +26,7 @@ var contactController = {
         }
     },
 
-
+    //Daten aus dem GUI werden im localStorage und im lieferant-Objekt gespeichert
     store: function () {
         if (this.lieferant != undefined) {
             if (this.lieferant != null) {

@@ -1,6 +1,8 @@
+
+//Logik hinter dem Termin-GUI
 var terminView = {
 
-
+    //Auswahl der Uhrzeit
     clockPickerHelper: function () {
         $('.clockpicker').clockpicker();
         $('.clockpicker').clockpicker()
@@ -27,7 +29,7 @@ var terminView = {
         }
     },
 
-
+    //Daten der GUI werden in einem termin-Objekt gespeichert
     readInput: function () {
         var termin = {};
 

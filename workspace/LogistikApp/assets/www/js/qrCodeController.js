@@ -1,4 +1,5 @@
 
+//für das Einscannen von QR-Codes zuständig
 var qrCodeController = {
 
     scan: function () {

@@ -1,5 +1,5 @@
 
-
+//ist für Anrufe und das Versenden von SMS zuständig
 var phoneController = {
 
     callNumber: function (phoneNumber, textToSpeech) {

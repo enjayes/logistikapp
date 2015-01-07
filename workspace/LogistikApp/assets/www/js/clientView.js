@@ -1,5 +1,6 @@
 
 
+//Logik hinter den Buttons der Besucherschein-Schaltflächen
 var clientView = {
     lieferant: null,
     getLieferantFullName: function () {
@@ -8,8 +9,9 @@ var clientView = {
             name = this.lieferant.vorname.trim() + " " + name;
         return name
     },
+
+    //überträgt die Daten aus dem GUI in ein Besucherschein-Objekt (job)
     check_input: function (job) {
-        //check input Aufgabenwahl
 
         console.log("Lieferant")
         console.dir(this.lieferant)
@@ -24,7 +26,6 @@ var clientView = {
         else {
             job.fixtermin = false;
         }
-
 
         if ($('#cb_besuch').is(":checked")) {
             job.besuch = true;
@@ -51,15 +52,10 @@ var clientView = {
             job.austausch = false;
         }
 
-        //input lieferantenschein1
-
         job.t_ziel = $("#t_ziel").val();
         job.t_grund = $("#t_grund").val();
         job.t_thematik = $("#t_thematik").val();
         job.gespraechspartner = $("#gespraechspartner").val();
-
-        //input lieferantenschein2
-
 
         if ($('#cb_auftrag_getaetigt').is(":checked")) {
             job.cb_auftrag_getaetigt = true;//Auftrag getätigt
@@ -155,19 +151,17 @@ var clientView = {
             job.cb_verlosung = false;
         }
 
-
-        //logout
         if ($("#t_notizen").val() != "") {
             //TODO
         }
         else {
         }
 
-        //console.dir(job);
         return job;
 
     },
 
+    //erstellt Zeitstempel und markiert Ende der Bearbeitung
     check_out: function (job) {
         job.timestamp_end = new Date();
         job.finished = true;
@@ -177,9 +171,8 @@ var clientView = {
         return job;
     },
 
-
+    //ein Besucherschein-Objekt wird in das GUI geladen
     setJob: function (job) {
-
 
         $('#fixtermin').prop('checked', job.fixtermin);
 
@@ -193,9 +186,10 @@ var clientView = {
 
         $('#cb_austausch').prop('checked', job.austausch);
 
-
         $("#t_ziel").val(job.t_ziel);
+
         $("#t_grund").val(job.t_grund);
+
         $("#t_thematik").val(job.t_thematik);
 
         $("#gespraechspartner").val(job.gespraechspartner);
@@ -246,6 +240,7 @@ var clientView = {
 
     },
 
+    //Objekt wird initialisiert, Besucherschein-Objekt (job) wird erstellt
     initialize: function () {
         var id = misc.getUniqueID();
         var job = new Job(id);
@@ -318,8 +313,6 @@ var clientView = {
          loginController.waitForLogin();
 
          $("#startScreen").show();
-
-
 
          });
          */
@@ -467,6 +460,8 @@ var clientView = {
 
 
     },
+
+    //GUI zurücksetzen
     clearJob: function () {
         var id = misc.getUniqueID();
         var clearJob = new Job(id);
