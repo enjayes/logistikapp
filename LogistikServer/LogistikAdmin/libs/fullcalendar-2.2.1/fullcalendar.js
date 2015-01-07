@@ -823,7 +823,14 @@ function Calendar(element, instanceOptions) {
 
 
 	function renderEvents() { // destroys old events if previously rendered
-		if (elementVisible()) {
+
+        if(termineTab.calender.oldDragElement){
+            termineTab.calender.oldDragElement.destroyEl();
+            termineTab.calender.oldDragElement = null;
+        }
+
+
+        if (elementVisible()) {
 			freezeContentHeight();
 			currentView.destroyEvents(); // no performance cost if never rendered
 			currentView.renderEvents(events);
@@ -4176,7 +4183,8 @@ MouseFollower.prototype = {
 
 		function complete() {
 			this.isAnimating = false;
-			_this.destroyEl();
+            //CHANGED
+            termineTab.calender.oldDragElement = _this;
 
 			this.top0 = this.left0 = null; // reset state for future updatePosition calls
 
@@ -5144,8 +5152,7 @@ $.extend(Grid.prototype, {
 				mouseFollower.stop(!hasChanged, function() {
 					_this.isDraggingSeg = false;
 
-					view.destroyDrag();
-
+                    view.destroyDrag();
                     //CHANGED
                     //view.showEvent(event);
 
@@ -5156,7 +5163,7 @@ $.extend(Grid.prototype, {
 					}
 				});
 
-				enableCursor();
+                enableCursor();
 			},
 			listenStop: function() {
 				mouseFollower.stop(); // put in listenStop in case there was a mousedown but the drag never started
