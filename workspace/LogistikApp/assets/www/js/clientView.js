@@ -402,6 +402,7 @@ var clientView = {
 
 
         $("#checkout_logout").click(function () {
+            job.id =  misc.getUniqueID();
             job = that.check_input(job);
             job = that.check_out(job);
 
@@ -411,6 +412,14 @@ var clientView = {
             else {
                 alert("Kein Lieferant eingelogged!");
             }
+
+
+            //TODO add selected termin
+
+            job.terminId = "e40d6e34-b43b-4160-885d-e7672b67d7ca"; //Id of Termin
+            job.terminStartMilli = 1420588800000; //Start of Termin
+            job.terminEndMilli = 1420588800000; //Stop of Termin
+
             serverController.job.create(job);
 
             $("#goodbye").show();

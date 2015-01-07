@@ -230,10 +230,15 @@ termineController = {
 
         $("#termintitel").val(calenderEvent.title.replace("✔ ", "").replace("✘ ", ""));
 
-        if(termineController.aktuellesEvent.jobId)
-         $("#zeigeauftragvonterminbutton").removeClass("ui-disabled");
-        else
-         $("#zeigeauftragvonterminbutton").addClass("ui-disabled");
+        if(termineController.aktuellesEvent.jobId){
+            $("#zeigeauftragvonterminbutton").removeClass("ui-disabled");
+            $("#lieferantRepeatTerminParent").hide();
+        }
+        else{
+            $("#zeigeauftragvonterminbutton").addClass("ui-disabled");
+            $("#lieferantRepeatTerminParent").show();
+        }
+
 
 
         termineTab.terminMarktSelectionWidget.selectedSingleItem(termineController.aktuellesEvent.marktId || uebersichtController.defaultMarktId);
@@ -665,7 +670,7 @@ termineController = {
                             $("#besucherscheinGrund").html(job.t_grund);
                             $("#besucherscheinGespraechspartner").html(job.gespraechspartner);
 
-
+                            console.dir(job)
                             job.cb_auftrag_getaetigt ? $("#besucherscheinAuftraggetaetigt").html("X") : {};
                             job.cb_aktionsabsprache ? $("#besucherscheinAktionsabsprache").html("X") : {};
                             job.cb_bemusterung ? $("#besucherscheinBemusterung").html("X") : {};
@@ -680,7 +685,14 @@ termineController = {
                             job.cb_verlosung ? $("#besucherscheinVerlosung").html("X") : {};
                             job.cb_warenaufbau ? $("#besucherscheinWarenaufbau").html("X") : {};
 
+                            $("#besucherscheinVKBetrag").html(job.t_vk_euro_abgabe+" €");
+
+                            $("#besucherscheinWarengruppe").html(job.t_warengruppe);
+
+
+
                             $("#besucherscheinNotizen").html(job.t_notizen);
+
 
 
                             $("#besucherscheinContent").show();
