@@ -263,6 +263,7 @@ serverController = {
             updateOthers: "nuo"
         },
         buildDTO: function (nachricht) {
+
             return {
                 id: nachricht.id,
                 datum: nachricht.datum.getTime(),
@@ -284,12 +285,14 @@ serverController = {
 
             if(nachricht.maerkte&&nachricht.maerkte!="")
              newNachricht. maerkte = JSON.parse(nachricht.maerkte);
+
             return  newNachricht;
         },
         getAll: function (callback,start,stop) {
             serverController.nachricht.getUpdateCallback = function (list) {
-                for (var i = 0; i < list.length; i++) {
-                    list[i] = serverController.nachricht.parseDTO(list[i]);
+
+                for (var i = 0; i < list.n.length; i++) {
+                    list.n[i] = serverController.nachricht.parseDTO(list.n[i]);
                 }
                 return callback(list);
             };
@@ -330,6 +333,7 @@ serverController = {
             return newNachricht;
         },
         parseDTO: function (nachricht) {
+             console.log(nachricht.datum)
             return  {
                 id: nachricht.id,
                 lieferantid: nachricht.lieferantid,
@@ -340,8 +344,9 @@ serverController = {
         },
         getAll: function (callback,start,stop) {
             serverController.antwortNachricht.getUpdateCallback = function (list) {
-                for (var i = 0; i < list.length; i++) {
-                    list[i] = serverController.antwortNachricht.parseDTO(list[i]);
+                console.dir(list)
+                for (var i = 0; i < list.n.length; i++) {
+                    list.n[i] = serverController.antwortNachricht.parseDTO(list.n[i]);
                 }
                 return callback(list);
             };

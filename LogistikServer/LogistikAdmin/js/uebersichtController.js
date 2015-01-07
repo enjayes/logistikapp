@@ -108,8 +108,6 @@ uebersichtController = {
     updateAuftragsHistorie: function () {
         serverController.job.getAll(function (jobs) {
 
-            console.dir(jobs)
-
             var maerkteSelected = uebersichtTab.auftragsHistorieMarktSelectionWidget.getSelectedItems();
             var lieferantenSelected = uebersichtTab.searchWidget.getSelectedItems();
 

@@ -179,7 +179,7 @@ nachrichtenController = {
 
         container.html("");
         for (var i = 0; i < Math.min(nachrichtenController.nachrichtenSent.length, nachrichtenTab.showMax); i++) {
-            var nachricht = nachrichtenController.nachrichtenSent[i % 2];
+            var nachricht = nachrichtenController.nachrichtenSent[i];
 
 
             var lieferanten = $("<span>An:</span>");
