@@ -1,23 +1,13 @@
-/**
- * configView
- *
- *
- * @author
- * @date 11.12.14 - 17:39
- * @copyright
- */
 
 
 var configView = {
-    pinPad:null,
-    initialize: function() {
+    pinPad: null,
+    initialize: function () {
 
 
+        configView.pinPad = new PinPad("#PINcodeConfig", function (code) {
 
-
-        configView.pinPad = new PinPad("#PINcodeConfig",function(code){
-
-            if(code=="1234") {
+            if (code == "1234") {
                 $('#konfi_login_menue').hide();
                 $('#konfi_menue').show();
             }
@@ -25,20 +15,17 @@ var configView = {
 
 
         //config_menue
-        $("#save_config").click(function()
-        {
+        $("#save_config").click(function () {
             logistikapp.servername = $("#t_server").val();
             logistikapp.server_port = $("#t_port").val();
             logistikapp.markt_id = $("#markt_id").val();
-            if(typeof(localStorage) !== "undefined")
-            {
+            if (typeof(localStorage) !== "undefined") {
                 localStorage.servername = logistikapp.servername;
                 localStorage.server_port = logistikapp.server_port;
                 localStorage.markt_id = logistikapp.markt_id;
 
             }
-            else
-            {
+            else {
                 alert("Error: HTML5 Storage not supported");
 
             }
@@ -49,24 +36,22 @@ var configView = {
 
             //Set Markt title
             $("#marktname_title").text(logistikapp.markt_id);
-            alert("SAVE!");
+
+            notifications.showWithTimeout("Gespeichert!");
 
 
         });
 
         //open konfig
-        $("#b_konfig").click(function()
-        {
+        $("#b_konfig").click(function () {
 
-            if(typeof(localStorage) !== "undefined")
-            {
+            if (typeof(localStorage) !== "undefined") {
                 $("#t_server").val(localStorage.servername);
                 $("#t_port").val(localStorage.server_port);
                 $("#markt_id").val(localStorage.markt_id);
 
             }
-            else
-            {
+            else {
                 alert("Error: HTML5 Storage not supported");
             }
 
@@ -81,23 +66,21 @@ var configView = {
         });
 
         //close konfig
-        $("#config_zurueck").click(function()
-        {
+        $("#config_zurueck").click(function () {
             $('#konfi_menue').hide();
             $('#startScreen').show();
         });
 
-        $("#konfi_zurueck_start").click(function()
-        {
+        $("#konfi_zurueck_start").click(function () {
             $('#konfi_login_menue').hide();
             $('#startScreen').show();
 
         });
 
 
-        $("#open_admin").click(function()
-        {
+        $("#open_admin").click(function () {
             url = "http://" + localStorage.servername + ":" + localStorage.server_port;
+            alert(url);
             misc.openLink(url);
 
         });

@@ -1,22 +1,9 @@
-/** * notification.js.
- *
- *
- *
- * @author Norbert
- * @date 06.12.14 - 20:28
- * @copyright  */
-
-
-
-
-
 
 var notifications = {
 
-    hideAll: function()
-    {
+    hideAll: function () {
         var _container = $('.jq-toast-wrap');
-        if(_container) {
+        if (_container) {
             if (_container.length != 0) {
                 _container.empty();
             }
@@ -55,14 +42,14 @@ var notifications = {
 
         $.toast({
             heading: "Fehler",
-            text: "<h2>"+message+"</h2>",
+            text: "<h2>" + message + "</h2>",
             stack: 50,
             hideAfter: 3000,
             showHideTransition: 'fade',
             allowToastClose: false,
             bgColor: '#440000'
 
-     })
+        })
 
     },
 

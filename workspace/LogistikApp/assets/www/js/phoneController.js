@@ -1,25 +1,21 @@
-/**
- * Created by Norbert on 29.12.2014.
- */
-
 
 
 var phoneController = {
 
-    callNumber:function(phoneNumber,textToSpeech){
-        serverController.phone.callNumber(phoneNumber,textToSpeech);
+    callNumber: function (phoneNumber, textToSpeech) {
+        serverController.phone.callNumber(phoneNumber, textToSpeech);
     },
 
-    sendMessage:function(phoneNumber,text){
-        serverController.phone.sendMessage(phoneNumber,text);
+    sendMessage: function (phoneNumber, text) {
+        serverController.phone.sendMessage(phoneNumber, text);
     },
 
-    informAboutLogin:function(markt,lieferant){
+    informAboutLogin: function (markt, lieferant) {
         if (markt.sms || markt.call) {
             var name = "Unbekannt";
             var firma = "Unbekannt"
             var telefon = "Unbekannt"
-            if(lieferant) {
+            if (lieferant) {
                 if (lieferant.vorname) {
                     name = lieferant.vorname + " "
                 }

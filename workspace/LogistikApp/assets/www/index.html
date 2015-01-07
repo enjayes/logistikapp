@@ -69,7 +69,7 @@
 
     <div class="app">
         <!--width:460px;-->
-        <div class="divbackground" style="width:400px; height:100%;border:nonce; background-color:#ffffff;opacity:1;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
+        <div class="divbackground" style="width:400px; height:100%;border:none; background-color:#ffffff;opacity:1;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
             <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
             <img id="banner" height="60px" src="img/bannerlogo.png">
             <br>
@@ -167,12 +167,23 @@
                                 <textarea id="t_port"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
+
                         <tr>
                             <td>
-                                <a id="open_admin" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
+                                <label>
+                                    Passwort
+                                </label></td>
+                            <td>
+                                <textarea type = "password" id="t_password"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
                             </td>
                         </tr>
                     </table>
+                    <br>
+
+                    <a id="b_write_nfc" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Lieferantenausweis beschreiben</a>
+                    <br>
+                    <a id="open_admin" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
+
                 </form>
 
 
@@ -251,7 +262,6 @@
                 </form>
 
                 <a id="b_kalender"  style="width:100px;height:15px;float:right;margin-left:10px;" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
-                <a id="b_write_nfc"  style="width:50px;height:15px;float:left; " class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Karte</a>
 
                 <br>
                 <br>
@@ -349,7 +359,7 @@
                                     <input  name="checkbox-0 " type="checkbox" id="cb_auftrag_getaetigt">Auftrag getätigt
                                 </label></td>
 
-                            <td><label style="width:54%">
+                            <td><label style="width:54%;">
                                 <input name="checkbox-0 " type="checkbox" id="cb_mhd">MHD-Kontrolle
                             </label></td>
                         </tr>
@@ -374,13 +384,11 @@
                             <td><label>
                                 <input name="checkbox-0 " type="checkbox" id="cb_info_gespraech">Info-Gespräch
                             </label></td>
-                            <td><label style="width:54%">
-                                <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
-                            </label>
-                                <div style="width:77.5%">
-                                <textarea id="t_vk_euro_abgabe"  placeholder="Wert in Euro"  rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                                <textarea id="t_warengruppe" placeholder="Warengruppe" rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                                </div>
+                            <td>
+                                <label style="width:54%">
+                                    <input name="checkbox-0 " type="checkbox" id="cb_verlosung">Verlosung
+                                </label>
+                            </td>
                         </tr>
                         <td><label>
                             <input name="checkbox-0 " type="checkbox" id="cb_verkostung">Verkostung
@@ -399,10 +407,20 @@
                         </tr>
 
                         <tr>
+
                             <td>
+                                <br>
                                 <label>
-                                    <input name="checkbox-0 " type="checkbox" id="cb_verlosung">Verlosung
+                                    <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
                                 </label>
+                            </td>
+                            <td>
+                                <br>
+                                <div style="width:77.5%">
+                                    <textarea id="t_vk_euro_abgabe"  placeholder="Wert in Euro"  rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                                    <textarea id="t_warengruppe" placeholder="Warengruppe" rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                                </div>
+
                             </td>
 
 
@@ -498,6 +516,7 @@
 
 
             <div id="logout" style="display:none">
+                <h2 class="greetingLieferant"></h2>
                 <h4>Notizen</h4>
                 <td><textarea id="t_notizen" rows="1" cols="50"></textarea></td>
                 <br>
@@ -586,7 +605,6 @@
                 <br>
 
 
-
                 <br>
             </div>
             <div id="callButton" style="display:none">
@@ -670,7 +688,6 @@
 
 <script type="text/javascript" src="js/logistikapp.js"></script>
 
-<script type="text/javascript" src="js/startView.js"></script>
 <script type="text/javascript" src="js/configView.js"></script>
 <script type="text/javascript" src="js/contactController.js"></script>
 <script type="text/javascript" src="js/templateController.js"></script>
@@ -686,8 +703,6 @@
 <script type="text/javascript" src="js/notification.js"></script>
 
 
-<script type="text/javascript" src="js/preferences.js"></script>
-
 
 <!--Imported libraries ------------------------------------------------->
 <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
@@ -701,11 +716,13 @@
     });
 
 
+    /*
     $( "#eventDate" ).setDefaults({
             showOn: "both",
             buttonImageOnly: true,
             buttonText: "Calendar"
     });
+    */
 
 
 </script>

@@ -1,17 +1,14 @@
-/**
- * Created by StandardB on 29.11.2014.
- */
 
 
 var clientView = {
-    lieferant:null,
+    lieferant: null,
     getLieferantFullName: function () {
         var name = this.lieferant.name;
         if (this.lieferant.vorname && this.lieferant.vorname.trim() != "")
-            name =  this.lieferant.vorname.trim()+" "+name;
+            name = this.lieferant.vorname.trim() + " " + name;
         return name
     },
-    check_input: function(job) {
+    check_input: function (job) {
         //check input Aufgabenwahl
 
         console.log("Lieferant")
@@ -21,47 +18,36 @@ var clientView = {
 
         job.markt_id = logistikapp.markt_id;
 
-        if ($('#fixtermin').is(":checked"))
-        {
+        if ($('#fixtermin').is(":checked")) {
             job.fixtermin = true;
         }
-        else
-        {
+        else {
             job.fixtermin = false;
         }
 
 
-
-        if ($('#cb_besuch').is(":checked"))
-        {
+        if ($('#cb_besuch').is(":checked")) {
             job.besuch = true;
         }
-        else
-        {
+        else {
             job.besuch = false;
         }
-        if ($('#cb_bestellung').is(":checked"))
-        {
+        if ($('#cb_bestellung').is(":checked")) {
             job.bestellung = true;
         }
-        else
-        {
+        else {
             job.bestellung = false;
         }
-        if ($('#cb_verraeumung').is(":checked"))
-        {
+        if ($('#cb_verraeumung').is(":checked")) {
             job.verraeumung = true;
         }
-        else
-        {
+        else {
             job.verraeumung = false;
         }
-        if ($('#cb_austausch').is(":checked"))
-        {
+        if ($('#cb_austausch').is(":checked")) {
             job.austausch = true;
         }
-        else
-        {
+        else {
             job.austausch = false;
         }
 
@@ -78,107 +64,103 @@ var clientView = {
         if ($('#cb_auftrag_getaetigt').is(":checked")) {
             job.cb_auftrag_getaetigt = true;//Auftrag getätigt
         }
-        else
-        {
+        else {
             job.cb_auftrag_getaetigt = false;
         }
         if ($('#cb_mhd').is(":checked")) {
             job.cb_mhd = true;//MHD-Kontrolle
         }
-        else{
+        else {
             job.cb_mhd = false;
         }
         if ($('#cb_ruecknahme').is(":checked")) {
             job.cb_ruecknahme = true; //Rücknahme
         }
-        else
-        {
+        else {
             job.cb_ruecknahme = false; //Rücknahme
         }
 
         if ($('#cb_warenaufbau').is(":checked")) {
-            job.cb_warenaufbau=true;
+            job.cb_warenaufbau = true;
         }
-        else{
-            job.cb_warenaufbau=false;
+        else {
+            job.cb_warenaufbau = false;
         }
 
         if ($('#cb_reklamation').is(":checked")) {
-            job.cb_reklamation=true;
+            job.cb_reklamation = true;
         }
-        else{
-            job.cb_reklamation=false; //Reklamationsbearbeitung
+        else {
+            job.cb_reklamation = false; //Reklamationsbearbeitung
         }
 
         if ($('#cb_umbau').is(":checked")) {
-            job.cb_umbau=true;
+            job.cb_umbau = true;
         }
-        else{
-            job.cb_umbau=false;
+        else {
+            job.cb_umbau = false;
         }
 
         if ($('#cb_info_gespraech').is(":checked")) {
-            job.cb_info_gespraech=true;
+            job.cb_info_gespraech = true;
         }
-        else{
-            job.cb_info_gespraech=false;
+        else {
+            job.cb_info_gespraech = false;
         }
 
         if ($('#cb_nr_abgabe').is(":checked")) {
-            job.cb_nr_abgabe=true;
+            job.cb_nr_abgabe = true;
             $("#t_vk_euro_abgabe").val(job.t_vk_euro_abgabe);
             $("#t_warengruppe").val(job.t_warengruppe);
 
         }
-        else{
-            job.cb_nr_abgabe=false;
+        else {
+            job.cb_nr_abgabe = false;
         }
 
         job.t_vk_euro_abgabe = $("#t_vk_euro_abgabe").val();
 
         if ($('#cb_verkostung').is(":checked")) {
-            job.cb_verkostung=true;
+            job.cb_verkostung = true;
         }
-        else{
-            job.cb_verkostung=false;
+        else {
+            job.cb_verkostung = false;
         }
 
         if ($('#cb_sortimentsinfo').is(":checked")) {
-            job.cb_sortimentsinfo=true;
+            job.cb_sortimentsinfo = true;
         }
-        else{
-            job.cb_sortimentsinfo=false;
+        else {
+            job.cb_sortimentsinfo = false;
         }
 
         if ($('#cb_aktionsabsprache').is(":checked")) {
-            job.cb_aktionsabsprache=true;
+            job.cb_aktionsabsprache = true;
         }
-        else{
-            job.cb_aktionsabsprache=false;
+        else {
+            job.cb_aktionsabsprache = false;
         }
 
         if ($('#cb_bemusterung').is(":checked")) {
-            job.cb_bemusterung=true;
+            job.cb_bemusterung = true;
         }
-        else{
-            job.cb_bemusterung=false;
+        else {
+            job.cb_bemusterung = false;
         }
 
         if ($('#cb_verlosung').is(":checked")) {
-            job.cb_verlosung=true;
+            job.cb_verlosung = true;
         }
-        else{
-            job.cb_verlosung=false;
+        else {
+            job.cb_verlosung = false;
         }
 
 
         //logout
-        if($("#t_notizen").val()!="")
-        {
+        if ($("#t_notizen").val() != "") {
             //TODO
         }
-        else
-        {
+        else {
         }
 
         //console.dir(job);
@@ -186,18 +168,17 @@ var clientView = {
 
     },
 
-    check_out: function(job) {
+    check_out: function (job) {
         job.timestamp_end = new Date();
         job.finished = true;
-        job.pending=false;
-        job.checked_out=true;
+        job.pending = false;
+        job.checked_out = true;
         console.dir(job);
         return job;
     },
 
 
-
-    setJob: function(job){
+    setJob: function (job) {
 
 
         $('#fixtermin').prop('checked', job.fixtermin);
@@ -205,7 +186,7 @@ var clientView = {
 
         $('#cb_besuch').prop('checked', job.besuch);
 
-        $('#cb_bestellung').prop('checked',job.bestellung);
+        $('#cb_bestellung').prop('checked', job.bestellung);
 
 
         $('#cb_verraeumung').prop('checked', job.verraeumung);
@@ -217,45 +198,44 @@ var clientView = {
         $("#t_grund").val(job.t_grund);
         $("#t_thematik").val(job.t_thematik);
 
-        $("#gespraechspartner").val( job.gespraechspartner );
+        $("#gespraechspartner").val(job.gespraechspartner);
 
-        $('#cb_auftrag_getaetigt').prop('checked',job.cb_auftrag_getaetigt);
+        $('#cb_auftrag_getaetigt').prop('checked', job.cb_auftrag_getaetigt);
 
-        $('#cb_mhd').prop('checked',job.cb_mhd);
-
-
-
-        $('#cb_ruecknahme').prop('checked',job.cb_ruecknahme);
+        $('#cb_mhd').prop('checked', job.cb_mhd);
 
 
-        $('#cb_warenaufbau').prop('checked',job.cb_warenaufbau);
+        $('#cb_ruecknahme').prop('checked', job.cb_ruecknahme);
 
 
-        $('#cb_reklamation').prop('checked',job.cb_reklamation);
+        $('#cb_warenaufbau').prop('checked', job.cb_warenaufbau);
 
 
-        $('#cb_umbau').prop('checked',   job.cb_umbau);
+        $('#cb_reklamation').prop('checked', job.cb_reklamation);
 
 
-        $('#cb_info_gespraech').prop('checked',job.cb_info_gespraech);
+        $('#cb_umbau').prop('checked', job.cb_umbau);
 
 
-        $('#cb_nr_abgabe').prop('checked',job.cb_nr_abgabe);
+        $('#cb_info_gespraech').prop('checked', job.cb_info_gespraech);
+
+
+        $('#cb_nr_abgabe').prop('checked', job.cb_nr_abgabe);
 
         $("#t_vk_euro_abgabe").val(job.t_vk_euro_abgabe);
         $("#t_warengruppe").val(job.t_warengruppe);
 
 
-        $('#cb_verkostung').prop('checked',job.cb_verkostung);
+        $('#cb_verkostung').prop('checked', job.cb_verkostung);
 
 
         $('#cb_sortimentsinfo').prop('checked', job.cb_sortimentsinfo);
 
 
-        $('#cb_aktionsabsprache').prop('checked',job.cb_aktionsabsprache);
+        $('#cb_aktionsabsprache').prop('checked', job.cb_aktionsabsprache);
 
 
-        $('#cb_bemusterung').prop('checked',job.cb_bemusterung);
+        $('#cb_bemusterung').prop('checked', job.cb_bemusterung);
 
 
         $('#cb_verlosung').prop('checked', job.cb_verlosung);
@@ -266,7 +246,7 @@ var clientView = {
 
     },
 
-    initialize: function() {
+    initialize: function () {
         var id = misc.getUniqueID();
         var job = new Job(id);
         var that = this;
@@ -280,8 +260,8 @@ var clientView = {
         $("#popupWriteNFC").show();
 
 
-        $("#waitgoodbye_button").click(function(){
-            if(goodByeTimeout!=null) {
+        $("#waitgoodbye_button").click(function () {
+            if (goodByeTimeout != null) {
                 clearTimeout(goodByeTimeout);
                 goodByeTimeout = null;
             }
@@ -291,14 +271,13 @@ var clientView = {
         });
 
 
-        $("#job_zurueck_kontakt").click(function()
-        {
+        $("#job_zurueck_kontakt").click(function () {
             $("#goodbye").show();
             $("#jobSelector").hide();
 
             loginController.logout();
 
-            goodByeTimeout = setTimeout(function(){
+            goodByeTimeout = setTimeout(function () {
 
                 $("#goodbye").hide();
                 $("#startScreen").show();
@@ -310,55 +289,50 @@ var clientView = {
         });
 
 
-        $("#zurueck_start").click(function()
-        {
+        $("#zurueck_start").click(function () {
             loginController.logout();
             $('#startScreen').show();
             $('#contact_daten_menu').hide();
 
 
-
         });
 
-        $("#zurueck_kontakt").click(function()
-        {
+        $("#zurueck_kontakt").click(function () {
             $('#contact_daten_menu').show();
             $('#termine_menu').hide();
 
 
         });
 
-        $("#b_kalender").click(function()
-        {
+        $("#b_kalender").click(function () {
             $('#termine_menu').show();
             $('#contact_daten_menu').hide();
 
         });
 
-  /*
-        $("#b_kalender").click(function()
-        {
-          //  $('#termine_menu').show();
-            $('#contact_daten_menu').hide();
-            loginController.waitForLogin();
+        /*
+         $("#b_kalender").click(function()
+         {
+         //  $('#termine_menu').show();
+         $('#contact_daten_menu').hide();
+         loginController.waitForLogin();
 
-            $("#startScreen").show();
-
-
-
-        });
-        */
+         $("#startScreen").show();
 
 
-        $("#weiter_jobSelector").click(function() {
+
+         });
+         */
+
+
+        $("#weiter_jobSelector").click(function () {
             contactController.store();
             $("#contact_daten_menu").hide();
             $("#jobSelector").show();
         });
 
 
-        $("#weiter_waitForLogin").click(function()
-        {
+        $("#weiter_waitForLogin").click(function () {
 
             contactController.store();
             //$("#jobSelector").show();
@@ -367,7 +341,7 @@ var clientView = {
 
             loginController.waitForLogin();
 
-            goodByeTimeout = setTimeout(function(){
+            goodByeTimeout = setTimeout(function () {
 
                 $("#waitgoodbye").hide();
                 $("#startScreen").show();
@@ -379,17 +353,14 @@ var clientView = {
         });
 
 
-
-        $("#weiter_Aufgaben").click(function()
-        {
+        $("#weiter_Aufgaben").click(function () {
 
             $("#lieferantenschein1").show();
             $("#jobSelector").hide();
 
         });
 
-        $("#weiter_lieferantenschein1").click(function()
-        {
+        $("#weiter_lieferantenschein1").click(function () {
 
             $("#lieferantenschein2").show();
             $("#lieferantenschein1").hide();
@@ -397,8 +368,7 @@ var clientView = {
         });
 
 
-        $("#zurueck_lieferantenschein1").click(function()
-        {
+        $("#zurueck_lieferantenschein1").click(function () {
 
 
             $("#jobSelector").show();
@@ -406,23 +376,21 @@ var clientView = {
 
         });
 
-        $("#zurueck_lieferantenschein2").click(function()
-        {
+        $("#zurueck_lieferantenschein2").click(function () {
             $("#lieferantenschein1").show();
             $("#lieferantenschein2").hide();
 
         });
 
 
-        $("#weiter_lieferantenschein2").click(function()
-        {
+        $("#weiter_lieferantenschein2").click(function () {
             $("#logout").show();
             $("#lieferantenschein2").hide();
 
         });
 
-        $("#goodbye_button").click(function(){
-            if(goodByeTimeout!=null) {
+        $("#goodbye_button").click(function () {
+            if (goodByeTimeout != null) {
                 clearTimeout(goodByeTimeout);
                 goodByeTimeout = null;
             }
@@ -433,16 +401,14 @@ var clientView = {
         });
 
 
-
-        $("#checkout_logout").click(function()
-        {
+        $("#checkout_logout").click(function () {
             job = that.check_input(job);
             job = that.check_out(job);
 
-            if(contactController.lieferant) {
+            if (contactController.lieferant) {
                 job.lieferanten_id = contactController.lieferant.id;
             }
-            else{
+            else {
                 alert("Kein Lieferant eingelogged!");
             }
             serverController.job.create(job);
@@ -452,7 +418,7 @@ var clientView = {
 
             loginController.logout();
 
-            goodByeTimeout = setTimeout(function(){
+            goodByeTimeout = setTimeout(function () {
 
 
                 loginController.logout();
@@ -465,20 +431,16 @@ var clientView = {
         });
 
 
-        $("#vorlage_logout").click(function()
-        {
+        $("#vorlage_logout").click(function () {
             $("#vorlage_benennen").show();
 
         });
 
-        $("#speichern_vorlage").click(function()
-        {
-            if($("#vorlagen_name").val()=="")
-            {
+        $("#speichern_vorlage").click(function () {
+            if ($("#vorlagen_name").val() == "") {
                 $("#vorlage_leer").show();
             }
-            else
-            {
+            else {
                 job.template_name = $("#vorlagen_name").val();
                 $("#vorlage_benennen").hide();
                 $("#vorlage_logout").hide();
@@ -486,28 +448,21 @@ var clientView = {
             }
 
 
-
-
         });
 
-        $("#zurueck_logout").click(function()
-        {
+        $("#zurueck_logout").click(function () {
             $("#logout").hide();
             $("#lieferantenschein2").show();
 
         });
 
 
-
-
     },
-    clearJob: function(){
+    clearJob: function () {
         var id = misc.getUniqueID();
         var clearJob = new Job(id);
         clientView.setJob(clearJob);
     }
-
-
 
 
 }

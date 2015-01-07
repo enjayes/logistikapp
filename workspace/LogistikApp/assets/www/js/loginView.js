@@ -1,70 +1,52 @@
-/**
- * loginView
- *
- *
- * @author
- * @date 11.12.14 - 16:55
- * @copyright
- */
-
 
 
 var loginView = {
-    pinPad:null,
-    initialize: function() {
+    pinPad: null,
+    initialize: function () {
 
 
-        loginView.pinPad= new PinPad("#PINcode",function(code){
+        loginView.pinPad = new PinPad("#PINcode", function (code) {
             loginController.clear();
             loginController.login(code);
 
         })
 
 
+        $("#start_nfc_code_anmelden").click(function () {
 
-        $("#start_nfc_code_anmelden").click(function()
-        {
-
-            $( "#popupNFCLogin" ).popup("open") ;
+            $("#popupNFCLogin").popup("open");
 
         });
 
-        $("#b_write_nfc").click(function()
-        {
+        $("#b_write_nfc").click(function () {
             nfcController.startWriteListener();
-            $( "#popupWriteNFC" ).popup("open") ;
+            $("#popupWriteNFC").popup("open");
 
         });
 
 
-        $("#start_qr_code_anmelden").click(function()
-        {
+        $("#start_qr_code_anmelden").click(function () {
             $.mobile.loading('show')
-           qrCodeController.scan();
+            qrCodeController.scan();
         });
 
 
-        $("#start_anmelden").click(function()
-        {
+        $("#start_anmelden").click(function () {
             loginView.pinPad.clear();
 
             $('#startScreen').hide();
             $('#lieferantenLogin').show();
 
 
-
         });
 
-        $("#login_zurueck_start").click(function()
-        {
+        $("#login_zurueck_start").click(function () {
 
             $('#lieferantenLogin').hide();
             $('#startScreen').show();
 
 
         });
-
-
 
 
     }

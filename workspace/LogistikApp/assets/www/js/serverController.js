@@ -1,9 +1,3 @@
-/**
- * serverController.
- * @date 21.11.14 - 00:19
- */
-
-
 
 
 var ServerMessage = function (data, type) {
@@ -47,10 +41,10 @@ serverController = {
         //serverController.socket = io.connect(preferences.server);
 
         var address = logistikapp.servername + ":" + logistikapp.server_port;
-         console.log(":::" +address+ "::::")
+        console.log(":::" + address + "::::")
 
 
-        serverController.socket = io.connect(address,{"force new connection":true});
+        serverController.socket = io.connect(address, {"force new connection": true});
 
         console.log(serverController.socket)
 
@@ -91,20 +85,20 @@ serverController = {
         });
 
     },
-    loadConfig: function(){
+    loadConfig: function () {
         serverController.markt.getAll(function (maerkte) {
-            if(maerkte) {
+            if (maerkte) {
                 var found = false;
                 configData.maerkte = maerkte;
                 var arrayLength = maerkte.length;
                 for (var i = 0; i < arrayLength; i++) {
-                    if (logistikapp.markt_id == maerkte[i].name){
+                    if (logistikapp.markt_id == maerkte[i].name) {
                         configData.markt = maerkte[i];
                         found = true;
                         break;
                     }
                 }
-                if(found==false){
+                if (found == false) {
                     serverController.socket.disconnect();
                     $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
                     notifications.showError("Der Marktname wurde nicht gefunden!")
@@ -160,10 +154,17 @@ serverController = {
                 } else
                     callback();
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.login, p: pinSha, callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.login,
+                p: pinSha,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
         },
         update: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, l: this.buildDTO(lieferant)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.update,
+                l: this.buildDTO(lieferant)
+            }));
         }
     },
     nachricht: {
@@ -249,7 +250,12 @@ serverController = {
                 serverController.phone.callCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.callNumber, n: number , text:text ,callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.callNumber,
+                n: number,
+                text: text,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
         },
         sendMessage: function (number, text) {
             serverController.phone.sendCallback = function (list) {
@@ -259,7 +265,12 @@ serverController = {
                 serverController.phone.sendCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.sendMessage , n: number , text:text ,callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.sendMessage,
+                n: number,
+                text: text,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
         }
 
 
@@ -354,7 +365,7 @@ serverController = {
     }, markt: {
         messageType: {
             getAll: "mga",
-                update: "mu"
+            update: "mu"
         },
         getAll: function (callback) {
             var newCallback = function () {
@@ -362,14 +373,17 @@ serverController = {
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getAll, callback: serverController.callbackHandler.register(newCallback)}));
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.getAll,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
 
         },
         update: function (markt) {
             serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, m: markt}));
         }
     },
-    
+
     termin: {
         messageType: {
             create: "tc"
@@ -380,7 +394,6 @@ serverController = {
             var termin = $.extend(true, {}, termin);
             //newTermin.timestamp_start = termin.timestamp_start.getTime();
             //newTermin.timestamp_end = termin.timestamp_end.getTime();
-
 
 
             var newTermin = {
@@ -394,18 +407,16 @@ serverController = {
                 RepeatDays: termin.repeatDays,
                 jobId: termin.jobId,
                 marktId: termin.marktId,
-                alarm:termin.alarm
+                alarm: termin.alarm
             };
-
 
 
             return newTermin;
 
         },
-        
-        
-        
-        create: function (termin){
+
+
+        create: function (termin) {
             serverController.socket.emit('message', new ServerMessage({
                 t: this.messageType.create,
                 e: this.buildDTO(termin)
