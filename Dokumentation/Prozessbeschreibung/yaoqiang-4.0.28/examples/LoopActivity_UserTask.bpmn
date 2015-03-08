@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="GBK" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://sourceforge.net/bpmn/definitions/_1421752700829" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yaoqiang="http://bpmn.sourceforge.net" exporter="Yaoqiang BPMN Editor" exporterVersion="4.0" expressionLanguage="http://www.w3.org/1999/XPath" id="_1421752700829" name="Loop Activity (User Task)" targetNamespace="http://sourceforge.net/bpmn/definitions/_1421752700829" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+  <process id="PROCESS_1" isClosed="false" isExecutable="true" processType="None">
+    <extensionElements>
+      <yaoqiang:pageFormat height="595.224" imageableHeight="585.288" imageableWidth="409.536" imageableX="4.968" imageableY="4.968" orientation="0" width="419.472"/>
+      <yaoqiang:page background="#FFFFFF" horizontalCount="1" verticalCount="1"/>
+    </extensionElements>
+    <userTask completionQuantity="1" id="_4" implementation="##unspecified" isForCompensation="false" name="Input Number" startQuantity="1">
+      <incoming>_5</incoming>
+      <outgoing>_7</outgoing>
+      <ioSpecification>
+        <dataOutput id="Dout_4_1" isCollection="false" itemSubjectRef="xsd:int" name="num"/>
+        <inputSet/>
+        <outputSet>
+          <dataOutputRefs>Dout_4_1</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <humanPerformer id="_4_RES_1">
+        <resourceAssignmentExpression>
+          <formalExpression><![CDATA[blenta;]]></formalExpression>
+        </resourceAssignmentExpression>
+      </humanPerformer>
+      <standardLoopCharacteristics loopMaximum="5" testBefore="false">
+        <loopCondition><![CDATA[num != '1129';]]></loopCondition>
+      </standardLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="_5" sourceRef="_3" targetRef="_4"/>
+    <startEvent id="_3" isInterrupting="true" name="Start Event" parallelMultiple="false">
+      <outgoing>_5</outgoing>
+    </startEvent>
+    <endEvent id="_6" name="End Event">
+      <incoming>_7</incoming>
+    </endEvent>
+    <sequenceFlow id="_7" sourceRef="_4" targetRef="_6"/>
+    <textAnnotation id="_2" textFormat="text/plain">
+      <text>Please input a four-figure number (e.g. 1250).
+Input '1129' to stop loop.</text>
+    </textAnnotation>
+    <association associationDirection="None" id="_9" sourceRef="_2" targetRef="_4"/>
+  </process>
+  <bpmndi:BPMNDiagram id="Yaoqiang_Diagram-_1" name="Untitled Diagram" resolution="96.0">
+    <bpmndi:BPMNPlane bpmnElement="PROCESS_1">
+      <bpmndi:BPMNShape bpmnElement="_2" id="Yaoqiang-_2">
+        <dc:Bounds height="55.0" width="227.0" x="253.0" y="73.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="37.02294921875" width="226.0" x="253.0" y="83.988525390625"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" id="Yaoqiang-_4">
+        <dc:Bounds height="55.0" width="85.0" x="170.92720862983248" y="178.80846675550262"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21.02294921875" width="69.0" x="178.92720862983248" y="197.79699214612762"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" id="Yaoqiang-_3">
+        <dc:Bounds height="32.0" width="32.0" x="78.92720862983249" y="190.30846675550262"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21.02294921875" width="59.0" x="65.42720862983248" y="229.79699214612762"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" id="Yaoqiang-_6">
+        <dc:Bounds height="32.0" width="32.0" x="315.9272086298325" y="190.30846675550262"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21.02294921875" width="54.0" x="304.9272086298325" y="229.79699214612762"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_7" id="Yaoqiang-_7">
+        <di:waypoint x="256.0" y="206.30846675550262"/>
+        <di:waypoint x="316.00297376820464" y="206.30846675550262"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21.02294921875" width="6.0" x="283.0014868841023" y="195.79699214612762"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5" id="Yaoqiang-_5">
+        <di:waypoint x="110.99702623179539" y="206.30846675550262"/>
+        <di:waypoint x="171.0" y="206.30846675550262"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21.02294921875" width="6.0" x="137.9985131158977" y="195.79699214612762"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9" id="Yaoqiang-_9">
+        <di:waypoint x="326.8066037735849" y="128.0"/>
+        <di:waypoint x="253.1933962264151" y="179.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21.02294921875" width="6.0" x="287.0" y="142.988525390625"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

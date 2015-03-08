@@ -1,0 +1,53 @@
+
+Yaoqiang BPMN Editor 4.0
+
+Copyright (C) 2009-2015 Shi Yaoqiang(shi_yaoqiang@yahoo.com)
+
+http://bpmn.sourceforge.net/
+
+
+Quick Start Guide
+----------------------------------------
+1.	Prerequisites
+
+	Java 6 or later, available at http://java.oracle.com.
+
+2.	Start the editor by:
+	double-click yaoqiang.jar (Windows)
+	$ java -jar yaoqiang.jar (Mac OS or Linux)
+   
+3.	Install new modules
+	3.1 select a repository at Repository view (if the view is not visible, enable it at [Window -> Show view])
+	3.2 select new modules at Available Modules tab
+		click Install button at view tab toolbar to install the selected module
+	3.3 select the new installed module at Modules view
+		click Start button at view tab toolbar to activate the selected module
+
+Yaoqiang BPMN Engine
+----------------------------------------
+Yaoqiang BPMN Editor 4.0 includes an embedded version of Yaoqiang BPMN Engine.
+The bpmn files in examples directory illustrate some useful features of BPMN Engine.
+The following are the steps you need to use BPMN Engine:
+
+1.	Open 'Engine' Perspective [Window -> Open Perspective -> Engine]
+	The 'Engine' Perspective includes: 'Definitions Repository', 'Process Instances', 'Work List', 'Process Data' views.
+	
+2.	Open the example files and save them to local repository [File -> Save To Local Repository]
+	The example Definitions should appear in 'Definitions Repository' view. Only the Definitions in repository can be executed.
+
+3.	Click Start button at 'Process Instances' view to select the Definitions to start.
+	A new process instance will be created and show in the view table. Double-Click it to open the instance diagram.
+
+4.	If the process executes a User Task, a work item will be created in 'Work List'.
+	Double-Click it to open Work Item dialog, The Input/Output Data will be displayed in the dialog. Click 'Complete' to continue the process. 
+	
+Tips and Tricks
+----------------------------------------
+1.  If you encounter a problem starting the editor, try to run it in clean mode: 
+	$ java -jar yaoqiang.jar -clean
+	
+2.  If the problem still exists, try to run it in debug mode:
+	$ java -jar yaoqiang.jar -debug
+	Then check if there is any errors in both the System and ASAF console.
+	
+Notes: If the editor is started in debug mode, you'll have to use Ctrl+C to stop it.
