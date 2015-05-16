@@ -40,7 +40,6 @@ var app = {
     onDeviceReady: function () {
 
 
-
         //Start Logistik App
         logistikapp.start();
         //$('input').textinput();

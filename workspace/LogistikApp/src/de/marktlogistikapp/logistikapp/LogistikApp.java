@@ -20,21 +20,30 @@
 
 package de.marktlogistikapp.logistikapp;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
-
 import org.apache.cordova.*; 
 import android.webkit.WebSettings.ZoomDensity;
 
 public class LogistikApp extends CordovaActivity
 {
-    @Override 
+
+	@SuppressLint("NewApi")
+	@Override  
      
     public void onCreate(Bundle savedInstanceState)
     {    
         super.onCreate(savedInstanceState); 
         // Set by <content src="index.html" /> in config.xml
-        loadUrl(launchUrl+"#android");
+        loadUrl(launchUrl+"#android"); 
+
+        
+        
    
         WebSettings settings = appView.getSettings( ); 
            
@@ -44,7 +53,22 @@ public class LogistikApp extends CordovaActivity
        
         settings.setDefaultZoom(ZoomDensity.MEDIUM); 
         settings.setSupportZoom(true ); 
-              
+        
+        /*Start Custom Edeka Code
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        else{
+	        View decorView = getWindow().getDecorView();
+		     int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+		     decorView.setSystemUiVisibility(uiOptions);
+		     ActionBar actionBar = getActionBar();
+		     actionBar.hide();
+        }
+        End Costum Edeka Code*/      
+        
+        
     } 
 } 
  

@@ -41,7 +41,8 @@ var logistikapp = {
 
     //wird beim Start der App aufgerufen, für die Initialisierung zuständig
     start: function () {
-
+        $(".centerapp").hide();
+        $(".centerapp").animate({ 'zoom': 1.5 }, 0);
         console.dir(nfc)
 
         localStorage.loggedIn = "false";
@@ -71,6 +72,7 @@ var logistikapp = {
         clientView.initialize();
 
         //Show App
+
         $(".centerapp").show();
 
     }
