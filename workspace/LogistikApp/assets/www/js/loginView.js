@@ -44,8 +44,7 @@ var loginView = {
 
             $('#lieferantenLogin').hide();
             $('#startScreen').show();
-
-
+            
         });
 
 
