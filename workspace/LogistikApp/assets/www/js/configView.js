@@ -78,6 +78,7 @@ var configView = {
 
 
         $("#open_admin").click(function () {
+            //url = "http://" + localStorage.servername + ":" + localStorage.server_port;
             url = "http://" + localStorage.servername + ":" + localStorage.server_port;
             alert(url);
             misc.openLink(url);
