@@ -43,11 +43,11 @@ var terminView = {
         termin.lieferant = clientView.lieferant.id;
         termin.marktId = configData.markt.id;
 
+        //TODO:
         termin.start = moment($("#eventDate").datepicker('getDate'));
-
         console.log(termin.start)
-
-        termin.start = $("#eventDate").datepicker('getDate');//TODO
+        termin.start = $("#eventDate").datepicker('getDate');
+        termin.start = new Date();
 
         termin.alarm = 0;
 
@@ -156,10 +156,12 @@ var terminView = {
         $("#lieferantAlldayTermin").click(function () {
 
             if ($("#lieferantAlldayTermin").prop("checked")) {
+                $("#lieferantClock").hide();
                 $("#termine_menu .clockpicker").addClass("ui-disabled");
             }
             else {
                 $("#termine_menu .clockpicker").removeClass("ui-disabled");
+                $("#lieferantClock").show();
             }
 
         });
