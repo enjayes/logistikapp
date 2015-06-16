@@ -45,10 +45,10 @@ var terminView = {
 
         //TODO:
         termin.start = moment($("#eventDate").datepicker('getDate'));
-        console.log(termin.start)
+        //console.log(termin.start)
         termin.start = $("#eventDate").datepicker('getDate');
         termin.start = new Date();
-
+        console.log(termin.start);
         termin.alarm = 0;
 
         if ($('#lieferantRepeatTermin').is(":checked")) {
@@ -70,6 +70,7 @@ var terminView = {
         }
 
 
+        console.dir(termin);
         return termin;
     },
 
@@ -116,6 +117,8 @@ var terminView = {
 
 
         $("#b_terminabsenden").click(function () {
+
+            console.log(termin);
 
             var termin = terminView.readInput();
 

@@ -386,7 +386,8 @@ serverController = {
 
     termin: {
         messageType: {
-            create: "tc"
+            create: "tc",
+            getAll: "tga"
         },
 
         buildDTO: function (termin) {
@@ -399,8 +400,8 @@ serverController = {
             var newTermin = {
                 id: termin.id,
                 Title: termin.title,
-                Start: termin.start.format(),
-                StartMilli: termin.start.toDate().getTime(),
+                Start: termin.start, //.format(), //TODO: wichtig?
+                StartMilli: termin.start.getTime(), //.toDate().getTime(),
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant,

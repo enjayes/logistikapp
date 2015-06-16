@@ -454,19 +454,29 @@
                 <a id="zurueck_kontakt" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
             </div>
 
-            <div id="terminEintragen" data-dismissible="false" data-theme="a" class="ui-corner-all" style="display:none">
+            <div id="terminEintragen" data-dismissible="false" class="fadein" style="display:none">
+            <!-- <div id="terminEintragen" data-dismissible="false" data-theme="a" class="ui-corner-all" style="display:none">-->
 
                 <div>
+                    <h3>Termin anlegen</h3>
+                    <!--
                     <h2 id="terminheader"></h2>
-
-                    <label for="termintitel" class="">Titel:</label>
-
+                    -->
+                    <label for="termintitel" >Titel:</label>
                     <textarea id="termintitel"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
 
 
                     <label for="eventDate" class="">Datum:</label>
+                    <textarea id="eventDate"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
+                    <div id="lieferantClock">
+                        <label for="eventTime" class="">Zeit:</label>
+                        <textarea id="eventTime"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+                    </div>
 
                     <!--<input id="eventDate" type="data" >  data-role="date">-->
+
+                    <!--
 
                     <input data-role="date" name="date" id="eventDate" value=""  />
 
@@ -478,29 +488,33 @@
                         </span>
                                 </div>
                     </div>
+                    -->
 
 
-                    <div id="lieferantRepeatTerminParent" class="topMarginCheckbox" >
 
-                        <label>
-                            <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen
-                        </label>
-                        <div id="lieferantRepeatTerminChild" class="fadein"  style="display:none">
-                            <div id="repeatDaysText1">alle</div>
-
-                            <input id="lieferantRepeatTerminInput" type="text">
-
-                            <div id="repeatDaysText">Tage</div>
-                        </div>
-                    </div>
                     </div>
                     <label class="topMarginCheckbox">
                         <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
                     </label>
 
+                <div id="lieferantRepeatTerminParent" class="topMarginCheckbox" >
+
+                    <label>
+                        <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen
+                    </label>
+                    <div id="lieferantRepeatTerminChild" class="fadein"  style="display:none">
+                        <div id="repeatDaysText1">alle</div>
+
+                        <input id="lieferantRepeatTerminInput" type="text">
+
+                        <div id="repeatDaysText">Tage</div>
+                        <br>
+                    </div>
+                </div>
+
 
                     <label id="terminnotizenLabel" for="terminnotizen" class="">Notizen:</label>
-                    <textarea id="terminnotizen" rows="7"></textarea>
+                    <textarea id="terminnotizen" rows="2"></textarea>
 
                     <div class="bottombuttons saved">
                         <a id="b_terminabsenden"
