@@ -74,9 +74,12 @@ var terminView = {
         return termin;
     },
 
+
+
     initialize: function () {
 
 
+        /*
         $('#termine_menu .clockpicker').clockpicker();
 
         terminView.clockPickerHelper();
@@ -105,6 +108,31 @@ var terminView = {
         if (/mobile/i.test(navigator.userAgent)) {
             $('input').prop('readOnly', true);
         }
+    */
+
+        var input = $('#single-input');
+        input.clockpicker({
+            autoclose: true
+        });
+
+// Manual operations
+        $('#check-minutes').click(function(e){
+            // Have to stop propagation here
+            e.stopPropagation();
+            input.clockpicker('show')
+                .clockpicker('toggleView', 'minutes');
+        });
+        $('#button-b').click(function(e){
+            // Have to stop propagation here
+            e.stopPropagation();
+            input.clockpicker('show')
+                .clockpicker('toggleView', 'hours');
+        });
+
+
+
+
+        //Buttons
 
 
         $("#cb_neuer_termin").click(function () {
