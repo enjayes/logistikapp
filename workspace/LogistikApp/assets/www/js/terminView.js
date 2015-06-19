@@ -45,9 +45,8 @@ var terminView = {
 
         //TODO:
         termin.start = moment($("#eventDate").datepicker('getDate'));
-        //console.log(termin.start)
         termin.start = $("#eventDate").datepicker('getDate');
-        termin.start = new Date();
+        //termin.start = new Date();
         console.log(termin.start);
         termin.alarm = 0;
 
@@ -74,12 +73,9 @@ var terminView = {
         return termin;
     },
 
-
-
     initialize: function () {
 
 
-        /*
         $('#termine_menu .clockpicker').clockpicker();
 
         terminView.clockPickerHelper();
@@ -108,31 +104,6 @@ var terminView = {
         if (/mobile/i.test(navigator.userAgent)) {
             $('input').prop('readOnly', true);
         }
-    */
-
-        var input = $('#single-input');
-        input.clockpicker({
-            autoclose: true
-        });
-
-// Manual operations
-        $('#check-minutes').click(function(e){
-            // Have to stop propagation here
-            e.stopPropagation();
-            input.clockpicker('show')
-                .clockpicker('toggleView', 'minutes');
-        });
-        $('#button-b').click(function(e){
-            // Have to stop propagation here
-            e.stopPropagation();
-            input.clockpicker('show')
-                .clockpicker('toggleView', 'hours');
-        });
-
-
-
-
-        //Buttons
 
 
         $("#cb_neuer_termin").click(function () {
