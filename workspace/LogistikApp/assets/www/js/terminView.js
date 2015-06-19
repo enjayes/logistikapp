@@ -44,10 +44,20 @@ var terminView = {
         termin.marktId = configData.markt.id;
 
         //TODO:
-        termin.start = moment($("#eventDate").datepicker('getDate'));
-        termin.start = $("#eventDate").datepicker('getDate');
+        //termin.start = moment($("#eventDate").datepicker('getDate'));
+        //termin.start = $("#eventDate").datepicker('getDate');
         //termin.start = new Date();
-        console.log(termin.start);
+        termin.start = new Date($("#eventDate").val());
+        //set time
+        time = $("#eventTime").val();
+        var array = time.split(':');
+        hours = array[0];
+        minutes = array[1];
+        // Set hours
+        termin.start.setHours(hours);
+        // Then set minutes
+        termin.start.setMinutes(minutes);
+
         termin.alarm = 0;
 
         if ($('#lieferantRepeatTermin').is(":checked")) {
@@ -110,8 +120,6 @@ var terminView = {
 
 
         $("#b_terminabsenden").click(function () {
-
-            console.log(termin);
 
             var termin = terminView.readInput();
 
