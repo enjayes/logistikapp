@@ -84,7 +84,7 @@ var terminView = {
             .find('input').change(function () {
                 console.log(this.value);
             });
-        var input = $('#single-input').clockpicker({
+        var input = $('#eventTime').clockpicker({
             placement: 'bottom',
             align: 'left',
             autoclose: true,
