@@ -106,13 +106,7 @@ var terminView = {
         }
 
 
-        $("#cb_neuer_termin").click(function () {
 
-            $("#terminEintragen").show();
-
-            $("#termine_menu").hide();
-
-        });
 
 
         $("#b_terminabsenden").click(function () {
