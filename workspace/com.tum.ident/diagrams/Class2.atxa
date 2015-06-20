@@ -1,0 +1,619 @@
+@prefix atxa-rse-eclipse: <http://www.architexa.com/rdf/rse-eclipse#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix atxa-jdt-wkspc: <http://www.architexa.com/rdf/jdt-wkspc#> .
+@prefix atxa-core: <http://www.architexa.com/rdf/core#> .
+@prefix atxa: <http://www.architexa.com/rdf/> .
+@prefix atxa-jdt: <http://www.architexa.com/rdf/jdt#> .
+
+<http://www.architexa.com/rdf/rse-eclipse#diagrams_slClass2.atxa> a atxa-core:reloFile .
+
+atxa:DetailNode atxa-core:detailLevel "0" .
+
+atxa-core:docRoot atxa-core:browseModel "com.architexa.diagrams.relo.jdt/com.architexa.diagrams.relo.jdt.browse.ClassStrucBrowseModel" ;
+	atxa-core:contains _:node19e2tamt2x1 .
+
+_:node19e2tamt2x1 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user> ;
+	atxa-core:posX "-479" ;
+	atxa-core:posY "16" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User> .
+
+_:node19e2tamt2x1 atxa-core:contains _:node19e2tamt2x2 .
+
+_:node19e2tamt2x2 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User> ;
+	atxa-core:posX "-473" ;
+	atxa-core:posY "41" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.collectData(Context,)> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.extractUserName()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getAccountList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getAccountListString()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getBluetoothList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getBluetoothString()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getCallLogList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getCallLogString()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getCarrierList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getCarrierListString()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getContactList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getContactString()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getGid()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getId()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getPackageList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getPackageString()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getPhoneNumberList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getSIMList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getSIMListString()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getUserName()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getWLANList()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getWLANString()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.setGid(String,)> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.setId(long,)> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.User()> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.accountList> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.bluetoothList> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.callLogList> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.carrierList> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.contactList> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getUserNameFromAccount(String,)> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.gid> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.id> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.packageList> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.phoneNumberList> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.serialVersionUID> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.simList> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.TAG> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.userName> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.wlanList> .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x3 .
+
+_:node19e2tamt2x3 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.collectData(Context,)> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "283" .
+
+_:node19e2tamt2x4 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x5 .
+
+_:node19e2tamt2x6 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x7 .
+
+_:node19e2tamt2x8 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x9 .
+
+_:node19e2tamt2x10 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x11 .
+
+_:node19e2tamt2x12 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x13 .
+
+_:node19e2tamt2x14 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x15 .
+
+_:node19e2tamt2x16 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x17 .
+
+_:node19e2tamt2x18 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x19 .
+
+_:node19e2tamt2x20 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x21 .
+
+_:node19e2tamt2x22 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x23 .
+
+_:node19e2tamt2x24 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x25 .
+
+_:node19e2tamt2x26 a atxa-core:link ;
+	atxa-core:model atxa-jdt:calls ;
+	rdf:subject _:node19e2tamt2x3 ;
+	rdf:object _:node19e2tamt2x27 .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x5 .
+
+_:node19e2tamt2x5 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.extractUserName()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "299" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x28 .
+
+_:node19e2tamt2x28 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getAccountList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "315" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x29 .
+
+_:node19e2tamt2x29 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getAccountListString()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "331" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x30 .
+
+_:node19e2tamt2x30 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getBluetoothList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "347" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x31 .
+
+_:node19e2tamt2x31 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getBluetoothString()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "363" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x32 .
+
+_:node19e2tamt2x32 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getCallLogList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "379" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x33 .
+
+_:node19e2tamt2x33 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getCallLogString()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "395" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x34 .
+
+_:node19e2tamt2x34 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getCarrierList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "411" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x35 .
+
+_:node19e2tamt2x35 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getCarrierListString()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "427" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x36 .
+
+_:node19e2tamt2x36 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getContactList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "443" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x37 .
+
+_:node19e2tamt2x37 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getContactString()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "459" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x38 .
+
+_:node19e2tamt2x38 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getGid()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "475" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x39 .
+
+_:node19e2tamt2x39 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getId()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "491" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x40 .
+
+_:node19e2tamt2x40 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getPackageList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "507" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x41 .
+
+_:node19e2tamt2x41 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getPackageString()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "523" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x42 .
+
+_:node19e2tamt2x42 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getPhoneNumberList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "539" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x43 .
+
+_:node19e2tamt2x43 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getSIMList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "555" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x44 .
+
+_:node19e2tamt2x44 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getSIMListString()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "571" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x45 .
+
+_:node19e2tamt2x45 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getUserName()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "587" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x46 .
+
+_:node19e2tamt2x46 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getWLANList()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "603" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x47 .
+
+_:node19e2tamt2x47 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getWLANString()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "619" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x48 .
+
+_:node19e2tamt2x48 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.setGid(String,)> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "635" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x49 .
+
+_:node19e2tamt2x49 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.setId(long,)> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "651" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x50 .
+
+_:node19e2tamt2x50 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.User()> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "667" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x51 .
+
+_:node19e2tamt2x51 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.accountList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "59" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x52 .
+
+_:node19e2tamt2x52 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.bluetoothList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "75" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x53 .
+
+_:node19e2tamt2x53 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.callLogList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "91" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x54 .
+
+_:node19e2tamt2x54 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.carrierList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "107" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x55 .
+
+_:node19e2tamt2x55 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.contactList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "123" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x56 .
+
+_:node19e2tamt2x56 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.getUserNameFromAccount(String,)> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "683" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x57 .
+
+_:node19e2tamt2x57 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.gid> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "139" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x58 .
+
+_:node19e2tamt2x58 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.id> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "155" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x59 .
+
+_:node19e2tamt2x59 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.packageList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "171" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x60 .
+
+_:node19e2tamt2x60 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.phoneNumberList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "187" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x61 .
+
+_:node19e2tamt2x61 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.serialVersionUID> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "203" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x62 .
+
+_:node19e2tamt2x62 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.simList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "219" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x63 .
+
+_:node19e2tamt2x63 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.TAG> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "235" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x64 .
+
+_:node19e2tamt2x64 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.userName> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "251" .
+
+_:node19e2tamt2x2 atxa-core:contains _:node19e2tamt2x65 .
+
+_:node19e2tamt2x65 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.user$User.wlanList> ;
+	atxa-core:posX "-472" ;
+	atxa-core:posY "267" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x66 .
+
+_:node19e2tamt2x66 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.util> ;
+	atxa-core:posX "248" ;
+	atxa-core:posY "839" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.util> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.util$HashGenerator> .
+
+_:node19e2tamt2x66 atxa-core:contains _:node19e2tamt2x67 .
+
+_:node19e2tamt2x67 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.util$HashGenerator> ;
+	atxa-core:posX "254" ;
+	atxa-core:posY "864" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.util$HashGenerator> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.util$HashGenerator.hash(String,)> .
+
+_:node19e2tamt2x67 atxa-core:contains _:node19e2tamt2x7 .
+
+_:node19e2tamt2x7 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.util$HashGenerator.hash(String,)> ;
+	atxa-core:posX "255" ;
+	atxa-core:posY "882" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x68 .
+
+_:node19e2tamt2x68 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim> ;
+	atxa-core:posX "-93" ;
+	atxa-core:posY "12" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData> .
+
+_:node19e2tamt2x68 atxa-core:contains _:node19e2tamt2x69 .
+
+_:node19e2tamt2x69 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData> ;
+	atxa-core:posX "-87" ;
+	atxa-core:posY "37" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData.getSIMData(Context,)> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData.getPhoneNumber(Context,)> , <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData.getCarrierName(Context,)> .
+
+_:node19e2tamt2x69 atxa-core:contains _:node19e2tamt2x27 .
+
+_:node19e2tamt2x27 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData.getSIMData(Context,)> ;
+	atxa-core:posX "-86" ;
+	atxa-core:posY "55" .
+
+_:node19e2tamt2x69 atxa-core:contains _:node19e2tamt2x9 .
+
+_:node19e2tamt2x9 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData.getPhoneNumber(Context,)> ;
+	atxa-core:posX "-86" ;
+	atxa-core:posY "71" .
+
+_:node19e2tamt2x69 atxa-core:contains _:node19e2tamt2x11 .
+
+_:node19e2tamt2x11 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.sim$SIMData.getCarrierName(Context,)> ;
+	atxa-core:posX "-86" ;
+	atxa-core:posY "87" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x70 .
+
+_:node19e2tamt2x70 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.calllog> ;
+	atxa-core:posX "-140" ;
+	atxa-core:posY "844" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.calllog> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.calllog$CallLogData> .
+
+_:node19e2tamt2x70 atxa-core:contains _:node19e2tamt2x71 .
+
+_:node19e2tamt2x71 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.calllog$CallLogData> ;
+	atxa-core:posX "-134" ;
+	atxa-core:posY "869" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.calllog$CallLogData> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.calllog$CallLogData.getCallLogData(Context,)> .
+
+_:node19e2tamt2x71 atxa-core:contains _:node19e2tamt2x13 .
+
+_:node19e2tamt2x13 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.calllog$CallLogData.getCallLogData(Context,)> ;
+	atxa-core:posX "-133" ;
+	atxa-core:posY "887" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x72 .
+
+_:node19e2tamt2x72 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.apps> ;
+	atxa-core:posX "-135" ;
+	atxa-core:posY "767" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.apps> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.apps$PackageData> .
+
+_:node19e2tamt2x72 atxa-core:contains _:node19e2tamt2x73 .
+
+_:node19e2tamt2x73 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.apps$PackageData> ;
+	atxa-core:posX "-129" ;
+	atxa-core:posY "792" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.apps$PackageData> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.apps$PackageData.getPackageData(Context,boolean,)> .
+
+_:node19e2tamt2x73 atxa-core:contains _:node19e2tamt2x15 .
+
+_:node19e2tamt2x15 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.apps$PackageData.getPackageData(Context,boolean,)> ;
+	atxa-core:posX "-128" ;
+	atxa-core:posY "810" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x74 .
+
+_:node19e2tamt2x74 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.wlan> ;
+	atxa-core:posX "-554" ;
+	atxa-core:posY "790" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.wlan> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.wlan$WLANData> .
+
+_:node19e2tamt2x74 atxa-core:contains _:node19e2tamt2x75 .
+
+_:node19e2tamt2x75 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.wlan$WLANData> ;
+	atxa-core:posX "-548" ;
+	atxa-core:posY "815" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.wlan$WLANData> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.wlan$WLANData.getWLANData(Context,)> .
+
+_:node19e2tamt2x75 atxa-core:contains _:node19e2tamt2x17 .
+
+_:node19e2tamt2x17 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.wlan$WLANData.getWLANData(Context,)> ;
+	atxa-core:posX "-547" ;
+	atxa-core:posY "833" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x76 .
+
+_:node19e2tamt2x76 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.contacts> ;
+	atxa-core:posX "145" ;
+	atxa-core:posY "980" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.contacts> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.contacts$ContactData> .
+
+_:node19e2tamt2x76 atxa-core:contains _:node19e2tamt2x77 .
+
+_:node19e2tamt2x77 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.contacts$ContactData> ;
+	atxa-core:posX "151" ;
+	atxa-core:posY "1005" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.contacts$ContactData> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.contacts$ContactData.getContactData(Context,)> .
+
+_:node19e2tamt2x77 atxa-core:contains _:node19e2tamt2x19 .
+
+_:node19e2tamt2x19 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.contacts$ContactData.getContactData(Context,)> ;
+	atxa-core:posX "152" ;
+	atxa-core:posY "1023" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x78 .
+
+_:node19e2tamt2x78 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.data> ;
+	atxa-core:posX "263" ;
+	atxa-core:posY "729" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.data> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.data$DataController> .
+
+_:node19e2tamt2x78 atxa-core:contains _:node19e2tamt2x79 .
+
+_:node19e2tamt2x79 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.data$DataController> ;
+	atxa-core:posX "269" ;
+	atxa-core:posY "754" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.data$DataController> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.data$DataController.setUserName(String,)> .
+
+_:node19e2tamt2x79 atxa-core:contains _:node19e2tamt2x21 .
+
+_:node19e2tamt2x21 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.data$DataController.setUserName(String,)> ;
+	atxa-core:posX "270" ;
+	atxa-core:posY "772" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x80 .
+
+_:node19e2tamt2x80 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.bluetooth> ;
+	atxa-core:posX "-153" ;
+	atxa-core:posY "987" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.bluetooth> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.bluetooth$BluetoothData> .
+
+_:node19e2tamt2x80 atxa-core:contains _:node19e2tamt2x81 .
+
+_:node19e2tamt2x81 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.bluetooth$BluetoothData> ;
+	atxa-core:posX "-147" ;
+	atxa-core:posY "1012" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.bluetooth$BluetoothData> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.bluetooth$BluetoothData.getBluetoothData()> .
+
+_:node19e2tamt2x81 atxa-core:contains _:node19e2tamt2x23 .
+
+_:node19e2tamt2x23 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.bluetooth$BluetoothData.getBluetoothData()> ;
+	atxa-core:posX "-146" ;
+	atxa-core:posY "1030" .
+
+atxa-core:docRoot atxa-core:contains _:node19e2tamt2x82 .
+
+_:node19e2tamt2x82 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.accounts> ;
+	atxa-core:posX "-365" ;
+	atxa-core:posY "918" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.accounts> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.accounts$AccountData> .
+
+_:node19e2tamt2x82 atxa-core:contains _:node19e2tamt2x83 .
+
+_:node19e2tamt2x83 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.accounts$AccountData> ;
+	atxa-core:posX "-359" ;
+	atxa-core:posY "943" .
+
+<http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.accounts$AccountData> atxa-core:contains <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.accounts$AccountData.getAccountData(Context,)> .
+
+_:node19e2tamt2x83 atxa-core:contains _:node19e2tamt2x25 .
+
+_:node19e2tamt2x25 a atxa-core:node ;
+	atxa-core:model <http://www.architexa.com/rdf/jdt-wkspc#com.tum.ident.accounts$AccountData.getAccountData(Context,)> ;
+	atxa-core:posX "-358" ;
+	atxa-core:posY "961" .
+
+@prefix atxa-rse-eclipse: <http://www.architexa.com/rdf/rse-eclipse#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix atxa-jdt-wkspc: <http://www.architexa.com/rdf/jdt-wkspc#> .
+@prefix atxa-core: <http://www.architexa.com/rdf/core#> .
+@prefix atxa: <http://www.architexa.com/rdf/> .
+@prefix atxa-jdt: <http://www.architexa.com/rdf/jdt#> .
+
+<http://www.architexa.com/rdf/rse-eclipse#diagrams_slClass2.atxa> a atxa-core:reloFile ;
+	atxa-core:contains _:node19e2tamt2x3 , _:node19e2tamt2x5 , _:node19e2tamt2x28 , _:node19e2tamt2x29 , _:node19e2tamt2x30 , _:node19e2tamt2x31 , _:node19e2tamt2x32 , _:node19e2tamt2x33 , _:node19e2tamt2x34 , _:node19e2tamt2x35 , _:node19e2tamt2x36 , _:node19e2tamt2x37 , _:node19e2tamt2x38 , _:node19e2tamt2x39 , _:node19e2tamt2x40 , _:node19e2tamt2x41 , _:node19e2tamt2x42 , _:node19e2tamt2x43 , _:node19e2tamt2x44 , _:node19e2tamt2x45 , _:node19e2tamt2x46 , _:node19e2tamt2x47 , _:node19e2tamt2x48 , _:node19e2tamt2x49 , _:node19e2tamt2x50 , _:node19e2tamt2x51 , _:node19e2tamt2x52 , _:node19e2tamt2x53 , _:node19e2tamt2x54 , _:node19e2tamt2x55 , _:node19e2tamt2x56 , _:node19e2tamt2x57 , _:node19e2tamt2x58 , _:node19e2tamt2x59 , _:node19e2tamt2x60 , _:node19e2tamt2x61 , _:node19e2tamt2x62 , _:node19e2tamt2x63 , _:node19e2tamt2x64 , _:node19e2tamt2x65 , _:node19e2tamt2x2 , _:node19e2tamt2x1 , _:node19e2tamt2x7 , _:node19e2tamt2x67 , _:node19e2tamt2x66 , _:node19e2tamt2x27 , _:node19e2tamt2x9 , _:node19e2tamt2x11 , _:node19e2tamt2x69 , _:node19e2tamt2x68 , _:node19e2tamt2x13 , _:node19e2tamt2x71 , _:node19e2tamt2x70 , _:node19e2tamt2x15 , _:node19e2tamt2x73 , _:node19e2tamt2x72 , _:node19e2tamt2x17 , _:node19e2tamt2x75 , _:node19e2tamt2x74 , _:node19e2tamt2x19 , _:node19e2tamt2x77 , _:node19e2tamt2x76 , _:node19e2tamt2x21 , _:node19e2tamt2x79 , _:node19e2tamt2x78 , _:node19e2tamt2x23 , _:node19e2tamt2x81 , _:node19e2tamt2x80 , _:node19e2tamt2x25 , _:node19e2tamt2x83 , _:node19e2tamt2x82 , atxa-core:docRoot , _:node19e2tamt2x3 , _:node19e2tamt2x5 , _:node19e2tamt2x28 , _:node19e2tamt2x29 , _:node19e2tamt2x30 , _:node19e2tamt2x31 , _:node19e2tamt2x32 , _:node19e2tamt2x33 , _:node19e2tamt2x34 , _:node19e2tamt2x35 , _:node19e2tamt2x36 , _:node19e2tamt2x37 , _:node19e2tamt2x38 , _:node19e2tamt2x39 , _:node19e2tamt2x40 , _:node19e2tamt2x41 , _:node19e2tamt2x42 , _:node19e2tamt2x43 , _:node19e2tamt2x44 , _:node19e2tamt2x45 , _:node19e2tamt2x46 , _:node19e2tamt2x47 , _:node19e2tamt2x48 , _:node19e2tamt2x49 , _:node19e2tamt2x50 , _:node19e2tamt2x51 , _:node19e2tamt2x52 , _:node19e2tamt2x53 , _:node19e2tamt2x54 , _:node19e2tamt2x55 , _:node19e2tamt2x56 , _:node19e2tamt2x57 , _:node19e2tamt2x58 , _:node19e2tamt2x59 , _:node19e2tamt2x60 , _:node19e2tamt2x61 , _:node19e2tamt2x62 , _:node19e2tamt2x63 , _:node19e2tamt2x64 , _:node19e2tamt2x65 , _:node19e2tamt2x2 , _:node19e2tamt2x1 , _:node19e2tamt2x7 , _:node19e2tamt2x67 , _:node19e2tamt2x66 , _:node19e2tamt2x27 , _:node19e2tamt2x9 , _:node19e2tamt2x11 , _:node19e2tamt2x69 , _:node19e2tamt2x68 , _:node19e2tamt2x13 , _:node19e2tamt2x71 , _:node19e2tamt2x70 , _:node19e2tamt2x15 , _:node19e2tamt2x73 , _:node19e2tamt2x72 , _:node19e2tamt2x17 , _:node19e2tamt2x75 , _:node19e2tamt2x74 , _:node19e2tamt2x19 , _:node19e2tamt2x77 , _:node19e2tamt2x76 , _:node19e2tamt2x21 , _:node19e2tamt2x79 , _:node19e2tamt2x78 , _:node19e2tamt2x23 , _:node19e2tamt2x81 , _:node19e2tamt2x80 , _:node19e2tamt2x25 , _:node19e2tamt2x83 , _:node19e2tamt2x82 , atxa-core:docRoot , _:node19e2tamt2x4 , _:node19e2tamt2x6 , _:node19e2tamt2x8 , _:node19e2tamt2x10 , _:node19e2tamt2x12 , _:node19e2tamt2x14 , _:node19e2tamt2x16 , _:node19e2tamt2x18 , _:node19e2tamt2x20 , _:node19e2tamt2x22 , _:node19e2tamt2x24 , _:node19e2tamt2x26 , _:node19e2tamt2x4 , _:node19e2tamt2x6 , _:node19e2tamt2x8 , _:node19e2tamt2x10 , _:node19e2tamt2x12 , _:node19e2tamt2x14 , _:node19e2tamt2x16 , _:node19e2tamt2x18 , _:node19e2tamt2x20 , _:node19e2tamt2x22 , _:node19e2tamt2x24 , _:node19e2tamt2x26 .
+
