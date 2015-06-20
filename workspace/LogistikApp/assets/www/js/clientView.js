@@ -247,6 +247,7 @@ var clientView = {
         var that = this;
 
         terminView.initialize();
+        termineListView.initialize();
         var goodByeTimeout = null;
 
 

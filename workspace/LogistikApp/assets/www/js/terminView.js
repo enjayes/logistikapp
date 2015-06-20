@@ -43,11 +43,20 @@ var terminView = {
         termin.lieferant = clientView.lieferant.id;
         termin.marktId = configData.markt.id;
 
-        termin.start = moment($("#eventDate").datepicker('getDate'));
-
-        console.log(termin.start)
-
-        termin.start = $("#eventDate").datepicker('getDate');//TODO
+        //TODO:
+        //termin.start = moment($("#eventDate").datepicker('getDate'));
+        //termin.start = $("#eventDate").datepicker('getDate');
+        //termin.start = new Date();
+        termin.start = new Date($("#eventDate").val());
+        //set time
+        time = $("#eventTime").val();
+        var array = time.split(':');
+        hours = array[0];
+        minutes = array[1];
+        // Set hours
+        termin.start.setHours(hours);
+        // Then set minutes
+        termin.start.setMinutes(minutes);
 
         termin.alarm = 0;
 
@@ -70,6 +79,7 @@ var terminView = {
         }
 
 
+        console.dir(termin);
         return termin;
     },
 
@@ -84,7 +94,7 @@ var terminView = {
             .find('input').change(function () {
                 console.log(this.value);
             });
-        var input = $('#single-input').clockpicker({
+        var input = $('#eventTime').clockpicker({
             placement: 'bottom',
             align: 'left',
             autoclose: true,
@@ -106,13 +116,7 @@ var terminView = {
         }
 
 
-        $("#cb_neuer_termin").click(function () {
 
-            $("#terminEintragen").show();
-
-            $("#termine_menu").hide();
-
-        });
 
 
         $("#b_terminabsenden").click(function () {
@@ -156,10 +160,12 @@ var terminView = {
         $("#lieferantAlldayTermin").click(function () {
 
             if ($("#lieferantAlldayTermin").prop("checked")) {
+                $("#lieferantClock").hide();
                 $("#termine_menu .clockpicker").addClass("ui-disabled");
             }
             else {
                 $("#termine_menu .clockpicker").removeClass("ui-disabled");
+                $("#lieferantClock").show();
             }
 
         });
