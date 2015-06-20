@@ -48,15 +48,7 @@ var terminView = {
         //termin.start = $("#eventDate").datepicker('getDate');
         //termin.start = new Date();
         termin.start = new Date($("#eventDate").val());
-        //set time
-        time = $("#eventTime").val();
-        var array = time.split(':');
-        hours = array[0];
-        minutes = array[1];
-        // Set hours
-        termin.start.setHours(hours);
-        // Then set minutes
-        termin.start.setMinutes(minutes);
+
 
         termin.alarm = 0;
 
@@ -76,6 +68,15 @@ var terminView = {
         }
         else {
             termin.allDay = false;
+            //set time
+            time = $("#eventTime").val();
+            var array = time.split(':');
+            hours = array[0];
+            minutes = array[1];
+            // Set hours
+            termin.start.setHours(hours);
+            // Then set minutes
+            termin.start.setMinutes(minutes);
         }
 
 
