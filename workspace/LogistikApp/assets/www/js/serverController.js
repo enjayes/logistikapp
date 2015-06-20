@@ -387,7 +387,7 @@ serverController = {
     termin: {
         messageType: {
             create: "tc",
-            getAll: "tga"
+            get: "tg"
         },
 
         buildDTO: function (termin) {
