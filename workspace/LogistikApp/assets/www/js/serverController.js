@@ -400,7 +400,7 @@ serverController = {
             var newTermin = {
                 id: termin.id,
                 Title: termin.title,
-                Start: termin.start, //.format(), //TODO: wichtig?
+                Start: termin.start, //.format(),
                 StartMilli: termin.start.getTime(), //.toDate().getTime(),
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
@@ -414,6 +414,26 @@ serverController = {
 
             return newTermin;
 
+        },
+
+
+        //TODO: zum funktionieren bringen aka gegenstück im server schreiben
+        get: function (lieferanten_id, callback) {
+            serverController.termin.getCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                }
+                return callback(list);
+            };
+            var newCallback = function () {
+                serverController.nachricht.getCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+            };
+
+            serverController.socket.emit('termin', new ServerMessage({
+                t: this.messageType.get,
+                lid: lieferanten_id,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
         },
 
 
