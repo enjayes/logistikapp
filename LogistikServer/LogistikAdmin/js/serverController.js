@@ -45,6 +45,7 @@ serverController = {
         //Load Socket io and connect
 
         serverController.socket = io();
+        serverController.socket = io.connect("localhost:3142", {"force new connection": true});
 
 
         serverController.socket.on('disconnect', function () {

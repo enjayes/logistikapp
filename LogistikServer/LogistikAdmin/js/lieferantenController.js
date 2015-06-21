@@ -12,9 +12,9 @@
 
 lieferantenController = {
     titleUnbenannt: "Unbenannt",
-    defaultPin:"0000",
+    defaultPin: "0000",
     lieferanten: [],
-    loaded:false,
+    loaded: false,
 
     init: function () {
 
@@ -33,9 +33,7 @@ lieferantenController = {
 
             if (lieferanten) {
                 lieferantenController.lieferanten = lieferanten;
-                lieferantenController.loaded =true;
-
-
+                lieferantenController.loaded = true;
 
 
                 if (lieferantenController.aktuellerLieferant) {
@@ -82,7 +80,7 @@ lieferantenController = {
                     }
                 }
 
-               //Update Lieferanten Widgets
+                //Update Lieferanten Widgets
                 uebersichtTab.searchWidget.setList(lieferantenController.lieferanten);
                 termineTab.searchWidget.setList(lieferantenController.lieferanten);
                 nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
@@ -106,24 +104,25 @@ lieferantenController = {
 
     zeigeLieferanten: function () {
 
+
         lieferantenController.zeigeAlleLieferanten = !lieferantenController.zeigeAlleLieferanten;
         if (lieferantenController.zeigeAlleLieferanten) {
             lieferantenController.lieferantenFilterDontDismissByBlur = true;
             setTimeout(function () {
                 lieferantenController.lieferantenFilterDontDismissByBlur = false;
-            }, 400)
+            }, 400);
             $("#allelieferantenanzeigen").val('Verstecken').button('refresh');
         } else {
             $("#allelieferantenanzeigen").val('Alle anzeigen').button('refresh');
         }
         $("#suchelieferantenliste").filterable("refresh");
+
     },
-
-
     zeigeAktuellenLieferanten: function (dontPush) {
 
-
         if (lieferantenController.aktuellerLieferant) {
+
+            $("#lieferantenUebersicht").hide();
 
             //Setze werte
             $("#lieferantVorname").val(lieferantenController.aktuellerLieferant.vorname);
@@ -137,7 +136,7 @@ lieferantenController = {
             $("#lieferantBearbeitenTelefon").val(lieferantenController.aktuellerLieferant.telefon);
             $("#lieferantBearbeitenPin").val(lieferantenController.aktuellerLieferant.pin);
 
-            $("#lieferantBearbeitenColor").css("color","#"+misc.getColorFromUniqueID(lieferantenController.aktuellerLieferant.id));
+            $("#lieferantBearbeitenColor").css("color", "#" + misc.getColorFromUniqueID(lieferantenController.aktuellerLieferant.id));
 
             $("#lieferantenInformationen").show();
             $("#lieferantenInformationen .redborder").removeClass("redborder");
@@ -150,6 +149,21 @@ lieferantenController = {
             if (!dontPush)
                 Router.pushState();
         }
+
+
+    }, zeigeLieferantenUebersicht: function () {
+
+
+        lieferantenController.checkSaved(function(){
+
+            lieferantenController.speichereAktuellenLieferant();
+            $("#lieferantenUebersicht").show();
+            $("#lieferantenInformationen").hide();
+
+        })
+
+
+
 
 
     }, speichereAktuellenLieferant: function () {
@@ -171,12 +185,13 @@ lieferantenController = {
                 this.aktuellerLieferant.vorname = $("#lieferantVorname").val();
                 this.aktuellerLieferant.name = name;
 
-                this.aktuellerLieferant.firma = $("#lieferantBearbeitenFirma").val();;
+                this.aktuellerLieferant.firma = $("#lieferantBearbeitenFirma").val();
+                ;
                 this.aktuellerLieferant.telefon = $("#lieferantBearbeitenTelefon").val();
 
                 this.aktuellerLieferant.email = $("#lieferantBearbeitenEMail").val();
                 this.aktuellerLieferant.adresse = $("#lieferantBearbeitenAdresse").val();
-                this.aktuellerLieferant.notizen= $("#lieferantBearbeitenNotizen").val();
+                this.aktuellerLieferant.notizen = $("#lieferantBearbeitenNotizen").val();
 
                 this.aktuellerLieferantGespeichert = true;
                 $("#speichereLieferant").css("opacity", 0).addClass("ui-disabled");
@@ -254,7 +269,7 @@ lieferantenController = {
             setTimeout(function () {
 
 
-                if (!lieferantenController.aktuellerLieferant){
+                if (!lieferantenController.aktuellerLieferant) {
 
                     $("#lieferantenInformationen").hide();
 
@@ -272,7 +287,7 @@ lieferantenController = {
 
 
         var waehleLieferant = function () {
-            lieferantenController.aktuellerLieferant = $.extend(true, {},lieferant);
+            lieferantenController.aktuellerLieferant = $.extend(true, {}, lieferant);
             $("#lieferantenInformationen").addClass("geladen").removeClass("geloescht");
             setTimeout(function () {
                 $("#lieferantenInformationen").removeClass("geladen");
@@ -322,17 +337,17 @@ lieferantenController = {
             //Update Server DB
             serverController.lieferant.create(lieferantenController.aktuellerLieferant);
             //Get New Pin for Lieferant
-            serverController.lieferant.getNewPin(lieferantenController.aktuellerLieferant, function(lieferant){
+            serverController.lieferant.getNewPin(lieferantenController.aktuellerLieferant, function (lieferant) {
 
-                if(lieferant){
+                if (lieferant) {
                     var newPin = lieferant.pin;
-                    console.log( lieferant.pin)
+                    console.log(lieferant.pin)
                     console.dir(lieferant);
-                    lieferant =    lieferantenController.getLieferantByID(lieferant.id)
-                    if(lieferant){
+                    lieferant = lieferantenController.getLieferantByID(lieferant.id)
+                    if (lieferant) {
                         console.log("!")
-                        lieferant.pin =  newPin;
-                        if(lieferant.id==lieferantenController.aktuellerLieferant.id){
+                        lieferant.pin = newPin;
+                        if (lieferant.id == lieferantenController.aktuellerLieferant.id) {
 
                             if (lieferantenController.aktuellerLieferant) {
                                 $("#lieferantenInformationen").addClass("neumitalt");
@@ -362,8 +377,6 @@ lieferantenController = {
             $("#suchelieferantenliste").hide();
 
 
-
-
         }
 
         this.checkSaved(lieferantenHinzufuegen);
@@ -389,8 +402,8 @@ lieferantenController = {
 
     },
     getLieferantFullName: function (lieferant) {
-        if(!lieferant)
-         return "";
+        if (!lieferant)
+            return "";
         var name = lieferant.name;
         if (lieferant.vorname && lieferant.vorname.trim() != "")
             name = name + " " + lieferant.vorname.trim();

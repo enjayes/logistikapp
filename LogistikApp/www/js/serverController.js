@@ -42,7 +42,6 @@ serverController = {
         var address = logistikapp.servername + ":" + logistikapp.server_port;
         console.log(":::" + address + "::::")
 
-
         serverController.socket = io.connect(address, {"force new connection": true});
 
         console.log(serverController.socket)

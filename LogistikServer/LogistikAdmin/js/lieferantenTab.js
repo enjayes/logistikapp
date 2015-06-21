@@ -26,6 +26,9 @@ lieferantenTab = {
             }
         )
 
+
+        lieferantenController.zeigeLieferantenUebersicht();
+
     },
 
     ready: function () {
@@ -33,7 +36,6 @@ lieferantenTab = {
 
     },
     open: function () {
-
 
     }
 

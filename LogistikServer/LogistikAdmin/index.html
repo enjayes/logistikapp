@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de-DE">
 <head>
+    <meta charset="utf-8"/>
     <title>EDEKA</title>
     <link href='libs/fullcalendar-2.2.1/fullcalendar.css' rel='stylesheet' type="text/css"/>
     <link href='libs/fullcalendar-2.2.1/fullcalendar.print.css' rel='stylesheet' media='print' type="text/css"/>
@@ -191,7 +192,6 @@
                 <h3 style="font-size: 16px;">Märkte</h3>
 
                 <div style="padding-left:5px">
-
                     <div id="auftragsHistorieMarktSelection" style="display:inline-block"></div>
                 </div>
             </div>
@@ -274,6 +274,14 @@
             </div>
 
         </div>
+
+
+        <div id="lieferantenUebersicht" style="display:none">
+            <h2 id="lieferantenUebersichtTitle">Lieferanten </h2>
+
+        </div>
+
+
         <div id="lieferantenInformationen" style="display:none">
 
             <h2 id="lieferantBearbeitenTitle">Lieferant </h2>
@@ -339,6 +347,9 @@
 
             <br>
             <br>
+            <a href="" id="lieferantZurueck" onclick="lieferantenController.zeigeLieferantenUebersicht()"
+               class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-l ui-btn-icon-left ui-btn-a"
+               data-transition="pop">Übersicht</a>
             <a href="" id="speichereLieferant" onclick="lieferantenController.speichereAktuellenLieferant()" style="opacity:0"
                class="greenbutton ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-disabled ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a"
                data-transition="pop">Speichern</a>
