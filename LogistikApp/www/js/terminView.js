@@ -55,6 +55,7 @@ var terminView = {
             termin.repeatDays = $("#lieferantRepeatTerminInput").val();
         }
         else {
+            termin.repeatDays = 0;
             //TODO: nothing??
         }
 

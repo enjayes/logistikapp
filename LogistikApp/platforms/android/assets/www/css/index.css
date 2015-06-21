@@ -154,6 +154,24 @@ button {
 }
 
 
+.colorbutton3{
+    text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #008814 /*{a-bup-shadow-color}*/!important;
+    color: #ff0000!important;
+    border-radius:  15px!important;
+}
+
+
+
+.colorbutton3:hover{
+    background-color:rgb(0, 113, 23)!important;;
+
+}
+.colorbutton3:active{
+    background-color:rgb(0, 93, 3)!important;;
+
+}
+
+
 .bluebutton{
     background-color:rgb(0, 23,113)!important;
     text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #001488 /*{a-bup-shadow-color}*/!important;

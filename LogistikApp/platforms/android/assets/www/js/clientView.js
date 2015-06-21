@@ -15,8 +15,9 @@ var clientView = {
 
         console.log("Lieferant")
         console.dir(this.lieferant)
-
-        job.lieferanten_id = this.lieferant.id;
+        if(this.lieferant) {
+            job.lieferanten_id = this.lieferant.id;
+        }
 
         job.markt_id = logistikapp.markt_id;
 
@@ -417,6 +418,13 @@ var clientView = {
 
             $("#goodbye").show();
             $("#logout").hide();
+            nachrichtText = $("#t_notizen").val();
+
+            var nachricht = {id: misc.getUniqueID(), lieferanten:[job.lieferanten_id] , read: false, datum: new Date(), nachricht: nachrichtText, maerkte: [job.markt_id]};
+
+            console.log("SENDE NACHRICHT:");
+            console.dir(nachricht);
+            serverController.nachricht.create(nachricht);
 
             loginController.logout();
 

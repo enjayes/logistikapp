@@ -280,7 +280,6 @@ nachrichtenController = {
             for (var j = 0; j < maerkte.length; j++) {
                 maerkteIds.push(maerkte[j].id);
             }
-
             var nachricht = {id: misc.getUniqueID(), lieferanten: lieferantenIds, read: false, datum: new Date(), nachricht: nachrichtText, maerkte: maerkteIds };
 
             console.dir(nachricht);

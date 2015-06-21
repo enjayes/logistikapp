@@ -234,6 +234,10 @@ serverController = {
             console.dir("markRead:");
             console.dir(markReadMessage);
             serverController.socket.emit('message', new ServerMessage(markReadMessage));
+        },
+        create: function (nachricht) {
+
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.create, n: this.buildDTO(nachricht)}));
         }
 
     },

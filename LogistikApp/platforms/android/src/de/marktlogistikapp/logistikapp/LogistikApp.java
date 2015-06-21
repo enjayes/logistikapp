@@ -51,7 +51,7 @@ public class LogistikApp extends CordovaActivity
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         loadUrl(launchUrl+"#android"); 
 
-        
+        String test = "";
         
    
         WebSettings settings = appView.getSettings( ); 

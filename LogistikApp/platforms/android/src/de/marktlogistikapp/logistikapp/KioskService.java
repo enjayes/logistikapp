@@ -83,7 +83,7 @@ public class KioskService extends Service {
 	    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    ctx.startActivity(i);
 	    */
-	    return;
+	    return ;
 	  }
 	  
 	  public boolean isKioskModeActive(final Context context) {

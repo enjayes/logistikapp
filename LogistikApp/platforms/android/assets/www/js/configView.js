@@ -14,6 +14,14 @@ var configView = {
             }
         })
 
+
+
+
+        $("#close_app").click(function () {
+            navigator.app.exitApp();
+        });
+
+
         $("#save_config").click(function () {
             logistikapp.servername = $("#t_server").val();
             logistikapp.server_port = $("#t_port").val();
