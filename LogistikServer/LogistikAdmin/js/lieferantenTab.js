@@ -27,13 +27,10 @@ lieferantenTab = {
         )
 
 
-        lieferantenController.zeigeLieferantenUebersicht();
 
     },
 
     ready: function () {
-
-
     },
     open: function () {
 

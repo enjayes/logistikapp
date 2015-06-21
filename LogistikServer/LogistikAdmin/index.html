@@ -278,7 +278,9 @@
 
         <div id="lieferantenUebersicht" style="display:none">
             <h2 id="lieferantenUebersichtTitle">Lieferanten </h2>
+            <ul id="lieferantenUebersichtListe" data-role="listview" data-inset="true">
 
+            </ul>
         </div>
 
 
@@ -347,7 +349,7 @@
 
             <br>
             <br>
-            <a href="" id="lieferantZurueck" onclick="lieferantenController.zeigeLieferantenUebersicht()"
+            <a href="" id="lieferantZurueck" onclick="lieferantenController.zeigeLieferantenUebersichtCheckSave()"
                class="ui-btn ui-btn-b ui-mini ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-l ui-btn-icon-left ui-btn-a"
                data-transition="pop">Übersicht</a>
             <a href="" id="speichereLieferant" onclick="lieferantenController.speichereAktuellenLieferant()" style="opacity:0"

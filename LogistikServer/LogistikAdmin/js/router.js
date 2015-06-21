@@ -100,7 +100,7 @@ Router = {
             }
         }
     },
-    pushState: function () {
+    pushState: function (keinAktuellerLieferant) {
         //Set Tabs as marked
         var colorTabs = function(){
             $("#tabs #" + tabsController.tab().anchorName).addClass("ui-btn-active")
@@ -119,7 +119,7 @@ Router = {
 
         var hashCode = "state=tab_" + tabsController.aktuellerTab;
 
-        if (lieferantenController.aktuellerLieferant)
+        if (!keinAktuellerLieferant&&lieferantenController.aktuellerLieferant)
             hashCode = hashCode + "+l_" + lieferantenController.aktuellerLieferant.id;
 
         hashCode = hashCode + "+jq_";
