@@ -23,19 +23,21 @@ var termineListView = {
         this.dummy_termine.push(termin3);
 
 
-        var listItem = "<li>" + termin1.title + "</li>";
-        //$("#termine_liste").html(listItem);
-        $("#termine_liste").append(listItem);
-        $("#termine_liste").listview();
+
+
 
 
         for (var t in this.dummy_termine)
         {
+            var listItem = "<li>" + termin1.title + "</li>";
+            $("#termine_liste").append(listItem);
+
             var string = t.title;
             console.log("this.dummy_termine");
             console.log(t.title);
             var listItem = "<li>" + string + "</li>";
             $("#termine_liste").append(listItem);
+            $("#termine_liste").listview("refresh");
         }
 
     },

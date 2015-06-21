@@ -390,6 +390,13 @@ serverController = {
             get: "tg"
         },
 
+
+        //TODO: implement
+        parseDT0: function (sent_termin)
+        {
+
+        },
+
         buildDTO: function (termin) {
 
             var termin = $.extend(true, {}, termin);
@@ -421,12 +428,13 @@ serverController = {
         get: function (lieferanten_id, callback) {
             serverController.termin.getCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
+                    console.log(list[i]);
                     list[i] = serverController.termin.parseDTO(list[i]);
                 }
                 return callback(list);
             };
             var newCallback = function () {
-                serverController.nachricht.getCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+                serverController.termin.getCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
             serverController.socket.emit('termin', new ServerMessage({
