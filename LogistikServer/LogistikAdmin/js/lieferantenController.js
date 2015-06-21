@@ -164,6 +164,7 @@ lieferantenController = {
         }
 
     }, zeigeLieferantenUebersicht: function () {
+
         lieferantenTab.searchWidget.selectedItems = [];
         lieferantenController.aktuellerLieferant = null;
         lieferantenController.aktuellerLieferantGespeichert = true;
@@ -177,7 +178,7 @@ lieferantenController = {
                     '<h2>' + lieferant.vorname + ' ' + lieferant.name + '</h2>' +
                     '<p>Firma: ' + lieferant.firma + '</p>' +
                     '<p><strong>Telefon: ' + lieferant.telefon + '</strong></p>' +
-                    '<p>E-Mail:: ' + lieferant.email + '</p>' +
+                    '<p>E-Mail: ' + lieferant.email + '</p>' +
                     '</a></li>');
 
             var clickLieferant = function (lieferantElement, lieferant) {
@@ -351,11 +352,11 @@ lieferantenController = {
         if (a.name < b.name)
             return -1;
         if (a.name > b.name)
-            return 1
+            return 1;
         if (a.vorname < b.vorname)
             return -1;
         if (a.vorname > b.vorname)
-            return 1
+            return 1;
         return 0;
     },
     lieferantenHinzufuegen: function () {
