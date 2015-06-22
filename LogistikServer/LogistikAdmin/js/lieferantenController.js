@@ -12,18 +12,19 @@
 
 lieferantenController = {
     titleUnbenannt: "Unbenannt",
-    defaultPin:"0000",
+    defaultPin: "0000",
     lieferanten: [],
-    loaded:false,
+    loaded: false,
 
     init: function () {
 
 
-        $("#lieferantenInformationen input").on("input", function () {
+        $("#lieferantenInformationen input,#lieferantenInformationen textarea").on("input", function () {
             lieferantenController.aktuellerLieferantGespeichert = false;
             $("#speichereLieferant").css("opacity", 1).removeClass("ui-disabled");
             $("#rueckgaengigLieferant").css("opacity", 1).removeClass("ui-disabled");
         })
+
 
     },
     ready: function () {
@@ -32,11 +33,10 @@ lieferantenController = {
         var getLieferatenFromServer = function (lieferanten) {
 
             if (lieferanten) {
+
                 lieferantenController.lieferanten = lieferanten;
-                lieferantenController.loaded =true;
-
-
-
+                lieferantenController.lieferanten.sort(lieferantenController.lieferantenCompare);
+                lieferantenController.loaded = true;
 
                 if (lieferantenController.aktuellerLieferant) {
                     var lieferant = lieferantenController.getLieferantByID(lieferantenController.aktuellerLieferant.id);
@@ -82,7 +82,7 @@ lieferantenController = {
                     }
                 }
 
-               //Update Lieferanten Widgets
+                //Update Lieferanten Widgets
                 uebersichtTab.searchWidget.setList(lieferantenController.lieferanten);
                 termineTab.searchWidget.setList(lieferantenController.lieferanten);
                 nachrichtenTab.searchWidget.setList(lieferantenController.lieferanten);
@@ -95,6 +95,8 @@ lieferantenController = {
 
                 uebersichtController.updateAuftragsHistorie();
 
+                lieferantenController.zeigeLieferantenUebersicht();
+
             }
         }
         serverController.lieferant.getAll(getLieferatenFromServer);
@@ -106,24 +108,25 @@ lieferantenController = {
 
     zeigeLieferanten: function () {
 
+
         lieferantenController.zeigeAlleLieferanten = !lieferantenController.zeigeAlleLieferanten;
         if (lieferantenController.zeigeAlleLieferanten) {
             lieferantenController.lieferantenFilterDontDismissByBlur = true;
             setTimeout(function () {
                 lieferantenController.lieferantenFilterDontDismissByBlur = false;
-            }, 400)
+            }, 400);
             $("#allelieferantenanzeigen").val('Verstecken').button('refresh');
         } else {
             $("#allelieferantenanzeigen").val('Alle anzeigen').button('refresh');
         }
         $("#suchelieferantenliste").filterable("refresh");
+
     },
-
-
     zeigeAktuellenLieferanten: function (dontPush) {
 
-
         if (lieferantenController.aktuellerLieferant) {
+
+            $("#lieferantenUebersicht").hide();
 
             //Setze werte
             $("#lieferantVorname").val(lieferantenController.aktuellerLieferant.vorname);
@@ -137,7 +140,7 @@ lieferantenController = {
             $("#lieferantBearbeitenTelefon").val(lieferantenController.aktuellerLieferant.telefon);
             $("#lieferantBearbeitenPin").val(lieferantenController.aktuellerLieferant.pin);
 
-            $("#lieferantBearbeitenColor").css("color","#"+misc.getColorFromUniqueID(lieferantenController.aktuellerLieferant.id));
+            $("#lieferantBearbeitenColor").css("color", "#" + misc.getColorFromUniqueID(lieferantenController.aktuellerLieferant.id));
 
             $("#lieferantenInformationen").show();
             $("#lieferantenInformationen .redborder").removeClass("redborder");
@@ -150,6 +153,49 @@ lieferantenController = {
             if (!dontPush)
                 Router.pushState();
         }
+
+
+    }, zeigeLieferantenUebersichtCheckSave: function () {
+        if (lieferantenController.aktuellerLieferant) {
+
+            Router.pushState(true);
+
+
+        }
+
+    }, zeigeLieferantenUebersicht: function () {
+
+        lieferantenTab.searchWidget.selectedItems = [];
+        lieferantenController.aktuellerLieferant = null;
+        lieferantenController.aktuellerLieferantGespeichert = true;
+
+        var listUebersicht = $("#lieferantenUebersichtListe");
+        listUebersicht.html("");
+        for (var i = 0; i < lieferantenController.lieferanten.length; i++) {
+            var lieferant = lieferantenController.lieferanten[i];
+            var lieferantElement = $(
+                '<li><a >' +
+                    '<h2>' + lieferant.vorname + ' ' + lieferant.name + '</h2>' +
+                    '<p>Firma: ' + lieferant.firma + '</p>' +
+                    '<p><strong>Telefon: ' + lieferant.telefon + '</strong></p>' +
+                    '<p>E-Mail: ' + lieferant.email + '</p>' +
+                    '</a></li>');
+
+            var clickLieferant = function (lieferantElement, lieferant) {
+                lieferantElement.click(function () {
+                    lieferantenController.waehleLieferant(lieferant)
+                })
+            };
+            clickLieferant(lieferantElement, lieferant);
+
+            listUebersicht.append(lieferantElement);
+
+        }
+        listUebersicht.listview("refresh");
+
+        lieferantenTab.searchWidget.renderList();
+        $("#lieferantenInformationen").hide();
+        $("#lieferantenUebersicht").show();
 
 
     }, speichereAktuellenLieferant: function () {
@@ -167,20 +213,29 @@ lieferantenController = {
 
             if (validated) {
 
+                lieferantenController.aktuellerLieferantGespeichert = true;
 
-                this.aktuellerLieferant.vorname = $("#lieferantVorname").val();
-                this.aktuellerLieferant.name = name;
+                lieferantenController.aktuellerLieferant.vorname = $("#lieferantVorname").val();
+                lieferantenController.aktuellerLieferant.name = name;
 
-                this.aktuellerLieferant.firma = $("#lieferantBearbeitenFirma").val();;
-                this.aktuellerLieferant.telefon = $("#lieferantBearbeitenTelefon").val();
+                lieferantenController.aktuellerLieferant.firma = $("#lieferantBearbeitenFirma").val();
 
-                this.aktuellerLieferant.email = $("#lieferantBearbeitenEMail").val();
-                this.aktuellerLieferant.adresse = $("#lieferantBearbeitenAdresse").val();
-                this.aktuellerLieferant.notizen= $("#lieferantBearbeitenNotizen").val();
+                lieferantenController.aktuellerLieferant.telefon = $("#lieferantBearbeitenTelefon").val();
 
-                this.aktuellerLieferantGespeichert = true;
+                lieferantenController.aktuellerLieferant.email = $("#lieferantBearbeitenEMail").val();
+                lieferantenController.aktuellerLieferant.adresse = $("#lieferantBearbeitenAdresse").val();
+                lieferantenController.aktuellerLieferant.notizen = $("#lieferantBearbeitenNotizen").val();
+
                 $("#speichereLieferant").css("opacity", 0).addClass("ui-disabled");
                 $("#rueckgaengigLieferant").css("opacity", 0).addClass("ui-disabled");
+
+
+                for (var i = 0; i < lieferantenController.lieferanten.length; i++) {
+
+                    var lieferant = lieferantenController.lieferanten[i]
+                    if (lieferant.id == lieferantenController.aktuellerLieferant.id)
+                        lieferantenController.lieferanten[i] = $.extend(true, {}, lieferantenController.aktuellerLieferant);
+                }
 
                 lieferantenController.lieferanten.sort(lieferantenController.lieferantenCompare);
 
@@ -197,6 +252,7 @@ lieferantenController = {
                 //Update Server DB
                 serverController.lieferant.update(lieferantenController.aktuellerLieferant);
 
+
             }
         }
     },
@@ -204,7 +260,7 @@ lieferantenController = {
     abbrechenBearbeitungAktuellerLieferant: function () {
 
 
-        this.zeigeAktuellenLieferanten();
+        lieferantenController.zeigeAktuellenLieferanten();
 
 
     },
@@ -254,25 +310,31 @@ lieferantenController = {
             setTimeout(function () {
 
 
-                if (!lieferantenController.aktuellerLieferant){
+                if (!lieferantenController.aktuellerLieferant) {
 
                     $("#lieferantenInformationen").hide();
 
                     $("#lieferantenInformationen").removeClass("geloescht");
 
+                    lieferantenController.zeigeLieferantenUebersicht()
+
+
                 }
             }, 1000);
             $("#lieferantenInformationen").addClass("geloescht").removeClass("geladen");
 
-        } else
+        } else {
             $("#lieferantenInformationen").hide();
+
+            lieferantenController.zeigeLieferantenUebersicht()
+
+        }
 
 
     }, waehleLieferant: function (lieferant) {
 
-
         var waehleLieferant = function () {
-            lieferantenController.aktuellerLieferant = $.extend(true, {},lieferant);
+            lieferantenController.aktuellerLieferant = $.extend(true, {}, lieferant);
             $("#lieferantenInformationen").addClass("geladen").removeClass("geloescht");
             setTimeout(function () {
                 $("#lieferantenInformationen").removeClass("geladen");
@@ -290,11 +352,11 @@ lieferantenController = {
         if (a.name < b.name)
             return -1;
         if (a.name > b.name)
-            return 1
+            return 1;
         if (a.vorname < b.vorname)
             return -1;
         if (a.vorname > b.vorname)
-            return 1
+            return 1;
         return 0;
     },
     lieferantenHinzufuegen: function () {
@@ -322,17 +384,17 @@ lieferantenController = {
             //Update Server DB
             serverController.lieferant.create(lieferantenController.aktuellerLieferant);
             //Get New Pin for Lieferant
-            serverController.lieferant.getNewPin(lieferantenController.aktuellerLieferant, function(lieferant){
+            serverController.lieferant.getNewPin(lieferantenController.aktuellerLieferant, function (lieferant) {
 
-                if(lieferant){
+                if (lieferant) {
                     var newPin = lieferant.pin;
-                    console.log( lieferant.pin)
+                    console.log(lieferant.pin)
                     console.dir(lieferant);
-                    lieferant =    lieferantenController.getLieferantByID(lieferant.id)
-                    if(lieferant){
+                    lieferant = lieferantenController.getLieferantByID(lieferant.id)
+                    if (lieferant) {
                         console.log("!")
-                        lieferant.pin =  newPin;
-                        if(lieferant.id==lieferantenController.aktuellerLieferant.id){
+                        lieferant.pin = newPin;
+                        if (lieferant.id == lieferantenController.aktuellerLieferant.id) {
 
                             if (lieferantenController.aktuellerLieferant) {
                                 $("#lieferantenInformationen").addClass("neumitalt");
@@ -362,8 +424,6 @@ lieferantenController = {
             $("#suchelieferantenliste").hide();
 
 
-
-
         }
 
         this.checkSaved(lieferantenHinzufuegen);
@@ -389,8 +449,8 @@ lieferantenController = {
 
     },
     getLieferantFullName: function (lieferant) {
-        if(!lieferant)
-         return "";
+        if (!lieferant)
+            return "";
         var name = lieferant.name;
         if (lieferant.vorname && lieferant.vorname.trim() != "")
             name = name + " " + lieferant.vorname.trim();
@@ -398,11 +458,16 @@ lieferantenController = {
     },
     savePopupCallback: null,
     savePopup: function (callback) {
+
+
+
         this.savePopupCallback = callback;
 
         $("#savePopup").popup("open", {
             transition: "pop"
         });
+
+
     },
     checkSaved: function (callback) {
 
@@ -422,6 +487,7 @@ lieferantenController = {
     },
     savePopupYes: function () {
         Router.popupClosed = true;
+
 
         this.speichereAktuellenLieferant();
         if (this.savePopupCallback)

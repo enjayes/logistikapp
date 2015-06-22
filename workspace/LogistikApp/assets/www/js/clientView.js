@@ -246,8 +246,9 @@ var clientView = {
         var job = new Job(id);
         var that = this;
 
+        //vor login
         terminView.initialize();
-        termineListView.initialize();
+
         var goodByeTimeout = null;
 
 

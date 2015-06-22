@@ -13,6 +13,8 @@ uebersichtController = {
     maerkte: null,
     defaultMarktId: null,
     auftragsHistorieDataTable: null,
+    statistikUebersichtDataTable: null,
+
     init: function () {
 
         this.auftragsHistorieDataTable = $('#auftragsHistorie').DataTable({
@@ -20,8 +22,9 @@ uebersichtController = {
             "searching": false,
             "columns": [
                 { "title": "Id" },
-                { "title": "Markt" },
                 { "title": "Lieferant" },
+                { "title": "Markt" },
+                { "title": "NR" },
                 { "title": "Datum" }
 
             ],
@@ -39,6 +42,37 @@ uebersichtController = {
                 $(row).css("cursor", "pointer").click(function () {
                     if (data[0]) {
                       termineController.showJobInNewWindow(data[0]);
+
+                    }
+                })
+            }
+        });
+
+
+        this.statistikUebersichtDataTable = $('#statistikUebersicht').DataTable({
+            "data": [],
+            "searching": false,
+            "columns": [
+                { "title": "Id" },
+                { "title": "Lieferant" },
+                { "title": "Naturalrabatt" },
+                { "title": "Datum" }
+
+            ],
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                }
+            ],
+            "language": {
+                "url": "js/German.json"
+            },
+            "createdRow": function (row, data, dataIndex) {
+                $(row).css("cursor", "pointer").click(function () {
+                    if (data[0]) {
+                        termineController.showJobInNewWindow(data[0]);
 
                     }
                 })
@@ -100,6 +134,11 @@ uebersichtController = {
         });
 
 
+
+
+
+
+
     },
     ready: function () {
 
@@ -134,8 +173,10 @@ uebersichtController = {
                             break;
                         }
                     }
+
+
                     if (selected == 2)
-                        uebersichtController.auftragsHistorieDataTable.row.add([job.id, lieferantenController.getLieferantFullName(lieferant), job.markt_id, termineTab.calenderFactory.moment(job.timestamp_start).format('HH:mm DD.MM.YYYY')]);
+                        uebersichtController.auftragsHistorieDataTable.row.add([job.id, lieferantenController.getLieferantFullName(lieferant), job.markt_id,job.t_vk_euro_abgabe,termineTab.calenderFactory.moment(job.timestamp_start).format('HH:mm DD.MM.YYYY')]);
 
                 }
             }

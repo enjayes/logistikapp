@@ -48,11 +48,6 @@ tabsController = {
             }else
                 tabsController.openTab(tabsController.openTabAttempt)
 
-
-
-
-
-
         } );
 
 
@@ -107,7 +102,6 @@ tabsController = {
                   Router.pushState();
 
             }, 0)
-
 
         }
 

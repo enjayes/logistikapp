@@ -31,6 +31,7 @@ Router = {
             var tab = Router.getQueryVariable(state, "tab") || 0;
             var lieferantId = Router.getQueryVariable(state, "l") || null;
             var jqueryvars = Router.getQueryVariable(state, "jq") || "";
+            var lieferantUebersicht = (Router.getQueryVariable(state, "lu")=="true") || null;
 
             if (Router.popupClosedStartUp || jqueryvars != "&ui-state=dialog") {
                 Router.popupClosedStartUp = false;
@@ -38,7 +39,7 @@ Router = {
 
                 var lieferant = lieferantenController.getLieferantByID(lieferantId);
                 var waehleLieferant = function () {
-                    if (lieferant) {
+                    if (lieferant&&!lieferantUebersicht) {
                         lieferantenController.aktuellerLieferant = lieferant;
                         lieferantenController.zeigeAktuellenLieferanten(true);
                     }
@@ -47,9 +48,6 @@ Router = {
 
 
                 };
-
-                console.log("!!!!!")
-                console.log(tabsController.tabs[tabsController.aktuellerTab] == lieferantenTab)
 
                 if (tabsController.tabs[tabsController.aktuellerTab] == lieferantenTab) {
                     setTimeout(function () {
@@ -103,7 +101,7 @@ Router = {
             }
         }
     },
-    pushState: function () {
+    pushState: function (keinAktuellerLieferant) {
         //Set Tabs as marked
         var colorTabs = function(){
             $("#tabs #" + tabsController.tab().anchorName).addClass("ui-btn-active")
@@ -123,11 +121,11 @@ Router = {
         var hashCode = "state=tab_" + tabsController.aktuellerTab;
 
         if (lieferantenController.aktuellerLieferant)
-            hashCode = hashCode + "+l_" + lieferantenController.aktuellerLieferant.id;
+            hashCode = hashCode + "+l_" + lieferantenController.aktuellerLieferant.id+"+lu_"+!(!keinAktuellerLieferant);
 
         hashCode = hashCode + "+jq_";
 
-        location.hash = hashCode;
+        location.hash = hashCode+"+r_"+(((new Date()).getTime())*2);
 
         setTimeout(colorTabs, 0);
 

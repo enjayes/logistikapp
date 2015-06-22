@@ -26,14 +26,13 @@ lieferantenTab = {
             }
         )
 
+
+
     },
 
     ready: function () {
-
-
     },
     open: function () {
-
 
     }
 

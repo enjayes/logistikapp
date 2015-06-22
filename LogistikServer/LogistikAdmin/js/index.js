@@ -17,7 +17,6 @@ tabsController.init();
 var initializedAfterFirstServerConnection = false;
 var initAfterServerConnection = function () {
 
-
     if (!initializedAfterFirstServerConnection) {
         initializedAfterFirstServerConnection = true;
         uebersichtController.init();
