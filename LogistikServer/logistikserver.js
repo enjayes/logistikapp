@@ -13,8 +13,7 @@ var preferences = {
         password: 'logistikpasswort',
         database: 'logistikdb'
     }
-}
-
+};
 
 
 
@@ -53,19 +52,12 @@ appController.init(preferences,dataController,io,app,express);
 
 
 
-
-
-
-
-
 /*
 // Load the twilio module
 var twilio = require('twilio');
 
 // Create a new REST API client to make authenticated requests against the
 // twilio back end
-
-
 
 
 
