@@ -166,12 +166,22 @@ Datebox
     position: relative;
 }
 
-#lieferantRepeatTerminParent .ui-input-text {
+
+#lieferantRepeatTerminParent #lieferantRepeatTerminInputParent {
     display: inline-block;
     position: absolute;
     top: -16px;
     left: 160px;
     width: 60px;
+}
+
+
+#lieferantRepeatTerminParent #eventDateStartParent {
+    display: inline-block;
+    position: absolute;
+    top: -16px;
+    left: 295px;
+    width: 98px;
 }
 
 #lieferantRepeatTerminParent #repeatDaysText {

@@ -208,7 +208,6 @@ termineController = {
         termineController.aktuellesEvent = $.extend({}, calenderEvent);
         termineController.aktuellesEventIstNeu = neuesEvent;
 
-
         var date = termineController.aktuellesEvent.start.format('DD.MM.YYYY');
         var time = termineController.aktuellesEvent.start.format('HH:mm');
 
@@ -230,15 +229,14 @@ termineController = {
 
         $("#termintitel").val(calenderEvent.title.replace("✔ ", "").replace("✘ ", ""));
 
-        if(termineController.aktuellesEvent.jobId){
+        if (termineController.aktuellesEvent.jobId) {
             $("#zeigeauftragvonterminbutton").removeClass("ui-disabled");
             $("#lieferantRepeatTerminParent").hide();
         }
-        else{
+        else {
             $("#zeigeauftragvonterminbutton").addClass("ui-disabled");
             $("#lieferantRepeatTerminParent").show();
         }
-
 
 
         termineTab.terminMarktSelectionWidget.selectedSingleItem(termineController.aktuellesEvent.marktId || uebersichtController.defaultMarktId);
@@ -293,16 +291,19 @@ termineController = {
 
             }, 0)
 
-        })
+        });
 
+
+        if (termineController.aktuellesEvent.repeatStart)
+            $("#eventDateStart").val(termineController.aktuellesEvent.repeatStart.format('DD.MM.YYYY'));
+        else
+            $("#eventDateStart").val(termineController.aktuellesEvent.start.format('DD.MM.YYYY'));
 
         if (calenderEvent.repeatDays > 0) {
             $("#lieferantRepeatTermin").prop("checked", true).checkboxradio("refresh");
             $("#repeatDaysText, #lieferantRepeatTerminInput").val(termineController.aktuellesEvent.repeatDays);
             $("#repeatDaysText, #lieferantRepeatTerminParent .ui-input-text").show();
             $("#lieferantRepeatTerminParent label").text("Wiederholen alle");
-
-
         }
         else {
             $("#lieferantRepeatTermin").removeProp("checked", true).checkboxradio("refresh");
@@ -434,12 +435,25 @@ termineController = {
 
 
         var start = termineTab.calenderFactory.moment($("#eventDate").datepicker('getDate'));
-
         //console.log($("#eventDate").datepicker('getDate')+"   "+start+"  "+start.format('DD.MM.YYYY'))
-
         if (start.format('DD.MM.YYYY') != $("#eventDate").val().trim()) {
             validated = false;
             $("#eventDate").parent(".ui-input-text").addClass("redborder");
+        }
+
+
+        if ($("#lieferantRepeatTermin").prop("checked"))
+            var repeatDays = parseInt($("#repeatDaysText, #lieferantRepeatTerminInput").val());
+        else
+            repeatDays = 0;
+
+        if (repeatDays > 0) {
+            var repeatStart = termineTab.calenderFactory.moment($("#eventDateStart").datepicker('getDate'));
+            //console.log($("#eventDate").datepicker('getDate')+"   "+start+"  "+start.format('DD.MM.YYYY'))
+            if (repeatStart.format('DD.MM.YYYY') != $("#eventDateStart").val().trim()) {
+                validated = false;
+                $("#eventDateStart").parent(".ui-input-text").addClass("redborder");
+            }
         }
 
 
@@ -468,10 +482,7 @@ termineController = {
 
             termineController.aktuellesEvent.allDay = $("#lieferantAlldayTermin").prop("checked");
 
-            if ($("#lieferantRepeatTermin").prop("checked"))
-                termineController.aktuellesEvent.repeatDays = parseInt($("#repeatDaysText, #lieferantRepeatTerminInput").val());
-            else
-                termineController.aktuellesEvent.repeatDays = 0;
+            termineController.aktuellesEvent.repeatDays = repeatDays;
 
             if (termineController.aktuellesEvent.repeatDays < 0)
                 termineController.aktuellesEvent.repeatDays = 0;
@@ -506,6 +517,9 @@ termineController = {
             }
             else
                 termineController.aktuellesEvent.lieferant = termineController.aktuellerTerminLieferant.id;
+
+            termineController.aktuellesEvent.repeatStart = repeatStart;
+
 
 
             if (this.aktuellesEventIstNeu)
@@ -623,7 +637,7 @@ termineController = {
         $("#mainbackground").css("top", "94px");
         $("#besucherschein").show();
 
-        $("#tabs").css("opacity","0");
+        $("#tabs").css("opacity", "0");
 
         $("#page").addClass("besucherschein");
         serverController.job.get(jobId, function (job) {
@@ -685,14 +699,12 @@ termineController = {
                             job.cb_verlosung ? $("#besucherscheinVerlosung").html("X") : {};
                             job.cb_warenaufbau ? $("#besucherscheinWarenaufbau").html("X") : {};
 
-                            $("#besucherscheinVKBetrag").html(job.t_vk_euro_abgabe+" €");
+                            $("#besucherscheinVKBetrag").html(job.t_vk_euro_abgabe + " €");
 
                             $("#besucherscheinWarengruppe").html(job.t_warengruppe);
 
 
-
                             $("#besucherscheinNotizen").html(job.t_notizen);
-
 
 
                             $("#besucherscheinContent").show();

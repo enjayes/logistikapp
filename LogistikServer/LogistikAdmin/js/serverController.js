@@ -184,6 +184,7 @@ serverController = {
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant,
                 RepeatDays: termin.repeatDays,
+                RepeatStartingMilli:  termin.repeatStart?termin.repeatStart.toDate().getTime():termineTab.calenderFactory.moment,
                 jobId: termin.jobId,
                 marktId: termin.marktId,
                 alarm:termin.alarm
@@ -210,6 +211,7 @@ serverController = {
                 notizen: termin.Notizen,
                 lieferant: termin.Lieferant,
                 repeatDays: termin.RepeatDays,
+                repeatStart: termin.RepeatStartingMilli|| termin.Start,
                 jobId: termin.jobId,
                 marktId: termin.marktId,
                 alarm:termin.alarm
@@ -225,6 +227,8 @@ serverController = {
             if (newTermin.end)
                 newTermin.end = termineTab.calenderFactory.moment(newTermin.end);
 
+            if (newTermin.repeatStart)
+                newTermin.repeatStart = termineTab.calenderFactory.moment(newTermin.repeatStart);
 
             return newTermin;
         },

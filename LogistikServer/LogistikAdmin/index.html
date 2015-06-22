@@ -427,9 +427,18 @@
             <label>
                 <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen alle
             </label>
-            <input id="lieferantRepeatTerminInput" type="text">
 
-            <div id="repeatDaysText">Tage</div>
+            <div id="lieferantRepeatTerminInputParent">
+                <input id="lieferantRepeatTerminInput" type="text">
+            </div>
+
+            <div id="repeatDaysText">Tage ab</div>
+
+            <div id="eventDateStartParent">
+                <input type="text" data-role="date" name="date" id="eventDateStart" value=""  />
+            </div>
+
+
         </div>
         <label class="topMarginCheckbox">
             <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
