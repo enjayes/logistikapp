@@ -66,14 +66,11 @@ termineTab = {
                 $("#lieferantAnzeigen button").show();
                 $("#searchTerminLieferanten").show();
 
-            } else{
+            } else {
                 $("#lieferantenTerminReadyOnly").parent(".ui-input-text").show();
                 $("#lieferantAnzeigen button").hide();
                 $("#searchTerminLieferanten").hide();
-
             }
-
-
         });
 
         $("#popupTermin").on("popupafterclose", function (event, ui) {

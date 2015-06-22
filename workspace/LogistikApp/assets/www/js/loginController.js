@@ -35,6 +35,9 @@ loginController = {
             serverController.loadConfig();
             //Login hat funktioniert
             if (lieferant) {
+
+
+
                 if (lieferant.id) {
                     localStorage.lieferantID = lieferant.id;
                     var resumeLogin = false;
@@ -72,6 +75,8 @@ loginController = {
                     $(".greetingLieferant").html(clientView.getLieferantFullName());
                     localStorage.loggedIn = "true";
                     $('#callButton').show();
+
+                    termineListView.initialize();
 
                 }
                 else {
