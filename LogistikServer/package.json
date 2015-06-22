@@ -12,5 +12,10 @@
     "mysql": "~2.5.3",
     "socket.io": "~1.2.0",
     "moment": "~2.8.4"
-  }
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "logistikserver.js"
 }
