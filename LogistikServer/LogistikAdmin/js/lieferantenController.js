@@ -365,7 +365,6 @@ lieferantenController = {
             if (lieferantenController.zeigeAlleLieferanten)
                 lieferantenController.zeigeLieferanten();
 
-
             lieferantenController.aktuellerLieferant = new lieferant(misc.titleUnbenannt, misc.titleUnbenannt);
 
             lieferantenController.lieferanten.push(lieferantenController.aktuellerLieferant);

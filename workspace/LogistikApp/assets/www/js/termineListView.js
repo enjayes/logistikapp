@@ -54,7 +54,6 @@ var termineListView = {
             datea = new Date(a.start);
             dateb = new Date(b.start);
 
-
             if (Date.parse(datea) < Date.parse(dateb))
                 return -1;
             if (Date.parse(datea) > Date.parse(dateb))
@@ -69,34 +68,50 @@ var termineListView = {
 
         for (var i=0; i < terminliste_sorted.length; i++)
         {
+            var akt = Date.parse(new Date()));
             t = terminliste_sorted[i];
             console.dir(t);
 
-            var datum = $.datepicker.formatDate('dd.mm.yy', t.start);
-            var time = t.start.getHours() + ":" + t.start.getMinutes();
+            //TOD0: fix: termine werden alles aussortiert
+            if (Date.parse(t) > akt) {
 
-            var terminElement =
-                '<li><a >' +
-                '<h2>' + t.title + '</h2>' +
-                '<p><strong>' + datum + " "+ time + '</strong></p>';
-            if (t.notizen != "")
-            {
-                terminElement += '<p>Notizen: ' + t.notizen + '</p>';
-            }
-            terminElement += '</a></li>';
+                var datum = $.datepicker.formatDate('dd.mm.yy', t.start);
+                var time = t.start.getHours() + ":" + t.start.getMinutes();
 
-            /*
-             var clickLieferant = function (lieferantElement, lieferant) {
-             lieferantElement.click(function () {
-             lieferantenController.waehleLieferant(lieferant)
+                var terminElement = '<li';
 
-             })
-             */
+                if (t.repeatDays != 0) {
+                    style = "color : silver"
+                }
 
-            $("#termine_liste").append(terminElement);
-            if (i > 4)
-            {
-                break;
+                terminElement += '><h2>' + t.title + '</h2>' + '<p><strong>' + datum;
+
+                if (t.allDay == 0) {
+                    terminElement += " " + time;
+                }
+                else {
+                    terminElement += " [ganztägig]";
+                }
+
+                terminElement += '</strong></p>';
+
+                if (t.notizen != "") {
+                    terminElement += '<p>Notizen: ' + t.notizen + '</p>';
+                }
+                terminElement += '</li>';
+
+                /*
+                 var clickLieferant = function (lieferantElement, lieferant) {
+                 lieferantElement.click(function () {
+                 lieferantenController.waehleLieferant(lieferant)
+
+                 })
+                 */
+
+                $("#termine_liste").append(terminElement);
+                if (i > 10) {
+                    break;
+                }
             }
 
         }
