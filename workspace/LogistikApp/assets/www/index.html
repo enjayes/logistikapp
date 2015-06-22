@@ -454,7 +454,7 @@
                 <a id="zurueck_kontakt" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
             </div>
 
-            <!-- Menü zum Erstellen eines neuen Termins -->
+            <!-- Menü zum Erstellen eines neuen Termins = terminView -->
             <div id="terminEintragen" data-dismissible="false" class="fadein" style="display:none">
             <!-- <div id="terminEintragen" data-dismissible="false" data-theme="a" class="ui-corner-all" style="display:none">-->
 
@@ -466,6 +466,11 @@
                     <label for="termintitel" >Titel:</label>
                     <textarea id="termintitel"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
 
+                    <div class="indpn-input-container">
+                        <input type="text" class="indpn-input" placeholder="Country">
+                        <span class="indpn-dropdown-arrow"></span>
+                    </div>
+                    <div class="indpn-dropdown"></div>
 
 
                     <div data-role="content">
@@ -765,6 +770,10 @@ für Datepicker -->
 
 <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
 <script type="text/javascript" src="js/socket.io.js"></script>
+
+<!--dropdown---->
+<script src="libs/jquery.inputdropdown.js"></script>
+
 
 <!--Cordova Libraries ------------------------------------------------->
 

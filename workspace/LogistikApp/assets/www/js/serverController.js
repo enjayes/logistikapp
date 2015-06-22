@@ -30,7 +30,7 @@ serverController = {
     callbackHandler: {
         register: function (callback) {
             var callBackName = "cb" + Date.now() + "x" + ((Math.random() * 1000000.0) + "").replace(".", "");
-            console.log("reg: "+callBackName);
+            //console.log("reg: "+callBackName);
             this[callBackName] = callback;
             return callBackName;
         }
@@ -74,9 +74,10 @@ serverController = {
                 //Execute Callback
                 if (msg.callback && serverController.callbackHandler[msg.callback]) {
 
+                    /*
                     console.dir("zurückgeschickte callback id" + msg.callback);
                     console.dir(msg.cbdata);
-                    console.dir(serverController.callbackHandler);
+                    console.dir(serverController.callbackHandler);*/
 
                     serverController.callbackHandler[msg.callback](msg.cbdata);
                     delete serverController.callbackHandler[msg.callback];
@@ -222,7 +223,7 @@ serverController = {
 
 
                 for (var i = 0; i < list.length; i++) {
-                    console.log(list[i]);
+                   // console.log(list[i]);
                     list[i] = serverController.nachricht.parseDTO(list[i]);
 
                 }
@@ -506,14 +507,12 @@ serverController = {
         //TODO: zum funktionieren bringen aka gegenstück im server schreiben
         get: function (lieferanten_id, callback) {
 
-            console.log("Termine.get");
 
              var newCallback = function (list) {
-                console.log("Termine");
-                console.log(list.length);
+
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.termin.parseDT0(list[i]);
-                    console.log(list[i]);
+
                 }
                 return callback(list);
             };
