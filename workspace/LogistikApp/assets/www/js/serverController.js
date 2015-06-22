@@ -30,6 +30,7 @@ serverController = {
     callbackHandler: {
         register: function (callback) {
             var callBackName = "cb" + Date.now() + "x" + ((Math.random() * 1000000.0) + "").replace(".", "");
+            console.log("reg: "+callBackName);
             this[callBackName] = callback;
             return callBackName;
         }
@@ -72,6 +73,11 @@ serverController = {
             else if (msg.t == serverController.messageType.callback) {
                 //Execute Callback
                 if (msg.callback && serverController.callbackHandler[msg.callback]) {
+
+                    console.dir("zurückgeschickte callback id" + msg.callback);
+                    console.dir(msg.cbdata);
+                    console.dir(serverController.callbackHandler);
+
                     serverController.callbackHandler[msg.callback](msg.cbdata);
                     delete serverController.callbackHandler[msg.callback];
                 }
@@ -213,8 +219,12 @@ serverController = {
         },
         get: function (lieferanten_id, callback) {
             serverController.nachricht.getCallback = function (list) {
+
+
                 for (var i = 0; i < list.length; i++) {
+                    console.log(list[i]);
                     list[i] = serverController.nachricht.parseDTO(list[i]);
+
                 }
                 return callback(list);
             };
@@ -392,10 +402,27 @@ serverController = {
 
 
         //TODO: implement
-        parseDT0: function (sent_termin)
-        {
+        parseDT0: function (sent_termin) {
 
-        },
+            var date = new Date(sent_termin.Start);
+
+            var newTermin = {
+                id: sent_termin.id,
+                title: sent_termin.Title,
+                marktid: sent_termin.marktId,
+                start: date,
+                end: parseInt(sent_termin.End),
+                allDay: sent_termin.AllDay,
+                notizen: sent_termin.Notizen,
+                lieferant: sent_termin.Lieferant,
+                repeatDays: sent_termin.RepeatDays
+            }
+
+            return newTermin;
+
+    },
+
+
 
         buildDTO: function (termin) {
 
@@ -426,18 +453,21 @@ serverController = {
 
         //TODO: zum funktionieren bringen aka gegenstück im server schreiben
         get: function (lieferanten_id, callback) {
-            serverController.termin.getCallback = function (list) {
+
+            console.log("Termine.get");
+
+             var newCallback = function (list) {
+                console.log("Termine");
+                console.log(list.length);
                 for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.termin.parseDT0(list[i]);
                     console.log(list[i]);
-                    list[i] = serverController.termin.parseDTO(list[i]);
                 }
                 return callback(list);
             };
-            var newCallback = function () {
-                serverController.termin.getCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
-            };
 
-            serverController.socket.emit('termin', new ServerMessage({
+
+            serverController.socket.emit('message', new ServerMessage({
                 t: this.messageType.get,
                 lid: lieferanten_id,
                 callback: serverController.callbackHandler.register(newCallback)
