@@ -15,8 +15,9 @@ var clientView = {
 
         console.log("Lieferant")
         console.dir(this.lieferant)
-
-        job.lieferanten_id = this.lieferant.id;
+        if(this.lieferant) {
+            job.lieferanten_id = this.lieferant.id;
+        }
 
         job.markt_id = logistikapp.markt_id;
 
@@ -246,9 +247,7 @@ var clientView = {
         var job = new Job(id);
         var that = this;
 
-        //vor login
         terminView.initialize();
-
         var goodByeTimeout = null;
 
 
@@ -419,7 +418,21 @@ var clientView = {
 
             $("#goodbye").show();
             $("#logout").hide();
+            if($("#t_notizen").val()!="") {
+                nachrichtText = "Notiz: " + $("#t_notizen").val();
 
+                var nachricht = {
+                    id: misc.getUniqueID(),
+                    lieferantid: job.lieferanten_id,
+                    read: 0,
+                    datum: new Date(),
+                    nachricht: nachrichtText
+                };
+
+                console.log("SENDE NACHRICHT:");
+                console.dir(nachricht);
+                serverController.antwortNachricht.create(nachricht);
+            }
             loginController.logout();
 
             goodByeTimeout = setTimeout(function () {

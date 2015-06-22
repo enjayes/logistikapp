@@ -75,8 +75,7 @@ loginController = {
                     $(".greetingLieferant").html(clientView.getLieferantFullName());
                     localStorage.loggedIn = "true";
                     $('#callButton').show();
-
-                    termineListView.initialize();
+                     termineListView.initialize();
 
                 }
                 else {

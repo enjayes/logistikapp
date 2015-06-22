@@ -74,6 +74,7 @@ var logistikapp = {
         //Show App
 
         $(".centerapp").show();
+        window.BOOTSTRAP_OK = true;
 
     }
 }

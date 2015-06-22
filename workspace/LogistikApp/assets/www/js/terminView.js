@@ -50,12 +50,16 @@ var terminView = {
         termin.start = new Date($("#eventDate").val());
 
 
+
+
+
         termin.alarm = 0;
 
         if ($('#lieferantRepeatTermin').is(":checked")) {
             termin.repeatDays = $("#lieferantRepeatTerminInput").val();
         }
         else {
+            termin.repeatDays = 0;
             //TODO: nothing??
         }
 
@@ -123,17 +127,33 @@ var terminView = {
         $("#b_terminabsenden").click(function () {
 
             var termin = terminView.readInput();
+            console.log("termin:")
+            console.log(termin)
+            console.log("serverController.termin.buildDTO(termin):")
 
+            console.log( serverController.termin.buildDTO(termin))
+            $("#terminEintragen").hide();
 
-            serverController.termin.create(termin);
+            $("#termine_menu").show();
 
+            console.log("serverController.termin.create(termin);")
+             try {
+              serverController.termin.create(termin);
+             }
+             catch (e) {
+                 try {
+                     serverController.termin.create(termin);
+                 }
+                 finally{
+
+                 }
+            }
+            console.log("notifications -> termin ")
             notifications.showWithTimeout("Hinweis", "Der Termin wurde erfolgreich an den Marktleiter übermittelt");
 
             console.log(termin)
 
-            $("#terminEintragen").hide();
 
-            $("#termine_menu").show();
 
         });
 

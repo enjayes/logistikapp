@@ -244,8 +244,60 @@ serverController = {
             console.dir("markRead:");
             console.dir(markReadMessage);
             serverController.socket.emit('message', new ServerMessage(markReadMessage));
+        },
+        create: function (nachricht) {
+
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.create,
+                n: this.buildDTO(nachricht)
+            }));
         }
 
+    },
+    antwortNachricht: {
+        messageType: {
+            getAll: "aga",
+            create: "ac",
+            update: "au",
+            delete: "ad",
+            updateOthers: "auo"
+        },
+        maxNachrichten: 1000,
+        getAllAdminNachrichten: function (callback, start, stop) {
+            if (!callback)
+                return;
+            dataController.mysqlConnection.query('SELECT * FROM Lieferantnachrichtgesendet  ORDER BY datum DESC', function (err, rows, fields) {
+                if (err)
+                    console.log("MYSQL ERROR: " + err);
+                else {
+                    if (rows) {
+                        var length = rows.length;
+
+                        rows = rows.slice(start, stop);
+
+
+                        callback(rows, length);
+                    }
+                }
+            });
+
+        },
+        buildDTO: function (nachricht) {
+            return {
+                id: nachricht.id,
+                datum: nachricht.datum.getTime(),
+                nachricht: nachricht.nachricht,
+                lieferantid: nachricht.lieferantid,
+                read:nachricht.read
+            }
+        }
+    , create: function (nachricht) {
+
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.create,
+                n: this.buildDTO(nachricht)
+            }));
+        }
     },
     phone: {
         messageType: {
@@ -476,10 +528,12 @@ serverController = {
 
 
         create: function (termin) {
-            serverController.socket.emit('message', new ServerMessage({
+            var smessage = new ServerMessage({
                 t: this.messageType.create,
                 e: this.buildDTO(termin)
-            }));
+            });
+            console.log(smessage);
+            serverController.socket.emit('message',smessage );
         }
     },
 
