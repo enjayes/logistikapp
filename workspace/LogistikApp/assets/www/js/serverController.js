@@ -42,27 +42,33 @@ serverController = {
         //serverController.socket = io.connect(preferences.server);
 
         var address = logistikapp.servername + ":" + logistikapp.server_port;
-        console.log(":::" + address + "::::")
 
+        if(address.search("http://")==-1){
+            address = "http://"+address
+        }
+        console.log("io.connect("+address+")");
 
         serverController.socket = io.connect(address, {"force new connection": true});
 
-        console.log(serverController.socket)
 
-        var upDateNoConnection = function () {
-            $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
-        }
 
-        upDateNoConnection();
         serverController.socket.on('disconnect', function () {
-            upDateNoConnection();
+            if(clientView.viewTitle=="konfi_menue") {
+                $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
+            }
             serverController.connected = false;
             console.log("DISCONNECT")
         });
 
+        serverController.socket.on('connect', function() {
+            console.log("CONNECT!")
+        });
+
         //On Message
         serverController.socket.on('message', function (msg) {
-            $("#server_status").css("color", "rgb(84, 191, 84)").text("Mit Server verbunden...");
+            if(clientView.viewTitle=="konfi_menue") {
+                $("#server_status").css("color", "rgb(84, 191, 84)").text("Mit Server verbunden...");
+            }
             serverController.connected = true;
             //Server Connected, send Connection message back
             if (msg.t == serverController.messageType.connection) {
@@ -106,7 +112,10 @@ serverController = {
                 }
                 if (found == false) {
                     serverController.socket.disconnect();
-                    $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
+                    if(clientView.viewTitle=="konfi_menue") {
+                        $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
+                    }
+                    serverController.connected = false;
                     notifications.showError("Der Marktname wurde nicht gefunden!")
                 }
 
@@ -129,13 +138,15 @@ serverController = {
 
         },
         parseDTO: function (lieferant) {
+            console.log("parseDTO ####################################### LIEFERANT");
+            console.log(lieferant);
             return {
                 id: lieferant.id,
                 pin: lieferant.Pin,
                 vorname: lieferant.Vorname,
                 name: lieferant.Name,
                 telefon: lieferant.Telefon,
-                email: lieferant.EMail,
+                email: lieferant.Email,
                 adresse: lieferant.Adresse,
                 notizen: lieferant.Notizen
             }
@@ -147,7 +158,7 @@ serverController = {
                 Vorname: lieferant.vorname,
                 Name: lieferant.name,
                 Telefon: lieferant.telefon,
-                EMail: lieferant.email,
+                Email: lieferant.email,
                 Adresse: lieferant.adresse,
                 Notizen: lieferant.notizen
             }
@@ -172,7 +183,9 @@ serverController = {
                 l: this.buildDTO(lieferant)
             }));
         }
-    },
+    }
+
+    ,
     nachricht: {
         messageType: {
             getAll: "nga",
@@ -347,7 +360,8 @@ serverController = {
             update: "ju",
             delete: "jd",
             get: "jg",
-            updateOthers: "juo"
+            updateOthers: "juo",
+            startVisit: "jsv"
         },
         buildDTO: function (job) {
 
@@ -383,8 +397,19 @@ serverController = {
                 callback: serverController.callbackHandler.register(newCallback)
             }));
         },
+        startVisit: function(startTime,lieferanten_id,jid){
+            serverController.socket.emit('message', new ServerMessage({
+                t: serverController.job.messageType.startVisit,
+                start: startTime,
+                mid: logistikapp.markt_id,
+                lid: lieferanten_id,
+                jid: jid
+            }))
+        },
         getTemplatesCallback: null,
         getTemplates: function (lieferanten_id, callback) {
+
+
             serverController.job.getTemplatesCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.job.parseDTO(list[i]);
@@ -404,7 +429,7 @@ serverController = {
         },
         create: function (job) {
             console.log("SEND JOB:")
-            console.log(job)
+            console.log(this.buildDTO(job));
 
             serverController.socket.emit('message', new ServerMessage({
                 t: this.messageType.create,
@@ -449,12 +474,12 @@ serverController = {
     termin: {
         messageType: {
             create: "tc",
-            get: "tg"
+            get: "tg",
+            getRange: "tgr",
+            setTerminJob: "tsj"
         },
 
-
-        //TODO: implement
-        parseDT0: function (sent_termin) {
+        parseDTO: function (sent_termin) {
 
             var date = new Date(sent_termin.Start);
 
@@ -472,11 +497,8 @@ serverController = {
 
             return newTermin;
 
-    },
-
-
-
-        buildDTO: function (termin) {
+          },
+          buildDTO: function (termin) {
 
             var termin = $.extend(true, {}, termin);
             //newTermin.timestamp_start = termin.timestamp_start.getTime();
@@ -502,7 +524,6 @@ serverController = {
 
         },
 
-
         //TODO: zum funktionieren bringen aka gegenstück im server schreiben
         get: function (lieferanten_id, callback) {
 
@@ -512,7 +533,7 @@ serverController = {
                 console.log("Termine");
                 console.log(list.length);
                 for (var i = 0; i < list.length; i++) {
-                    list[i] = serverController.termin.parseDT0(list[i]);
+                    list[i] = serverController.termin.parseDTO(list[i]);
                     console.log(list[i]);
                 }
                 return callback(list);
@@ -534,7 +555,20 @@ serverController = {
             });
             console.log(smessage);
             serverController.socket.emit('message',smessage );
+        }, getRangeLieferant: function (lid, start, end, callback) {
+
+            var newCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                }
+
+                callback(list);
+
+            };
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.getTime(), end: end.getTime(), callback: serverController.callbackHandler.register(newCallback)}));
         }
+
+
     },
 
 
