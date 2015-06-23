@@ -70,12 +70,17 @@ var termineListView = {
 
         for (var i=0; i < terminliste_sorted.length; i++)
         {
-            var akt = Date.parse(new Date()) ;
-            t = terminliste_sorted[i];
-            console.dir(t);
 
-            //TOD0: fix: termine werden alles aussortiert
-            if (Date.parse(t) > akt) {
+            var jetzt_d = new Date();
+            var akt = jetzt_d.getTime();
+
+            t = terminliste_sorted[i];
+
+            console.log("akt vergleichtermin ");
+            console.log(Date.parse(t.start));
+            console.log(akt);
+
+            if (Date.parse(t.start) > akt) {
 
                 var datum = $.datepicker.formatDate('dd.mm.yy', t.start);
                 var time = t.start.getHours() + ":" + t.start.getMinutes();

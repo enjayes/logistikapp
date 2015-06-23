@@ -206,6 +206,28 @@ var terminView = {
         });
 
 
+
+        //Dropdown für titel
+        var countries = [{"id":0,"text":"Abkhazia"},{"id":1,"text":"Aland"},{"id":2,"text":"Albania"}];
+
+        $('.indpn-input').inputDropdown({
+            data: function() {
+                return $.map(countries, function(o,i) {
+                    return o.text;
+                });
+            },
+            onSelect: function(selected) {
+                console.log(selected);
+            },
+            toggleButton: $('.indpn-dropdown-arrow'),
+            dropdownClass: '.indpn-dropdown',
+            image: function(item) {
+                return null;
+            },
+            debug: false
+        });
+
+
     }
 
 }

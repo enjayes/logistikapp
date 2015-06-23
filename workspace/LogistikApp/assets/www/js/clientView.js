@@ -50,20 +50,22 @@ var clientView = {
         console.log(clientView.loadedTitle+" ->  clientView.setJob");
 
         clientView.loadedTitle = clientView.viewTitle;
+        clientView.job = clientView.setJob(clientView.job);
         clientView.viewTitle = fadeInElement;
         var fadeOutDiv = "#gui"+clientView.currentViewDiv;
         clientView.currentViewDiv = 1-clientView.currentViewDiv
         var fadeInDiv = "#gui"+clientView.currentViewDiv;
-        $(fadeInDiv).trigger('create');
+
         $(fadeOutDiv).fadeOut(); //todo
         $( fadeInDiv).load( "html/"+fadeInElement+".html","",function(){
                 $(fadeInDiv).trigger('create');
                 clientView.setGUI(clientView.job);
                 clientView.initializeView(fadeInElement);
                 console.log(fadeInElement+" ->  $("+fadeInDiv+").trigger('create'); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                $(fadeInDiv).show();
                 $(fadeOutDiv).hide();
-                clientView.job = clientView.setJob(clientView.job);
+                $(fadeInDiv).show();
+
+
                 $(fadeOutDiv).empty();
                 if (misc.isMobileApp()) {
                     FastClick.attach(document.body);
@@ -101,11 +103,11 @@ var clientView = {
             });
         }
         else if (fadeInElement=="contact_daten_menu"){
-         //   if(this.lieferant) {
+           if(this.lieferant) {
             console.log("################################################################ LIEFERANT");
             console.log(this.lieferant);
                 contactController.set(this.lieferant.id, this.lieferant);
-           // }
+            }
             $("#b_kalender").click(function () {
                 switchView('termine_menue');
             });
