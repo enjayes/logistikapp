@@ -27,6 +27,9 @@ var templateController = {
 
     load: function (index) {
         if (index < templateList.length) {
+            var id = misc.getUniqueID();
+            clientView.job = templateList[index];
+            clientView.job.id = id;
             clientView.setJob(templateList[index]);
         }
 

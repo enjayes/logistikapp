@@ -56,6 +56,8 @@ public class LogistikApp extends CordovaActivity
    
         WebSettings settings = appView.getSettings( ); 
         
+        settings.setDefaultZoom(ZoomDensity.MEDIUM); 
+        settings.setSupportZoom(true ); 
     
         settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true); 
@@ -63,8 +65,7 @@ public class LogistikApp extends CordovaActivity
       
       
         
-        settings.setDefaultZoom(ZoomDensity.MEDIUM); 
-        settings.setSupportZoom(true ); 
+    
         
      
        
