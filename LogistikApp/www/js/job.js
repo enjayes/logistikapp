@@ -2,18 +2,19 @@
 //hält die Besucherschein-Daten
 function Job(id) {
     this.id = id;
+    this.termin_id = "";
     this.lieferanten_id = ""; //TODO:
     this.markt_id = localStorage.markt_id;
-    this.timestamp_start = new Date();
-    this.timestamp_end;
-    this.fixtermin;
-    this.gespraechspartner;
+    this.timestamp_start = 0;
+    this.timestamp_end = 0;
+    this.fixtermin = 0;
+    this.gespraechspartner = "";
 
     //status
     this.pending = true;
     this.finished = false;
     this.checked_out = false; //lieferant hat den job explicit abgeschlossen, d.h. sich ausgeloggt
-    this.template_name;
+    this.template_name = "";
 
     //job_selector
     this.besuch = false;
@@ -23,9 +24,9 @@ function Job(id) {
 
     //TODO: lieferantenschein1
     //lieferantenschein1
-    this.t_ziel;
-    this.t_grund;
-    this.t_thematik;
+    this.t_ziel = "";
+    this.t_grund = "";
+    this.t_thematik = "";
 
     //lieferantenschein2
 
@@ -37,8 +38,8 @@ function Job(id) {
     this.cb_umbau = false; //Umbau
     this.cb_info_gespraech = false; //Info-Gespräch
     this.cb_nr_abgabe = false; //Nummer-Abgabe
-    this.t_vk_euro_abgabe;
-    this.t_warengruppe;
+    this.t_vk_euro_abgabe = "";
+    this.t_warengruppe = "";
     this.cb_verkostung = false; //Verkostung
     this.cb_sortimentsinfo = false; //Sortimentsinfo
     this.cb_aktionsabsprache = false;
@@ -46,7 +47,7 @@ function Job(id) {
     this.cb_verlosung = false; //Verlosung
 
     //logout
-    this.t_notizen
+    this.t_notizen = "";
 
 
 

@@ -44,21 +44,26 @@ public class LogistikApp extends CordovaActivity
 	private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP));
 	
 	@Override  
-    public void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle  savedInstanceState)
     {    
         super.onCreate(savedInstanceState); 
         // Set by <content src="index.html" /> in config.xml
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         loadUrl(launchUrl+"#android"); 
 
-        String test = "";
+        String test = "h";
         
    
         WebSettings settings = appView.getSettings( ); 
            
-        settings.setLoadWithOverviewMode(true);  
-        settings.setUseWideViewPort(true);  
+          
+        settings.enableSmoothTransition();
+        settings.setEnableSmoothTransition(true);
+        
+        settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true); 
+        settings.setUseWideViewPort(true);  
+       
        
         settings.setDefaultZoom(ZoomDensity.MEDIUM); 
         settings.setSupportZoom(true ); 

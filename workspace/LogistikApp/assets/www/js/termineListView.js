@@ -36,7 +36,7 @@ var termineListView = {
         }
 
 
-        },
+    },
 
     compare: function () {
         return;
@@ -44,6 +44,8 @@ var termineListView = {
 
 
     addTermine: function(terminliste) {
+
+        return ;//TODO !!!!!! remove
 
         console.log("addtermine");
         console.dir(terminliste);
@@ -68,8 +70,10 @@ var termineListView = {
 
         for (var i=0; i < terminliste_sorted.length; i++)
         {
+
             var jetzt_d = new Date();
             var akt = jetzt_d.getTime();
+
             t = terminliste_sorted[i];
 
             console.log("akt vergleichtermin ");
@@ -132,23 +136,19 @@ var termineListView = {
 
     initialize: function()
     {
-        serverController.termin.get(contactController.lieferant.id, function (termine) {
-            console.dir("termine.liste");
-            console.dir(termine);
-
-            //this.termine = termine;
-            termineListView.addTermine(termine);
-
-
-        })
+        termineListView.addTermine(terminController.terminListe);
 
         $("#cb_neuer_termin").click(function () {
 
-            $("#terminEintragen").show();
-
-            $("#termine_menu").hide();
+            switchView("termin_eintragen");
 
         });
+
+        $("#zurueck_kontakt").click(function () {
+            switchView("contact_daten_menu");
+
+        });
+
     }
 
 }

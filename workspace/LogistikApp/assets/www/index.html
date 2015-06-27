@@ -28,50 +28,62 @@
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css"/>
     <link rel="stylesheet" type="text/css" href="css/PINpad.css"  />
     <link rel="stylesheet" type="text/css" href="css/jquery-clockpicker.css"  />
-    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.css"/>
-    <link rel="stylesheet" href="libs/jquery.mobile.datepicker.theme.css"/>
-
     <title>LogistikApp</title>
-    <!--Install Console-->
-    <script
-            type="text/javascript"
-            server="" /*todo*/
-            manifest="manifest.json"
-            src="js/bootstrap.js"></script>
 
-    <script type="text/javascript" src="js/misc.js"></script>
-    <script type="text/javascript">
 
-        if (typeof window.console == "undefined") {
-            window.console = {
-                log: function (str) {
-                    window.external.Notify(str);
-                }
-            };
-        }
-        window.onerror = function (e, url, lineNumber) {
-            console.log("ERROR! : " + url + "(" + lineNumber + ") : " + JSON.stringify(e));
-        };
 
-        windowOpen = window.open;
+    <link rel="stylesheet" href="libs/datepicker/jquery.mobile.datepicker.css"/>
+    <link rel="stylesheet" href="libs/datepicker/jquery.mobile.datepicker.theme.css"/>
 
-        //Overwrite alert and prompt if in browser
-        if (misc.isMobileApp()==false){
-            window.prompt = function (msg) {
-                // console.log("PROMPT: " + msg)
-            }
-        }
-    </script>
-
+    <!--Toast------------------------------------------------->
+    <link href="js/notifications/jquery.toast.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
+<!--Datepicker für Termine-->
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+<script src="libs/datepicker/datepicker.js"></script>
+<script src="libs/datepicker/jquery.mobile.datepicker.js"></script>
 
+
+<!--Install Console-->
+<script
+        type="text/javascript"
+        server="localhost"
+        manifest="manifest.json"
+        src="js/bootstrap.js">
+
+
+</script>
+<script type="text/javascript" src="js/misc.js"></script>
+<script type="text/javascript">
+
+    if (typeof window.console == "undefined") {
+        window.console = {
+            log: function (str) {
+                window.external.Notify(str);
+            }
+        };
+    }
+    window.onerror = function (e, url, lineNumber) {
+        console.log("ERROR! : " + url + "(" + lineNumber + ") : " + JSON.stringify(e));
+    };
+
+    windowOpen = window.open;
+
+    //Overwrite alert and prompt if in browser
+    if (misc.isMobileApp()==false){
+        window.prompt = function (msg) {
+            // console.log("PROMPT: " + msg)
+        }
+    }
+</script>
 
 
 <div id="bannerbackground"></div>
-<div class="centerapp" class="fadein" style="display:none">
 
+<div class="centerapp" style="display:none">
     <div class="app">
         <!--width:460px;-->
         <div class="divbackground" style="width:400px; height:100%;border:none; background-color:#ffffff;opacity:1;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
@@ -79,591 +91,25 @@
             <img id="banner" height="60px" src="img/bannerlogo.png">
             <br>
 
+            <div id="gui0"  class="fadein"  style="display:none" ></div>
 
-            <!--<a href="skype:004908941150015?call">Call the Skype Echo / Sound Test Service</a>
+            <div id="gui1"  class="fadein"  style="display:none" ></div>
 
-            -->
-
-            <!--script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
-            <div id="SkypeButton" >
-                <script type="text/javascript">
-                    Skype.ui({
-                        name: "call",
-                        element: "SkypeButton",
-                        participants: ["00498941150015"],
-                        imageSize: 32,
-                        imageColor: "black"
-                    });
-                </script>
-            </div-->
-
-            <div id="startScreen" class="fadein" >
-                <!--
-                <h2 id="gruppenname_title"></h2>
-                -->
-                <h2 id="marktname_title"></h2>
-
-                <br>
-                <h3>Anmelden:</h3> <!-- ui-icon-user-->
-                <a id="start_anmelden"  class="colorbutton ui-btn ui-shadow ui-corner-all ui-icon-grid ui-btn-icon-left"><br>PIN eingeben<br><br></a>
-
-                <a id="start_qr_code_anmelden"  class="colorbutton ui-btn ui-shadow ui-corner-all ui-icon-camera ui-btn-icon-left"><br>Code scannen<br><br></a>
-
-                <a id="start_nfc_code_anmelden"  class="colorbutton ui-btn ui-shadow ui-corner-all ui-icon-action ui-btn-icon-left"><br>Chipkarte<br><br></a>
-                <br>
-                <br>
-                <a id="b_konfig" class="standardbutton ui-btn ui-shadow ui-corner-all ui-mini ui-icon-gear ui-btn-icon-notext " style="width:40px;height:40px;float: right;"></a>
-                <br>
-
-                <br>
-                <br>
-
-                <a onclick="$('#startScreen').hide();$('#contact_daten_menu').show();" class="standardbutton ui-btn ui-shadow ui-corner-all">Job</a>
-
-                <br>
-                <br>
-
-            </div>
-
-            <div id="konfi_login_menue" class="fadein" style="display:none" >
-                <h2>Konfiguration</h2>
-                <h3>Bitte PIN eingeben... TODO RMV 1234</h3>
-                <div id="PINcodeConfig" data-enhance="false"></div>
-                <br>
-                <a id="konfi_zurueck_start" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-                <br>
-            </div>
-
-            <div id="konfi_menue"  class="fadein"  style="display:none" >
-
-                <h2>Konfigurationsmenü</h2>
-                <h3 id="server_status"></h3>
-
-                <form>
-                    <table style="width:100%;border: none">
-                        <tr>
-                            <td>
-                                <label>
-                                    Marktname
-                                </label></td>
-                            <td>
-                                <textarea id="markt_id"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label>
-                                    Server
-                                </label></td>
-                            <td>
-                                <textarea id="t_server"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label>
-                                    Port
-                                </label></td>
-                            <td>
-                                <textarea id="t_port"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label>
-                                    Passwort
-                                </label></td>
-                            <td>
-                                <textarea type = "password" id="t_password"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                    <br>
-
-                    <a id="b_write_nfc" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-edit ui-btn-icon-left">Lieferantenausweis beschreiben</a>
-                    <br>
-                    <a id="open_admin" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Admin-Oberfläche</a>
-
-                </form>
-
-                <a id="close_app" class="colorbutton3 ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left">Anwendung schließen</a>
-                <br>
-                <a id="save_config" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-recycle ui-btn-icon-left">Speichern</a>
-                <a id="config_zurueck" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-
-            </div>
-
-
-            <div id="lieferantenLogin" class="fadein"  style="display:none" >
-                <h2>Anmelden</h2>
-                <h3>Bitte PIN eingeben...</h3>
-
-                <div id="PINcode" data-enhance="false"></div>
-                <br>
-                <a id="login_zurueck_start" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-                <br>
-            </div>
-
-            <div id="contact_daten_menu" class="fadein"  style="display:none">
-                <h3>Kontaktdaten</h3>
-                <br>
-                <form>
-                    <table style="width:100%;border: none">
-                        <tr>
-                            <td>
-                                <label>
-                                    Vorname:
-                                </label></td>
-                            <td><input id="vorname" readonly>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label>
-                                    Nachnname:
-                                </label></td>
-                            <td><input id="familienname" readonly>
-                            </td>
-                        </tr>
-
-
-
-                        <tr>
-                            <td>
-                                <label>
-                                    Firma:
-                                </label></td>
-                            <td><input id="firma" readonly>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label>
-                                    Telefon-Nr:
-                                </label></td>
-                            <td>
-                                <textarea id="telefon"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label>
-                                    E-Mail:
-                                </label></td>
-                            <td>
-                                <textarea id="email"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-
-                <a id="b_kalender"  style="width:100px;height:15px;float:right;margin-left:10px;" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Kalender</a>
-
-                <br>
-                <br>
-                <br>
-                <a id="weiter_waitForLogin" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-                <a id="weiter_jobSelector" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-forward ui-btn-icon-left">Besucherschein</a>
-                <a id="zurueck_start" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-            </div>
-
-
-            <div id="jobSelector" class="fadein"  style="display:none">
-                <h2 class="greetingLieferant"></h2>
-                <h3>Aufgabenwahl</h3>
-
-
-                <br>
-                <form>
-                    <label>
-                        <input name="checkbox-0 " type="checkbox" id="fixtermin" class="standardbutton" >Fixtermin
-                    </label>
-                    <br>
-
-                    <label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_besuch" class="standardbutton">Besuch
-                    </label>
-                    <label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_bestellung" class="standardbutton">Bestellung
-                    </label>
-                    <label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_verraeumung" class="standardbutton">Verräumung
-                    </label>
-                    <label>
-                        <input name="checkbox-0 " type="checkbox" id="cb_austausch" class="standardbutton">Austausch von Bruch und Verderb
-                    </label>
-
-
-                </form>
-                <br>
-                <a id="b_vorlagen"  onClick='$( "#popupVorlagen" ).popup("open") ;' class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-left">Gespeicherte Vorlagen</a>
-
-                <br>
-
-                <a id="weiter_Aufgaben" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-                <a id="job_zurueck_kontakt" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Abmelden</a>
-
-            </div>
-
-            <div id="lieferantenschein1" class="fadein"  style="display:none">
-                <h2 class="greetingLieferant"></h2>
-
-                <br>
-                <tr>
-                    <td>
-                        <label>
-                            Ziel
-                        </label>
-                    <td><textarea id="t_ziel" rows="1" cols="50"></textarea></td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            Grund
-                        </label>
-                    <td><textarea id="t_grund" rows="1" cols="50"></textarea></td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            Thematik
-                        </label>
-                    <td><textarea id="t_thematik"rows="1" cols="50" ></textarea></td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            Gesprächspartner
-                        </label>
-                    <td><textarea id="gespraechspartner"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea> </td>
-                </tr>
-                <br>
-                <a id="weiter_lieferantenschein1" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-                <a id="zurueck_lieferantenschein1" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-            </div>
-
-
-            <div id="lieferantenschein2" class="fadein"  style="display:none">
-                <h2 class="greetingLieferant"></h2>
-
-                <br>
-
-                    <div>
-                    <table style="table-layout:fixed">
-                        <tr>
-                            <td >
-                                <label > <!--style="width:70%"-->
-                                    <input  name="checkbox-0 " type="checkbox" id="cb_auftrag_getaetigt">Auftrag getätigt
-                                </label></td>
-
-                            <td><label style="width:54%;">
-                                <input name="checkbox-0 " type="checkbox" id="cb_mhd">MHD-Kontrolle
-                            </label></td>
-                        </tr>
-                        <tr>
-                            <td><label>
-                                <input name="checkbox-0 " type="checkbox" id="cb_ruecknahme">Rücknahme
-                            </label></td>
-
-                            <td><label style="width:54%">
-                                <input name="checkbox-0 " type="checkbox" id="cb_reklamation">Reklamationsbearbeitung
-                            </label></td>
-                        </tr>
-                        <tr>
-                            <td><label>
-                                <input name="checkbox-0 " type="checkbox" id="cb_warenaufbau">Warenaufbau
-                            </label></td>
-                            <td><label style="width:54%">
-                                <input name="checkbox-0 " type="checkbox" id="cb_umbau">Umbau
-                            </label></td>
-                        </tr>
-                        <tr>
-                            <td><label>
-                                <input name="checkbox-0 " type="checkbox" id="cb_info_gespraech">Info-Gespräch
-                            </label></td>
-                            <td>
-                                <label style="width:54%">
-                                    <input name="checkbox-0 " type="checkbox" id="cb_verlosung">Verlosung
-                                </label>
-                            </td>
-                        </tr>
-                        <td><label>
-                            <input name="checkbox-0 " type="checkbox" id="cb_verkostung">Verkostung
-                        </label></td>
-                        <td><label style="width:54%">
-                            <input name="checkbox-0 " type="checkbox" id="cb_sortimentsinfo">Sortimentsinfo
-                        </label></td>
-
-                        <tr>
-                            <td><label >
-                                <input name="checkbox-0 " type="checkbox" id="cb_aktionsabsprache">Aktionsabsprache
-                            </label></td>
-                            <td><label style="width:54%">
-                                <input name="checkbox-0 " type="checkbox" id="cb_bemusterung">Bemusterung
-                            </label></td>
-                        </tr>
-
-                        <tr>
-
-                            <td>
-                                <br>
-                                <label>
-                                    <input name="checkbox-0 " type="checkbox" id="cb_nr_abgabe">Natural-Rabatt
-                                </label>
-                            </td>
-                            <td>
-                                <br>
-                                <div style="width:77.5%">
-                                    <textarea id="t_vk_euro_abgabe"  placeholder="Wert in Euro"  rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                                    <textarea id="t_warengruppe" placeholder="Warengruppe" rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-                                </div>
-
-                            </td>
-
-
-                        </tr>
-                    </table>
-                    </div>
-                <br>
-                <a id="weiter_lieferantenschein2" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
-                <a id="zurueck_lieferantenschein2" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Zurück</a>
-            </div>
-
-
-            <!--termineListView-->
-            <div id="termine_menu" class="fadein"  style="display:none">
-                <h3>Termine</h3>
-                <br>
-                <ul id="termine_liste" data-role="listview">
-                </ul>
-                <br>
-                <br>
-                <a id="cb_neuer_termin"  class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-calendar ui-btn-icon-left">Termin anlegen</a>
-                <br>
-
-                <a id="zurueck_kontakt" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-            </div>
-
-            <!-- Menü zum Erstellen eines neuen Termins = terminView -->
-            <div id="terminEintragen" data-dismissible="false" class="fadein" style="display:none">
-            <!-- <div id="terminEintragen" data-dismissible="false" data-theme="a" class="ui-corner-all" style="display:none">-->
-
-                <div>
-                    <h3>Termin anlegen</h3>
-                    <!--
-                    <h2 id="terminheader"></h2>
-                    -->
-                    <label for="termintitel" >Titel:</label>
-                    <textarea id="termintitel"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
-
-                    <div class="indpn-input-container">
-                        <input type="text" class="indpn-input" placeholder="Country">
-                        <span class="indpn-dropdown-arrow"></span>
-                    </div>
-                    <div class="indpn-dropdown"></div>
-
-                    <div class="ui-widget">
-                        <label>Your preferred programming language: </label>
-                        <select id="combobox">
-                            <option value="">Select one...</option>
-                            <option value="ActionScript">ActionScript</option>
-                            <option value="AppleScript">AppleScript</option>
-                            <option value="Asp">Asp</option>
-                            <option value="BASIC">BASIC</option>
-                        </select>
-                    </div>
-
-                    <div data-role="content">
-                        <form action="#" method="get">
-                            <div data-role="fieldcontain">
-                                <label for="eventDate">Datum:</label>
-                                <input type="date" name="date" id="eventDate" value=""  />
-                            </div>
-                        </form>
-                        </div>
-
-
-                        <div id="lieferantClock">
-                        <label for="eventTime" class="">Zeit:</label>
-                        <input id="eventTime" value="" data-default="09:00">
-                        <!--<button type="button" id="b_selectTime">Zeit wählen</button>-->
-                    </div>
-
-
-                    <!--<input id="eventDate" type="data" >  data-role="date">-->
-
-                    <!--
-
-                    <input data-role="date" name="date" id="eventDate" value=""  />
-
-                    <div class="form-group">
-                        <div class="input-group clockpicker">
-                            <input type="text" class="form-control" value="12:00">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-time"></span>
-                        </span>
-                                </div>
-                    </div>
-                    -->
-
-
-
-                    </div>
-                    <label class="topMarginCheckbox">
-                        <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
-                    </label>
-
-                <div id="lieferantRepeatTerminParent" class="topMarginCheckbox" >
-
-                    <label>
-                        <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen
-                    </label>
-                    <div id="lieferantRepeatTerminChild" class="fadein"  style="display:none">
-                        <div id="repeatDaysText1">alle</div>
-
-                        <input id="lieferantRepeatTerminInput" type="text">
-
-                        <div id="repeatDaysText">Tage</div>
-                        <br>
-                    </div>
-                </div>
-
-
-                    <label id="terminnotizenLabel" for="terminnotizen" class="">Notizen:</label>
-                    <textarea id="terminnotizen" rows="2"></textarea>
-
-                    <div class="bottombuttons saved">
-                        <a id="b_terminabsenden"
-                           class="standardbutton  ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Absenden
-                        </a>
-                    </div>
-                    <a id="b_termin_abbrechen"
-                       class="redbutton ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-delete">Abbrechen
-                    </a>
-                </div>
-
-            </div>
-
-
-            <div id="logout" style="display:none">
-                <h2 class="greetingLieferant"></h2>
-                <h4>Notizen</h4>
-                <td><textarea id="t_notizen" rows="1" cols="50"></textarea></td>
-                <br>
-                <a id="vorlage_logout" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">als Vorlage speichern...</a>
-
-
-                <div id="vorlage_benennen" class="fadein"  style="display:none">
-                    <h3>Vorlagenname</h3>
-
-                    <input id="vorlagen_name">
-
-                    <div id="vorlage_leer" style="display:none"><font color="red">Vorlagename darf nicht leer sein.</font></div>
-
-                    <a id="speichern_vorlage" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Speichern</a>
-                </div>
-
-                <br>
-                <a id="checkout_logout" class="colorbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left"><br>Checkout<br><br></a>
-                <a id="zurueck_logout" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>
-
-            </div>
-
-            <div id="waitgoodbye" style="display:none">
-                <br>
-
-
-                <a id="waitgoodbye_button" class="standardbutton ui-btn ui-shadow ui-corner-all">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-
-
-                    <h4>
-                        Die Anmeldung war erfolgreich!<br>
-                        <br>
-                        <p style="color:darkblue">
-                        Bitte kehren Sie sich nach Abschluss <br>Ihres Besuches an das Terminal zurück,<br> um den Edeka-Besucherschein auszufüllen. <br><br>
-                        </p>
-
-
-                    </h4>
-                    <h3>
-                       Vielen Dank!
-                    </h3>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-
-                </a>
-
-                <br>
-
-                <br>
-            </div>
-
-
-            <div id="goodbye" style="display:none">
-                <br>
-
-
-                <a id="goodbye_button" class="standardbutton ui-btn ui-shadow ui-corner-all">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <h4>
-                        Vielen Dank für Ihren Besuch!
-                    </h4>
-                    <h3>
-                        Auf Wiedersehen
-                    </h3>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-
-                </a>
-
-                <br>
-
-
-                <br>
-            </div>
-            <div id="callButton" style="display:none">
-                <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
 
         </div>
+
+
+        <div id="callButton" style="display:none">
+            <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
     </div>
-
-
-
 </div>
 
-
-</div>
 
 <div data-role="popup" id="popupVorlagen" data-transition="fade" data-rel="popup" class="ui-content" style="display:none" >
     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -680,7 +126,7 @@
     <h3>Login mit Chipkarte</h3>
     <br>
     <p style="color:black">
-    Bitte halten Sie Ihre Chipkarte gegen das Lesegerät!
+        Bitte halten Sie Ihre Chipkarte gegen das Lesegerät!
     </p>
     <br>
 
@@ -704,7 +150,7 @@
 <!--Own Libraries ------------------------------------------------->
 
 
-
+<script type="text/javascript" src="js/terminController.js"></script>
 <script type="text/javascript" src="js/qrCodeController.js"></script>
 <script type="text/javascript" src="js/nfcController.js"></script>
 
@@ -716,9 +162,7 @@
 <script type="text/javascript" src="js/sjcl.js"></script>
 <!-- ---->
 
-
 <script type="text/javascript" src="js/sha3.js"></script>
-
 
 <script type="text/javascript" src="js/fastclick.js"></script>
 
@@ -728,12 +172,9 @@
 
 <script type="text/javascript" src="js/logistikapp.js"></script>
 
-<script type="text/javascript" src="js/configView.js"></script>
+
 <script type="text/javascript" src="js/contactController.js"></script>
 <script type="text/javascript" src="js/templateController.js"></script>
-
-<script type="text/javascript" src="js/loginView.js"></script>
-
 
 
 <script type="text/javascript" src="js/terminView.js"></script>
@@ -746,39 +187,28 @@
 
 
 <!--Imported libraries ------------------------------------------------->
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 
-<!-- nach Empfehlung von http://demos.jquerymobile.com/1.0a4.1/experiments/ui-datepicker/
-für Datepicker -->
-<script>
-    //reset type=date inputs to text
-    $( document ).bind( "mobileinit", function(){
-        $.mobile.page.prototype.options.degradeInputs.date = true;
-    });
-</script>
+
 
 <script>
-
-
-
     $(document).on("mobileinit", function(){
         $.mobile.ignoreContentEnabled = true;
         $.mobile.page.prototype.options.degradeInputs.date = true;
+
     });
 
 
     /*
-    $( "#eventDate" ).setDefaults({
-            showOn: "both",
-            buttonImageOnly: true,
-            buttonText: "Calendar"
-    });
-    */
-
+     $( "#eventDate" ).setDefaults({
+     showOn: "both",
+     buttonImageOnly: true,
+     buttonText: "Calendar"
+     });
+     */
 
 </script>
 
-<script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+
 <script type="text/javascript" src="js/socket.io.js"></script>
 
 <!--dropdown---->
@@ -794,15 +224,9 @@ für Datepicker -->
 <script src="js/PINpad.js"></script>
 
 
-<!--Toast------------------------------------------------->
-<link href="js/notifications/jquery.toast.min.css" rel="stylesheet" type="text/css">
 
 
 <script src="js/notifications/jquery.toast.js"></script>
-
-<!--Datepicker für Termine-->
-<script src="libs/jquery.ui.datepicker.js"></script>
-<script src="libs/jquery.mobile.datepicker.js"></script>
 
 
 <!--Timepicker für Zeit-->
@@ -810,9 +234,11 @@ für Datepicker -->
 
 <script src="libs/moment.min.js"></script>
 
+<script type="text/javascript" src="libs/CordovaPromiseFS.js"></script>
+<script type="text/javascript" src="js/cordova-app-loader-complete.js"></script>
+<script type="text/javascript" src="js/autoupdate.js"></script>
 
 <script type="text/javascript">
-
 
     $('textarea[style="resize:none;height:37px!important;"]').bind('keypress', function(e) {
         if ((e.keyCode || e.which) == 13) {

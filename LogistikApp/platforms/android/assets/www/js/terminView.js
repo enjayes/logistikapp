@@ -43,11 +43,17 @@ var terminView = {
         termin.lieferant = clientView.lieferant.id;
         termin.marktId = configData.markt.id;
 
-        termin.start = moment($("#eventDate").datepicker('getDate'));
+        //TODO:
+        //termin.start = moment($("#eventDate").datepicker('getDate'));
+        //termin.start = $("#eventDate").datepicker('getDate');
+        //termin.start = new Date();
+        termin.start = $("#eventDate").datepicker('getDate');
+        console.log("#################################################################################");
+        console.log( termin.start);
+        console.log(new Date($("#eventDate").datepicker('getDate')));
+        console.log($("#eventDate").datepicker('getDate').getDate());
 
-        console.log(termin.start)
 
-        termin.start = $("#eventDate").datepicker('getDate');//TODO
 
         termin.alarm = 0;
 
@@ -68,9 +74,22 @@ var terminView = {
         }
         else {
             termin.allDay = false;
+            //set time
+            time = $("#eventTime").val();
+            var array = time.split(':');
+            hours = array[0];
+            minutes = array[1];
+            console.log("SetTime:")
+            console.log(hours);
+            console.log(minutes);
+            // Set hours
+            termin.start.setHours(hours);
+            // Then set minutes
+            termin.start.setMinutes(minutes);
         }
 
 
+        console.dir(termin);
         return termin;
     },
 
@@ -85,12 +104,15 @@ var terminView = {
             .find('input').change(function () {
                 console.log(this.value);
             });
-        var input = $('#single-input').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            autoclose: true,
-            'default': 'now'
-        });
+        var input = $('#eventTime').clockpicker();/*{
+         placement: 'bottom',
+         align: 'left',
+         autoclose: true,
+         'default': 'now'
+         });
+         */
+
+        /* $( "#eventDate" ).datepicker();*/
 
 
         // Manually toggle to the minutes view
@@ -107,29 +129,38 @@ var terminView = {
         }
 
 
-        $("#cb_neuer_termin").click(function () {
 
-            $("#terminEintragen").show();
-
-            $("#termine_menu").hide();
-
-        });
 
 
         $("#b_terminabsenden").click(function () {
 
             var termin = terminView.readInput();
+            console.log("termin:")
+            console.log(termin)
+            console.log("serverController.termin.buildDTO(termin):")
 
+            console.log( serverController.termin.buildDTO(termin))
 
-            serverController.termin.create(termin);
+            switchView('termine_menu');
 
+            console.log("serverController.termin.create(termin);")
+            try {
+                serverController.termin.create(termin);
+            }
+            catch (e) {
+                try {
+                    serverController.termin.create(termin);
+                }
+                finally{
+
+                }
+            }
+            console.log("notifications -> termin ")
             notifications.showWithTimeout("Hinweis", "Der Termin wurde erfolgreich an den Marktleiter übermittelt");
 
             console.log(termin)
 
-            $("#terminEintragen").hide();
 
-            $("#termine_menu").show();
 
         });
 
@@ -138,8 +169,7 @@ var terminView = {
 
             notifications.showWithTimeout("Hinweis", "Der Termin wurde <p style='color:#ff2723'>nicht</p> gespeichert!");
 
-            $("#terminEintragen").hide();
-            $("#termine_menu").show();
+            switchView('termine_menu');
 
 
         });
@@ -157,10 +187,12 @@ var terminView = {
         $("#lieferantAlldayTermin").click(function () {
 
             if ($("#lieferantAlldayTermin").prop("checked")) {
+                $("#lieferantClock").hide();
                 $("#termine_menu .clockpicker").addClass("ui-disabled");
             }
             else {
                 $("#termine_menu .clockpicker").removeClass("ui-disabled");
+                $("#lieferantClock").show();
             }
 
         });

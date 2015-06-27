@@ -10,7 +10,7 @@ function handleNfcFromIntentFilter() {
     // addConstructor was finishing *before* deviceReady was complete and the
     // ndef listeners had not been registered.
     // It seems like there should be a better solution.
-    if (cordova.platformId === "android") {
+    if (cordova.platformId === "android" || cordova.platformId === "windows") {
         setTimeout(
             function () {
                 cordova.exec(
@@ -191,6 +191,15 @@ var ndef = {
     },
 
     /**
+     * Helper that creates an Android Application Record (AAR).
+     * http://developer.android.com/guide/topics/connectivity/nfc/nfc.html#aar
+     *
+     */
+    androidApplicationRecord: function(packageName) {
+        return ndef.record(ndef.TNF_EXTERNAL_TYPE, "android.com:pkg", [], packageName);
+    },
+
+    /**
      * Encodes an NDEF Message into bytes that can be written to a NFC tag.
      *
      * @ndefRecords an Array of NDEF Records
@@ -360,6 +369,42 @@ var ndef = {
         }
 
         return value;
+    },
+
+    /**
+     * Convert TNF to String for user friendly display
+     *
+     */
+    tnfToString: function (tnf) {
+        var value = tnf;
+
+        switch (tnf) {
+            case ndef.TNF_EMPTY:
+                value = "Empty";
+                break;
+            case ndef.TNF_WELL_KNOWN:
+                value = "Well Known";
+                break;
+            case ndef.TNF_MIME_MEDIA:
+                value = "Mime Media";
+                break;
+            case ndef.TNF_ABSOLUTE_URI:
+                value = "Absolute URI";
+                break;
+            case ndef.TNF_EXTERNAL_TYPE:
+                value = "External";
+                break;
+            case ndef.TNF_UNKNOWN:
+                value = "Unknown";
+                break;
+            case ndef.TNF_UNCHANGED:
+                value = "Unchanged";
+                break;
+            case ndef.TNF_RESERVED:
+                value = "Reserved";
+                break;
+        }
+        return value;
     }
 
 };
@@ -417,6 +462,10 @@ var nfc = {
 
     erase: function (win, fail) {
         cordova.exec(win, fail, "NfcPlugin", "eraseTag", [[]]);
+    },
+
+    enabled: function (win, fail) {
+        cordova.exec(win, fail, "NfcPlugin", "enabled", [[]]);
     },
 
     removeTagDiscoveredListener: function (callback, win, fail) {

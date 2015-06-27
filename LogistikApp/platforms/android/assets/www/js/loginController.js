@@ -3,7 +3,6 @@
 loginController = {
 
     lieferant: null,
-
     loginError: function () {
         notifications.showError("Die Anmeldung war leider nicht erfolgreich!")
     },
@@ -24,7 +23,6 @@ loginController = {
         }
 
     },
-
     login: function (pin, pinShaCode) {
 
         if (localStorage.waitForLogin == null || localStorage.waitForLogin == undefined) {
@@ -35,27 +33,45 @@ loginController = {
             serverController.loadConfig();
             //Login hat funktioniert
             if (lieferant) {
+
+
+
                 if (lieferant.id) {
                     localStorage.lieferantID = lieferant.id;
                     var resumeLogin = false;
 
                     if (localStorage.waitForLogin.search(lieferant.id + ",") != -1) {
                         resumeLogin = true;
+                        var timenow = new Date();
+                        var lastlogin = terminController.getTerminStart(lieferant.id);
+                        if(lastlogin && lastlogin!=undefined &&  lastlogin!= 0) {
+                            var time = timenow.getTime()-lastlogin;
+                            if (time > 36000000 ){//) {
+                                resumeLogin = false;
+                            }
+                        }
+                        else
+                        {
+                            resumeLogin = false;
+                        }
+                        if(resumeLogin==false){
+                            terminController.deleteTermin(lieferant.id);
+                            localStorage.waitForLogin = localStorage.waitForLogin.replace(lieferant.id + ",", "");
+                            notifications.showError("Die letzte Sitzung ist abgelaufen!");
+                        }
                     }
                     console.log("waitForLogin login: " + localStorage.waitForLogin);
                     loginController.lieferant = lieferant;
                     if (resumeLogin == false) {
-                        $('#contact_daten_menu').show();
-                        $('#startScreen').hide();
-                        $('#lieferantenLogin').hide();
+                        terminController.startTermin(lieferant.id);
+                        switchView("contact_daten_menu");
+
 
                     }
                     else {
 
                         serverController.job.getTemplates(lieferant.id, templateController.set);
-                        $("#jobSelector").show();
-                        $('#startScreen').hide();
-                        $('#lieferantenLogin').hide();
+                        switchView("job_selector");
 
                         localStorage.loggedIn = "true";
                     }
@@ -67,11 +83,12 @@ loginController = {
                     })
                     clientView.lieferant = lieferant;
                     console.dir(lieferant)
-                    contactController.set(lieferant.id, lieferant);
 
-                    $(".greetingLieferant").html(clientView.getLieferantFullName());
+
+
                     localStorage.loggedIn = "true";
                     $('#callButton').show();
+
 
                 }
                 else {

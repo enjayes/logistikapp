@@ -1,0 +1,78 @@
+<!-- <div id="terminEintragen" data-dismissible="false" data-theme="a" class="ui-corner-all" style="display:none">-->
+
+<div>
+    <h3>Termin vereinbaren</h3>
+    <!--
+    <h2 id="terminheader"></h2>
+    -->
+    <label for="termintitel" >Titel:</label>
+    <textarea id="termintitel"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea>
+
+
+
+    <form action="#" method="get">
+        <div data-role="fieldcontain">
+            <label for="eventDate">Datum:</label>
+            <!--<input id="eventDate" value=""  >-->
+            <input id="eventDate"  class="date-input" data-inline="false" data-role="date"  >
+        </div>
+    </form>
+
+
+    <div id="lieferantClock">
+        <label for="eventTime" class="">Zeit:</label>
+        <input id="eventTime" value="" >
+        <!--<button type="button" id="b_selectTime">Zeit wählen</button>-->
+    </div>
+
+
+    <!--<input id="eventDate" type="data" >  data-role="date">-->
+
+    <!--
+
+    <input data-role="date" name="date" id="eventDate" value=""  />
+
+    <div class="form-group">
+        <div class="input-group clockpicker">
+            <input type="text" class="form-control" value="12:00">
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+        </span>
+                </div>
+    </div>
+    -->
+
+
+
+</div>
+<label class="topMarginCheckbox">
+    <input id="lieferantAlldayTermin" type="checkbox" name="">Ganztägig
+</label>
+
+<div id="lieferantRepeatTerminParent" class="topMarginCheckbox" >
+
+    <label>
+        <input id="lieferantRepeatTermin" type="checkbox" name="">Wiederholen
+    </label>
+    <div id="lieferantRepeatTerminChild" class="fadein"  style="display:none">
+        <div id="repeatDaysText1">alle</div>
+
+        <input id="lieferantRepeatTerminInput" type="text">
+
+        <div id="repeatDaysText">Tage</div>
+        <br>
+    </div>
+</div>
+
+
+<label id="terminnotizenLabel" for="terminnotizen" class="">Notizen:</label>
+<textarea id="terminnotizen" rows="2"></textarea>
+
+<div class="bottombuttons saved">
+    <a id="b_terminabsenden"
+       class="standardbutton  ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Absenden
+    </a>
+</div>
+<a id="b_termin_abbrechen"
+   class="redbutton ui-btn ui-corner-all ui-mini ui-mini ui-btn-inline ui-shadow ui-btn-b ui-btn-icon-left ui-icon-delete">Abbrechen
+</a>

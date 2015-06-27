@@ -1,3 +1,4 @@
+
 //Nachricht an den Server
 var ServerMessage = function (data, type) {
     //It is an app message  0 = App
@@ -29,6 +30,7 @@ serverController = {
     callbackHandler: {
         register: function (callback) {
             var callBackName = "cb" + Date.now() + "x" + ((Math.random() * 1000000.0) + "").replace(".", "");
+            console.log("reg: "+callBackName);
             this[callBackName] = callback;
             return callBackName;
         }
@@ -42,24 +44,24 @@ serverController = {
         var address = logistikapp.servername + ":" + logistikapp.server_port;
         console.log(":::" + address + "::::")
 
+
         serverController.socket = io.connect(address, {"force new connection": true});
 
         console.log(serverController.socket)
 
-        var upDateNoConnection = function () {
-            $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
-        }
-
-        upDateNoConnection();
         serverController.socket.on('disconnect', function () {
-            upDateNoConnection();
+            if(clientView.viewTitle=="konfi_menue") {
+                $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
+            }
             serverController.connected = false;
             console.log("DISCONNECT")
         });
 
         //On Message
         serverController.socket.on('message', function (msg) {
-            $("#server_status").css("color", "rgb(84, 191, 84)").text("Mit Server verbunden...");
+            if(clientView.viewTitle=="konfi_menue") {
+                $("#server_status").css("color", "rgb(84, 191, 84)").text("Mit Server verbunden...");
+            }
             serverController.connected = true;
             //Server Connected, send Connection message back
             if (msg.t == serverController.messageType.connection) {
@@ -70,6 +72,11 @@ serverController = {
             else if (msg.t == serverController.messageType.callback) {
                 //Execute Callback
                 if (msg.callback && serverController.callbackHandler[msg.callback]) {
+
+                    console.dir("zurückgeschickte callback id" + msg.callback);
+                    console.dir(msg.cbdata);
+                    console.dir(serverController.callbackHandler);
+
                     serverController.callbackHandler[msg.callback](msg.cbdata);
                     delete serverController.callbackHandler[msg.callback];
                 }
@@ -98,7 +105,10 @@ serverController = {
                 }
                 if (found == false) {
                     serverController.socket.disconnect();
-                    $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
+                    if(clientView.viewTitle=="konfi_menue") {
+                        $("#server_status").css("color", "rgb(191,84, 84)").text("Keine Serververbindung...");
+                    }
+                    serverController.connected = false;
                     notifications.showError("Der Marktname wurde nicht gefunden!")
                 }
 
@@ -164,7 +174,9 @@ serverController = {
                 l: this.buildDTO(lieferant)
             }));
         }
-    },
+    }
+
+    ,
     nachricht: {
         messageType: {
             getAll: "nga",
@@ -211,8 +223,12 @@ serverController = {
         },
         get: function (lieferanten_id, callback) {
             serverController.nachricht.getCallback = function (list) {
+
+
                 for (var i = 0; i < list.length; i++) {
+                    console.log(list[i]);
                     list[i] = serverController.nachricht.parseDTO(list[i]);
+
                 }
                 return callback(list);
             };
@@ -335,7 +351,8 @@ serverController = {
             update: "ju",
             delete: "jd",
             get: "jg",
-            updateOthers: "juo"
+            updateOthers: "juo",
+            startVisit: "jsv"
         },
         buildDTO: function (job) {
 
@@ -371,8 +388,19 @@ serverController = {
                 callback: serverController.callbackHandler.register(newCallback)
             }));
         },
+        startVisit: function(startTime,lieferanten_id,jid){
+            serverController.socket.emit('message', new ServerMessage({
+                t: serverController.job.messageType.startVisit,
+                start: startTime,
+                mid: logistikapp.markt_id,
+                lid: lieferanten_id,
+                jid: jid
+            }))
+        },
         getTemplatesCallback: null,
         getTemplates: function (lieferanten_id, callback) {
+
+
             serverController.job.getTemplatesCallback = function (list) {
                 for (var i = 0; i < list.length; i++) {
                     list[i] = serverController.job.parseDTO(list[i]);
@@ -436,10 +464,32 @@ serverController = {
 
     termin: {
         messageType: {
-            create: "tc"
+            create: "tc",
+            get: "tg",
+            getRange: "tgr",
+            setTerminJob: "tsj"
         },
 
-        buildDTO: function (termin) {
+        parseDTO: function (sent_termin) {
+
+            var date = new Date(sent_termin.Start);
+
+            var newTermin = {
+                id: sent_termin.id,
+                title: sent_termin.Title,
+                marktid: sent_termin.marktId,
+                start: date,
+                end: parseInt(sent_termin.End),
+                allDay: sent_termin.AllDay,
+                notizen: sent_termin.Notizen,
+                lieferant: sent_termin.Lieferant,
+                repeatDays: sent_termin.RepeatDays
+            }
+
+            return newTermin;
+
+          },
+          buildDTO: function (termin) {
 
             var termin = $.extend(true, {}, termin);
             //newTermin.timestamp_start = termin.timestamp_start.getTime();
@@ -449,8 +499,8 @@ serverController = {
             var newTermin = {
                 id: termin.id,
                 Title: termin.title,
-                Start: termin.start.format(),
-                StartMilli: termin.start.toDate().getTime(),
+                Start: termin.start, //.format(),
+                StartMilli: termin.start.getTime(), //.toDate().getTime(),
                 AllDay: termin.allDay,
                 Notizen: termin.notizen,
                 Lieferant: termin.lieferant,
@@ -465,13 +515,51 @@ serverController = {
 
         },
 
+        //TODO: zum funktionieren bringen aka gegenstück im server schreiben
+        get: function (lieferanten_id, callback) {
+
+            console.log("Termine.get");
+
+             var newCallback = function (list) {
+                console.log("Termine");
+                console.log(list.length);
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                    console.log(list[i]);
+                }
+                return callback(list);
+            };
+
+
+            serverController.socket.emit('message', new ServerMessage({
+                t: this.messageType.get,
+                lid: lieferanten_id,
+                callback: serverController.callbackHandler.register(newCallback)
+            }));
+        },
+
 
         create: function (termin) {
-            serverController.socket.emit('message', new ServerMessage({
+            var smessage = new ServerMessage({
                 t: this.messageType.create,
                 e: this.buildDTO(termin)
-            }));
+            });
+            console.log(smessage);
+            serverController.socket.emit('message',smessage );
+        }, getRangeLieferant: function (lid, start, end, callback) {
+
+            var newCallback = function (list) {
+                for (var i = 0; i < list.length; i++) {
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                }
+
+                callback(list);
+
+            };
+            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.getTime(), end: end.getTime(), callback: serverController.callbackHandler.register(newCallback)}));
         }
+
+
     },
 
 

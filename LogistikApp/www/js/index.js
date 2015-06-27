@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
+navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVi
 
 var app = {
     // Application Constructor
