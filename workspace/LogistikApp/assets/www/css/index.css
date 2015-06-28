@@ -173,9 +173,11 @@ button {
 
 
 .bluebutton{
-    background-color:rgb(0, 23,113)!important;
-    text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #001488 /*{a-bup-shadow-color}*/!important;
+    background-color:rgb(0,98,174)!important;
+    text-shadow: 1px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #001488 /*{a-bup-shadow-color}*/!important;
     color: #fff!important;
+    border: 1px solid #FFFFFF!important;
+    border-radius: 15px !important
 
 }
 

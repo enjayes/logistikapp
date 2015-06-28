@@ -61,8 +61,7 @@ var clientView = {
                 $(fadeInDiv).trigger('create');
                 clientView.setGUI(clientView.job);
                 clientView.initializeView(fadeInElement);
-                console.log(fadeInElement+" ->  $("+fadeInDiv+").trigger('create'); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                $(fadeOutDiv).hide();
+                 $(fadeOutDiv).hide();
                 $(fadeInDiv).show();
 
 
@@ -77,6 +76,7 @@ var clientView = {
     },
     initializeView: function(fadeInElement){
         if(fadeInElement=="start_screen"){
+            $('#callButton').hide();
             var id = misc.getUniqueID();
             clientView.job = new Job(id);
             $("#start_qr_code_anmelden").click(function () {
@@ -103,6 +103,7 @@ var clientView = {
             });
         }
         else if (fadeInElement=="contact_daten_menu"){
+            $('#callButton').fadeIn();
            if(this.lieferant) {
             console.log("################################################################ LIEFERANT");
             console.log(this.lieferant);
@@ -241,7 +242,7 @@ var clientView = {
             terminView.initialize();
         }
         else if (fadeInElement=="job_selector"){
-
+            $('#callButton').fadeIn();
             $(".greetingLieferant").html(clientView.getLieferantFullName());
             $("#weiter_Aufgaben").click(function () {
                 switchView("lieferantenschein_1");

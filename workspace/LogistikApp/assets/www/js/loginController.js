@@ -48,25 +48,24 @@ loginController = {
                         resumeLogin = true;
                         var timenow = new Date();
                         var lastlogin = terminController.getTerminStart(lieferant.id);
-                        if(lastlogin && lastlogin!=undefined &&  lastlogin!= 0) {
-                            var time = timenow.getTime()-lastlogin;
-                            if (time > 36000000 ){//) {
+                        if (lastlogin && lastlogin != undefined && lastlogin != 0) {
+                            var time = timenow.getTime() - lastlogin;
+                            if (time > 36000000) {//) {
                                 resumeLogin = false;
                             }
                         }
-                        else
-                        {
+                        else {
                             resumeLogin = false;
                         }
-                        if(resumeLogin==false){
+                        if (resumeLogin == false) {
                             terminController.deleteTermin(lieferant.id);
                             localStorage.waitForLogin = localStorage.waitForLogin.replace(lieferant.id + ",", "");
                             notifications.showError("Die letzte Sitzung ist abgelaufen!");
                         }
                     }
                     console.log("waitForLogin login: " + localStorage.waitForLogin);
-                    loginController.lieferant   = lieferant;
-                    clientView.lieferant        = lieferant;
+                    loginController.lieferant = lieferant;
+                    clientView.lieferant = lieferant;
                     contactController.lieferant = lieferant;
                     if (resumeLogin == false) {
                         terminController.startTermin(lieferant.id);
@@ -89,9 +88,7 @@ loginController = {
                     console.dir(lieferant)
 
 
-
                     localStorage.loggedIn = "true";
-                    $('#callButton').show();
 
 
                 }

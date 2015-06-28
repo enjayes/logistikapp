@@ -85,11 +85,24 @@
 <div id="bannerbackground"></div>
 
 <div class="centerapp" style="display:none">
+
     <div class="app">
         <!--width:460px;-->
         <div class="divbackground" style="width:400px; height:100%;border:none; background-color:#ffffff;opacity:1;padding-left:30px;padding-right:30px;margin-top:55px;margin-bottom:0px;" >
             <img id="bannerext" height="60px" width="100%" src="img/bannerext.png">
             <img id="banner" height="60px" src="img/bannerlogo.png">
+            <div id="callButton" style="display:none">
+                <div  style="position: absolute;top: 33px;left: 413px; height:40px;">
+                    Kontakt:
+                </div>
+                <div style=";position: absolute;top: 17px;left:475px; height:40px;">
+                    <a  class="bluebutton  ui-btn  ui-icon-phone  ui-btn-icon-notext" style="width:30px;height:32px;float:right;" data-mini="true" data-inline="true" data-inline="true" data-iconpos="notext"   onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anruf</a>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
             <br>
 
             <div id="gui0"  class="fadein"  style="display:none" ></div>
@@ -100,13 +113,7 @@
         </div>
 
 
-        <div id="callButton" style="display:none">
-            <a   class="bluebutton  ui-btn ui-shadow ui-corner-all ui-icon-phone ui-btn-icon-left" style="width:65px;float:right;"  onclick="$.mobile.loading('show');misc.call('00498941150015');setTimeout(function(){ $.mobile.loading('hide') }, 5000);return false;" href="">Anrufen</a>
-            <br>
-            <br>
-            <br>
-            <br>
-        </div>
+
 
     </div>
 </div>
