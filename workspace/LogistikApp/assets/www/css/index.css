@@ -114,6 +114,25 @@ button {
 
 
 
+.checkoutbutton{
+    background-color:rgb(0, 113, 23)!important;
+    text-shadow: 01px /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #008814 /*{a-bup-shadow-color}*/!important;
+    color: #fff!important;
+    border-radius:  20px!important;
+}
+
+
+
+.checkoutbutton:hover{
+    background-color:rgb(0, 113, 23)!important;;
+
+}
+.checkoutbutton:active{
+    background-color:rgb(0, 93, 3)!important;;
+
+}
+
+
 
 
 
@@ -305,4 +324,24 @@ button {
     top: 0;
     left: 0;
     z-index: 0;
+}
+
+.titledatafield {
+    font-weight: bold;
+    width: 100px;
+}
+
+.contentdatafield {
+    background: #FFF;
+    border-bottom: 1px dashed #000;
+    padding: 5px;
+    height:15px!important;
+
+}
+
+.selectiondatafield {
+    width: 18px;
+    background: #fff;
+    padding: 3px 0px 3px 2px;
+    border: 1px solid #A5A5A5;
 }

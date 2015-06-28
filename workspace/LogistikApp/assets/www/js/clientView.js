@@ -297,6 +297,52 @@ var clientView = {
                 switchView("logout")
             });
         }
+        else if(fadeInElement=="logout_check"){
+            clientView.showJobPreview(clientView.job,contactController.lieferant);
+            $("#zurueck_logout_check").click(function () {
+                switchView("logout");
+
+            });
+            $("#checkout_logout").click(function () {
+                if ($("#t_notizen").val() != "") {
+
+                    nachrichtText = "Notiz: " + $("#t_notizen").val();
+
+                    var nachricht = {
+                        id: misc.getUniqueID(),
+                        lieferantid: clientView.job.lieferanten_id,
+                        read: 0,
+                        datum: new Date(),
+                        nachricht: nachrichtText
+                    };
+
+                    console.log("SENDE NACHRICHT:");
+                    console.dir(nachricht);
+                    serverController.antwortNachricht.create(nachricht);
+                }
+
+                terminController.endTermin(clientView.job);
+                console.log("DONE - > GOODBYe!")
+
+
+                loginController.logout();
+
+                switchView("goodbye");
+                goodByeTimeout = setTimeout(function () {
+
+
+                    loginController.logout();
+
+
+                    goodByeTimeout = null;
+                    switchView("start_screen");
+
+                }, 10000);
+
+            });
+
+
+        }
         else if(fadeInElement=="logout"){
             clientView.template_name = "";
                 $(".greetingLieferant").html(clientView.getLieferantFullName());
@@ -323,11 +369,11 @@ var clientView = {
 
 
             $("#zurueck_logout").click(function () {
+
                 switchView("lieferantenschein_2");
 
             });
-
-            $("#checkout_logout").click(function () {
+            $("#weiter_lieferantenschein3").click(function () {
 
                 clientView.job = clientView.check_input(clientView.job);
                 clientView.job = clientView.check_out(clientView.job);
@@ -338,49 +384,15 @@ var clientView = {
                 else {
                     alert("Kein Lieferant eingelogged!");
                 }
-
                 //Speichert den Job + sucht den dazugehörigen Termin:
-
 
                 if ($("#t_notizen").val() != "") {
                     clientView.job.t_notizen = window.btoa($("#t_notizen").val());
-                    nachrichtText = "Notiz: " + $("#t_notizen").val();
 
-                    var nachricht = {
-                        id: misc.getUniqueID(),
-                        lieferantid: clientView.job.lieferanten_id,
-                        read: 0,
-                        datum: new Date(),
-                        nachricht: nachrichtText
-                    };
-
-                    console.log("SENDE NACHRICHT:");
-                    console.dir(nachricht);
-                    serverController.antwortNachricht.create(nachricht);
                 }
+                switchView("logout_check");
+            })
 
-
-                terminController.endTermin(clientView.job);
-                console.log("DONE - > GOODBYe!")
-
-
-
-
-                loginController.logout();
-
-                switchView("goodbye");
-                goodByeTimeout = setTimeout(function () {
-
-
-                    loginController.logout();
-
-
-                    goodByeTimeout = null;
-                    switchView("start_screen");
-
-                }, 10000);
-
-            });
         }
         else if(fadeInElement== "wait_goodbye"){
             $("#waitgoodbye_button").click(function () {
@@ -407,6 +419,82 @@ var clientView = {
             clientView.job = new Job(id);
 
         }
+
+    },
+
+    showJobPreview: function (job,lieferant) {
+        //Lieferanten not loadedyet
+
+
+        // $("#besucherscheinContent").html("TODO: format job<br> termineController.showJob()<br><br><br><br><br><br>" + JSON.stringify(job))
+        // $("#besucherscheinMarkt").html(job.markt_id);
+        // $("#besucherscheinFirma").html(lieferant.firma);
+
+        $("#besucherscheinLieferant").html(clientView.getLieferantFullName(lieferant)+" ");
+
+
+
+        $("#besucherscheinThematik").html(window.atob(job.t_thematik+" "));
+        $("#besucherscheinZiel").html(window.atob(job.t_ziel)+" ");
+        $("#besucherscheinGrund").html(window.atob(job.t_grund)+" ");
+        $("#besucherscheinGespraechspartner").html(window.atob(job.gespraechspartner)+" ");
+
+        console.dir(job)
+        job.cb_auftrag_getaetigt ? $("#besucherscheinAuftraggetaetigt").html("X") : {};
+        job.cb_aktionsabsprache ? $("#besucherscheinAktionsabsprache").html("X") : {};
+        job.cb_bemusterung ? $("#besucherscheinBemusterung").html("X") : {};
+        job.cb_info_gespraech ? $("#besucherscheinInfoGespraech").html("X") : {};
+        job.cb_mhd ? $("#besucherscheinMHD").html("X") : {};
+        job.cb_nr_abgabe ? $("#besucherscheinNrAbgabe").html("X") : {};
+        job.cb_reklamation ? $("#besucherscheinRelamationsbearbeitung").html("X") : {};
+        job.cb_ruecknahme ? $("#besucherscheinRuecknahme").html("X") : {};
+        job.cb_sortimentsinfo ? $("#besucherscheinSortimentsinfo").html("X") : {};
+        job.cb_umbau ? $("#besucherscheinUmbau").html("X") : {};
+        job.cb_verkostung ? $("#besucherscheinVerkostung").html("X") : {};
+        job.cb_verlosung ? $("#besucherscheinVerlosung").html("X") : {};
+        job.cb_warenaufbau ? $("#besucherscheinWarenaufbau").html("X") : {};
+
+        $("#besucherscheinVKBetrag").html(job.t_vk_euro_abgabe + " €");
+
+        $("#besucherscheinWarengruppe").html(window.atob(job.t_warengruppe)+" ");
+
+
+        $("#besucherscheinNotizen").html(window.atob(job.t_notizen)+" ");
+        
+        $("#besucherscheinThematik").click(function () {switchView("lieferantenschein_1");})
+        $("#besucherscheinZiel").click(function () {switchView("lieferantenschein_1");})
+        $("#besucherscheinGrund").click(function () {switchView("lieferantenschein_1");})
+        $("#besucherscheinGespraechspartner").click(function () {switchView("lieferantenschein_1");})
+
+        $("#besucherscheinAuftraggetaetigt").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinAktionsabsprache").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinBemusterung").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinInfoGespraech").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinMHD").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinNrAbgabe").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinRelamationsbearbeitung").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinRuecknahme").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinSortimentsinfo").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinUmbau").click(function () {switchView("lieferantenschein_2");})
+
+        $("#besucherscheinVerkostung").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinVerlosung").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinWarenaufbau").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinVKBetrag").click(function () {switchView("lieferantenschein_2");})
+        $("#besucherscheinWarengruppe").click(function () {switchView("lieferantenschein_2");})
+
+        $("#besucherscheinNotizen").click(function () {switchView("logout");})
+
+
+        $("#besucherscheinContent").show();
+
+
+
+
+
+
+
+
 
     }
 //überträgt die Daten aus dem GUI in ein Besucherschein-Objekt (job)
