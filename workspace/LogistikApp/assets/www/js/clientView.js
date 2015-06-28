@@ -29,9 +29,9 @@ var clientView = {
         $("#popupVorlagen").show();
         $("#popupNFCLogin").show();
         $("#popupWriteNFC").show();
+        $("#popupJobselector").show();
 
     },
-
 
 
     getLieferantFullName: function () {
@@ -128,9 +128,19 @@ var clientView = {
 
             });
 
+
+            $("#close_popupJobselector").click(function () {
+                $("#popupJobselector").popup("close");
+            });
+
+            $("#weiter_jobSelectorPopup").click(function () {
+                $("#popupJobselector").popup("open");
+            });
+
             $("#weiter_jobSelector").click(function () {
+                $("#popupJobselector").popup("close");
                 contactController.store();
-                switchView("job_selector");
+                setTimeout(function(){switchView("job_selector")},1000);
             });
 
             $("#zurueck_start").click(function () {
@@ -460,7 +470,7 @@ var clientView = {
 
 
         $("#besucherscheinNotizen").html(window.atob(job.t_notizen)+" ");
-        
+
         $("#besucherscheinThematik").click(function () {switchView("lieferantenschein_1");})
         $("#besucherscheinZiel").click(function () {switchView("lieferantenschein_1");})
         $("#besucherscheinGrund").click(function () {switchView("lieferantenschein_1");})
