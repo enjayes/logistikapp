@@ -64,5 +64,9 @@ var nfcController = {
     },
     stopWriteListener: function () {
         localStorage.writeTag = "false";
+    },
+    writeNFCTag: function(){
+        nfcController.startWriteListener();
+        $("#popupWriteNFC").popup("open");
     }
 }

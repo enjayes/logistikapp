@@ -173,9 +173,7 @@ var clientView = {
             }
 
             $("#b_write_nfc").click(function () {
-                nfcController.startWriteListener();
-                $("#popupWriteNFC").popup("open");
-
+                switchView('lieferanten_login_nfc');
             });
 
             $("#open_admin").click(function () {
@@ -219,6 +217,18 @@ var clientView = {
             //Schließt die  Konfigurations-Ansicht
             $("#config_zurueck").click(function () {
                 switchView('start_screen');
+            });
+        }
+        else if (fadeInElement == "lieferanten_login_nfc"){
+            loginView.pinPadNFC = new PinPad("#PINcodeNFC", function (code) {
+                loginController.clear();
+                loginController.writeNFClogin(code);
+                loginView.pinPadNFC.clear();
+
+            })
+            $("#login_zurueck_start_nfc").click(function () {
+                switchView("start_screen");
+
             });
         }
         else if (fadeInElement=="lieferanten_login"){

@@ -23,6 +23,32 @@ loginController = {
         }
 
     },
+    writeNFClogin: function(pin){
+        var loginCallback = function (lieferant) {
+            serverController.loadConfig();
+            if (lieferant) {
+                if (lieferant.id) {
+                    localStorage.lieferantID = lieferant.id;
+                    switchView("konfi_menue");
+                    setTimeout(nfcController.writeNFCTag, 200);
+                }
+                else {
+                    loginController.loginError();
+                }
+            }
+            else {
+                loginController.loginError();
+            }
+        };
+        //Create Pin 4 digits
+        var pad = "0000";
+        pin = pad.substring(0, pad.length - pin.length) + pin;
+
+        var pinSha = "" + CryptoJS.SHA3("dfjo58443pggd9gudf9" + pin, {outputLength: 512});
+        localStorage.pinSha = pinSha;
+        serverController.lieferant.login(pinSha, loginCallback);
+    }
+    ,
     login: function (pin, pinShaCode) {
 
         if (localStorage.waitForLogin == null || localStorage.waitForLogin == undefined) {
