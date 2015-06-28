@@ -29,7 +29,7 @@ var clientView = {
         $("#popupVorlagen").show();
         $("#popupNFCLogin").show();
         $("#popupWriteNFC").show();
-        $("#popupJobselector").show();
+
 
     },
 
@@ -47,8 +47,10 @@ var clientView = {
     },
 
     switchView: function(fadeInElement){
+
         console.log(clientView.loadedTitle+" ->  clientView.setJob");
         var fadeOutDiv = "#gui"+clientView.currentViewDiv;
+
         if(clientView.viewTitle=="admin"){
             fadeOutDiv = "#gui2"
             $("#divbackground").show();
@@ -63,32 +65,30 @@ var clientView = {
         var fadeInDiv = "#gui"+clientView.currentViewDiv;
         if(clientView.viewTitle=="admin"){
             fadeInDiv = "#gui2"
-
             $("#divbackground").hide();
             $("#centerapp").hide();
             var height = window.innerHeight+"px";
             $("#gui2").attr('style', "display:none;width:100%;height:"+height);
-
-
         }
+        if(fadeOutDiv!=fadeInDiv) {
+            $(fadeOutDiv).fadeOut(); //todo
+            $(fadeInDiv).load("html/" + fadeInElement + ".html", "", function () {
+                    $(fadeInDiv).trigger('create');
+                    clientView.setGUI(clientView.job);
+                    clientView.initializeView(fadeInElement);
+                    $(fadeOutDiv).hide();
+                    $(fadeInDiv).show();
 
-        $(fadeOutDiv).fadeOut(); //todo
-        $( fadeInDiv).load( "html/"+fadeInElement+".html","",function(){
-                $(fadeInDiv).trigger('create');
-                clientView.setGUI(clientView.job);
-                clientView.initializeView(fadeInElement);
-                 $(fadeOutDiv).hide();
-                $(fadeInDiv).show();
 
+                    $(fadeOutDiv).empty();
+                    if (misc.isMobileApp()) {
+                        FastClick.attach(document.body);
 
-                $(fadeOutDiv).empty();
-                if (misc.isMobileApp()) {
-                    FastClick.attach(document.body);
+                    }
 
                 }
-
-            }
-        );
+            );
+        }
     },
     initializeView: function(fadeInElement){
         if(fadeInElement=="start_screen"){
@@ -120,6 +120,7 @@ var clientView = {
             });
         }
         else if (fadeInElement=="contact_daten_menu"){
+            $("#popupJobselector").show();
             $("#progresssteps").attr("src","img/progress1.png");
             $("#progresssteps").show();
             $('#callButton').fadeIn();
@@ -153,13 +154,15 @@ var clientView = {
             });
 
             $("#weiter_jobSelectorPopup").click(function () {
-                $("#popupJobselector").popup("open");
+                //switchView("job_selector")
+               $("#popupJobselector").popup("open");
             });
 
             $("#weiter_jobSelector").click(function () {
                 $("#popupJobselector").popup("close");
+
                 contactController.store();
-                setTimeout(function(){switchView("job_selector")},1000);
+               setTimeout(function(){ switchView("job_selector")},1200);
             });
 
             $("#zurueck_start").click(function () {
