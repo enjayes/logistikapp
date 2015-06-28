@@ -454,7 +454,8 @@ var clientView = {
 
         }
         else if(fadeInElement== "wait_goodbye"){
-            $("#progresssteps").hide();
+            $("#progresssteps").attr("src","img//progress2.png");
+            $("#progresssteps").show();
             $("#waitgoodbye_button").click(function () {
                 if (goodByeTimeout != null) {
                     clearTimeout(goodByeTimeout);
