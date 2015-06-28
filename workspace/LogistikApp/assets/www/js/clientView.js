@@ -48,13 +48,29 @@ var clientView = {
 
     switchView: function(fadeInElement){
         console.log(clientView.loadedTitle+" ->  clientView.setJob");
-
+        var fadeOutDiv = "#gui"+clientView.currentViewDiv;
+        if(clientView.viewTitle=="admin"){
+            fadeOutDiv = "#gui2"
+            $("#divbackground").show();
+            $("#centerapp").show();
+        }
         clientView.loadedTitle = clientView.viewTitle;
         clientView.job = clientView.setJob(clientView.job);
         clientView.viewTitle = fadeInElement;
-        var fadeOutDiv = "#gui"+clientView.currentViewDiv;
+
+
         clientView.currentViewDiv = 1-clientView.currentViewDiv
         var fadeInDiv = "#gui"+clientView.currentViewDiv;
+        if(clientView.viewTitle=="admin"){
+            fadeInDiv = "#gui2"
+
+            $("#divbackground").hide();
+            $("#centerapp").hide();
+            var height = window.innerHeight+"px";
+            $("#gui2").attr('style', "display:none;width:100%;height:"+height);
+
+
+        }
 
         $(fadeOutDiv).fadeOut(); //todo
         $( fadeInDiv).load( "html/"+fadeInElement+".html","",function(){
@@ -163,6 +179,23 @@ var clientView = {
 
             });
         }
+        else if (fadeInElement=="admin"){
+            $("#admin_zurueck").click(function () {
+                switchView('konfi_menue');
+            })
+
+            var url =  localStorage.servername + ":" + localStorage.server_port;
+            if(url.search("http://")==-1){
+                url = "http://" +url;
+            }
+            $("#adminframe").attr('src', url);
+            $.mobile.loading( "show");
+            $("#adminframe").load(function(){
+                $.mobile.loading( "hide");
+            })
+
+
+        }
         else if (fadeInElement=="konfi_menue"){
 
             if (typeof(localStorage) !== "undefined") {
@@ -187,12 +220,15 @@ var clientView = {
             });
 
             $("#open_admin").click(function () {
+                switchView('admin');
                 //url = "http://" + localStorage.servername + ":" + localStorage.server_port;
+                /*
                 url =  localStorage.servername + ":" + localStorage.server_port;
                 if(url.search("http://")==-1){
                     url = "http://" +url;
                 }
                 misc.openLink(url);
+                */
 
             });
             $("#close_app").click(function () {
