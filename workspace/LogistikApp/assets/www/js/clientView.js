@@ -92,6 +92,7 @@ var clientView = {
     },
     initializeView: function(fadeInElement){
         if(fadeInElement=="start_screen"){
+            $("#progresssteps").hide();
             $('#callButton').hide();
             var id = misc.getUniqueID();
             clientView.job = new Job(id);
@@ -119,6 +120,8 @@ var clientView = {
             });
         }
         else if (fadeInElement=="contact_daten_menu"){
+            $("#progresssteps").attr("src","img/progress1.png");
+            $("#progresssteps").show();
             $('#callButton').fadeIn();
            if(this.lieferant) {
             console.log("################################################################ LIEFERANT");
@@ -298,6 +301,8 @@ var clientView = {
             terminView.initialize();
         }
         else if (fadeInElement=="job_selector"){
+            $("#progresssteps").attr("src","img//progress3.png");
+            $("#progresssteps").show();
             $('#callButton').fadeIn();
             $(".greetingLieferant").html(clientView.getLieferantFullName());
             $("#weiter_Aufgaben").click(function () {
@@ -322,6 +327,8 @@ var clientView = {
 
         }
         else if (fadeInElement=="lieferantenschein_1"){
+            $("#progresssteps").attr("src","img//progress4.png");
+            $("#progresssteps").show();
             $(".greetingLieferant").html(clientView.getLieferantFullName());
             $("#weiter_lieferantenschein1").click(function () {
                 switchView("lieferantenschein_2");
@@ -333,6 +340,8 @@ var clientView = {
             });
         }
         else if(fadeInElement=="lieferantenschein_2") {
+            $("#progresssteps").attr("src", "img//progress5.png");
+            $("#progresssteps").show();
             $(".greetingLieferant").html(clientView.getLieferantFullName());
             $("#zurueck_lieferantenschein2").click(function () {
                 switchView("lieferantenschein_1");
@@ -343,53 +352,9 @@ var clientView = {
                 switchView("logout")
             });
         }
-        else if(fadeInElement=="logout_check"){
-            clientView.showJobPreview(clientView.job,contactController.lieferant);
-            $("#zurueck_logout_check").click(function () {
-                switchView("logout");
-
-            });
-            $("#checkout_logout").click(function () {
-                if ($("#t_notizen").val() != "") {
-
-                    nachrichtText = "Notiz: " + $("#t_notizen").val();
-
-                    var nachricht = {
-                        id: misc.getUniqueID(),
-                        lieferantid: clientView.job.lieferanten_id,
-                        read: 0,
-                        datum: new Date(),
-                        nachricht: nachrichtText
-                    };
-
-                    console.log("SENDE NACHRICHT:");
-                    console.dir(nachricht);
-                    serverController.antwortNachricht.create(nachricht);
-                }
-
-                terminController.endTermin(clientView.job);
-                console.log("DONE - > GOODBYe!")
-
-
-                loginController.logout();
-
-                switchView("goodbye");
-                goodByeTimeout = setTimeout(function () {
-
-
-                    loginController.logout();
-
-
-                    goodByeTimeout = null;
-                    switchView("start_screen");
-
-                }, 10000);
-
-            });
-
-
-        }
         else if(fadeInElement=="logout"){
+            $("#progresssteps").attr("src", "img//progress6.png");
+            $("#progresssteps").show();
             clientView.template_name = "";
                 $(".greetingLieferant").html(clientView.getLieferantFullName());
 
@@ -440,7 +405,56 @@ var clientView = {
             })
 
         }
+        else if(fadeInElement=="logout_check"){
+            $("#progresssteps").attr("src","img//progress7.png");
+            $("#progresssteps").show();
+            clientView.showJobPreview(clientView.job,contactController.lieferant);
+            $("#zurueck_logout_check").click(function () {
+                switchView("logout");
+
+            });
+            $("#checkout_logout").click(function () {
+                if ($("#t_notizen").val() != "") {
+
+                    nachrichtText = "Notiz: " + $("#t_notizen").val();
+
+                    var nachricht = {
+                        id: misc.getUniqueID(),
+                        lieferantid: clientView.job.lieferanten_id,
+                        read: 0,
+                        datum: new Date(),
+                        nachricht: nachrichtText
+                    };
+
+                    console.log("SENDE NACHRICHT:");
+                    console.dir(nachricht);
+                    serverController.antwortNachricht.create(nachricht);
+                }
+
+                terminController.endTermin(clientView.job);
+                console.log("DONE - > GOODBYe!")
+
+
+                loginController.logout();
+
+                switchView("goodbye");
+                goodByeTimeout = setTimeout(function () {
+
+
+                    loginController.logout();
+
+
+                    goodByeTimeout = null;
+                    switchView("start_screen");
+
+                }, 10000);
+
+            });
+
+
+        }
         else if(fadeInElement== "wait_goodbye"){
+            $("#progresssteps").hide();
             $("#waitgoodbye_button").click(function () {
                 if (goodByeTimeout != null) {
                     clearTimeout(goodByeTimeout);
@@ -454,6 +468,7 @@ var clientView = {
 
         }
         else if(fadeInElement== "goodbye"){
+            $("#progresssteps").hide();
             $("#goodbye_button").click(function () {
                 if (goodByeTimeout != null) {
                     clearTimeout(goodByeTimeout);

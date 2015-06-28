@@ -317,7 +317,22 @@ button {
     z-index: 1;
 }
 
-#bannerext {
+
+
+#progresssteps {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left:-155px;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    z-index: 1;
+}
+
+
+
+
+#bannerext{
     margin-top: 10px;
     margin-bottom: 10px;
     position: absolute;
