@@ -76,13 +76,9 @@ public class KioskService extends Service {
 	  }
 
 	  private void restoreApp() {
-		//todo
-	    // Restart activity
-		/*
 	    Intent i = new Intent(ctx, LogistikApp.class);
 	    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    ctx.startActivity(i);
-	    */
 	    return ;
 	  }
 	  

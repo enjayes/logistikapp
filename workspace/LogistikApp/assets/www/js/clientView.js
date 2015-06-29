@@ -154,8 +154,8 @@ var clientView = {
             });
 
             $("#weiter_jobSelectorPopup").click(function () {
-                //switchView("job_selector")
-               $("#popupJobselector").popup("open");
+                switchView("job_selector")
+              // $("#popupJobselector").popup("open");
             });
 
             $("#weiter_jobSelector").click(function () {
@@ -175,7 +175,7 @@ var clientView = {
         }
         else if (fadeInElement=="konfi_login_menue"){
             configView.pinPad = new PinPad("#PINcodeConfig", function (code) {
-                if (code == "1234") {
+                if (code == "3792") {
                     configView.pinPad.clear();
                     clientView.switchView("konfi_menue");
                 }
