@@ -9,13 +9,16 @@ var terminController = {
     terminListe: null,
     termine:null,
     load: function(){
-        serverController.termin.getAll(terminController.setTermine)
 
+
+        serverController.termin.getAll(terminController.setTermine);
 
     },
 
     setTermine: function (termine){
         this.termine = termine;
+        console.log("load termine");
+        console.dir(termine);
     },
 
     initialize: function(){
