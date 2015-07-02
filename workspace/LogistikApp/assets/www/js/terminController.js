@@ -25,7 +25,7 @@ var terminController = {
         serverController.termin.get(contactController.lieferant.id, function (termine) {
             console.dir("termine.liste");
             console.dir(termine);
-            terminListe = termine;
+            this.termine = termine;
             //this.termine = termine;
 
         })
