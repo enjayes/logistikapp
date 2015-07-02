@@ -9,8 +9,15 @@ var terminController = {
     terminListe: null,
     termine:null,
     load: function(){
+        serverController.termin.getAll(terminController.setTermine)
+
 
     },
+
+    setTermine: function (termine){
+        this.termine = termine;
+    },
+
     initialize: function(){
         serverController.termin.get(contactController.lieferant.id, function (termine) {
             console.dir("termine.liste");

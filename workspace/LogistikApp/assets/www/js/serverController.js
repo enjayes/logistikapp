@@ -61,7 +61,8 @@ serverController = {
         });
 
         serverController.socket.on('connect', function() {
-            console.log("CONNECT!")
+            console.log("CONNECT!");
+
         });
 
         //On Message
@@ -74,6 +75,7 @@ serverController = {
             if (msg.t == serverController.messageType.connection) {
                 dataController.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
                 serverController.loadConfig();
+                dataController.load();
 
             }
             else if (msg.t == serverController.messageType.callback) {
@@ -477,7 +479,8 @@ serverController = {
             create: "tc",
             get: "tg",
             getRange: "tgr",
-            setTerminJob: "tsj"
+            setTerminJob: "tsj",
+            getAll: "tgA"
         },
 
         parseDTO: function (sent_termin) {
@@ -525,7 +528,6 @@ serverController = {
 
         },
 
-        //TODO: zum funktionieren bringen aka gegenstück im server schreiben
         get: function (lieferanten_id, callback) {
 
 
@@ -566,6 +568,11 @@ serverController = {
 
             };
             dataController.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.getTime(), end: end.getTime(), callback: serverController.callbackHandler.register(newCallback)}));
+        },
+
+        getAll: function (callback){
+            dataController.emit('message', new ServerMessage({t: this.messageType.getAll,
+                callback: callback, marktid: localStorage.markt_id}));
         }
 
 
