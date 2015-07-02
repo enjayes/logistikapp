@@ -1,5 +1,5 @@
 dataController = {
-    load: function (m,d){
+    emit: function (m,d){
 
         var isLocal = false;
 

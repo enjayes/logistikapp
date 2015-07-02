@@ -39,7 +39,7 @@ serverController = {
 
         //Load Socket io and connect
 
-        //serverController.socket = io.connect(preferences.server);
+        //dataController = io.connect(preferences.server);
 
         var address = logistikapp.servername + ":" + logistikapp.server_port;
 
@@ -48,7 +48,7 @@ serverController = {
         }
         console.log("io.connect("+address+")");
 
-        serverController.socket = io.connect(address, {"force new connection": true});
+        dataController = io.connect(address, {"force new connection": true});
 
 
 
@@ -172,14 +172,14 @@ serverController = {
                 } else
                     callback();
             };
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.login,
                 p: pinSha,
                 callback: serverController.callbackHandler.register(newCallback)
             }));
         },
         update: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.update,
                 l: this.buildDTO(lieferant)
             }));
@@ -226,7 +226,7 @@ serverController = {
                 serverController.onLoadedGetAllOnStartup();
             };
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.getAll,
                 callback: serverController.callbackHandler.register(newCallback)
             }));
@@ -246,7 +246,7 @@ serverController = {
                 serverController.nachricht.getCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.get,
                 lid: lieferanten_id,
                 callback: serverController.callbackHandler.register(newCallback)
@@ -257,11 +257,11 @@ serverController = {
             var markReadMessage = {t: this.messageType.markRead, lid: clientView.lieferant.id, nid: nachricht.id}
             console.dir("markRead:");
             console.dir(markReadMessage);
-            serverController.socket.emit('message', new ServerMessage(markReadMessage));
+            dataController.emit('message', new ServerMessage(markReadMessage));
         },
         create: function (nachricht) {
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.create,
                 n: this.buildDTO(nachricht)
             }));
@@ -307,7 +307,7 @@ serverController = {
         }
     , create: function (nachricht) {
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.create,
                 n: this.buildDTO(nachricht)
             }));
@@ -326,7 +326,7 @@ serverController = {
                 serverController.phone.callCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.callNumber,
                 n: number,
                 text: text,
@@ -341,7 +341,7 @@ serverController = {
                 serverController.phone.sendCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.sendMessage,
                 n: number,
                 text: text,
@@ -393,13 +393,13 @@ serverController = {
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.getAll,
                 callback: serverController.callbackHandler.register(newCallback)
             }));
         },
         startVisit: function(startTime,lieferanten_id,jid){
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: serverController.job.messageType.startVisit,
                 start: startTime,
                 mid: logistikapp.markt_id,
@@ -422,7 +422,7 @@ serverController = {
                 serverController.getTemplatesOnLoginCounter++;
                 serverController.onLoadedGetTemplatesOnLogin();
             };
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.getTemplates,
                 lid: lieferanten_id,
                 callback: serverController.callbackHandler.register(newCallback)
@@ -432,19 +432,19 @@ serverController = {
             console.log("SEND JOB:")
             console.log(this.buildDTO(job));
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.create,
                 j: this.buildDTO(job)
             }));
         },
         update: function (job) {
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.update,
                 j: this.buildDTO(job)
             }));
         },
         delete: function (job) {
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.delete,
                 j: this.buildDTO(job)
             }));
@@ -461,14 +461,14 @@ serverController = {
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.getAll,
                 callback: serverController.callbackHandler.register(newCallback)
             }));
 
         },
         update: function (markt) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, m: markt}));
+            dataController.emit('message', new ServerMessage({t: this.messageType.update, m: markt}));
         }
     },
 
@@ -540,7 +540,7 @@ serverController = {
             };
 
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.get,
                 lid: lieferanten_id,
                 callback: serverController.callbackHandler.register(newCallback)
@@ -554,7 +554,7 @@ serverController = {
                 e: this.buildDTO(termin)
             });
             console.log(smessage);
-            serverController.socket.emit('message',smessage );
+            dataController.emit('message',smessage );
         }, getRangeLieferant: function (lid, start, end, callback) {
 
             var newCallback = function (list) {
@@ -565,7 +565,7 @@ serverController = {
                 callback(list);
 
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.getTime(), end: end.getTime(), callback: serverController.callbackHandler.register(newCallback)}));
+            dataController.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.getTime(), end: end.getTime(), callback: serverController.callbackHandler.register(newCallback)}));
         }
 
 
