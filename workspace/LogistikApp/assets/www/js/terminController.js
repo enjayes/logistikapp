@@ -14,8 +14,6 @@ var terminController = {
             terminListe = termine;
             //this.termine = termine;
 
-
-
         })
     }
     ,
