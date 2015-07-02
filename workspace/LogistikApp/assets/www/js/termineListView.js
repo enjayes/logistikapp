@@ -9,7 +9,6 @@ var termineListView = {
     //TODO: remove
     //templateList: null,
     dummy_termine: [],
-    termine: [],
 
     //TODO: remove
     addDummies: function()
@@ -45,13 +44,25 @@ var termineListView = {
 
     addTermine: function(terminliste) {
 
-        return ;//TODO !!!!!! remove
+        //return ;//TODO !!!!!! remove
 
         console.log("addtermine");
         console.dir(terminliste);
 
 
-        terminliste_sorted = terminliste.sort(function (a,b) {
+        //termine des lieferanten rausfiltern
+        for (var i=0; i < terminliste.length; i++)
+        {
+            l_termine: [];
+            if (terminliste[i].lieferant = contactController.lieferant.id)
+            {
+                l_termine.push(terminliste[i]);
+            }
+        }
+
+
+        //Termine nach Datum sortieren
+        terminliste_sorted = l_termine.sort(function (a,b) {
 
             datea = new Date(a.start);
             dateb = new Date(b.start);
@@ -136,7 +147,10 @@ var termineListView = {
 
     initialize: function()
     {
-        termineListView.addTermine(terminController.terminListe);
+
+        console.log("init_termine");
+        console.dir(terminController.termine);
+        termineListView.addTermine(terminController.termine);
 
         $("#cb_neuer_termin").click(function () {
 

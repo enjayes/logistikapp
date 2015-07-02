@@ -4,9 +4,8 @@
 
 var terminController = {
     lieferantVisitTimeMap:{},
-
+    terminTolerance:1,
     setTerminCurrenJob: null,
-    terminListe: null,
     termine:null,
     load: function(){
 
@@ -18,10 +17,12 @@ var terminController = {
     setTermine: function (termine){
         this.termine = termine;
         console.log("load termine");
-        console.dir(termine);
+        console.dir(this.termine);
     },
 
     initialize: function(){
+
+        /*
         serverController.termin.get(contactController.lieferant.id, function (termine) {
             console.dir("termine.liste");
             console.dir(termine);
@@ -30,6 +31,7 @@ var terminController = {
 
         })
 
+        */
 
     }
     ,
