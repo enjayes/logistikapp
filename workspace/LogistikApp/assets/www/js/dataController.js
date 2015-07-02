@@ -16,7 +16,7 @@ dataController = {
     load: function(){
         $.mobile.loading( "show");
         lieferantenController.load();
-        termineController.load();
+        terminController.load();
 
         $.mobile.loading( "hide");
         clientView.initialize();

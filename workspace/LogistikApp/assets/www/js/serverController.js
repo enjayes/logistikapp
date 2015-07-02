@@ -48,7 +48,7 @@ serverController = {
         }
         console.log("io.connect("+address+")");
 
-        dataController = io.connect(address, {"force new connection": true});
+        serverController.socket = io.connect(address, {"force new connection": true});
 
 
 
@@ -72,7 +72,7 @@ serverController = {
             serverController.connected = true;
             //Server Connected, send Connection message back
             if (msg.t == serverController.messageType.connection) {
-                dataController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
+                dataController.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
                 serverController.loadConfig();
 
             }
