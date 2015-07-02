@@ -4,8 +4,4 @@ lieferantenController = {
         lieferanten = new Array(150);
 
     }
-
-
-
-
 }
