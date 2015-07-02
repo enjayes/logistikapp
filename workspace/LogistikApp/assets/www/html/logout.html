@@ -1,9 +1,45 @@
 <h2 class="greetingLieferant"></h2>
-<h4>Notizen</h4>
+<table style="table-layout:fixed">
+
+    <tr style="display:none">
+        <td>
+            <label>
+                Ziel
+            </label>
+        <td  style="width:54%;"><textarea id="t_ziel" rows="1" cols="50" ></textarea></td>
+    </tr>
+
+    <tr>
+        <td>
+            <label>
+                Grund
+            </label>
+        <td  style="width:54%;"><textarea id="t_grund" rows="1" cols="50"></textarea></td>
+    </tr>
+
+    <tr style="display:none">
+        <td>
+            <label>
+                Thematik
+            </label>
+        <td  style="width:54%;"><textarea id="t_thematik"rows="1" cols="50" ></textarea></td>
+    </tr>
+
+    <tr>
+        <td>
+            <label>
+                Gesprächspartner
+            </label>
+        <td  style="width:54%;"><textarea id="gespraechspartner"rows="1" cols="50" style="resize:none;height:37px!important;"></textarea> </td>
+    </tr>
+</table>
+<h4>Nachricht an den Marktleiter:</h4>
 <textarea id="t_notizen" rows="5" cols="50"></textarea>
 <br>
 <br>
 <a id="vorlage_logout" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Besucherschein als Vorlage speichern</a>
+
+
 
 <div id="vorlage_benennen" class="fadein"  style="display:none">
     <h3>Vorlagenname</h3>
@@ -16,5 +52,6 @@
 </div>
 <br>
 <br>
+
 <a id="weiter_lieferantenschein3" class="colorbutton2 ui-btn ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left">Weiter</a>
 <a id="zurueck_logout" class="standardbutton ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-left">Zurück</a>

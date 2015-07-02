@@ -25,7 +25,9 @@ serverController = {
     messageType: {
         connection: "c",
         normal: "n",
-        callback: "cb"
+        callback: "cb",
+        pushLieferant: "pl",
+        deleteLieferant: "dl"
     },
     callbackHandler: {
         register: function (callback) {
@@ -51,6 +53,11 @@ serverController = {
         serverController.socket = io.connect(address, {"force new connection": true});
 
 
+        serverController.socket.on('error', function (err) {
+            console.log("SOCKET ERROR!!!!")
+            console.log(err);
+        });
+
 
         serverController.socket.on('disconnect', function () {
             if(clientView.viewTitle=="konfi_menue") {
@@ -61,20 +68,32 @@ serverController = {
         });
 
         serverController.socket.on('connect', function() {
-            console.log("CONNECT!")
+            console.log("CONNECT!");
+
         });
 
         //On Message
         serverController.socket.on('message', function (msg) {
+            console.dir("on(message)");
+            console.dir(msg);
             if(clientView.viewTitle=="konfi_menue") {
                 $("#server_status").css("color", "rgb(84, 191, 84)").text("Mit Server verbunden...");
             }
-            serverController.connected = true;
+            setTimeout(function(){serverController.connected = true},1000);
             //Server Connected, send Connection message back
             if (msg.t == serverController.messageType.connection) {
-                dataController.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
+                serverController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
                 serverController.loadConfig();
-
+                dataController.load();
+                console.log("serverController.messageType.connection");
+            }
+            else if (msg.t == serverController.messageType.pushLieferant){
+                console.log("UPDATE LIEFERANT")
+                console.log(msg.l);
+                lieferantenController.update(serverController.lieferant.parseDTO(msg.l));
+            }
+            else if (msg.t == serverController.messageType.deleteLieferant){
+                lieferantenController.deleteLieferant(serverController.lieferant.parseDTO(msg.l));
             }
             else if (msg.t == serverController.messageType.callback) {
                 //Execute Callback
@@ -123,6 +142,11 @@ serverController = {
             }
             console.log("loadConfig-Märkte:");
             console.log(configData.maerkte);
+
+
+            terminController.load();
+
+
         })
     }
     ,
@@ -165,18 +189,27 @@ serverController = {
             }
         },
         login: function (pinSha, callback) {
-            var newCallback = function () {
-                if (arguments[0]) {
-                    var lieferant = serverController.lieferant.parseDTO(arguments[0]);
-                    callback(lieferant);
-                } else
-                    callback();
-            };
-            dataController.emit('message', new ServerMessage({
-                t: this.messageType.login,
-                p: pinSha,
-                callback: serverController.callbackHandler.register(newCallback)
-            }));
+
+            var lieferant = lieferantenController.login(pinSha);
+            if( lieferant==null) {
+
+                var newCallback = function () {
+                    if (arguments[0]) {
+                        var lieferant = serverController.lieferant.parseDTO(arguments[0]);
+                        callback(lieferant);
+                    } else
+                        callback();
+                };
+                dataController.emit('message', new ServerMessage({
+                    t: this.messageType.login,
+                    p: pinSha,
+                    callback: serverController.callbackHandler.register(newCallback)
+                }));
+            }
+            else
+            {
+                callback(lieferant);
+            }
         },
         update: function (lieferant) {
             dataController.emit('message', new ServerMessage({
@@ -326,7 +359,7 @@ serverController = {
                 serverController.phone.callCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            dataController.emit('message', new ServerMessage({
+            serverController.socket.emit('message', new ServerMessage({
                 t: this.messageType.callNumber,
                 n: number,
                 text: text,
@@ -341,7 +374,7 @@ serverController = {
                 serverController.phone.sendCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            dataController.emit('message', new ServerMessage({
+            serverController.socket.emit('message', new ServerMessage({
                 t: this.messageType.sendMessage,
                 n: number,
                 text: text,
@@ -351,7 +384,6 @@ serverController = {
 
 
     },
-
     job: {
         messageType: {
 
@@ -478,6 +510,7 @@ serverController = {
             get: "tg",
             getRange: "tgr",
             setTerminJob: "tsj"
+
         },
 
         parseDTO: function (sent_termin) {
