@@ -7,6 +7,10 @@ var terminController = {
     terminTolerance:2,
     setTerminCurrenJob: null,
     terminListe: null,
+    termine:null,
+    load: function(){
+
+    },
     initialize: function(){
         serverController.termin.get(contactController.lieferant.id, function (termine) {
             console.dir("termine.liste");

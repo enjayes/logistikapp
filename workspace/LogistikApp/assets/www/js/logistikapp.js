@@ -68,12 +68,14 @@ var logistikapp = {
 
         //Initialize Views
 
-        clientView.initialize();
+
 
         //Show App
 
         $(".centerapp").show();
         window.BOOTSTRAP_OK = true;
+
+        dataController.load();
 
     }
 }
