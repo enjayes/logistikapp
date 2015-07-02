@@ -74,8 +74,6 @@ serverController = {
 
         //On Message
         serverController.socket.on('message', function (msg) {
-            console.dir("on(message)");
-            console.dir(msg);
             if(clientView.viewTitle=="konfi_menue") {
                 $("#server_status").css("color", "rgb(84, 191, 84)").text("Mit Server verbunden...");
             }
@@ -165,8 +163,7 @@ serverController = {
 
         },
         parseDTO: function (lieferant) {
-            console.log("parseDTO ####################################### LIEFERANT");
-            console.log(lieferant);
+
             return {
                 id: lieferant.id,
                 pin: lieferant.Pin,

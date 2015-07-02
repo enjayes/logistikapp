@@ -9,7 +9,7 @@ var terminController = {
     termine:null,
     load: function(){
 
-
+        console.log("load termine##########################################################");
         serverController.termin.getAll(terminController.setTermine);
 
     },

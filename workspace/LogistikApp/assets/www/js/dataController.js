@@ -27,10 +27,6 @@ dataController = {
         }
     },
     emit: function (m,d,noretry) {
-        console.log("EMIT!")
-            console.log("d.t: "+d.data.t);
-        console.dir(d.data);
-        console.log("noretry: "+noretry);
 
         if(serverController.socket.connected && serverController.connected==true) {
 
@@ -84,7 +80,7 @@ dataController = {
         $.mobile.loading( "show");
 
         lieferantenController.load();
-
+        serverController.loadConfig();
         $.mobile.loading( "hide");
         dataController.checkIfLoaded();
         if(dataController.messages) {
