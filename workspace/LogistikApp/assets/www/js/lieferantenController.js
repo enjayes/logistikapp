@@ -3,5 +3,8 @@ lieferantenController = {
     init: function(){
         lieferanten = new Array(150);
 
+    },
+    load: function(){
+
     }
 }

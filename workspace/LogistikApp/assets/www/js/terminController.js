@@ -8,6 +8,9 @@ var terminController = {
     setTerminCurrenJob: null,
     terminListe: null,
     termine:null,
+    load: function(){
+
+    },
     initialize: function(){
         serverController.termin.get(contactController.lieferant.id, function (termine) {
             console.dir("termine.liste");
