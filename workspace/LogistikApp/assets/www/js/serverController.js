@@ -85,6 +85,7 @@ serverController = {
                 serverController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
                 serverController.loadConfig();
                 dataController.load();
+
                 console.log("serverController.messageType.connection");
             }
             else if (msg.t == serverController.messageType.pushLieferant){
@@ -94,6 +95,7 @@ serverController = {
             }
             else if (msg.t == serverController.messageType.deleteLieferant){
                 lieferantenController.deleteLieferant(serverController.lieferant.parseDTO(msg.l));
+
             }
             else if (msg.t == serverController.messageType.callback) {
                 //Execute Callback
@@ -509,7 +511,8 @@ serverController = {
             create: "tc",
             get: "tg",
             getRange: "tgr",
-            setTerminJob: "tsj"
+            setTerminJob: "tsj",
+            getAll: "tgA"
 
         },
 
@@ -558,7 +561,6 @@ serverController = {
 
         },
 
-        //TODO: zum funktionieren bringen aka gegenstück im server schreiben
         get: function (lieferanten_id, callback) {
 
 
@@ -599,6 +601,37 @@ serverController = {
 
             };
             dataController.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.getTime(), end: end.getTime(), callback: serverController.callbackHandler.register(newCallback)}));
+        },
+
+
+
+
+        getAll: function (callback){
+            serverController.termin.getAllCallback = function (list) {
+                //console.log("termin");
+                for (var i = 0; i < list.length; i++) {
+                   console.dir(list[i]);
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                    //console.log("nach parse");
+                    //console.dir(list[i]);
+                }
+                return callback(list);
+            };
+
+            var newCallback = function () {
+
+                serverController.termin.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+
+                /*TODO: manni fragen was semantik
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+                */
+            };
+
+            //TODO: echten markt eintragen
+            mid = 0;
+            dataController.emit('message', new ServerMessage({t: this.messageType.getAll,
+                callback: serverController.callbackHandler.register(newCallback), marktid: mid}));
         }
 
 

@@ -10,15 +10,23 @@ var terminController = {
     termine:null,
     load: function(){
 
+
+        serverController.termin.getAll(terminController.setTermine);
+
     },
+
+    setTermine: function (termine){
+        this.termine = termine;
+        console.log("load termine");
+        console.dir(termine);
+    },
+
     initialize: function(){
         serverController.termin.get(contactController.lieferant.id, function (termine) {
             console.dir("termine.liste");
             console.dir(termine);
             terminListe = termine;
             //this.termine = termine;
-
-
 
         })
 
