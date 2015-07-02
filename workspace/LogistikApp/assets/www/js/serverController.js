@@ -577,7 +577,7 @@ serverController = {
             serverController.termin.getAllCallback = function (list) {
                 //console.log("termin");
                 for (var i = 0; i < list.length; i++) {
-                   console.dir(list[i]);
+                   //console.dir(list[i]);
                     list[i] = serverController.termin.parseDTO(list[i]);
                     //console.log("nach parse");
                     //console.dir(list[i]);
