@@ -6,18 +6,32 @@ var terminController = {
     lieferantVisitTimeMap:{},
     terminTolerance:1,
     setTerminCurrenJob: null,
-    termine:null,
+    termine:[],
     load: function(){
-
         console.log("load termine##########################################################");
+        try {
+            if (localStorage.termineListe) {
+                terminController.termine = JSON.parse(localStorage.termineListe);
+            }
+        }
+        catch(e){}
+        console.log("serverController.termin.getAll");
         serverController.termin.getAll(terminController.setTermine);
 
     },
 
     setTermine: function (termine){
-        terminController.termine = termine;
-        console.log("set termine");
-        console.dir(terminController.termine);
+        console.log("set termine######################");
+        console.dir(termine);
+        if(termine) {
+
+            terminController.termine = termine;
+            localStorage.termineListe = JSON.stringify(terminController.termine);;
+        }
+    },
+    addTermin:function(termin) {
+        terminController.termine.push(termin);
+        localStorage.termineListe = JSON.stringify(terminController.termine);
     },
 
     initialize: function(){

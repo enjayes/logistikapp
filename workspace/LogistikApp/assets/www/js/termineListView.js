@@ -49,14 +49,19 @@ var termineListView = {
         console.log("addtermine");
         console.dir(terminliste);
 
+        if(!terminliste) {
+            terminliste = []
 
+        }
+        var l_termine =[];
         //termine des lieferanten rausfiltern
         for (var i=0; i < terminliste.length; i++)
         {
-            l_termine: [];
+
             if (terminliste[i].lieferant = contactController.lieferant.id)
             {
                 l_termine.push(terminliste[i]);
+                console.log(terminliste[i]);
             }
         }
 

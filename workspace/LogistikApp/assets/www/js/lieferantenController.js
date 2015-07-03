@@ -86,9 +86,12 @@ lieferantenController = {
     loadLieferanten: function() {
         console.log("loadLieferanten!");
         console.log(localStorage.lieferantenListe)
-        if (localStorage.lieferantenListe){
-            lieferantenController.lieferanten = JSON.parse(localStorage.lieferantenListe);
+        try {
+            if (localStorage.lieferantenListe) {
+                lieferantenController.lieferanten = JSON.parse(localStorage.lieferantenListe);
+            }
         }
+        catch(e){}
         if(!lieferantenController.lieferanten){
             lieferantenController.lieferanten = [];
         }
