@@ -44,7 +44,6 @@ var termineListView = {
 
     addTermine: function(terminliste) {
 
-        //return ;//TODO !!!!!! remove
 
         console.log("addtermine");
         console.dir(terminliste);
