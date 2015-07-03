@@ -82,12 +82,15 @@ var termineListView = {
         console.log("addtermine_sorted");
         console.dir(terminliste_sorted);
 
+        var jetzt_d = new Date();
+        var akt = jetzt_d.getTime();
+
 
         for (var i=0; i < terminliste_sorted.length; i++)
         {
 
-            var jetzt_d = new Date();
-            var akt = jetzt_d.getTime();
+
+
 
             t = terminliste_sorted[i];
             console.log("");
@@ -132,6 +135,8 @@ var termineListView = {
                  */
 
                 $("#termine_liste").append(terminElement);
+
+                //Wieviele Termine anzeigen
                 if (i > 10) {
                     break;
                 }
