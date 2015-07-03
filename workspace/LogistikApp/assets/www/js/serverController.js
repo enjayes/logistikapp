@@ -605,7 +605,7 @@ serverController = {
 
         getAll: function (callback){
             serverController.termin.getAllCallback = function (list) {
-                //console.log("termin");
+                console.log("getAll termine##################################################");
                 for (var i = 0; i < list.length; i++) {
                    //console.dir(list[i]);
                     list[i] = serverController.termin.parseDTO(list[i]);
@@ -626,7 +626,10 @@ serverController = {
             };
 
             //TODO: echten markt eintragen
-            mid = 0;
+            console.dir("configData#######################################");
+            console.dir(configData);
+            mid = configData.markt.id;
+            console.dir("configData.markt.id: "+configData.markt.id);
             dataController.emit('message', new ServerMessage({t: this.messageType.getAll,
                 callback: serverController.callbackHandler.register(newCallback), marktid: mid}));
         }

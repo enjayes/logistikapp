@@ -15,9 +15,9 @@ var terminController = {
     },
 
     setTermine: function (termine){
-        this.termine = termine;
-        console.log("load termine");
-        console.dir(this.termine);
+        terminController.termine = termine;
+        console.log("set termine");
+        console.dir(terminController.termine);
     },
 
     initialize: function(){

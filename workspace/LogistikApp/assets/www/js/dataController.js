@@ -80,7 +80,7 @@ dataController = {
         $.mobile.loading( "show");
 
         lieferantenController.load();
-        serverController.loadConfig();
+       // serverController.loadConfig();
         $.mobile.loading( "hide");
         dataController.checkIfLoaded();
         if(dataController.messages) {
