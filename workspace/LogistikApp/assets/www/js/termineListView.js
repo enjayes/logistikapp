@@ -90,13 +90,14 @@ var termineListView = {
             var akt = jetzt_d.getTime();
 
             t = terminliste_sorted[i];
-
+            console.log("");
             console.log("akt vergleichtermin ");
+            console.log(t.title);
             console.log(Date.parse(t.start));
             console.log(akt);
 
             if (Date.parse(t.start) > akt) {
-
+                console.log("add");
                 var datum = $.datepicker.formatDate('dd.mm.yy', t.start);
                 var time = t.start.getHours() + ":" + t.start.getMinutes();
 
