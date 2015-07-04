@@ -628,12 +628,17 @@ serverController = {
             //TODO: echten markt eintragen
             console.dir("configData#######################################");
             console.dir(configData);
-            mid = configData.markt.id;
-            console.dir("configData.markt.id: "+configData.markt.id);
-            dataController.emit('message', new ServerMessage({t: this.messageType.getAll,
-                callback: serverController.callbackHandler.register(newCallback), marktid: mid}));
+            if(configData.markt) {
+                if (configData.markt.id) {
+                    mid = configData.markt.id;
+                    console.dir("configData.markt.id: " + configData.markt.id);
+                    dataController.emit('message', new ServerMessage({
+                        t: this.messageType.getAll,
+                        callback: serverController.callbackHandler.register(newCallback), marktid: mid
+                    }));
+                }
+            }
         }
-
 
     },
 

@@ -100,6 +100,7 @@ var logistikapp = {
         dataController.loadMessages();
         lieferantenController.loadLieferanten();
         clientView.initialize();
+        setTimeout(terminController.refreshload,3600000);
 
     }
 }
