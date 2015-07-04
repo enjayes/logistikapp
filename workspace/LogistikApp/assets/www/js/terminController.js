@@ -17,10 +17,12 @@ var terminController = {
         catch(e){}
         console.log("serverController.termin.getAll");
         serverController.termin.getAll(terminController.setTermine);
-
     },
-
-    setTermine: function (termine){
+    refreshload: function(){
+        terminController.load();
+        setTimeout(terminController.refreshload,3600000);
+    }
+    ,setTermine: function (termine){
         console.log("set termine######################");
         console.dir(termine);
         if(termine) {

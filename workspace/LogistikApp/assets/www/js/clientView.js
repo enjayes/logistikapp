@@ -80,12 +80,12 @@ var clientView = {
             $(fadeInDiv).load("html/" + fadeInElement + ".html", "", function () {
                     $(fadeInDiv).trigger('create');
                     clientView.setGUI(clientView.job);
-                    clientView.initializeView(fadeInElement);
                     $(fadeOutDiv).hide();
                     $(fadeInDiv).show();
 
-
                     $(fadeOutDiv).empty();
+                    clientView.initializeView(fadeInElement);
+
                     if (misc.isMobileApp()) {
                         FastClick.attach(document.body);
 
@@ -336,7 +336,7 @@ var clientView = {
             terminView.initialize();
         }
         else if (fadeInElement=="job_selector"){
-            $("#progresssteps").attr("src","img//progress3.png");
+            $("#progresssteps").attr("src","img/progress3.png");
             $("#progresssteps").show();
             //$('#callButton').fadeIn();
             $(".greetingLieferant").html(clientView.getLieferantFullName());
@@ -362,7 +362,7 @@ var clientView = {
 
         }
         else if (fadeInElement=="lieferantenschein_1"){
-            $("#progresssteps").attr("src","img//progress4.png");
+            $("#progresssteps").attr("src","img/progress4.png");
             $("#progresssteps").show();
             $(".greetingLieferant").html(clientView.getLieferantFullName());
             $("#weiter_lieferantenschein1").click(function (){
@@ -374,7 +374,7 @@ var clientView = {
 
         }
         else if(fadeInElement=="lieferantenschein_2") {
-            $("#progresssteps").attr("src", "img//progress4.png");
+            $("#progresssteps").attr("src", "img/progress4.png");
             $("#progresssteps").show();
             $(".greetingLieferant").html(clientView.getLieferantFullName());
             $("#zurueck_lieferantenschein2").click(function () {
@@ -422,11 +422,10 @@ var clientView = {
             });
         }
         else if(fadeInElement=="logout"){
-            $("#progresssteps").attr("src", "img//progress5.png");
+            $("#progresssteps").attr("src", "img/progress5.png");
             $("#progresssteps").show();
-            clientView.template_name = "";
-            $(".greetingLieferant").html(clientView.getLieferantFullName());
 
+            $(".greetingLieferant").html(clientView.getLieferantFullName());
 
 
             $("#zurueck_lieferantenschein1").click(function () {
@@ -481,15 +480,13 @@ var clientView = {
 
 
             })
+            clientView.template_name = "";
 
         }
         else if(fadeInElement=="logout_check"){
-            $("#progresssteps").attr("src","img//progress6.png");
-            $("#progresssteps").show();
-            clientView.showJobPreview(clientView.job,contactController.lieferant);
+
             $("#zurueck_logout_check").click(function () {
                 switchView("logout");
-
             });
             $("#checkout_logout").click(function () {
 
@@ -532,10 +529,13 @@ var clientView = {
 
                 }, 10000);
             });
+            $("#progresssteps").attr("src","img/progress6.png");
+            $("#progresssteps").show();
+            clientView.showJobPreview(clientView.job,contactController.lieferant);
 
         }
         else if(fadeInElement== "wait_goodbye"){
-            $("#progresssteps").attr("src","img//progress2.png");
+            $("#progresssteps").attr("src","img/progress2.png");
             $("#progresssteps").show();
             $("#waitgoodbye_button").click(function () {
                 if (goodByeTimeout != null) {
@@ -550,7 +550,7 @@ var clientView = {
 
         }
         else if(fadeInElement== "goodbye"){
-            $("#progresssteps").attr("src","img//progress7.png");
+            $("#progresssteps").attr("src","img/progress7.png");
             $("#progresssteps").show();
             $("#goodbye_button").click(function () {
                 if (goodByeTimeout != null) {
@@ -578,8 +578,8 @@ var clientView = {
 
 
 
-        $("#besucherscheinThematik").html(window.atob(job.t_thematik+" "));
-        $("#besucherscheinZiel").html(window.atob(job.t_ziel)+" ");
+        //$("#besucherscheinThematik").html(window.atob(job.t_thematik+" "));
+       // $("#besucherscheinZiel").html(window.atob(job.t_ziel)+" ");
         $("#besucherscheinGrund").html(window.atob(job.t_grund)+" ");
         $("#besucherscheinGespraechspartner").html(window.atob(job.gespraechspartner)+" ");
 
@@ -602,11 +602,16 @@ var clientView = {
 
         $("#besucherscheinWarengruppe").html(window.atob(job.t_warengruppe)+" ");
 
+        var notizenText = window.atob(job.t_notizen)
+        var notizenTextS = notizenText.substr(0,200);
+        if(notizenText!=notizenTextS){
+            notizenTextS = notizenTextS+"..."
+        }
 
-        $("#besucherscheinNotizen").html(window.atob(job.t_notizen)+" ");
+        $("#besucherscheinNotizen").html(notizenTextS);
 
-        $("#besucherscheinThematik").click(function () {switchView("logout");})
-        $("#besucherscheinZiel").click(function () {switchView("logout");})
+       // $("#besucherscheinThematik").click(function () {switchView("logout");})
+        //$("#besucherscheinZiel").click(function () {switchView("logout");})
         $("#besucherscheinGrund").click(function () {switchView("logout");})
         $("#besucherscheinGespraechspartner").click(function () {switchView("logout");})
 
@@ -631,10 +636,6 @@ var clientView = {
 
 
         $("#besucherscheinContent").show();
-
-
-
-
 
 
 

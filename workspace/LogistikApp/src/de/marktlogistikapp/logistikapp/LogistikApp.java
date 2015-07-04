@@ -54,14 +54,14 @@ public class LogistikApp extends CordovaActivity
    
         WebSettings settings = appView.getSettings( ); 
      
-        settings.setDefaultZoom(ZoomDensity.MEDIUM); 
-        settings.setSupportZoom(true );
+       
         
         settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true); 
         settings.setUseWideViewPort(true);  
 
-
+        settings.setDefaultZoom(ZoomDensity.MEDIUM); 
+        settings.setSupportZoom(true );
 
         
         /*Start Custom Edeka Code
