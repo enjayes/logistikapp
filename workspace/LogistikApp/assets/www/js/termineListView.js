@@ -94,9 +94,9 @@ var termineListView = {
 
             t = terminliste_sorted[i];
 
-            console.log("akt vergleichtermin ");
-            console.log(Date.parse(t.start));
-            console.log(akt);
+            //console.log("akt vergleichtermin ");
+            //console.log(Date.parse(t.start));
+            //console.log(akt);
 
             if (Date.parse(t.start) > akt) {
 
