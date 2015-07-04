@@ -152,6 +152,8 @@ var terminView = {
                 switchView('termine_menue');
 
                 console.log("serverController.termin.create(termin);")
+                terminController.addTermin(termin);
+
                 try {
                     serverController.termin.create(termin);
                 }

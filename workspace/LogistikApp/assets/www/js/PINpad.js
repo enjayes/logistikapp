@@ -22,13 +22,13 @@ var PinPad = function (selector, callback) {
 
     $(that.pinPad).find(".PINenter").click(function () {
         if (that.pinBox.val()) {
-            callback(parseInt(that.pinBox.val()));
+            callback(that.pinBox.val());
             that.pinBox.val("");
         }
     });
 
     this.addNumber = function (element) {
-        that.pinBox.val(that.pinBox.val() + element.value);
+        that.pinBox.val(that.pinBox.val() + element.value.toString());
     }
 
     this.clear = function () {

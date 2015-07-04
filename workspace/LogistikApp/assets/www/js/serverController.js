@@ -25,7 +25,9 @@ serverController = {
     messageType: {
         connection: "c",
         normal: "n",
-        callback: "cb"
+        callback: "cb",
+        pushLieferant: "pl",
+        deleteLieferant: "dl"
     },
     callbackHandler: {
         register: function (callback) {
@@ -39,7 +41,7 @@ serverController = {
 
         //Load Socket io and connect
 
-        //serverController.socket = io.connect(preferences.server);
+        //dataController = io.connect(preferences.server);
 
         var address = logistikapp.servername + ":" + logistikapp.server_port;
 
@@ -51,6 +53,11 @@ serverController = {
         serverController.socket = io.connect(address, {"force new connection": true});
 
 
+        serverController.socket.on('error', function (err) {
+            console.log("SOCKET ERROR!!!!")
+            console.log(err);
+        });
+
 
         serverController.socket.on('disconnect', function () {
             if(clientView.viewTitle=="konfi_menue") {
@@ -61,7 +68,8 @@ serverController = {
         });
 
         serverController.socket.on('connect', function() {
-            console.log("CONNECT!")
+            console.log("CONNECT!");
+
         });
 
         //On Message
@@ -69,11 +77,22 @@ serverController = {
             if(clientView.viewTitle=="konfi_menue") {
                 $("#server_status").css("color", "rgb(84, 191, 84)").text("Mit Server verbunden...");
             }
-            serverController.connected = true;
+            setTimeout(function(){serverController.connected = true},1000);
             //Server Connected, send Connection message back
             if (msg.t == serverController.messageType.connection) {
                 serverController.socket.emit('message', new ServerMessage({callback: serverController.callbackHandler.register(callback)}, serverController.messageType.connection));
                 serverController.loadConfig();
+                dataController.load();
+
+                console.log("serverController.messageType.connection");
+            }
+            else if (msg.t == serverController.messageType.pushLieferant){
+                console.log("UPDATE LIEFERANT")
+                console.log(msg.l);
+                lieferantenController.update(serverController.lieferant.parseDTO(msg.l));
+            }
+            else if (msg.t == serverController.messageType.deleteLieferant){
+                lieferantenController.deleteLieferant(serverController.lieferant.parseDTO(msg.l));
 
             }
             else if (msg.t == serverController.messageType.callback) {
@@ -123,6 +142,11 @@ serverController = {
             }
             console.log("loadConfig-Märkte:");
             console.log(configData.maerkte);
+
+
+            terminController.load();
+
+
         })
     }
     ,
@@ -139,8 +163,7 @@ serverController = {
 
         },
         parseDTO: function (lieferant) {
-            console.log("parseDTO ####################################### LIEFERANT");
-            console.log(lieferant);
+
             return {
                 id: lieferant.id,
                 pin: lieferant.Pin,
@@ -165,21 +188,30 @@ serverController = {
             }
         },
         login: function (pinSha, callback) {
-            var newCallback = function () {
-                if (arguments[0]) {
-                    var lieferant = serverController.lieferant.parseDTO(arguments[0]);
-                    callback(lieferant);
-                } else
-                    callback();
-            };
-            serverController.socket.emit('message', new ServerMessage({
-                t: this.messageType.login,
-                p: pinSha,
-                callback: serverController.callbackHandler.register(newCallback)
-            }));
+
+            var lieferant = lieferantenController.login(pinSha);
+            if( lieferant==null) {
+
+                var newCallback = function () {
+                    if (arguments[0]) {
+                        var lieferant = serverController.lieferant.parseDTO(arguments[0]);
+                        callback(lieferant);
+                    } else
+                        callback();
+                };
+                dataController.emit('message', new ServerMessage({
+                    t: this.messageType.login,
+                    p: pinSha,
+                    callback: serverController.callbackHandler.register(newCallback)
+                }));
+            }
+            else
+            {
+                callback(lieferant);
+            }
         },
         update: function (lieferant) {
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.update,
                 l: this.buildDTO(lieferant)
             }));
@@ -226,7 +258,7 @@ serverController = {
                 serverController.onLoadedGetAllOnStartup();
             };
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.getAll,
                 callback: serverController.callbackHandler.register(newCallback)
             }));
@@ -246,7 +278,7 @@ serverController = {
                 serverController.nachricht.getCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
             };
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.get,
                 lid: lieferanten_id,
                 callback: serverController.callbackHandler.register(newCallback)
@@ -257,11 +289,11 @@ serverController = {
             var markReadMessage = {t: this.messageType.markRead, lid: clientView.lieferant.id, nid: nachricht.id}
             console.dir("markRead:");
             console.dir(markReadMessage);
-            serverController.socket.emit('message', new ServerMessage(markReadMessage));
+            dataController.emit('message', new ServerMessage(markReadMessage));
         },
         create: function (nachricht) {
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.create,
                 n: this.buildDTO(nachricht)
             }));
@@ -307,7 +339,7 @@ serverController = {
         }
     , create: function (nachricht) {
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.create,
                 n: this.buildDTO(nachricht)
             }));
@@ -351,7 +383,6 @@ serverController = {
 
 
     },
-
     job: {
         messageType: {
 
@@ -393,13 +424,13 @@ serverController = {
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.getAll,
                 callback: serverController.callbackHandler.register(newCallback)
             }));
         },
         startVisit: function(startTime,lieferanten_id,jid){
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: serverController.job.messageType.startVisit,
                 start: startTime,
                 mid: logistikapp.markt_id,
@@ -422,7 +453,7 @@ serverController = {
                 serverController.getTemplatesOnLoginCounter++;
                 serverController.onLoadedGetTemplatesOnLogin();
             };
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.getTemplates,
                 lid: lieferanten_id,
                 callback: serverController.callbackHandler.register(newCallback)
@@ -432,19 +463,19 @@ serverController = {
             console.log("SEND JOB:")
             console.log(this.buildDTO(job));
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.create,
                 j: this.buildDTO(job)
             }));
         },
         update: function (job) {
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.update,
                 j: this.buildDTO(job)
             }));
         },
         delete: function (job) {
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.delete,
                 j: this.buildDTO(job)
             }));
@@ -461,14 +492,14 @@ serverController = {
                 serverController.getAllOnStartupCounter++;
                 serverController.onLoadedGetAllOnStartup();
             };
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.getAll,
                 callback: serverController.callbackHandler.register(newCallback)
             }));
 
         },
         update: function (markt) {
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.update, m: markt}));
+            dataController.emit('message', new ServerMessage({t: this.messageType.update, m: markt}));
         }
     },
 
@@ -477,7 +508,9 @@ serverController = {
             create: "tc",
             get: "tg",
             getRange: "tgr",
-            setTerminJob: "tsj"
+            setTerminJob: "tsj",
+            getAll: "tgA"
+
         },
 
         parseDTO: function (sent_termin) {
@@ -525,7 +558,6 @@ serverController = {
 
         },
 
-        //TODO: zum funktionieren bringen aka gegenstück im server schreiben
         get: function (lieferanten_id, callback) {
 
 
@@ -540,7 +572,7 @@ serverController = {
             };
 
 
-            serverController.socket.emit('message', new ServerMessage({
+            dataController.emit('message', new ServerMessage({
                 t: this.messageType.get,
                 lid: lieferanten_id,
                 callback: serverController.callbackHandler.register(newCallback)
@@ -554,7 +586,7 @@ serverController = {
                 e: this.buildDTO(termin)
             });
             console.log(smessage);
-            serverController.socket.emit('message',smessage );
+            dataController.emit('message',smessage );
         }, getRangeLieferant: function (lid, start, end, callback) {
 
             var newCallback = function (list) {
@@ -565,9 +597,48 @@ serverController = {
                 callback(list);
 
             };
-            serverController.socket.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.getTime(), end: end.getTime(), callback: serverController.callbackHandler.register(newCallback)}));
-        }
+            dataController.emit('message', new ServerMessage({t: this.messageType.getRange,today: (new Date()).getTime(), start: start.getTime(), end: end.getTime(), callback: serverController.callbackHandler.register(newCallback)}));
+        },
 
+
+
+
+        getAll: function (callback){
+            serverController.termin.getAllCallback = function (list) {
+                console.log("getAll termine##################################################");
+                for (var i = 0; i < list.length; i++) {
+                   //console.dir(list[i]);
+                    list[i] = serverController.termin.parseDTO(list[i]);
+                    //console.log("nach parse");
+                    //console.dir(list[i]);
+                }
+                return callback(list);
+            };
+
+            var newCallback = function () {
+
+                serverController.termin.getAllCallback(arguments[0], arguments[1], arguments[2], arguments[3]);
+
+                /*TODO: manni fragen was semantik
+                serverController.getAllOnStartupCounter++;
+                serverController.onLoadedGetAllOnStartup();
+                */
+            };
+
+            //TODO: echten markt eintragen
+            console.dir("configData#######################################");
+            console.dir(configData);
+            if(configData.markt) {
+                if (configData.markt.id) {
+                    mid = configData.markt.id;
+                    console.dir("configData.markt.id: " + configData.markt.id);
+                    dataController.emit('message', new ServerMessage({
+                        t: this.messageType.getAll,
+                        callback: serverController.callbackHandler.register(newCallback), marktid: mid
+                    }));
+                }
+            }
+        }
 
     },
 

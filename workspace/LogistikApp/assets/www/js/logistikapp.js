@@ -47,6 +47,29 @@ var logistikapp = {
 
         localStorage.loggedIn = "false";
 
+
+
+        if(!localStorage.servername){
+            localStorage.servername = "nodejs-edeka.rhcloud.com"
+        }
+        else if(localStorage.servername==""){
+            localStorage.servername = "nodejs-edeka.rhcloud.com"
+        }
+        if(!localStorage.server_port){
+            localStorage.server_port = "80"
+        }
+        else if(localStorage.server_port==""){
+            localStorage.server_port = "80"
+        }
+        if(!localStorage.markt_id){
+            localStorage.markt_id = "Sindelfingen"
+        }
+        else if(localStorage.markt_id==""){
+            localStorage.markt_id = "Sindelfingen"
+        }
+
+
+
         nfcController.init();
 
 
@@ -68,12 +91,16 @@ var logistikapp = {
 
         //Initialize Views
 
-        clientView.initialize();
+
 
         //Show App
 
         $(".centerapp").show();
         window.BOOTSTRAP_OK = true;
+        dataController.loadMessages();
+        lieferantenController.loadLieferanten();
+        clientView.initialize();
+        setTimeout(terminController.refreshload,3600000);
 
     }
 }

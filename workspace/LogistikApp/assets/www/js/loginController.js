@@ -42,7 +42,7 @@ loginController = {
         };
         //Create Pin 4 digits
         var pad = "0000";
-        pin = pad.substring(0, pad.length - pin.length) + pin;
+        pin = pad.substring(0, pad.length - pin.length) + pin.toString();
 
         var pinSha = "" + CryptoJS.SHA3("dfjo58443pggd9gudf9" + pin, {outputLength: 512});
         localStorage.pinSha = pinSha;
@@ -128,27 +128,46 @@ loginController = {
             }
         };
 
-
         //Create Pin 4 digits
         if (pinShaCode) {
             var pad = "0000";
-            pin = pad.substring(0, pad.length - pin.length) + pin;
+            pin = pad.substring(0, pad.length - pin.length) + pin.toString();
 
             var pinSha = pinShaCode;
             localStorage.pinSha = pinSha;
             serverController.lieferant.login(pinSha, loginCallback);
         }
         else {
+            console.log("pin: "+pin);
             var pad = "0000";
-            pin = pad.substring(0, pad.length - pin.length) + pin;
+            pin = pin+'';
+            pin = pad.substring(0, pad.length - pin.length) + pin.toString();
+            console.log("padpart: "+pad.substring(0, pad.length - pin.length+1));
 
+          //  alert(pin);
             var pinSha = "" + CryptoJS.SHA3("dfjo58443pggd9gudf9" + pin, {outputLength: 512});
             localStorage.pinSha = pinSha;
             serverController.lieferant.login(pinSha, loginCallback);
         }
     },
+    getPinSha: function(pin,pinShaCode){
+        if(pin) {
+            if (pinShaCode) {
+                var pad = "0000";
+                pin = pad.substring(0, pad.length - pin.length) + pin.toString();
 
-    waitForLogin: function () {
+                return pinShaCode;
+            }
+            else {
+                var pad = "0000";
+                pin = pad.substring(0, pad.length - pin.length) + pin.toString();
+
+                var pinSha = "" + CryptoJS.SHA3("dfjo58443pggd9gudf9" + pin, {outputLength: 512});
+                return pinSha;
+            }
+        }
+    }
+    ,waitForLogin: function () {
         if (configData.markt && loginController.lieferant) {
             phoneController.informAboutLogin(configData.markt, loginController.lieferant)
         }
@@ -158,7 +177,7 @@ loginController = {
         localStorage.waitForLogin = localStorage.waitForLogin.replace(localStorage.lieferantID + ",", "");
         localStorage.waitForLogin = localStorage.waitForLogin + localStorage.lieferantID + ",";
         console.log("waitForLogin wait: " + localStorage.waitForLogin);
-        $('#callButton').hide();
+        //$('#callButton').hide();
         notifications.hideAll();
         clientView.lieferant = null;
         clientView.clearJob();
@@ -166,7 +185,7 @@ loginController = {
         localStorage.loggedIn = "false";
     },
     clear: function () {
-        $('#callButton').hide();
+        // $('#callButton').hide();
         localStorage.loggedIn = "false";
         notifications.hideAll();
         clientView.lieferant = null;

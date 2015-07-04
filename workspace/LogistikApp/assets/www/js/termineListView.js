@@ -9,7 +9,6 @@ var termineListView = {
     //TODO: remove
     //templateList: null,
     dummy_termine: [],
-    termine: [],
 
     //TODO: remove
     addDummies: function()
@@ -45,13 +44,29 @@ var termineListView = {
 
     addTermine: function(terminliste) {
 
-        return ;//TODO !!!!!! remove
 
         console.log("addtermine");
         console.dir(terminliste);
 
+        if(!terminliste) {
+            terminliste = []
 
-        terminliste_sorted = terminliste.sort(function (a,b) {
+        }
+        var l_termine =[];
+        //termine des lieferanten rausfiltern
+        for (var i=0; i < terminliste.length; i++)
+        {
+
+            if (terminliste[i].lieferant = contactController.lieferant.id)
+            {
+                l_termine.push(terminliste[i]);
+                console.log(terminliste[i]);
+            }
+        }
+
+
+        //Termine nach Datum sortieren
+        terminliste_sorted = l_termine.sort(function (a,b) {
 
             datea = new Date(a.start);
             dateb = new Date(b.start);
@@ -67,21 +82,25 @@ var termineListView = {
         console.log("addtermine_sorted");
         console.dir(terminliste_sorted);
 
+        var jetzt_d = new Date();
+        var akt = jetzt_d.getTime();
+
 
         for (var i=0; i < terminliste_sorted.length; i++)
         {
 
-            var jetzt_d = new Date();
-            var akt = jetzt_d.getTime();
+
+
 
             t = terminliste_sorted[i];
-
+            console.log("");
             console.log("akt vergleichtermin ");
+            console.log(t.title);
             console.log(Date.parse(t.start));
             console.log(akt);
 
             if (Date.parse(t.start) > akt) {
-
+                console.log("add");
                 var datum = $.datepicker.formatDate('dd.mm.yy', t.start);
                 var time = t.start.getHours() + ":" + t.start.getMinutes();
 
@@ -116,6 +135,8 @@ var termineListView = {
                  */
 
                 $("#termine_liste").append(terminElement);
+
+                //Wieviele Termine anzeigen
                 if (i > 10) {
                     break;
                 }
@@ -136,7 +157,10 @@ var termineListView = {
 
     initialize: function()
     {
-        termineListView.addTermine(terminController.terminListe);
+
+        console.log("init_termine");
+        console.dir(terminController.termine);
+        termineListView.addTermine(terminController.termine);
 
         $("#cb_neuer_termin").click(function () {
 
