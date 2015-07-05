@@ -89,9 +89,6 @@ var termineListView = {
         for (var i=0; i < terminliste_sorted.length; i++)
         {
 
-
-
-
             t = terminliste_sorted[i];
 
             console.log("");
