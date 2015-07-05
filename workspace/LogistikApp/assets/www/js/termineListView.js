@@ -89,15 +89,14 @@ var termineListView = {
         for (var i=0; i < terminliste_sorted.length; i++)
         {
 
-
-
-
             t = terminliste_sorted[i];
+
             console.log("");
             console.log("akt vergleichtermin ");
             console.log(t.title);
             console.log(Date.parse(t.start));
             console.log(akt);
+
 
             if (Date.parse(t.start) > akt) {
                 console.log("add");
