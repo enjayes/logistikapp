@@ -172,7 +172,8 @@ serverController = {
                 telefon: lieferant.Telefon,
                 email: lieferant.Email,
                 adresse: lieferant.Adresse,
-                notizen: lieferant.Notizen
+                notizen: lieferant.Notizen,
+                firma: lieferant.Firma
             }
         },
         buildDTO: function (lieferant) {
@@ -184,7 +185,8 @@ serverController = {
                 Telefon: lieferant.telefon,
                 Email: lieferant.email,
                 Adresse: lieferant.adresse,
-                Notizen: lieferant.notizen
+                Notizen: lieferant.notizen,
+                Firma: lieferant.firma
             }
         },
         login: function (pinSha, callback) {

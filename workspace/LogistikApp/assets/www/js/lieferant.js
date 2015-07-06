@@ -6,7 +6,7 @@ lieferant = {
     Name: null,
     Telefon: null,
     Email: null,
-    Adreese: null,
+    Adresse: null,
     Aufgaben: null,
     Notizen: null,
     Firma: null

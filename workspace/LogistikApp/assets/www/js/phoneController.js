@@ -11,6 +11,8 @@ var phoneController = {
     },
 
     informAboutLogin: function (markt, lieferant) {
+        console.log("informAboutLogin!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        console.dir(lieferant);
         if (markt.sms || markt.call) {
             var name = "Unbekannt";
             var firma = "Unbekannt"
