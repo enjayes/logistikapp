@@ -91,17 +91,22 @@ public class LogistikApp extends CordovaActivity
 	  }
 	}
 	
+	/*
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		
 
 		Intent intent = null;
 		intent = new Intent(this, LogistikApp.class);
 
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startService(intent);
+		
 
 	}
+*/
+	
 	
 	@Override 
 	public void onBackPressed(){  
@@ -117,6 +122,7 @@ public class LogistikApp extends CordovaActivity
 	  }
 	}
 	
+	/*
 	@Override 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_HOME) {
@@ -125,6 +131,7 @@ public class LogistikApp extends CordovaActivity
 		}
 		return super.onKeyDown(keyCode, event);    
 	}
+	*/
 
 } 
  

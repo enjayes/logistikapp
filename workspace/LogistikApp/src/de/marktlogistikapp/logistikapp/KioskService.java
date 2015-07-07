@@ -64,7 +64,7 @@ public class KioskService extends Service {
 	      if(isKioskModeActive(ctx)) {
 	        // is App in background?
 	      if(isInBackground()) {
-	        restoreApp(); // restore!
+				// restoreApp(); // restore!
 	      }
 	    }
 	  }
